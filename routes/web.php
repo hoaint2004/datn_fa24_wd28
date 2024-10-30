@@ -1,5 +1,6 @@
 <?php
 
+// use app\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -28,6 +29,9 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/account', [AdminController::class, 'account'])->name('account.management');
         Route::get('/order', [AdminController::class, 'order'])->name('order.management');
         Route::get('/comment', [AdminController::class, 'comment'])->name('comment.management');            
+        Route::get('/review', [AdminController::class, 'review'])->name('review.management');            
+        Route::get('/product-variants', [AdminController::class, 'product_variants'])->name('product_variants.management');            
+        Route::get('/discount', [AdminController::class, 'discount'])->name('discount.management');            
 
         // CRUD Product
         Route::get('/product/create', [AdminController::class, 'product_create'])->name('product.create');

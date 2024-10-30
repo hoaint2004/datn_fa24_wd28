@@ -4,6 +4,8 @@ body{
     background-color: #1b203d;
     overflow: hidden;
     font-family: system-ui;
+    overflow-y: auto; /* Cuộn theo chiều dọc */
+    overflow-x: hidden; /* Ẩn cuộn ngang */
 }
 
 .clearfix{
@@ -241,5 +243,182 @@ td, th{
     z-index: 100;
     font-weight: 700;
     font-size: 2em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
+
+@media (max-width: 1200px) {
+    /* Thu hẹp sidebar và điều chỉnh phần chính */
+    .mySidenav {
+        width: 250px;
+    }
+
+    #main {
+        margin-left: 250px;
+    }
+
+    /* Thu nhỏ font logo */
+    .logo {
+        font-size: 30px;
+    }
+
+    #main {
+        margin-left: 250px;
+    }
+
+    /* Điều chỉnh logo cho phù hợp */
+    .logo {
+        font-size: 30px;
+    }
+
+    /* Điều chỉnh chiều rộng các cột */
+    .col-div-3 {
+        width: 50%;
+    }
+
+    .col-div-8 {
+        width: 65%;
+    }
+
+    .col-div-4 {
+        width: 35%;
+    }
+
+    /* Giảm kích thước font của nội dung trong box */
+    .box p {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Sidebar nhỏ hơn và phần chính sẽ mở rộng hơn */
+    .mySidenav {
+        width: 200px;
+    }
+
+    #main {
+        margin-left: 200px;
+    }
+
+    /* Thu nhỏ thêm logo */
+    .logo {
+        font-size: 25px;
+    }
+
+    /* Ẩn hoặc thu nhỏ các phần tử không cần thiết */
+    .icon-a {
+        font-size: 18px;
+    }
+    /* Điều chỉnh cột để chiếm toàn bộ chiều rộng khi cần thiết */
+    .col-div-3, .col-div-6 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .col-div-8, .col-div-4 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Điều chỉnh font và kích thước bảng */
+    .box p {
+        font-size: 25px;
+    }
+
+    table {
+        font-size: 15px;
+    }
+}
+@media (max-width: 768px) {
+    /* Thu nhỏ thanh sidebar */
+    .mySidenav {
+        width: 70px; /* Thu nhỏ sidebar */
+    }
+
+    #main {
+        margin-left: 70px;
+    }
+
+    /* Ẩn các chi tiết logo và giữ chỉ một chữ cái */
+    .logo {
+        font-size: 20px;
+    }
+
+    .logo span {
+        margin-left: -10px;
+    }
+
+    /* Thu nhỏ các biểu tượng và văn bản */
+    .icon-a {
+        font-size: 14px;
+    }
+
+    .icons {
+        font-size: 20px;
+    }
+
+    /* Điều chỉnh các khối box */
+    .col-div-3 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .col-div-8,
+    .col-div-4 {
+        width: 100%;
+    }
+
+    .profile {
+        width: 100px;
+    }
+
+    /* Điều chỉnh bảng trong nội dung */
+    table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ẩn sidebar và cho phép menu hiện khi nhấn vào biểu tượng */
+    .mySidenav {
+        width: 0; /* Ẩn sidebar */
+        visibility: hidden;
+    }
+
+    #main {
+        margin-left: 0;
+    }
+
+    /* Hiển thị menu khi nhấn vào biểu tượng */
+    .nav, .nav2 {
+        display: block;
+    }
+
+    .nav2 {
+        display: none;
+    }
+    .profile {
+        display: none;
+    }
+
+    /* Thu nhỏ các khối box */
+    .box {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .box p {
+        font-size: 25px;
+    }
 }
 

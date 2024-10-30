@@ -1,3 +1,5 @@
-<div>
-    <!-- Simplicity is the consequence of refined emotions. - Jean D'Alembert -->
-</div>
+@extends('admin.index')
+@section('title', 'Quản Lý Bình Luận')
+@section('content')
+    
+@endsection

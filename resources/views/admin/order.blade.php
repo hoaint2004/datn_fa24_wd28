@@ -1,3 +1,5 @@
-<div>
-    <!-- Simplicity is the ultimate sophistication. - Leonardo da Vinci -->
-</div>
+@extends('admin.index')
+@section('title', 'Quản Lý Đơn Hàng')
+@section('content')
+    
+@endsection

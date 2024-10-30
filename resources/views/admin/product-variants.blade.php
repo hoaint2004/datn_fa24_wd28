@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Quản Lý Tài Khoản')
+@section('title', 'Quản Lý Biến Thể Sản Phẩm')
 @section('content')
     
 @endsection

@@ -1,3 +1,5 @@
-<div>
-    <!-- The only way to do great work is to love what you do. - Steve Jobs -->
-</div>
+@extends('admin.index')
+@section('title', 'Quản Lý Sản Phẩm')
+@section('content')
+    
+@endsection
