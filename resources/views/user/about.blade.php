@@ -1,3 +1,13 @@
-<div>
-    <!-- Smile, breathe, and go slowly. - Thich Nhat Hanh -->
-</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
+</head>
+<body>
+    <button class="alo">Mucbang</button>
+</body>
+</html>
