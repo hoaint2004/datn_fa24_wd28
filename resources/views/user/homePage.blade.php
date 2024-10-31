@@ -18,14 +18,36 @@
       <div class="uk-slideshow-items">
         <div>
         <img
-            src="{{ url('storage/images/2.png') }}"
+            src="{{ url('storage/images/Banner/2.png') }}"
+             alt="Slide 1"
             uk-cover="true"
         />
         </div>
         <div>
           <img
-            src="https://wallpapercrafter.com/desktop/106317-anime-girls-WLOP.jpg"
+           src="{{ url('storage/images/Banner/1.png') }}"
             alt="Slide 2"
+            uk-cover="true"
+          />
+        </div>
+        <div>
+          <img
+           src="{{ url('storage/images/Banner/3.png') }}"
+            alt="Slide 3"
+            uk-cover="true"
+          />
+        </div>
+        <div>
+          <img
+           src="{{ url('storage/images/Banner/4.png') }}"
+            alt="Slide 4"
+            uk-cover="true"
+          />
+        </div>
+        <div>
+          <img
+           src="{{ url('storage/images/Banner/5.png') }}"
+            alt="Slide 5"
             uk-cover="true"
           />
         </div>
