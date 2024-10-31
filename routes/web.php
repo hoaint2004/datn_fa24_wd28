@@ -21,6 +21,19 @@ Route::get('/', function () {
     return view('admin.index');
 });
 
+Route::get('/test', function () {
+    return view('user.about');
+});
+
+Route::get('/testhome', function () {
+    return view('user.homePage');
+});
+
+Route::get('/testfooter', function () {
+    return view('user.footer');
+});
+
+
 Route::group(['prefix' => 'admin'], function(){
     Route::prefix('management')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
