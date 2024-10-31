@@ -4,18 +4,7 @@ import laravel from 'laravel-vite-plugin';
 export default defineConfig({
     plugins: [
         laravel({
-<<<<<<< Updated upstream
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-=======
-            input: ['resources/css/app.css', 
-                'resources/js/app.js', 
-                'resources/js/admin.js', 
-                'resources/css/admin/order.scss',
-                'resources/css/user/account.scss',
-                'resources/js/app.css',
-
-            ],
->>>>>>> Stashed changes
+            input: ['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'],
             refresh: true,
         }),
     ],
