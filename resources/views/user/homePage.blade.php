@@ -613,22 +613,22 @@
         </span>
         <div class="uk-grid" uk-grid="true" >
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.png') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.png') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.png') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.png') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.png') }}" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Banner/2.png') }}" alt="" />
           </a> 
         </div>
     </section>

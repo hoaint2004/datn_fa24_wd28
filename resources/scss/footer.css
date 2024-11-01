@@ -1,0 +1,190 @@
+:root {
+  --border_radius: 5px;
+}
+
+footer {
+  background-image: url("https://wallpapers.com/images/featured/dragon-ball-pictures-8qqybb74n0132u2u.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.85);
+  background-blend-mode: color;
+  font-family: Spectral, sans-serif;
+}
+@media (min-width: 640px) and (max-width: 1200px) {
+  footer {
+    padding: 0 40px;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  footer {
+    padding: 0 20px;
+  }
+}
+footer section {
+  max-width: 100%;
+}
+footer section h2 {
+  font-family: Spectral, sans-serif;
+  font-weight: 700;
+}
+footer section p {
+  color: #333;
+}
+footer section form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer section form .input-ft {
+  width: 70%;
+  height: 45px;
+  border: 2px solid #ebebeb;
+  border-radius: var(--border_radius);
+  padding: 0 10px;
+}
+footer section form .button-ft {
+  background-color: #FDB5B9;
+  color: #FFFFFF;
+  border: 2px solid #FDB5B9;
+  transition: all 0.8s;
+  font-family: Spectral, sans-serif;
+  height: 45px;
+  width: calc(30% - 10px);
+  border-radius: var(--border_radius);
+  text-transform: uppercase;
+}
+footer section form .button-ft:hover {
+  background-color: #FFFFFF;
+  color: #FDB5B9;
+}
+
+.ft-copyright {
+  color: #333;
+}
+@media (min-width: 640px) and (max-width: 960px) {
+  .ft-copyright .ft-warp {
+    padding: 40px 0 10px 0;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp {
+    padding: 30px 0 10px 0;
+  }
+}
+.ft-copyright .ft-warp .ft-top {
+  padding-bottom: 70px !important;
+}
+@media (min-width: 640px) and (max-width: 959px) {
+  .ft-copyright .ft-warp .ft-top {
+    padding-bottom: 40px !important;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top {
+    padding-bottom: 20px !important;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-one {
+    width: 100%;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-two {
+    width: 100%;
+    margin-top: 15px !important;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-three {
+    width: 50%;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-four {
+    width: 50%;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-five {
+    width: 100%;
+  }
+}
+@media (min-width: 640px) and (max-width: 959px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-one, .ft-copyright .ft-warp .ft-top .ft-top-item-two, .ft-copyright .ft-warp .ft-top .ft-top-item-three, .ft-copyright .ft-warp .ft-top .ft-top-item-four, .ft-copyright .ft-warp .ft-top .ft-top-item-five {
+    margin: 0;
+    padding-top: 10px;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top .ft-top-item-one, .ft-copyright .ft-warp .ft-top .ft-top-item-two, .ft-copyright .ft-warp .ft-top .ft-top-item-three, .ft-copyright .ft-warp .ft-top .ft-top-item-four, .ft-copyright .ft-warp .ft-top .ft-top-item-five {
+    margin: 0;
+  }
+}
+.ft-copyright .ft-warp .ft-top .ft-top-item-one .ft-top-info, .ft-copyright .ft-warp .ft-top .ft-top-item-two .ft-top-info, .ft-copyright .ft-warp .ft-top .ft-top-item-three .ft-top-info, .ft-copyright .ft-warp .ft-top .ft-top-item-four .ft-top-info, .ft-copyright .ft-warp .ft-top .ft-top-item-five .ft-top-info {
+  margin: 0;
+  margin-top: 5px !important;
+  font-size: 14px;
+}
+.ft-copyright .ft-warp .ft-top a {
+  text-decoration: none;
+  color: #666;
+  transition: all 0.5s;
+}
+.ft-copyright .ft-warp .ft-top a:hover {
+  color: #FDB5B9;
+}
+.ft-copyright .ft-warp .ft-top h4 {
+  font-family: Spectral, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: black;
+}
+@media (min-width: 640px) and (max-width: 960px) {
+  .ft-copyright .ft-warp .ft-top h4 {
+    margin: 0 !important;
+    padding: 5px 0;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-top h4 {
+    margin: 0;
+    padding-bottom: 5px;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-bot {
+    display: block;
+    padding: 0;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-bot p {
+    font-size: 8px;
+  }
+}
+.ft-copyright .ft-warp .ft-bot p a {
+  color: #333;
+  text-decoration: none;
+}
+.ft-copyright .ft-warp .ft-bot p a strong {
+  color: #FDB5B9;
+  transition: all 0.8s;
+}
+.ft-copyright .ft-warp .ft-bot p a strong:hover {
+  color: #ffdba8;
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-bot ul {
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+  }
+}
+@media (min-width: 360px) and (max-width: 639px) {
+  .ft-copyright .ft-warp .ft-bot ul li {
+    font-size: 12px;
+    padding: 0;
+  }
+}/*# sourceMappingURL=footer.css.map */
