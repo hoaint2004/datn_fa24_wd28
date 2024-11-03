@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HomePage</title>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
@@ -18,8 +18,8 @@
       <div class="uk-slideshow-items">
         <div>
         <img
-            src="{{ url('storage/images/Banner/2.png') }}"
-             alt="Slide 1"
+           src="{{ url('storage/images/Banner/2.png') }}"
+            alt="Slide 1"
             uk-cover="true"
         />
         </div>
@@ -613,22 +613,22 @@
         </span>
         <div class="uk-grid" uk-grid="true" >
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/jordan.jpeg" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/adidas.png" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/adidas.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/alexsander.png" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/alexsander.png') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/gucci.jpg" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/gucci.jpg') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/nike.jpg" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/nike.jpg') }}" alt="" />
           </a>
           <a href="#" class="uk-width-1-6 uk-transition-toggle" tabIndex={0}>
-            <img class="uk-transition-scale-up uk-transition-opaque" src="../../../../public/Brand/puma.jpg" alt="" />
+            <img class="uk-transition-scale-up uk-transition-opaque" src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
           </a> 
         </div>
     </section>

@@ -59,3 +59,11 @@ font-size: 15px;
 font-family: $font-spectral;
 }
 
+@mixin ctn-pay-shopping {
+  padding: 13px 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all .6s;
+  text-transform: uppercase;
+}

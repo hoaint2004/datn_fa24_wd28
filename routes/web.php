@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('welcome');
 });
+
 
 Route::get('/test', function () {
     return view('user.about');
@@ -32,6 +33,15 @@ Route::get('/testhome', function () {
 Route::get('/testfooter', function () {
     return view('user.footer');
 });
+
+Route::get('/testheader', function () {
+    return view('user.header');
+});
+
+Route::get('/testcart', function () {
+    return view('user.cart');
+});
+
 
 
 Route::group(['prefix' => 'admin'], function(){
@@ -82,3 +92,4 @@ Route::middleware(['web'])->group(function () {
     Route::get('/register', [LoginController::class, 'register'])->name('register');
     Route::post('/register', [LoginController::class, 'postRegister'])->name('postRegister');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
