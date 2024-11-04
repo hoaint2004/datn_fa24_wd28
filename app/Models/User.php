@@ -17,11 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+
+    
+   protected $fillable = [
+    'fullname',  // Thêm trường fullname
+    'username',  // Thêm trường username
+    'email',
+    'password',
+    'role',      // Thêm trường role nếu cần
+];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +47,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // public function reviews()
+    // {
+    //     return $this->hasMany(Review::class);
+    // }
+
+    // // Quan hệ một-nhiều với order histories
+    // public function orderHistories()
+    // {
+    //     return $this->hasMany(OrderHistory::class);
+    // }
+
+    // // Quan hệ một-nhiều với orders
+    // public function orders()
+    // {
+    //     return $this->hasMany(Order::class);
+    // }
+
+    // // Quan hệ một-nhiều với comments
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
 }

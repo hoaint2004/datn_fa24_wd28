@@ -4,6 +4,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,12 +50,20 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/product', [AdminController::class, 'product'])->name('product.management');
         Route::get('/category', [AdminController::class, 'category'])->name('category.management');
-        Route::get('/account', [AdminController::class, 'account'])->name('account.management');
+        Route::get('/account', [AccountController::class, 'account'])->name('account.management');
         Route::get('/order', [AdminController::class, 'order'])->name('order.management');
         Route::get('/comment', [AdminController::class, 'comment'])->name('comment.management');            
         Route::get('/review', [AdminController::class, 'review'])->name('review.management');            
         Route::get('/product-variants', [AdminController::class, 'product_variants'])->name('product_variants.management');            
-        Route::get('/discount', [AdminController::class, 'discount'])->name('discount.management');            
+        Route::get('/discount', [AdminController::class, 'discount'])->name('discount.management');    
+        
+        // CRUD Account
+        Route::get('/account/create',[AccountController::class,'create'])->name('account.create');
+        Route::post('/account/save',[AccountController::class,'save'])->name('account.save');
+        Route::get('/account/edit/{id}',[AccountController::class,'edit'])->name('account.edit');
+        Route::put('/account/update',[AccountController::class,'update'])->name('account.update');
+        Route::delete('/account/delete/{id}',[AccountController::class,'delete'])->name('account.delete');
+        Route::post('/account/search',[AccountController::class,'search'])->name('account.search');
 
         // CRUD Product
         Route::get('/product/create', [AdminController::class, 'product_create'])->name('product.create');
