@@ -42,6 +42,11 @@ Route::get('/testcart', function () {
     return view('user.cart');
 });
 
+Route::get('/testorder', function () {
+    return view('user.order');
+});
+
+
 
 
 Route::group(['prefix' => 'admin'], function(){
