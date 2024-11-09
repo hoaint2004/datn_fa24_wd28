@@ -1,7 +1,8 @@
+
 body{
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: #1b203d;
     overflow: hidden;
     font-family: system-ui;
     overflow-y: auto; /* Cuộn theo chiều dọc */
@@ -80,7 +81,7 @@ body{
 }
 
 .profile p{
-    color: rgb(0, 0, 0);
+    color: white;
     font-weight: 500;
     margin-left: 55px;
     margin-top: 10px;
@@ -183,7 +184,7 @@ table{
 td, th{
     text-align: left;
     padding: 15px;
-    color: #474545;
+    color: #ddd;
     border-bottom: 1px solid #81818149;
 }
 
@@ -421,4 +422,3 @@ table {
         font-size: 25px;
     }
 }
-

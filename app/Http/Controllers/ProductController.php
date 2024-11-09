@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,7 +6,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-
+        
     }
 
     public function create(){
@@ -33,8 +32,5 @@ class ProductController extends Controller
     public function search(){
         return view('user.search');
     }
-
-    public function account(){
-        return view('user.account');
-    }
 }
+

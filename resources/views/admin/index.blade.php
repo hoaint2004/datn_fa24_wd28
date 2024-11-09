@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,8 +13,7 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     
-    
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js', 'resources/css/admin/account.css', 'resources/css/admin/order.scss',])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js',])
 
     <title>@yield('title')</title>
 </head>
@@ -67,10 +67,10 @@
     <div id="main">
         <div class="head">
             <div class="col-div-6">
-                <span style="font-size: 30px; cursor: pointer; color: rgb(0, 0, 0)" class="nav">
+                <span style="font-size: 30px; cursor: pointer; color: white" class="nav">
                     &#9776; Dashbroad
                 </span>
-                <span style="font-size: 30px; cursor: pointer; color: rgb(0, 0, 0)" class="nav2">
+                <span style="font-size: 30px; cursor: pointer; color: white" class="nav2">
                     &#9776; Dashbroad
                 </span>
             </div>
@@ -102,3 +102,4 @@
 
 
 </html>
+>>>>>>> main
