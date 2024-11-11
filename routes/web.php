@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -68,7 +69,7 @@ Route::prefix('admin')
         Route::controller(DiscountController::class)
             ->name('discounts.')
             ->prefix('discounts')
-            ->group(function(){
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
@@ -77,5 +78,22 @@ Route::prefix('admin')
                 Route::put('/update/{id}', 'update')->name('update');
                 Route::get('/detail/{id}', 'detail')->name('detail');
                 Route::delete('/delete/{id}', 'delete')->name('delete');
+            });
+
+        Route::controller(CommentController::class)
+            ->name('comments.')
+            ->prefix('comments')
+            ->group(function () {
+                Route::get('/', 'index')
+                    ->name('index');
+
+                Route::get('/edit/{id}', 'edit')
+                    ->name('edit');
+
+                Route::post('/update/{id}', 'update')
+                    ->name('update');
+
+                Route::post('/delete/{id}', 'delete')
+                    ->name('delete');
             });
     });
