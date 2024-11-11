@@ -16,6 +16,8 @@
 
 <body>
   <header uk-sticky="top: 100; animation: uk-animation-slide-top">
+
+
     <div class="header-warp uk-container uk-container-large">
       <div class="uk-grid" uk-grid="true">
         <!-- Phần tìm kiếm bên trái -->
@@ -43,58 +45,232 @@
           </div>
 
           <!-- Dropnav hiện ra khi nhấn vào icon user -->
-          <div id="dropnav-user" uk-drop="mode: click; pos: bottom-center; offset: 10" class="uk-drop uk-background-default uk-box-shadow-small uk-padding-small">
-            <ul class="uk-nav uk-dropdown-nav">
-              <li><a href="#register">Đăng ký</a></li>
-              <li><a href="#login">Đăng nhập</a></li>
-              <li><a href="#account">Thông tin tài khoản</a></li>
+          <div id="dropnav-user" uk-drop="mode: click; pos: bottom-center; offset: 10; animation: reveal-top; animate-out: true; duration: 700" class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
+            <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
+              <li><a class="user-header" href="#register">Đăng ký</a></li>
+              <li><a class="user-header" href="#login">Đăng nhập</a></li>
+              <li><a class="user-header" href="#account">Thông tin tài khoản</a></li>
             </ul>
           </div>
 
-        
           <div>
-            <a href="#" class="uk-icon-link header-icon" uk-icon="icon: heart" uk-toggle="target: #dropnav-user"></a>
+            <a href="#" class="uk-icon-link header-icon" uk-icon="icon: heart"></a>
           </div>
+
+          <!-- cart -->
           <div>
-            <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag" uk-toggle="target: #dropnav-user"></a>
+            <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag" uk-toggle="target: #offcanvas-flip">
+              <span class="cart-counter">3</span>
+            </a>
           </div>
+
+          <div class="offcanvas-cart" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+            <div class="uk-offcanvas-bar offcanvas-cart-body">
+              <button class="uk-offcanvas-close" type="button" uk-close style="color: red;"></button>
+
+              <div class="modal-header">
+                <h3 class="modal-title">Your Cart
+                  <span class="cart-panel-counter" style="opacity: 1;">(3)</span>
+                </h3>
+                <a href="#" class="close-account-panel button-close">
+                  <i class="fas fa-close"></i>
+                </a>
+              </div>
+
+              <div class="mini-cart-product">
+                <div class="warp">
+                  <a href="#"><img src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" width="120px"></a>
+                  <div class="warp-body">
+                    <a href="#" class="product-name">Giày búp bê da</a>
+                    <div class="price">
+                      <span><strong>150$</strong></span>
+                    </div>
+                    <div class="data-size">
+                      <span>Trắng / 35</span>
+                    </div>
+                    <div class="quantity">
+                      <div class="quantity-selector">
+                        <button aria-label="Giảm số lượng" class="quantity-selector-button-minus">-</button>
+                        <input class="quantity-selector-input" type="number" step="1" min="1" max="9999" aria-label="Số lượng sản phẩm" value="1" readonly="">
+                        <button aria-label="Tăng số lượng" class="quantity-selector-button-plus">+</button>
+                      </div>
+                      <button class="cart-item-remove"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="warp">
+                  <a href="#"><img src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" width="120px"></a>
+                  <div class="warp-body">
+                    <a href="#" class="product-name">Giày búp bê da</a>
+                    <div class="price">
+                      <span><strong>150$</strong></span>
+                    </div>
+                    <div class="data-size">
+                      <span>Trắng / 35</span>
+                    </div>
+                    <div class="quantity">
+                      <div class="quantity-selector">
+                        <button aria-label="Giảm số lượng" class="quantity-selector-button-minus">-</button>
+                        <input class="quantity-selector-input" type="number" step="1" min="1" max="9999" aria-label="Số lượng sản phẩm" value="1" readonly="">
+                        <button aria-label="Tăng số lượng" class="quantity-selector-button-plus">+</button>
+                      </div>
+                      <button class="cart-item-remove"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="warp">
+                  <a href="#"><img src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" width="120px"></a>
+                  <div class="warp-body">
+                    <a href="#" class="product-name">Giày búp bê da</a>
+                    <div class="price">
+                      <span><strong>150$</strong></span>
+                    </div>
+                    <div class="data-size">
+                      <span>Trắng / 35</span>
+                    </div>
+                    <div class="quantity">
+                      <div class="quantity-selector">
+                        <button aria-label="Giảm số lượng" class="quantity-selector-button-minus">-</button>
+                        <input class="quantity-selector-input" type="number" step="1" min="1" max="9999" aria-label="Số lượng sản phẩm" value="1" readonly="">
+                        <button aria-label="Tăng số lượng" class="quantity-selector-button-plus">+</button>
+                      </div>
+                      <button class="cart-item-remove"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="total-action">
+                <p class="mini-cart-total ">
+                  <span class="subtotal">Tổng tiền:</span>
+                  <bdi class="currencysymbol">
+                    <span class="currencysymbol">$</span>
+                    329.90
+                  </bdi>
+                </p>
+                <p class="mini-cart-button">
+                  <a href="#" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
+                  <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
-
     <div class="header-bot border-b border-gray-300 shadow-md uk-container uk-container-expand">
-      <nav class="menu-header" uk-navbar="true">
+      <nav class="menu-header" uk-navbar uk-dropnav="dropbar: true">
+        <!-- Nút toggle cho menu trên thiết bị di động -->
         <div class="navbar-toggle">
           <button
-            class="toggke-navbar"
+            class="toggle-navbar"
             type="button"
             uk-toggle="target: #offcanvas-menu">
-            <span class="icon-togge" uk-navbar-toggle-icon="true"></span>
+            <span class="icon-toggle" uk-navbar-toggle-icon></span>
           </button>
         </div>
 
+        <!-- Menu chính -->
         <div class="navbar-menu alo">
-          <ul class="flex justify-center m-0 p-0 gap-8">
-            <li>
-              <a href="#">Trang chủ</a>
+          <ul class="flex justify-center m-0 p-0 gap-8 uk-subnav">
+            <li><a href="#">Trang chủ</a></li>
+
+            <!-- Danh mục sản phẩm với menu con và dropbar -->
+            <li class="uk-parent">
+              <a href="#" class="">Danh mục sản phẩm <span>›</span></a>
+              <div class="uk-dropdown uk-width-2xlarge">
+                <div class="uk-child-width-1-3@m aloo11" uk-grid>
+                  <!-- Nổi bật -->
+                  <div>
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li class="uk-nav-header">NỔI BẬT</li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li class="uk-nav-header">Muckbang</li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li><a href="#">Best Seller</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li><a href="#">Xem tất cả</a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Giày nam -->
+                  <div>
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li class="uk-nav-header">Giày nam</li>
+                      <li><a href="#">Basas</a></li>
+                      <li><a href="#">Vintas</a></li>
+                      <li><a href="#">Urbas</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li class="uk-nav-header">Muckbang</li>
+                      <li><a href="#">High Top</a></li>
+                      <li><a href="#">Low Top</a></li>
+                      <li><a href="#">Slip-on</a></li>
+                      <li><a href="#">Slip-on</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li><a href="#">Xem tất cả</a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Giày nam -->
+                  <div>
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li class="uk-nav-header">Giày nữ</li>
+                      <li><a href="#">Basic Tee</a></li>
+                      <li><a href="#">Graphic Tee</a></li>
+                      <li><a href="#">Sweatshirt</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li class="uk-nav-header">Muckbang</li>
+                      <li><a href="#">Nón</a></li>
+                      <li><a href="#">Dây giày</a></li>
+                      <li><a href="#">Vớ</a></li>
+                      <li><a href="#">Túi Tote</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li><a href="#">Xem tất cả</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </li>
-            <li>
-              <a href="#">
-                Danh mục sản phẩm <span>›</span>
-              </a>
+
+            <!-- Sản phẩm nổi bật với menu con và dropbar -->
+            <li class="uk-parent">
+              <a href="#">Sản phẩm nổi bật <span>›</span></a>
+              <div class="uk-dropdown uk-width-2xlarge">
+                <div class="uk-child-width-1-4@m" uk-grid>
+                  <!-- Nổi bật -->
+                  <div>
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                      <li><a href="#">Nổi bật 1</a></li>
+                      <li><a href="#">Nổi bật 2</a></li>
+                    </ul>
+                  </div>
+
+                  <!-- Giày nam -->
+                  <div>
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                      <li><a href="#">Nổi bật 3</a></li>
+                      <li><a href="#">Nổi bật 4</a></li>
+                    </ul>
+                  </div>
+                  <!-- Giày nam -->
+                   
+                </div>
+              </div>
             </li>
-            <li>
-              <a href="#">
-                Sản phẩm nổi bật <span>›</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">Xu hướng thời trang</a>
-            </li>
-            <li>
-              <a href="#">Liên hệ</a>
-            </li>
+
+            <li><a href="#">Xu hướng thời trang</a></li>
+            <li><a href="#">Liên hệ</a></li>
           </ul>
         </div>
       </nav>
