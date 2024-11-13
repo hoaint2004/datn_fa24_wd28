@@ -21,11 +21,17 @@ class ProductController extends Controller
     
         // Lọc và phân trang sản phẩm theo danh mục nếu có
         $products = Product::with('category', 'variants')
-            ->when($request->category_id, function($query) use ($request) {
-                return $query->where('category_id', $request->category_id);
-            })
-            ->orderBy('id', 'asc')  // Sắp xếp theo ID, bạn có thể thay đổi nếu cần
-            ->paginate(10);  // Phân trang với 10 sản phẩm mỗi trang
+        ->when($request->category_id, function($query) use ($request) {
+            return $query->where('category_id', $request->category_id);
+        })
+        ->when($request->name, function($query) use ($request) {
+            return $query->where('name', 'like', '%' . $request->name . '%')
+                        ->orWhere('name', 'like', '%' . $request->name)
+                        ->orWhere('name', 'like' , $request->name . '%');
+        })
+        ->orderBy('id', 'asc')  // Sắp xếp theo ID, bạn có thể thay đổi nếu cần
+        ->paginate(10);  // Phân trang với 10 sản phẩm mỗi trang
+    
     
         return view('admin.pages.products.index', compact('products', 'categories'));
     }
