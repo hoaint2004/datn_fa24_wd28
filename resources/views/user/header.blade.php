@@ -151,10 +151,10 @@
                     329.90
                   </bdi>
                 </p>
-                <p class="mini-cart-button">
-                  <a href="#" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
-                  <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
-                </p>
+                  <p class="mini-cart-button">
+                    <a href="#" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
+                    <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                  </p>
               </div>
 
             </div>

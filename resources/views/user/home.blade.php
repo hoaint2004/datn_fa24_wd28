@@ -1564,123 +1564,78 @@
 
     <!-- Modal xem nhanh-->
     <div id="modal-container" class="uk-modal-container" uk-modal>
-        <div class="uk-modal-dialog ">
+        <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <div class="uk-modal-header">
-                <h2 class="uk-modal-title">Chi tiết sản phẩm</h2>
-            </div>
-            <div class="uk-modal-body uk-grid" uk-overflow-auto uk-grid>
+            <div class="uk-modal-body uk-grid" uk-grid>
                 <div class="uk-width-1-2">
-                    <img alt="Girls Pink Moana Printed Dress" class="w-full rounded-lg" height="600" src="https://storage.googleapis.com/a1aa/image/QlFy9nCahwI6FhC3ndLvpiqB4O5mxs5RZSRDPdoBlOeKYx3JA.jpg" width="400" />
+                    <img alt="Girls Pink Moana Printed Dress" class="w-full rounded-lg" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" style="width: 100%; max-height: 70vh; object-fit: cover;" />
                     <div class="flex mt-4 space-x-2">
-                        <img alt="Girls Pink Moana Printed Dress Thumbnail 1" class="w-20 h-20 rounded-lg" height="100" src="https://storage.googleapis.com/a1aa/image/JnWfW4OtHFSUf0y7vjAPJAOfGfL756t6GiaXTal7QeOVCW8dC.jpg" width="100" />
-                        <img alt="Girls Pink Moana Printed Dress Thumbnail 2" class="w-20 h-20 rounded-lg" height="100" src="https://storage.googleapis.com/a1aa/image/20qmePoCC83HByDWBl584wuBfOzRYYVDTi7aGSN9SxwXwivTA.jpg" width="100" />
-                        <img alt="Girls Pink Moana Printed Dress Thumbnail 3" class="w-20 h-20 rounded-lg" height="100" src="https://storage.googleapis.com/a1aa/image/BZLAr8M8nCquGhK9dBkLeY4wefA0CgQZUAHB5HFqfpoOBLedC.jpg" width="100" />
-                        <img alt="Girls Pink Moana Printed Dress Thumbnail 4" class="w-20 h-20 rounded-lg" height="100" src="https://storage.googleapis.com/a1aa/image/5EvM7di6x5qfRak3ZX5DWQizfpTZs5EugfvtOAWgm22ggFfOB.jpg" width="100" />
+                        <img alt="Thumbnail 1" class="w-20 h-20 rounded-lg" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" style="width: 80px; height: 80px; object-fit: cover;" />
+                        <img alt="Thumbnail 2" class="w-20 h-20 rounded-lg" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" style="width: 80px; height: 80px; object-fit: cover;" />
+                        <img alt="Thumbnail 3" class="w-20 h-20 rounded-lg" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" style="width: 80px; height: 80px; object-fit: cover;" />
+                        <img alt="Thumbnail 4" class="w-20 h-20 rounded-lg" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" style="width: 80px; height: 80px; object-fit: cover;" />
                     </div>
                 </div>
 
-                <div class="uk-width-1-2">
-                    <h1 class="text-3xl font-bold">
-                        YK Disney
-                    </h1>
-                    <p class="text-xl text-gray-600">
-                        Girls Pink Moana Printed Dress
-                    </p>
+                <div class="uk-width-1-2" style="overflow-y: hidden;">
+                    <h1 class="text-3xl font-bold">YK Disney</h1>
+                    <p class="text-xl text-gray-600">Giày búp bê da</p>
                     <div class="flex items-center mt-2">
                         <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-500">
-                            </i>
-                            <i class="fas fa-star text-yellow-500">
-                            </i>
-                            <i class="fas fa-star text-yellow-500">
-                            </i>
-                            <i class="fas fa-star text-yellow-500">
-                            </i>
-                            <i class="fas fa-star text-yellow-500">
-                            </i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">
-                            (121 Reviews)
-                        </p>
+                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
                     </div>
                     <div class="mt-4">
-                        <span class="text-2xl font-bold">
-                            $80.00
-                        </span>
-                        <span class="text-xl line-through text-gray-500 ml-2">
-                            $100.00
-                        </span>
+                        <span class="text-2xl font-bold">$80.00</span>
+                        <span class="text-xl line-through text-gray-500 ml-2">$100.00</span>
                     </div>
                     <p class="mt-4 text-gray-600">
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
                     </p>
                     <div class="mt-4">
-                        <p class="font-bold">
-                            Color
-                        </p>
+                        <p class="font-bold">Color</p>
                         <div class="flex space-x-2 mt-2">
-                            <div class="w-8 h-8 bg-blue-600 rounded-full cursor-pointer">
-                            </div>
-                            <div class="w-8 h-8 bg-red-600 rounded-full cursor-pointer">
-                            </div>
-                            <div class="w-8 h-8 bg-black rounded-full cursor-pointer">
-                            </div>
-                            <div class="w-8 h-8 bg-yellow-600 rounded-full cursor-pointer">
-                            </div>
-                            <div class="w-8 h-8 bg-green-600 rounded-full cursor-pointer">
-                            </div>
+                            <div class="w-8 h-8 bg-blue-600 rounded-full cursor-pointer"></div>
+                            <div class="w-8 h-8 bg-red-600 rounded-full cursor-pointer"></div>
+                            <div class="w-8 h-8 bg-black rounded-full cursor-pointer"></div>
+                            <div class="w-8 h-8 bg-yellow-600 rounded-full cursor-pointer"></div>
+                            <div class="w-8 h-8 bg-green-600 rounded-full cursor-pointer"></div>
                         </div>
                     </div>
                     <div class="mt-4">
-                        <p class="font-bold">
-                            Size
-                        </p>
+                        <p class="font-bold">Size</p>
                         <div class="flex space-x-2 mt-2">
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">
-                                S
-                            </button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">
-                                M
-                            </button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">
-                                L
-                            </button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">
-                                XL
-                            </button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">
-                                XXL
-                            </button>
+                            <button class="w-10 h-10 border border-gray-300 rounded-lg">S</button>
+                            <button class="w-10 h-10 border border-gray-300 rounded-lg">M</button>
+                            <button class="w-10 h-10 border border-gray-300 rounded-lg">L</button>
+                            <button class="w-10 h-10 border border-gray-300 rounded-lg">XL</button>
+                            <button class="w-10 h-10 border border-gray-300 rounded-lg">XXL</button>
                         </div>
                     </div>
                     <div class="mt-4 flex items-center space-x-4">
                         <div class="flex items-center border border-gray-300 rounded-lg">
-                            <button class="w-10 h-10 text-gray-600">
-                                -
-                            </button>
+                            <button class="w-10 h-10 text-gray-600">-</button>
                             <input class="w-12 h-10 text-center border-none" type="text" value="1" />
-                            <button class="w-10 h-10 text-gray-600">
-                                +
-                            </button>
+                            <button class="w-10 h-10 text-gray-600">+</button>
                         </div>
-                        <button class="bg-black text-white px-6 py-2 rounded-lg">
-                            Add to Cart
-                        </button>
+                        <button class="bg-black text-white px-6 py-2 rounded-lg">Add to Cart</button>
                         <button class="border border-gray-300 rounded-lg p-2">
-                            <i class="far fa-heart text-gray-600">
-                            </i>
+                            <i class="far fa-heart text-gray-600"></i>
                         </button>
                     </div>
                     <div class="mt-4">
-                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">
-                            In Stock
-                        </span>
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">In Stock</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- Modal giảm giá -->

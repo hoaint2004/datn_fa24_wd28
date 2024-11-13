@@ -24,31 +24,13 @@ body {
     font-size: 22px;
     font-weight: $font-weight-bold;
 }
-.uk-tab::before {
-    border: none;
-}
-.uk-tab.custom-tab {
-    display: flex;
-    justify-content: space-between;
-    position: static;
-}
-.uk-tab > .uk-active > a {
-    //bỏ gạch dưới icon
-    border: none;
-}
 
 .order {
-    .order-title {
-        color: $color-title;
-        font-family: $font-spectral;
-        font-size: 32px;
-    }
     .order-body {
         .order-left {
             padding-right: 65px;
             .order-left-body {
                 .address {
-                    
                 }
                 .payments {
                     .payments-body {
@@ -118,6 +100,23 @@ body {
                 @include button;
             }
         }
+    }
+    .uk-tab::before {
+        border: none;
+    }
+    .uk-tab.custom-tab {
+        display: flex;
+        justify-content: space-between;
+        position: static;
+    }
+    .uk-tab > .uk-active > a {
+        //bỏ gạch dưới icon
+        border: none;
+    }
+    .order-title {
+        color: $color-title;
+        font-family: $font-spectral;
+        font-size: 32px;
     }
 }
 

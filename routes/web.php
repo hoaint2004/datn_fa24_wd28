@@ -99,3 +99,7 @@ Route::get('/cart', function(){
 Route::get('/footer', function(){
     return view('user.footer');
 });
+
+Route::get('/details', function(){
+    return view('user.product-details');
+});
