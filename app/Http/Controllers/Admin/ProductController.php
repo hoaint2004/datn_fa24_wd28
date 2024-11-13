@@ -71,9 +71,11 @@ class ProductController extends Controller
     
     
 
-    public function detail()
+    public function detail($id)
     {
-        return view('admin.pages.products.detail');
+        $product = Product::with('category', 'variants')->findOrFail($id);
+        return view('admin.pages.products.dentail', compact('product'));
+
     }
 // edit
     public function edit($id)

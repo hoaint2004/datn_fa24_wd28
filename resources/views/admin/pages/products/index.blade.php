@@ -51,7 +51,7 @@
                                                 <th scope="col">Category</th>
                                                 <th scope="col">Description</th>
                                                 <th scope="col">Price</th>
-                                                <th scope="col">Variants</th>  
+                                                {{-- <th scope="col">Variants</th>   --}}
                                                <!-- Thêm cột hiển thị các biến thể -->
                                                 <th scope="col" style="width: 150px;">Thao tác</th>
                                             </tr>
@@ -65,18 +65,21 @@
                                                     <td>{{ $pro->category->name ?? 'Không có loại' }}</td>
                                                     <td>{{$pro->description}}</td>
                                                     <td>{{ number_format($pro->price, 0, ',', '.') }} đ</td>
-                                                    <td>
+                                                    {{-- <td>
                                                         <!-- Hiển thị biến thể -->
                                                         @foreach ($pro->variants as $variant)
                                                             <p>Kích thước: {{ $variant->size }}, Màu sắc: {{ $variant->color }}, Số lượng: {{ $variant->quantity }}</p>
                                                         @endforeach
-                                                    </td>
+                                                    </td> --}}
                                                     <td>
                                                         <a href="{{ route('admin.products.edit', $pro->id) }}" class="link-primary" style="margin: 0 5px;">
                                                             <i class="ri-settings-4-line" style="font-size:18px;"></i>
                                                         </a>
                                                         <a href="javascript:void(0);" class="link-danger" style="margin: 0 5px;" data-bs-toggle="modal" data-bs-target="#topmodal{{ $pro->id }}">
                                                             <i class="ri-delete-bin-5-line" style="font-size:18px;"></i>
+                                                        </a>
+                                                        <a href="{{ route('admin.products.detail', $pro->id) }}" class="link-primary" style="margin: 0 5px;">
+                                                            <i class="ri-eye-line" style="font-size:18px;"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
