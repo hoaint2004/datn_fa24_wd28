@@ -112,7 +112,7 @@
                                                        <span class="text-danger">{{ $message }}</span>
                                                    @enderror
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3">adsfsf
                                                 <label for="variantQuantity_{{ $index }}" class="form-label">Quantity</label>
                                                 <input type="number" id="variantQuantity_{{ $index }}" name="variants[{{ $index }}][quantity]" 
                                                        value="{{ old("variants.{$index}.quantity", $variant['quantity'] ?? '') }}" class="form-control" required>
