@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <meta name="description" content="">
     <meta name="robots" content="noindex, follow" />
@@ -29,6 +30,9 @@
 
     <!-- Master stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/style.css') }}">
+
+    {{-- Account stylesheet --}}
+    <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/account.css') }}">
 
     <!-- Responsive stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/responsive.css') }}">
@@ -114,6 +118,8 @@
     @yield('script')
     <!-- JS
     ============================================ -->
+    {{-- JS index --}}
+    {{-- <script src="{{ asset('assets/sneakers/assets/js/index.js') }}"></script> --}}
 
     <!-- jQuery JS -->
     <script src="{{ asset('assets/sneakers/assets/js/jquery.1.12.4.min.js') }}"></script>

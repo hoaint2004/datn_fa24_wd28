@@ -31,6 +31,7 @@
     <!-- App Css-->
     <link href="{{ asset('assets/theme/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <!-- style Css-->
     <link href="{{ asset('assets/theme/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('assets/theme/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />

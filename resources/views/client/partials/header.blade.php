@@ -24,9 +24,12 @@
                                         class="fa fa-angle-down"></i></button>
                                 <div class="dropdown-menu">
                                     <ul>
-                                        <li><a href="#" class="current"><img src="{{ asset('assets/sneakers/assets/images/icons/en-gb.jpg') }}"
+                                        <li><a href="#" class="current"><img
+                                                    src="{{ asset('assets/sneakers/assets/images/icons/en-gb.jpg') }}"
                                                     alt="Icons"> English</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/sneakers/assets/images/icons/fr-fr.jpg') }}" alt="Icons">
+                                        <li><a href="#"><img
+                                                    src="{{ asset('assets/sneakers/assets/images/icons/fr-fr.jpg') }}"
+                                                    alt="Icons">
                                                 Việt Nam</a></li>
                                     </ul>
                                 </div>
@@ -56,7 +59,8 @@
                 </div>
                 <div class="col-12 order-1 col-sm-12 order-sm-1 col-md-4 order-md-2 col-lg-6">
                     <div class="logo">
-                        <a href="/"><img src="{{ asset('assets/sneakers/assets/images/logo.png') }}" alt="Logo" class="img-fluid"></a>
+                        <a href="/"><img src="{{ asset('assets/sneakers/assets/images/logo.png') }}"
+                                alt="Logo" class="img-fluid"></a>
                     </div>
                 </div>
                 <div class="col-6 order-3 col-sm-6 col-md-4 col-lg-3">
@@ -130,8 +134,13 @@
                                     <button class="btn-link dropdown-toggle"><i class="pe-7s-config"></i></button>
                                     <div class="dropdown-menu">
                                         <ul>
-                                            <li><a href="{{ route('register.form') }}">Đăng ký</a></li>
-                                            <li><a href="{{ route('login.form') }}">Đăng nhập</a></li>
+                                            @if (Auth::check())
+                                                <a href="{{ route('account')}}">Thông tin tài khoản</a>
+                                                <a href="{{ route('logout') }}" class="auth-link">Logout</a>
+                                            @else
+                                                <li><a href="{{ route('register.form') }}">Đăng ký</a></li>
+                                                <li><a href="{{ route('login.form') }}">Đăng nhập</a></li>
+                                            @endif
                                         </ul>
 
                                     </div>
@@ -192,7 +201,8 @@
                                 </ul>
                             </li>
                             <li class="fullwidth-banner">
-                                <a href="#"><img src="{{ asset('assets/sneakers/assets/images/banners/menu-banner.jpg') }}"
+                                <a href="#"><img
+                                        src="{{ asset('assets/sneakers/assets/images/banners/menu-banner.jpg') }}"
                                         alt="Menu Banner"></a>
                             </li>
                         </ul>

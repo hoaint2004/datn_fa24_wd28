@@ -129,7 +129,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="register-box d-flex justify-content-start mt-half">
-                                                    <button type="submit" id="btnRegister" class="default-btn tiny-btn">Đăng ký</button>
+                                                    <button type="button" id="btnRegister" class="default-btn tiny-btn">Đăng ký</button>
                                                 </div>
                                             </form>
                                         </div>
