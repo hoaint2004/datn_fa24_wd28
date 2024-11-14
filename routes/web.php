@@ -1,6 +1,5 @@
 <?php
 
-// use app\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AccountController;
@@ -17,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+|WebRoutes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+|Hereiswhereyoucanregisterwebroutesforyourapplication.These
+|routesareloadedbytheRouteServiceProviderandallofthemwill
+|beassignedtothe"web"middlewaregroup.Makesomethinggreat!
 |
 */
 
