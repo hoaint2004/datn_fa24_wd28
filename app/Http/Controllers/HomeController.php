@@ -18,6 +18,11 @@ class HomeController extends Controller
 
     public function account(){
         $user = Auth::user();
+        // dd($user);
         return view('client.account', compact('user'));
+    }
+
+    public function changePassword(){
+        
     }
 }
