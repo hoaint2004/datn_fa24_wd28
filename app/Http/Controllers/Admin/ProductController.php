@@ -17,55 +17,55 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         // Lấy tất cả danh mục để hiển thị trong form lọc
-        $categories = Category::all();  
-    
+        $categories = Category::all();
+
         // Lọc và phân trang sản phẩm theo danh mục nếu có
         $products = Product::with('category', 'variants')
-        ->when($request->category_id, function($query) use ($request) {
-            return $query->where('category_id', $request->category_id);
-        })
-        ->when($request->name, function($query) use ($request) {
-            return $query->where('name', 'like', '%' . $request->name . '%')
-                        ->orWhere('name', 'like', '%' . $request->name)
-                        ->orWhere('name', 'like' , $request->name . '%');
-        })
-        ->orderBy('id', 'asc')  // Sắp xếp theo ID, bạn có thể thay đổi nếu cần
-        ->paginate(10);  // Phân trang với 10 sản phẩm mỗi trang
-    
-    
+            ->when($request->category_id, function ($query) use ($request) {
+                return $query->where('category_id', $request->category_id);
+            })
+            ->when($request->name, function ($query) use ($request) {
+                return $query->where('name', 'like', '%' . $request->name . '%')
+                    ->orWhere('name', 'like', '%' . $request->name)
+                    ->orWhere('name', 'like', $request->name . '%');
+            })
+            ->orderBy('id', 'asc')  // Sắp xếp theo ID, bạn có thể thay đổi nếu cần
+            ->paginate(10);  // Phân trang với 10 sản phẩm mỗi trang
+
+
         return view('admin.pages.products.index', compact('products', 'categories'));
     }
-    
+
 
     public function create()
     {
         $categories = Category::all();
-        return view('admin.pages.products.create',compact('categories'));
+        return view('admin.pages.products.create', compact('categories'));
     }
 
     public function store(ProductRequest $request)
     {
         DB::beginTransaction();
-    
+
         try {
-            $data = $request->only(['name', 'category_id', 'price','description']);
-    
+            $data = $request->only(['name', 'category_id', 'price', 'description']);
+
             if ($request->hasFile('image')) {
                 $path = $request->file('image')->storePublicly('public/products');
                 $data['image'] = Storage::url($path);
             }
-    
+
             $product = Product::create($data);
-    
+
             // Add variants if present in request
             if ($request->has('variants')) {
                 foreach ($request->input('variants') as $variantData) {
                     $product->variants()->create($variantData);
                 }
             }
-    
+
             DB::commit();
-    
+
             return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được thêm thành công');
         } catch (Exception $e) {
             DB::rollBack();
@@ -73,17 +73,16 @@ class ProductController extends Controller
             return redirect()->back()->with('messages', 'Lỗi: ' . $e->getMessage());
         }
     }
-    
-    
-    
+
+
+
 
     public function detail($id)
     {
         $product = Product::with('category', 'variants')->findOrFail($id);
         return view('admin.pages.products.dentail', compact('product'));
-
     }
-// edit
+    // edit
     public function edit($id)
     {
         $products = Product::with('variants')->findOrFail($id);
@@ -94,18 +93,18 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         DB::beginTransaction();
-    
+
         try {
             $products = Product::findOrFail($id);
-            $data = $request->only(['name', 'category_id', 'price','description']);
-    
+            $data = $request->only(['name', 'category_id', 'price', 'description']);
+
             if ($request->hasFile('image')) {
                 $path = $request->file('image')->storePublicly('public/products');
                 $data['image'] = Storage::url($path);
             }
-    
+
             $products->update($data);
-    
+
             // Update variants
             $products->variants()->delete();
             if ($request->has('variants')) {
@@ -113,40 +112,40 @@ class ProductController extends Controller
                     $products->variants()->create($variantData);
                 }
             }
-    
+
             DB::commit();
-    
+
             return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được cập nhật thành công');
         } catch (Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('messages', 'Lỗi: ' . $e->getMessage());
         }
     }
-    
-// delete
-public function delete($id)
-{
-    DB::beginTransaction();
-    try {
-        $product = Product::findOrFail($id);
 
-        // Xóa các biến thể trước
-        $product->variants()->delete();
+    // delete
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
 
-        // Sau đó xóa sản phẩm
-        $product->delete();
+            // Xóa các biến thể trước
+            $product->variants()->delete();
 
-        DB::commit();
-        // return response()->json(['message' => 'Xóa sản phẩm thành công.'], 200);
-        return redirect()->back()->with('messages','delete success');
-    } catch (Exception $e) {
-        DB::rollBack();
-        
-        // Ghi lại lỗi nếu cần hoặc trả về lỗi
-        // return response()->json(['message' => 'Xóa sản phẩm thất bại.', 'error' => $e->getMessage()], 500);
-        return redirect()->back()->with('messages','delete error');
+            // Sau đó xóa sản phẩm
+            $product->delete();
+
+            DB::commit();
+            // return response()->json(['message' => 'Xóa sản phẩm thành công.'], 200);
+            return redirect()->back()->with('messages', 'delete success');
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            // Ghi lại lỗi nếu cần hoặc trả về lỗi
+            // return response()->json(['message' => 'Xóa sản phẩm thất bại.', 'error' => $e->getMessage()], 500);
+            return redirect()->back()->with('messages', 'delete error');
+        }
     }
-}
 
 
     // public function topSellers()
@@ -160,7 +159,7 @@ public function delete($id)
     //     $products = $topSellers->map(function ($orderDetail) {
     //         return Product::find($orderDetail->product_id);
     //     });
-
+    
     //     return view('dashboard', compact('products'));
     // }
 
