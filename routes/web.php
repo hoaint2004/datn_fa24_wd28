@@ -103,3 +103,8 @@ Route::get('/footer', function(){
 Route::get('/details', function(){
     return view('user.product-details');
 });
+
+Route::get('/filter', function(){
+    return view('user.filter-product');
+});
+
