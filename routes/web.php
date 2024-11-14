@@ -6,11 +6,14 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProductVariantsController;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\SneakerController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +66,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/detail/{id}','detail')->name('detail');
         Route::post('/delete/{id}','delete')->name('delete');
     });
+
+    Route::controller(ProductVariantsController::class)->name('product_variants.')->prefix('product_variants')
+    ->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::get('/show/{id}','show')->name('show');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::post('/update/{id}','update')->name('update');
+        Route::get('/detail/{id}','detail')->name('detail');
+        Route::delete('/delete/{id}','delete')->name('delete');
+    });
 });
 
 // Route user
@@ -78,4 +93,5 @@ Route::middleware(['web'])->group(function () {
     Route::get('/search', [ProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [HomeController::class, 'account'])->name('account');
+    Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
 });

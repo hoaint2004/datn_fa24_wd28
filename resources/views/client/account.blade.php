@@ -1,6 +1,17 @@
 @extends('Client.layouts.master')
 @section('title', 'Sneakers - Thế Giới Giày')
 @section('content')
+@if (session('message'))
+    <div class="alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     <div class="profile-container">
         <aside class="sidebar">
             <div class="profile-header">
@@ -40,18 +51,23 @@
             <!-- Form Thay Đổi Mật Khẩu -->
             <div class="change-password">
                 <h3>Thay đổi mật khẩu</h3>
-                <form class="change-password-form">
+                <form action="{{ route('changePassword', $user->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label>Mật khẩu hiện tại</label>
-                        <input type="password" placeholder="Nhập mật khẩu hiện tại">
+                        <input type="password" placeholder="Nhập mật khẩu hiện tại" class="password_old" name="password_old"
+                            required>
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu mới</label>
-                        <input type="password" placeholder="Nhập mật khẩu mới">
+                        <input type="password" placeholder="Nhập mật khẩu mới" class="password_new" name="password_new"
+                            required>
                     </div>
                     <div class="form-group">
                         <label>Xác nhận mật khẩu mới</label>
-                        <input type="password" placeholder="Xác nhận mật khẩu mới">
+                        <input type="password" placeholder="Xác nhận mật khẩu mới" class="password_confirm"
+                            name="password_confirm" required>
                     </div>
                     <button type="submit" class="save-password-btn">Lưu thay đổi</button>
                 </form>
