@@ -1,0 +1,221 @@
+@import "./_mixin.scss";
+@import "./font.scss";
+
+body {
+    font-family: $font-spectral;
+}
+
+.breadcrumb-a {
+    color: $color-title;
+    transition: all 0.8s;
+    font-size: 16px;
+    &:hover {
+        color: $color;
+    }
+}
+
+.order-title-item {
+    color: $color-title;
+    font-size: 18px;
+}
+
+.order-name {
+    color: $color-title;
+    font-size: 22px;
+    font-weight: $font-weight-bold;
+}
+
+.order {
+    .order-body {
+        .order-left {
+            padding-right: 65px;
+            .order-left-body {
+                .address {
+                }
+                .payments {
+                    .payments-body {
+                        .payments-card {
+                            .payments-card-title {
+                            }
+                            .payments-card-input:focus {
+                                outline: none;
+                            }
+                            .payments-card-label {
+                                color: $color-title;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                }
+                .review {
+                    .review-body {
+                        .review-content {
+                            .warp {
+                                display: flex;
+                                padding: 20px 0 10px 0;
+                                .warp-body {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    padding-left: 30px;
+                                    .product-name {
+                                        font-size: 18px;
+                                        color: $color-title;
+                                        font-weight: $font-weight-bold;
+                                        text-decoration: none;
+                                        display: block;
+                                        margin-bottom: 5px;
+                                        transition: all 0.6s;
+                                        &:hover {
+                                            color: $color-red;
+                                        }
+                                    }
+                                    .price {
+                                        margin-bottom: 5px;
+                                        span {
+                                            font-size: 18px;
+                                            color: $color-title;
+                                            strong {
+                                                color: $color-red;
+                                                font-weight: $font-weight-regular;
+                                            }
+                                            del {
+                                                color: $color-auth;
+                                                font-size: 15px;
+                                            }
+                                        }
+                                    }
+                                    .data-size {
+                                        color: $color-title;
+                                        font-size: 18px;
+                                        margin-bottom: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            button {
+                @include button;
+            }
+        }
+    }
+    .uk-tab::before {
+        border: none;
+    }
+    .uk-tab.custom-tab {
+        display: flex;
+        justify-content: space-between;
+        position: static;
+    }
+    .uk-tab > .uk-active > a {
+        //bỏ gạch dưới icon
+        border: none;
+    }
+    .order-title {
+        color: $color-title;
+        font-family: $font-spectral;
+        font-size: 32px;
+    }
+}
+
+.shopping-cart-right {
+    h2 {
+        color: $color-title;
+        font-size: 20px;
+        font-family: $font-spectral;
+        border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+        padding-bottom: 20px;
+        font-weight: $font-weight-regular;
+    }
+    .discount-code {
+        padding-top: 30px;
+        .code {
+            font-size: 20px;
+            color: $color-title;
+        }
+        form {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+            padding: 20px 0 25px 0;
+            .shopping-cart-right-input {
+                border: 1px solid hsla(0, 0%, 7%, 0.11);
+                padding: 10px 120px 10px 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+            .shopping-cart-right-button {
+                border: 1px solid $color;
+                background-color: $color;
+                color: $color-button;
+                padding: 10px 28px;
+                transition: all 0.6s;
+                text-transform: uppercase;
+                &:hover {
+                    color: $color;
+                    background-color: $color-button;
+                }
+            }
+        }
+    }
+    .shipping-fee {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+        span {
+            color: $color-title;
+            font-size: 18px;
+        }
+    }
+    .total-right {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+        span {
+            color: $color-title;
+            font-size: 22px;
+        }
+    }
+    .total-action {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .continue-shopping {
+            @include ctn-pay-shopping;
+            border: 1px solid $color-title;
+            color: $color-title;
+            &:hover {
+                color: $color;
+                border-color: $color;
+            }
+        }
+        .pay-money {
+            @include ctn-pay-shopping;
+            border: 1px solid $color;
+            color: $color-button;
+            background-color: $color;
+            &:hover {
+                color: $color;
+                border-color: $color;
+                background-color: $color-button;
+            }
+        }
+    }
+}
+
+// .uk-tab.custom-tab li:not(:last-child) {
+//     border-right: 1px solid #ccc; /* Đặt màu cho đường kẻ */
+//     padding-right: 10px; /* Khoảng cách giữa icon và đường kẻ */
+// }
+
+// .uk-tab.custom-tab li a {
+//     display: flex;
+//     align-items: center;
+// }
