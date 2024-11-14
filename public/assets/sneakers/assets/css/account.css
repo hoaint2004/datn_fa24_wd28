@@ -82,7 +82,8 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-bottom: 10px;
-            &:hover {
+
+            .edit-profile:hover {
                 background-color: #333;
             }
         }
@@ -129,7 +130,6 @@
             margin-bottom: 1rem;
             color: #333;
         }
-
         .change-password-form .form-group {
             margin-bottom: 1rem;
         }
@@ -138,7 +138,6 @@
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-
         .change-password-form .form-group input {
             width: 100%;
             padding: 0.6rem;
@@ -165,6 +164,47 @@
         }
 
     }
+}
+
+/* Kiểu cho thông báo thành công */
+.alert {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+/* Thông báo thành công */
+.alert-success {
+    background-color: #4CAF50;
+    padding: 10px;
+    /* Màu xanh lá cây */
+    color: white;
+}
+
+/* Thông báo lỗi */
+.alert-danger {
+    background-color: #f44336;
+    padding: 10px;
+    /* Màu đỏ */
+    color: white;
+}
+
+/* Kiểu cho icon trong thông báo */
+.alert .icon {
+    margin-right: 10px;
+}
+
+/* Kiểu cho thông báo đóng (x) */
+.alert .close-btn {
+    margin-left: auto;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
 }
 
 /* responsive */

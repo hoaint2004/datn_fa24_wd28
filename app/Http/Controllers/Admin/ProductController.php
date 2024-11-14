@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-
-use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -41,9 +39,9 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         return view('admin.pages.products.create', compact('categories'));
-    }
+         }
 
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
 
@@ -69,13 +67,8 @@ class ProductController extends Controller
             return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được thêm thành công');
         } catch (Exception $e) {
             DB::rollBack();
-            // dd($e);
-            return redirect()->back()->with('messages', 'Lỗi: ' . $e->getMessage());
         }
     }
-
-
-
 
     public function detail($id)
     {
@@ -84,16 +77,13 @@ class ProductController extends Controller
     }
     // edit
     public function edit($id)
-    {
-        $products = Product::with('variants')->findOrFail($id);
-        $categories = Category::all();
-        return view('admin.pages.products.edit', compact('products', 'categories'));
+        {
+        return view('admin.pages.products.edit');
     }
-    // update
-    public function update(ProductRequest $request, $id)
+
+    public function update($id, Request $request)
     {
         DB::beginTransaction();
-
         try {
             $products = Product::findOrFail($id);
             $data = $request->only(['name', 'category_id', 'price', 'description']);
@@ -116,9 +106,8 @@ class ProductController extends Controller
             DB::commit();
 
             return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được cập nhật thành công');
-        } catch (Exception $e) {
+   } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('messages', 'Lỗi: ' . $e->getMessage());
         }
     }
 
@@ -162,5 +151,4 @@ class ProductController extends Controller
     
     //     return view('dashboard', compact('products'));
     // }
-
 }
