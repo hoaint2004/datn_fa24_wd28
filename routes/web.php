@@ -11,7 +11,7 @@ use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\ProductController as ControllersProductController;
 use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -84,14 +84,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 Route::middleware(['web'])->group(function () {
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
-    Route::get('/category', [ProductController::class, 'category'])->name('category');
-    Route::get('/product_detail', [ProductController::class, 'product_detail'])->name('product_detail');
-    Route::get('/contact', [ProductController::class, 'contact'])->name('contact');
-    Route::get('/cart', [ProductController::class, 'cart'])->name('cart');
-    Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
-    Route::get('/order-history', [ProductController::class, 'order_history'])->name('order_history');
-    Route::get('/search', [ProductController::class, 'search'])->name('search');
-    Route::get('/notFound', [ProductController::class, 'notFound'])->name('notFound');
-    Route::get('/account', [HomeController::class, 'account'])->name('account');
+    Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
+    Route::get('/product_detail', [ControllersProductController::class, 'product_detail'])->name('product_detail');
+    Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
+    Route::get('/cart', [ControllersProductController::class, 'cart'])->name('cart');
+    Route::get('/order', [ControllersProductController::class, 'order'])->name('checkout');
+    Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
+    Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
+    Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
+    Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
 });

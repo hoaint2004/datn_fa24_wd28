@@ -16,7 +16,8 @@
 
     <!-- CSS files
     ============================================ -->
-
+    <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/account.css') }}">
+    
     <!-- Boostrap stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/bootstrap.min.css') }}">
 
@@ -53,7 +54,7 @@
     <div id="whole" class="whole-site-wrapper">
 
         <!-- Start of Header -->
-        @include('Client.partials.header')
+        @include('client.partials.header')
         <!-- End of Header -->
 
         <div class="fixed-header-space"></div> <!-- empty placeholder div for Fixed Menu bar height-->

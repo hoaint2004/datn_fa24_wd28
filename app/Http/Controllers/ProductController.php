@@ -5,32 +5,36 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(){
-        
-    }
-
-    public function create(){
+    public function category(){
 
     }
 
-    public function store(){
+    public function product_detail(){
+        return view('client.product-detail');
+    }
+
+    public function contact(){
 
     }
 
-    public function edit(){
+    public function cart(){
 
     }
-
-    public function update(){
-
+    
+    public function order(){
+        return view('client.order');
     }
 
-    public function delete(){
-
-    }
+    public function order_history(){}
 
     public function search(){
         return view('user.search');
     }
+
+    public function notFound(){
+
+    }
+    
+
 }
 
