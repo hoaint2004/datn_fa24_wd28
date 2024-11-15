@@ -9,20 +9,12 @@ class HomeController extends Controller
 {
     public function home()
     {
-        return view('user.homePage');
+        return view('client.homePage');
     }
 
     public function about(){
-        return view('user.about');
+        return view('client.about');
     }
 
-    public function account(){
-        $user = Auth::user();
-        // dd($user);
-        return view('client.account', compact('user'));
-    }
-
-    public function changePassword(){
-        
-    }
+    
 }
