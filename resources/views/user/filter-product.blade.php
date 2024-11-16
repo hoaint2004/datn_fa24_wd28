@@ -24,97 +24,119 @@
         </nav>
     </div>
 
-    <section class="uk-container uk-container-large">
+    <section class="filter-product uk-container uk-container-large">
+        <div class="filter-top uk-container uk-container-small">
+            <h2 class="title-category">Giày nữ</h2>
+            <p class="content-category">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic neque perspiciatis, at voluptatum sapiente maiores doloribus explicabo impedit quis veniam eveniet id beatae magni suscipit quam accusantium! Doloremque, at dolorum. lor</p>
+        </div>
         <div class="uk-grid" uk-grid>
-            <div class="uk-width-1-4">
-                <aside class="sidebar">
-                    <h3>Product Categories</h3>
-                    <ul>
-                        <li><input type="checkbox" /> Men</li>
-                        <li><input type="checkbox" /> Women</li>
-                        <li><input type="checkbox" /> Kids</li>
-                        <li><input type="checkbox" /> Bags</li>
-                        <li><input type="checkbox" /> Belts</li>
-                        <li><input type="checkbox" /> Wallets</li>
-                        <li><input type="checkbox" /> Watches</li>
-                        <li><input type="checkbox" /> Accessories</li>
-                        <li><input type="checkbox" /> Winter Wear</li>
-                    </ul>
 
-                    <h3>Filter by Price</h3>
-                    <input type="range" min="0" max="2000" value="500" class="price-slider" />
+            <div class="sidebar uk-width-1-4">
+                <ul uk-accordion="multiple: true">
 
-                    <h3>Filter by Color</h3>
-                    <ul>
-                        <li><input type="checkbox" /> Red</li>
-                        <li><input type="checkbox" /> Blue</li>
-                        <li><input type="checkbox" /> Orange</li>
-                        <li><input type="checkbox" /> Black</li>
-                        <li><input type="checkbox" /> Green</li>
-                        <li><input type="checkbox" /> Yellow</li>
-                    </ul>
+                    <li class="uk-open sidebar-category">
+                        <a class="uk-accordion-title" href>Danh mục</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay1" /><label for="giay1">Giầy nữ</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay2" /><label for="giay2">Giầy nữ</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay3" /><label for="giay3">Giầy nữ</label> <span class="custom-number">(10)</span></li>
+                            </ul>
+                        </div>
+                    </li>
 
-                    <h3>Filter by Size</h3>
-                    <ul>
-                        <li><input type="checkbox" /> S</li>
-                        <li><input type="checkbox" /> M</li>
-                        <li><input type="checkbox" /> L</li>
-                        <li><input type="checkbox" /> XL</li>
-                        <li><input type="checkbox" /> XXL</li>
-                        <li><input type="checkbox" /> XXXL</li>
-                    </ul>
-                </aside>
+                    <li class="uk-open sidebar-size">
+                        <a class="uk-accordion-title" href>Kích thước</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay10" /><label for="giay10">42</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay11" /><label for="giay11">41</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay12" /><label for="giay12">40</label> <span class="custom-number">(10)</span></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="uk-open sidebar-color">
+                        <a class="uk-accordion-title" href>Màu sắc</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay17" />
+                                        <label for="giay17">Xanh</label>
+                                        <div class="color-accordion">
+                                        </div>
+                                    </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay18" />
+                                        <label for="giay18">Xanh</label>
+                                        <div class="color-accordion">
+                                        </div>
+                                    </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay19" />
+                                        <label for="giay19">Xanh</label>
+                                        <div class="color-accordion">
+                                        </div>
+                                    </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="uk-open sidebar-price">
+                        <a class="uk-accordion-title" href="#">Giá</a>
+                        <div class="uk-accordion-content sidebar-price-body">
+                            <div class="input-container">
+                                <span class="label">Từ</span>
+                                <input type="text" placeholder="Nhập giá" class="input-field" />
+
+                            </div>
+                            <div class="input-container">
+                                <span class="label">Đến</span>
+                                <input type="text" placeholder="Nhập giá" class="input-field" />
+
+                            </div>
+
+                        </div>
+                    </li>
+
+                </ul>
             </div>
 
-            <div class="uk-width-3-4">
+            <div class="uk-width-3-4 collection-right">
+                <div class="product-list-filter">
+                    <div class="show-product">
+                        Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
+                    </div>
+
+                    <form class="uk-form-stacked shop-sort-by">
+                        <div class="shop-sort-by">
+                            <label class="uk-form-label " for="sort-by">Sắp xếp theo:</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="sort-by" name="sort-by">
+                                    <option class="option-filter" value="">Phổ biến nhất</option>
+                                    <option class="option-filter" value="">Giá (Thấp đến cao)</option>
+                                    <option class="option-filter" value="">Giá (Cao đến thấp)</option>
+                                    <option class="option-filter" value="">Mới nhất</option>
+                                    <option class="option-filter" value="">Cũ nhất</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
                 <div class="product-list">
                     <div class="home-product-list-wrapper uk-grid " uk-grid>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="product-item uk-width-1-4">
                             <div class="product-image">
@@ -163,520 +185,25 @@
                             </div>
                         </div>
 
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item uk-width-1-4">
-                            <div class="product-image">
-                                <a href="#">
-                                    <img
-                                        src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png"
-                                        alt="" />
-                                </a>
-                                <span>-10%</span>
-                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                                <div class="product-button">
-                                    <button>Thêm vào giỏ </button>
-                                    <button uk-toggle="target: #modal-container">Xem nhanh</button>
-                                </div>
-                            </div>
-                            <div class="product-review">
-                                <a href="#">
-                                    <span>RIBBON</span>
-                                </a>
-                                <div class="icon">
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                                </div>
-                            </div>
-                            <a href="#" class="product-name">Giày búp bê da</a>
-                            <div class="product-price">
-                                <strong>2.180.000₫</strong>
-                                <del>2.000.000₫</del>
-                            </div>
-                            <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
+                <nav aria-label="Pagination">
+                    <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                        <li><a href="#"><span uk-pagination-previous></span></a></li>
+                        <li class="uk-active"><span aria-current="page">1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li class="uk-disabled"><span>…</span></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#"><span uk-pagination-next></span></a></li>
+                    </ul>
+                </nav>
             </div>
+
         </div>
     </section>
-
 
     <div id="modal-container" class="uk-modal-container" uk-modal>
         <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
