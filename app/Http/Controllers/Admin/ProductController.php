@@ -7,8 +7,11 @@ use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,7 +21,7 @@ class ProductController extends Controller
         $categories = Category::all();
 
         // Lọc và phân trang sản phẩm theo danh mục nếu có
-        $products = Product::with('category', 'variants')
+        $products = Product::with('category', 'variants' ,'images')
             ->when($request->category_id, function ($query) use ($request) {
                 return $query->where('category_id', $request->category_id);
             })
@@ -34,19 +37,20 @@ class ProductController extends Controller
         return view('admin.pages.products.index', compact('products', 'categories'));
     }
 
-
     public function create()
     {
         $categories = Category::all();
         return view('admin.pages.products.create', compact('categories'));
-         }
+    }
 
     public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
-            $data = $request->only(['name', 'category_id', 'price', 'description']);
+            $data = $request->only(['name', 'category_id', 'price', 'description','price_old']);
+
+            $data['code'] = 'P' . date('YmdHis') . Str::upper(Str::random(5));
 
             if ($request->hasFile('image')) {
                 $path = $request->file('image')->storePublicly('public/products');
@@ -56,29 +60,31 @@ class ProductController extends Controller
             $product = Product::create($data);
 
             // Add variants if present in request
-            if ($request->has('variants')) {
-                foreach ($request->input('variants') as $variantData) {
-                    $product->variants()->create($variantData);
-                }
-            }
+            $this->storeVariants($product, $request);
+            // Add image gallery
+            $this->storeGallery($product, $request);
 
             DB::commit();
 
-            return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được thêm thành công');
+            return redirect()->route('admin.products.index')->with('status_succeed', 'Sản phẩm đã được thêm thành công');
         } catch (Exception $e) {
             DB::rollBack();
+            return redirect()->back()->with('status_failed', 'Lỗi: ' . $e->getMessage());
         }
     }
 
     public function detail($id)
     {
-        $product = Product::with('category', 'variants')->findOrFail($id);
+        $product = Product::with('category', 'variants','images')->findOrFail($id);
         return view('admin.pages.products.dentail', compact('product'));
     }
+
     // edit
     public function edit($id)
-        {
-        return view('admin.pages.products.edit');
+    {
+        $products = Product::with('variants','images')->findOrFail($id);
+        $categories = Category::all();
+        return view('admin.pages.products.edit', compact('products', 'categories'));
     }
 
     public function update($id, Request $request)
@@ -86,7 +92,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $products = Product::findOrFail($id);
-            $data = $request->only(['name', 'category_id', 'price', 'description']);
+            $data = $request->only(['name', 'category_id', 'price', 'description','price_old','code']);
 
             if ($request->hasFile('image')) {
                 $path = $request->file('image')->storePublicly('public/products');
@@ -96,18 +102,16 @@ class ProductController extends Controller
             $products->update($data);
 
             // Update variants
-            $products->variants()->delete();
-            if ($request->has('variants')) {
-                foreach ($request->input('variants') as $variantData) {
-                    $products->variants()->create($variantData);
-                }
-            }
+            $this->updateVariants($products, $request);
+            // Update image gallery
+            $this->updateGallery($products, $request);
 
             DB::commit();
 
-            return redirect()->route('admin.products.index')->with('messages', 'Sản phẩm đã được cập nhật thành công');
-   } catch (Exception $e) {
+            return redirect()->route('admin.products.index')->with('status_succeed', 'Sản phẩm đã được cập nhật thành công');
+        } catch (Exception $e) {
             DB::rollBack();
+            return redirect()->back()->with('status_failed', 'Lỗi: ' . $e->getMessage());
         }
     }
 
@@ -120,35 +124,78 @@ class ProductController extends Controller
 
             // Xóa các biến thể trước
             $product->variants()->delete();
+            $product->images()->delete();
 
             // Sau đó xóa sản phẩm
             $product->delete();
 
             DB::commit();
-            // return response()->json(['message' => 'Xóa sản phẩm thành công.'], 200);
-            return redirect()->back()->with('messages', 'delete success');
+            return redirect()->back()->with('status_succeed', 'delete success');
         } catch (Exception $e) {
             DB::rollBack();
-
-            // Ghi lại lỗi nếu cần hoặc trả về lỗi
-            // return response()->json(['message' => 'Xóa sản phẩm thất bại.', 'error' => $e->getMessage()], 500);
-            return redirect()->back()->with('messages', 'delete error');
+            return redirect()->back()->with('status_failed', 'delete error');
         }
     }
 
+    // Hàm lưu biến thể sản phẩm
+    private function storeVariants($product, $request)
+    {
+        if ($request->has('variants')) {
+            foreach ($request->input('variants') as $variantData) {
+                $product->variants()->create($variantData);
+            }
+        }
+    }
 
-    // public function topSellers()
-    // {
-    //     $topSellers = OrderDetail::select('product_id', DB::raw('SUM(quantity) as total_quantity'))
-    //         ->groupBy('product_id')
-    //         ->orderByDesc('total_quantity')
-    //         ->limit(5)
-    //         ->get();
+    // Hàm cập nhật biến thể sản phẩm
+    private function updateVariants($product, $request)
+    {
+        if ($request->has('variants')) {
+            $product->variants()->delete();  // Xóa biến thể cũ
+            foreach ($request->input('variants') as $variantData) {
+                $product->variants()->create($variantData);
+            }
+        }
+    }
 
-    //     $products = $topSellers->map(function ($orderDetail) {
-    //         return Product::find($orderDetail->product_id);
-    //     });
-    
-    //     return view('dashboard', compact('products'));
-    // }
+    // Hàm lưu gallery ảnh sản phẩm
+    private function storeGallery($product, $request)
+    {
+        if ($request->hasFile('product_galleries')) {
+            foreach ($request->file('product_galleries') as $index => $image) {
+                $path = $image->storePublicly('public/product_galleries');
+                $product->images()->create([
+                    'image_url' => Storage::url($path),
+                    'image_order' => $index + 1
+                ]);
+            }
+        }
+    }
+
+    // Hàm cập nhật gallery ảnh sản phẩm
+    private function updateGallery($product, $request)
+    {
+        // Kiểm tra xem có ảnh được xóa trong client ko
+        if ($request->filled('delete_galleries')) {
+            foreach ($request->delete_galleries as $image_id => $image_url) {
+                $image = $product->images()->find($image_id);
+                if ($image) {
+                    // Xóa ảnh khỏi thư mục
+                    Storage::disk('public')->delete($image_url);
+                    // Xóa ảnh trong cơ sở dữ liệu
+                    $image->delete();
+                }
+            }
+        }
+
+        if ($request->hasFile('product_galleries')) {
+            foreach ($request->file('product_galleries') as $index => $image) {
+                $path = $image->storePublicly('public/product_galleries');
+                $product->images()->create([
+                    'image_url' => Storage::url($path),
+                    'image_order' => $index + 1
+                ]);
+            }
+        }
+    }
 }
