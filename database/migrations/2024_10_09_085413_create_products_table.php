@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('image', 255);
             $table->decimal('price', 30, 2);
+            $table->decimal('price_old',20,2);
+            $table->string('code')->unique();
             $table->text('description')->nullable();
             $table->bigInteger('category_id');
             $table->timestamps();
