@@ -17,7 +17,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-
     
    protected $fillable = [
     'fullname',  // Thêm trường fullname
@@ -26,7 +25,6 @@ class User extends Authenticatable
     'password',
     'role',      // Thêm trường role nếu cần
 ];
-
 
     /**
      * The attributes that should be hidden for serialization.

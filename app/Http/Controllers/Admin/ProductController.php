@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -37,19 +37,17 @@ class ProductController extends Controller
         return view('admin.pages.products.index', compact('products', 'categories'));
     }
 
-
     public function create()
     {
         $categories = Category::all();
         return view('admin.pages.products.create', compact('categories'));
     }
 
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
         DB::beginTransaction();
 
         try {
-          
             $data = $request->only(['name', 'category_id', 'price', 'description','price_old']);
 
             $data['code'] = 'P' . date('YmdHis') . Str::upper(Str::random(5));
@@ -65,26 +63,22 @@ class ProductController extends Controller
             $this->storeVariants($product, $request);
             // Add image gallery
             $this->storeGallery($product, $request);
-            
 
             DB::commit();
 
             return redirect()->route('admin.products.index')->with('status_succeed', 'Sản phẩm đã được thêm thành công');
         } catch (Exception $e) {
             DB::rollBack();
-            // dd($e);
             return redirect()->back()->with('status_failed', 'Lỗi: ' . $e->getMessage());
         }
     }
-
-
-
 
     public function detail($id)
     {
         $product = Product::with('category', 'variants','images')->findOrFail($id);
         return view('admin.pages.products.dentail', compact('product'));
     }
+
     // edit
     public function edit($id)
     {
@@ -92,11 +86,10 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('admin.pages.products.edit', compact('products', 'categories'));
     }
-    // update
-    public function update(ProductRequest $request, $id)
+
+    public function update($id, Request $request)
     {
         DB::beginTransaction();
-
         try {
             $products = Product::findOrFail($id);
             $data = $request->only(['name', 'category_id', 'price', 'description','price_old','code']);
@@ -137,32 +130,12 @@ class ProductController extends Controller
             $product->delete();
 
             DB::commit();
-            // return response()->json(['message' => 'Xóa sản phẩm thành công.'], 200);
             return redirect()->back()->with('status_succeed', 'delete success');
         } catch (Exception $e) {
             DB::rollBack();
-
-            // Ghi lại lỗi nếu cần hoặc trả về lỗi
-            // return response()->json(['message' => 'Xóa sản phẩm thất bại.', 'error' => $e->getMessage()], 500);
             return redirect()->back()->with('status_failed', 'delete error');
         }
     }
-
-
-    // public function topSellers()
-    // {
-    //     $topSellers = OrderDetail::select('product_id', DB::raw('SUM(quantity) as total_quantity'))
-    //         ->groupBy('product_id')
-    //         ->orderByDesc('total_quantity')
-    //         ->limit(5)
-    //         ->get();
-
-    //     $products = $topSellers->map(function ($orderDetail) {
-    //         return Product::find($orderDetail->product_id);
-    //     });
-    
-    //     return view('dashboard', compact('products'));
-    // }
 
     // Hàm lưu biến thể sản phẩm
     private function storeVariants($product, $request)
@@ -177,7 +150,6 @@ class ProductController extends Controller
     // Hàm cập nhật biến thể sản phẩm
     private function updateVariants($product, $request)
     {
-        
         if ($request->has('variants')) {
             $product->variants()->delete();  // Xóa biến thể cũ
             foreach ($request->input('variants') as $variantData) {
@@ -203,8 +175,7 @@ class ProductController extends Controller
     // Hàm cập nhật gallery ảnh sản phẩm
     private function updateGallery($product, $request)
     {
-
-           // Kiểm tra xem có ảnh được xóa trong client ko
+        // Kiểm tra xem có ảnh được xóa trong client ko
         if ($request->filled('delete_galleries')) {
             foreach ($request->delete_galleries as $image_id => $image_url) {
                 $image = $product->images()->find($image_id);
@@ -217,10 +188,7 @@ class ProductController extends Controller
             }
         }
 
-
-
         if ($request->hasFile('product_galleries')) {
-           
             foreach ($request->file('product_galleries') as $index => $image) {
                 $path = $image->storePublicly('public/product_galleries');
                 $product->images()->create([
@@ -230,5 +198,4 @@ class ProductController extends Controller
             }
         }
     }
-
 }
