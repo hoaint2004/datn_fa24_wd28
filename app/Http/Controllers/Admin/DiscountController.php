@@ -29,15 +29,10 @@ class DiscountController extends Controller
     // Lưu discount mới
     public function store(Request $request)
     {
-        $request->validate([
-            'discount_code' => 'required|unique:discount',
-            'description' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+        $this->discountValidate($request);
 
         Discount::create($request->all());
-        return redirect()->route('admin.discounts.index')->with('success', 'Discount created successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount created successfully');
     }
 
     // Hiển thị form chỉnh sửa discount
@@ -50,16 +45,10 @@ class DiscountController extends Controller
     // Cập nhật discount
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'discount_code' => 'required|unique:discount,discount_code,' . $id,
-            'description' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
-
+        $this->discountValidate($request, $id);
         $discount = Discount::findOrFail($id);
         $discount->update($request->all());
-        return redirect()->route('admin.discounts.index')->with('success', 'Discount updated successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount updated successfully');
     }
 
     // Xóa discount
@@ -67,6 +56,23 @@ class DiscountController extends Controller
     {
         $discount = Discount::findOrFail($id);
         $discount->delete();
-        return redirect()->route('admin.discounts.index')->with('success', 'Discount deleted successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount deleted successfully');
     }
+
+    // validate discount
+    private function discountValidate($request, $id = null)
+    {
+        return $request->validate([
+            'discount_code' => 'required|unique:discount,discount_code,' . $id,
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'is_active' => 'nullable|boolean', // Kiểm tra trạng thái kích hoạt
+            'discount_type' => 'required|in:percentage,fixed', // Kiểm tra loại giảm giá
+            'discount_value' => 'required|numeric|min:0', // Kiểm tra giá trị giảm giá
+            'min_order_value' => 'nullable|numeric|min:0', // Kiểm tra giá trị đơn hàng tối thiểu
+            'usage_limit' => 'nullable|integer|min:1', // Kiểm tra giới hạn sử dụng
+        ]);
+    }
+    
 }

@@ -25,20 +25,8 @@
                             <div class="live-preview">
                                 <div class="table-responsive table-card">
                                     <a href="{{ route('admin.discounts.create') }}" class="btn btn-primary m-3">Thêm mới giảm giá</a>
-                                    {{-- lọc --}}
-                                    {{-- <form method="GET" action="{{ route('admin.discounts.index') }}">
-                                        <div class="d-flex mb-3">
-                                            <select name="category_id" class="form-select" aria-label="Chọn danh mục">
-                                                <option value="">Chọn danh mục</option>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                                        {{ $category->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <button type="submit" class="btn btn-primary ms-2">Lọc</button>
-                                        </div>
-                                    </form> --}}
+                                    {{-- Lọc theo danh mục (bỏ chú thích để sử dụng) --}}
+                                   
 
                                     <span class="text-danger">{{ session('messages') ?? '' }}</span>
                                     <table class="table align-middle table-nowrap table-striped-columns mb-0">
@@ -46,10 +34,14 @@
                                             <tr>
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Mã giảm giá</th>
-                                                <th scope="col">Giảm giá </th>
+                                                <th scope="col">Mô tả</th>
                                                 <th scope="col">Ngày bắt đầu</th>
                                                 <th scope="col">Ngày kết thúc</th>
-                                                <th scope="col">Sản phẩm áp dụng</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Loại giảm giá</th>
+                                                <th scope="col">Giảm giá</th>
+                                                <th scope="col">Giá trị đơn hàng tối thiểu</th>
+                                                <th scope="col">Giới hạn sử dụng</th>
                                                 <th scope="col" style="width: 150px;">Thao tác</th>
                                             </tr>
                                         </thead>
@@ -61,7 +53,18 @@
                                                     <td>{{ $discount->description }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($discount->start_date)->format('d/m/Y') }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($discount->end_date)->format('d/m/Y') }}</td>
-                                                    <td>Không áp dụng cho sản phẩm cụ thể</td> <!-- Thay vì lặp qua sản phẩm -->
+                                                    <td>
+                                                        @if($discount->is_active)
+                                                            <span class="badge bg-success">Kích hoạt</span>
+                                                        @else
+                                                            <span class="badge bg-danger">Không kích hoạt</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $discount->discount_type }}</td>
+                                                    <td>{{ number_format($discount->discount_value, 0, '.', ',' ) }}{{ $discount->discount_type == 'percentage' ? '%' : 'Đ' }}</td>
+                                                    <td>{{ number_format($discount->min_order_value, 0, '.', ',').' VND'}}</td>
+                                                    <td>{{ $discount->usage_limit }}</td>
+                                                    
                                                     <td>
                                                         <a href="{{ route('admin.discounts.edit', $discount->id) }}" class="link-primary" style="margin: 0 5px;">
                                                             <i class="ri-settings-4-line" style="font-size:18px;"></i>
@@ -71,7 +74,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                        
+                                                
                                                 <!-- Modal Xóa -->
                                                 <div id="topmodal{{ $discount->id }}" class="modal fade" tabindex="-1" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -98,7 +101,6 @@
                                                 </div>
                                             @endforeach
                                         </tbody>
-                                        
                                     </table>
                                     
                                 </div>
