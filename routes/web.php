@@ -26,6 +26,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin.dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Thêm các route khác cho chức năng admin
+});
+Route::post('/register', [AuthController::class, 'register']);
+
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/collections/sneakers', [SneakerController::class, 'products'])->name('products');
 Route::get('/product-detail/{id}', [SneakerController::class, 'productDetail'])->name('productDetail');
