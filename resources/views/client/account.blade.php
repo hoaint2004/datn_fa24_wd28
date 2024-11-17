@@ -1,7 +1,6 @@
 @extends('client.layouts.master')
 @section('title', 'Sneakers - Thế Giới Giày')
 @section('content')
-
 @if (session('message'))
     <div class="alert-success">
         {{ session('message') }}

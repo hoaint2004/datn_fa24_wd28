@@ -19,32 +19,32 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-        $data = $request->only('email', 'password');
+    $data = $request->only('email', 'password');
 
-        // Tìm user theo email
-        $user = User::where('email', $data['email'])->first();
+    // Tìm user theo email
+    $user = User::where('email', $data['email'])->first();
 
-        if ($user) {
-            // Kiểm tra mật khẩu
-            if ($user->password == $data['password']) {
-                // Đăng nhập thành công
-                Auth::login($user);
+    if ($user) {
+        // Kiểm tra mật khẩu
+        if (Hash::check($data['password'], $user->password)) {
+            // Đăng nhập thành công
+            Auth::login($user);
 
-                // Kiểm tra quyền của người dùng sau khi đăng nhập thành công
-                if (Auth::user()->role == 'admin') {
-                    return redirect()->intended(route('admin.dashboard'));
-                } elseif (Auth::user()->role == 'user') {
-                    return redirect()->intended(route('home'));
-                }
-            } else {
-                // Sai mật khẩu
-                return redirect()->route('login.form')->with('errorLogin', 'Mật khẩu không chính xác.');
+            // Kiểm tra quyền của người dùng sau khi đăng nhập thành công
+            if (Auth::user()->role == 'admin') {
+                return redirect()->intended(route('admin.dashboard'));
+            } elseif (Auth::user()->role == 'user') {
+                return redirect()->intended(route('home'));
             }
         } else {
-            // Sai email
-            return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại.');
+            // Sai mật khẩu
+            return redirect()->route('login.form')->with('errorLogin', 'Mật khẩu không chính xác.');
         }
+    } else {
+        // Sai email
+        return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại.');
     }
+}
 
 
     public function showRegisterForm()
