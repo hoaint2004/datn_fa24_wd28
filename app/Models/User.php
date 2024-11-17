@@ -21,13 +21,7 @@ class User extends Authenticatable
     const TYPE_ADMIN = 'admin';
     const TYPE_MEMBER = 'user';
 
-    protected $fillable = [
-        'fullname',  // Thêm trường fullname
-        'username',  // Thêm trường username
-        'email',
-        'password',
-        'role',      // Thêm trường role nếu cần
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
