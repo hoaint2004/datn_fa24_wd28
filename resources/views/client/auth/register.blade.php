@@ -149,3 +149,51 @@
 
 @section('script')
 @endsection
+
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const passwordConfirmation = document.getElementById("password_confirmation").value;
+
+    const errorMessage = document.getElementById("errorMessage");
+    const successMessage = document.getElementById("successMessage");
+
+    errorMessage.textContent = "";
+    successMessage.textContent = "";
+
+    try {
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+                password_confirmation: passwordConfirmation,
+            }),
+        });
+
+        const result = await response.json();
+
+        if (response.status === 422) {
+            // Hiển thị lỗi xác thực
+            errorMessage.innerHTML = Object.values(result.errors)
+                .map(err => `<li>${err}</li>`)
+                .join("");
+        } else if (result.success) {
+            successMessage.textContent = result.message;
+        }
+    } catch (error) {
+        errorMessage.textContent = "An error occurred. Please try again.";
+    }
+});
+
+</script>
