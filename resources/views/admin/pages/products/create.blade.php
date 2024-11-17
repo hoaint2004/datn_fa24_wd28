@@ -32,7 +32,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+                            
                                 <!-- Ảnh sản phẩm -->
                                 <div class="col-md-12 mt-3">
                                     <label for="productImage" class="form-label">Ảnh</label>
@@ -70,17 +70,49 @@
                                     @enderror
                                 </div>
 
-                                <!-- Giá sản phẩm -->
+
+                                <!-- Giá sản phẩm cũ-->
                                 <div class="col-md-12 mt-3">
-                                    <label for="productPrice" class="form-label">Giá sản phẩm</label>
+                                    <label for="productPrice" class="form-label">Giá cũ</label>
+                                    <input type="number" class="form-control" name="price_old"
+                                        id="productPrice" value="{{ old('price_old') }}" placeholder="Nhập giá sản phẩm old...">
+                                    @error('price_old')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                
+                                <!-- Giá sản phẩm mới -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="productPrice" class="form-label">Giá mới</label>
                                     <input type="number" class="form-control" name="price"
                                         id="productPrice" value="{{ old('price') }}" placeholder="Nhập giá sản phẩm...">
                                     @error('price')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-
-                             
+                                 <!-- Product Image Gallery -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h4 class="card-title mb-0 flex-grow-1">Ảnh phụ</h4>
+                                                <button type="button" class="btn btn-primary" onclick="addImageGallery()">Thêm ảnh</button>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <div class="row gy-4" id="gallery_list">
+                                                        <div class="col-md-4" id="gallery_default_item">
+                                                            <label for="gallery_default" class="form-label">Ảnh sản phẩm</label>
+                                                            <div class="d-flex">
+                                                                <input type="file" class="form-control" name="product_galleries[]" id="gallery_default" onchange="previewImage(this)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                {{-- Biến thể sản phẩm --}}
                                 <div class="form-group mt-4">
                                     <label class="form-label">Biến thể sản phẩm</label>
@@ -193,5 +225,40 @@
             variantIndex = variants.length;
         }
 
+
+        // image gallier
+        // CKEDITOR.replace('detailed_description');
+
+        function previewImage(input) {
+            var file = input.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(input).closest('.form-group').find('.image-preview').html('<img src="' + e.target.result + '" class="img-fluid">');
+            }
+            reader.readAsDataURL(file);
+        }
+
+        function addImageGallery() {
+            let id = 'gen_' + Math.random().toString(36).substring(2, 15).toLowerCase();
+            let html = `
+                <div class="col-md-4" id="${id}_item">
+                    <label for="${id}" class="form-label">Ảnh sản phẩm</label>
+                    <div class="d-flex">
+                        <input type="file" class="form-control" name="product_galleries[]" id="${id}" onchange="previewImage(this)">
+                        <button type="button" class="btn btn-danger ms-2" onclick="removeImageGallery('${id}_item')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            $('#gallery_list').append(html);
+        }
+
+        function removeImageGallery(id) {
+            if (confirm('Chắc chắn xóa không?')) {
+                $('#' + id).remove();
+            }
+        }
+    
     </script>
 @endsection

@@ -29,7 +29,7 @@
                                 <div class="col-md-12">
                                     <label for="discount_code" class="form-label">Discount Code</label>
                                     <input type="text" class="form-control" name="discount_code" id="discount_code"
-                                        value="{{ old('discount_code', $discount->discount_code) }}" placeholder="Nhập mã giảm giá...">
+                                        value="{{  $discount->discount_code }}" readonly>
                                     @error('discount_code')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -48,8 +48,8 @@
                                 <!-- Start Date -->
                                 <div class="col-md-12 mt-3">
                                     <label for="start_date" class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" name="start_date" id="start_date"
-                                        value="{{ old('start_date', $discount->start_date) }}">
+                                    <input type="datetime-local" class="form-control" name="start_date" id="start_date"
+                                        value="{{ old('start_date', $discount->start_date ) }}">
                                     @error('start_date')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -58,9 +58,62 @@
                                 <!-- End Date -->
                                 <div class="col-md-12 mt-3">
                                     <label for="end_date" class="form-label">End Date</label>
-                                    <input type="date" class="form-control" name="end_date" id="end_date"
-                                        value="{{ old('end_date', $discount->end_date) }}">
+                                    <input type="datetime-local" class="form-control" name="end_date" id="end_date"
+                                        value="{{ old('end_date', $discount->end_date ) }}">
                                     @error('end_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <!-- Is Active -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="is_active" class="form-label">Trạng thái kích hoạt</label>
+                                    <select class="form-control" name="is_active" id="is_active">
+                                        <option value="1" {{ old('is_active' , $discount->is_active) == 1 ? 'selected' : '' }}>Kích hoạt</option>
+                                        <option value="0" {{ old('is_active' , $discount->is_active) == 0 ? 'selected' : ''}}>Không kích hoạt</option>
+                                    </select>
+                                    @error('is_active')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Discount Type -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="discount_type" class="form-label">Loại giảm giá</label>
+                                    <select class="form-control" name="discount_type" id="discount_type">
+                                        <option value="percentage" {{ old('discount_type' , $discount->discount_type) == 'percentage' ? 'selected' : '' }}>Phần trăm</option>
+                                        <option value="fixed" {{ old('discount_type' , $discount->discount_type) == 'fixed' ? 'selected' : '' }}>Giảm giá cố định</option>
+                                    </select>
+                                    @error('discount_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Discount Value -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="discount_value" class="form-label">Giá trị giảm giá</label>
+                                    <input type="number" class="form-control" name="discount_value" id="discount_value"
+                                        value="{{ number_format(old('discount_value', $discount->discount_value),0,'.',',' ) }}" step="0.01" placeholder="Nhập giá trị giảm giá">
+                                    @error('discount_value')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Minimum Order Value -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="min_order_value" class="form-label">Giá trị đơn hàng tối thiểu</label>
+                                    <input type="number" class="form-control" name="min_order_value" id="min_order_value"
+                                        value="{{ old('min_order_value', $discount->min_order_value ) }}" step="0.01" placeholder="Nhập giá trị đơn hàng tối thiểu">
+                                    @error('min_order_value')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <!-- Usage Limit -->
+                                <div class="col-md-12 mt-3">
+                                    <label for="usage_limit" class="form-label">Giới hạn sử dụng</label>
+                                    <input type="number" class="form-control" name="usage_limit" id="usage_limit"
+                                        value="{{ old('usage_limit', $discount->usage_limit) }}" placeholder="Nhập giới hạn sử dụng">
+                                    @error('usage_limit')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -68,7 +121,7 @@
                                 <!-- Submit Button -->
                                 <div class="col-12 mt-3">
                                     <div class="text-start">
-                                        <button type="submit" id="btnEditDiscount" name="updateDiscount"
+                                        <button type="submit" id="btnEditDiscount"
                                             class="btn btn-primary">Cập nhật Discount</button>
                                         <a href="{{ route('admin.discounts.index') }}" class="btn btn-outline-warning">Quay lại</a>
                                     </div>

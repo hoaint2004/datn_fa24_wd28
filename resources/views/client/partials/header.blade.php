@@ -1,219 +1,333 @@
-<header class="header bgc-white header-type-1">
-    <div class="top-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 order-2 col-sm-12 order-sm-2 col-md-8 order-md-1 align-self-center">
-                    <p>GIẢM GIÁ giữa mùa lên tới 20%. Sử dụng mã "SALEOFF20"</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
+</head>
+
+<body>
+    <header uk-sticky="top: 100; animation: uk-animation-slide-top">
+
+
+        <div class="header-warp uk-container uk-container-large">
+            <div class="uk-grid" uk-grid="true">
+                <!-- Phần tìm kiếm bên trái -->
+                <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
+                    <form action="" class="form-search">
+                        <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
+                        <button>
+                            <SearchOutlined class="icon-search" />
+                        </button>
+                    </form>
                 </div>
-                <div class="col-12 order-1 col-sm-12 order-sm-1 col-md-4 order-md-2">
-                    <ul class="list-inline">
-                        <li class="currency list-inline-item">
-                            <div class="btn-group">
-                                <button class="btn-link dropdown-toggle"> USD $<i class="fa fa-angle-down"></i></button>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#">Euro €</a></li>
-                                        <li><a href="#" class="current">USD $</a></li>
-                                    </ul>
+
+                <!-- Phần logo ở giữa -->
+                <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
+                    <a href="">
+                        <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
+                            alt="" />
+                    </a>
+                </div>
+
+                <!-- Phần icon bên phải -->
+                <div class="header-right uk-width-1-3 uk-flex uk-flex-right uk-flex-middle">
+                    <!-- Dropnav cho biểu tượng user -->
+                    <div>
+                        <a href="#" class="uk-icon-link header-icon" uk-icon="icon: user"
+                            uk-toggle="target: #dropnav-user"></a>
+                    </div>
+
+                    <!-- Dropnav hiện ra khi nhấn vào icon user -->
+                    <div id="dropnav-user"
+                        uk-drop="mode: click; pos: bottom-center; offset: 10; animation: reveal-top; animate-out: true; duration: 700"
+                        class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
+                        <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
+                            @if (Auth::check())
+                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                                <a class="user-header" href="{{ route('logout') }}">Logout</a>
+                            @else
+                            <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
+                            <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
+                            @endif
+                            </ul>
+                    </div>
+
+                    <div>
+                        <a href="#" class="uk-icon-link header-icon" uk-icon="icon: heart"></a>
+                    </div>
+
+                    <!-- cart -->
+                    <div>
+                        <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
+                            uk-toggle="target: #offcanvas-flip">
+                            <span class="cart-counter">3</span>
+                        </a>
+                    </div>
+
+                    <div class="offcanvas-cart" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                        <div class="uk-offcanvas-bar offcanvas-cart-body">
+                            <button class="uk-offcanvas-close" type="button" uk-close style="color: red;"></button>
+
+                            <div class="modal-header">
+                                <h3 class="modal-title">Your Cart
+                                    <span class="cart-panel-counter" style="opacity: 1;">(3)</span>
+                                </h3>
+                                <a href="#" class="close-account-panel button-close">
+                                    <i class="fas fa-close"></i>
+                                </a>
+                            </div>
+
+                            <div class="mini-cart-product">
+                                <div class="warp">
+                                    <a href="#"><img
+                                            src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png"
+                                            alt="" width="120px"></a>
+                                    <div class="warp-body">
+                                        <a href="#" class="product-name">Giày búp bê da</a>
+                                        <div class="price">
+                                            <span><strong>150$</strong></span>
+                                        </div>
+                                        <div class="data-size">
+                                            <span>Trắng / 35</span>
+                                        </div>
+                                        <div class="quantity">
+                                            <div class="quantity-selector">
+                                                <button aria-label="Giảm số lượng"
+                                                    class="quantity-selector-button-minus">-</button>
+                                                <input class="quantity-selector-input" type="number" step="1"
+                                                    min="1" max="9999" aria-label="Số lượng sản phẩm"
+                                                    value="1" readonly="">
+                                                <button aria-label="Tăng số lượng"
+                                                    class="quantity-selector-button-plus">+</button>
+                                            </div>
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="warp">
+                                    <a href="#"><img
+                                            src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png"
+                                            alt="" width="120px"></a>
+                                    <div class="warp-body">
+                                        <a href="#" class="product-name">Giày búp bê da</a>
+                                        <div class="price">
+                                            <span><strong>150$</strong></span>
+                                        </div>
+                                        <div class="data-size">
+                                            <span>Trắng / 35</span>
+                                        </div>
+                                        <div class="quantity">
+                                            <div class="quantity-selector">
+                                                <button aria-label="Giảm số lượng"
+                                                    class="quantity-selector-button-minus">-</button>
+                                                <input class="quantity-selector-input" type="number" step="1"
+                                                    min="1" max="9999" aria-label="Số lượng sản phẩm"
+                                                    value="1" readonly="">
+                                                <button aria-label="Tăng số lượng"
+                                                    class="quantity-selector-button-plus">+</button>
+                                            </div>
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="warp">
+                                    <a href="#"><img
+                                            src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png"
+                                            alt="" width="120px"></a>
+                                    <div class="warp-body">
+                                        <a href="#" class="product-name">Giày búp bê da</a>
+                                        <div class="price">
+                                            <span><strong>150$</strong></span>
+                                        </div>
+                                        <div class="data-size">
+                                            <span>Trắng / 35</span>
+                                        </div>
+                                        <div class="quantity">
+                                            <div class="quantity-selector">
+                                                <button aria-label="Giảm số lượng"
+                                                    class="quantity-selector-button-minus">-</button>
+                                                <input class="quantity-selector-input" type="number" step="1"
+                                                    min="1" max="9999" aria-label="Số lượng sản phẩm"
+                                                    value="1" readonly="">
+                                                <button aria-label="Tăng số lượng"
+                                                    class="quantity-selector-button-plus">+</button>
+                                            </div>
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="total-action">
+                                <p class="mini-cart-total ">
+                                    <span class="subtotal">Tổng tiền:</span>
+                                    <bdi class="currencysymbol">
+                                        <span class="currencysymbol">$</span>
+                                        329.90
+                                    </bdi>
+                                </p>
+                                <p class="mini-cart-button">
+                                    <a href="#" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
+                                    <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bot border-b border-gray-300 shadow-md uk-container uk-container-expand">
+            <nav class="menu-header" uk-navbar uk-dropnav="dropbar: true">
+                <!-- Nút toggle cho menu trên thiết bị di động -->
+                <div class="navbar-toggle">
+                    <button class="toggle-navbar" type="button" uk-toggle="target: #offcanvas-menu">
+                        <span class="icon-toggle" uk-navbar-toggle-icon></span>
+                    </button>
+                </div>
+
+                <!-- Menu chính -->
+                <div class="navbar-menu alo">
+                    <ul class="flex justify-center m-0 p-0 gap-8 uk-subnav">
+                        <li><a href="{{ route('home')}}">Trang chủ</a></li>
+
+                        <!-- Danh mục sản phẩm với menu con và dropbar -->
+                        <li class="uk-parent">
+                            <a href="{{ route('category') }}" class="">Danh mục sản phẩm <span>›</span></a>
+                            <div class="uk-dropdown uk-width-2xlarge">
+                                <div class="uk-child-width-1-3@m aloo11" uk-grid>
+                                    <!-- Nổi bật -->
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li class="uk-nav-header">NỔI BẬT</li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-nav-header">Muckbang</li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li><a href="#">Best Seller</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li><a href="#">Xem tất cả</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Giày nam -->
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li class="uk-nav-header">Giày nam</li>
+                                            <li><a href="#">Basas</a></li>
+                                            <li><a href="#">Vintas</a></li>
+                                            <li><a href="#">Urbas</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-nav-header">Muckbang</li>
+                                            <li><a href="#">High Top</a></li>
+                                            <li><a href="#">Low Top</a></li>
+                                            <li><a href="#">Slip-on</a></li>
+                                            <li><a href="#">Slip-on</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li><a href="#">Xem tất cả</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Giày nam -->
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            <li class="uk-nav-header">Giày nữ</li>
+                                            <li><a href="#">Basic Tee</a></li>
+                                            <li><a href="#">Graphic Tee</a></li>
+                                            <li><a href="#">Sweatshirt</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-nav-header">Muckbang</li>
+                                            <li><a href="#">Nón</a></li>
+                                            <li><a href="#">Dây giày</a></li>
+                                            <li><a href="#">Vớ</a></li>
+                                            <li><a href="#">Túi Tote</a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li><a href="#">Xem tất cả</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="language list-inline-item">
-                            <div class="btn-group">
-                                <button class="btn-link dropdown-toggle">English <i
-                                        class="fa fa-angle-down"></i></button>
-                                <div class="dropdown-menu">
-                                    <ul>
-                                        <li><a href="#" class="current"><img src="{{ asset('assets/sneakers/assets/images/icons/en-gb.jpg') }}"
-                                                    alt="Icons"> English</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/sneakers/assets/images/icons/fr-fr.jpg') }}" alt="Icons">
-                                                Việt Nam</a></li>
-                                    </ul>
+
+                        <!-- Sản phẩm nổi bật với menu con và dropbar -->
+                        <li class="uk-parent">
+                            <a href="#">Sản phẩm nổi bật <span>›</span></a>
+                            <div class="uk-dropdown uk-width-2xlarge">
+                                <div class="uk-child-width-1-4@m" uk-grid>
+                                    <!-- Nổi bật -->
+                                    <div>
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="#">Nổi bật 1</a></li>
+                                            <li><a href="#">Nổi bật 2</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Giày nam -->
+                                    <div>
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li><a href="#">Nổi bật 3</a></li>
+                                            <li><a href="#">Nổi bật 4</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- Giày nam -->
+
                                 </div>
                             </div>
                         </li>
+
+                        <li><a href="#">Xu hướng thời trang</a></li>
+                        <li><a href="{{ route('contact')}}">Liên hệ</a></li>
                     </ul>
                 </div>
-            </div>
-        </div> <!-- end of container -->
-    </div> <!-- end of top-bar -->
-
-    <div class="header-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-6 order-2 col-sm-6 order-sm-2 col-md-4 order-md-1 col-lg-3">
-                    <div class="header-search-area">
-                        <form action="#">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm ở đây ...">
-                                <div class="input-group-append">
-                                    <button class="header-search-btn" type="submit"><i
-                                            class="pe-7s-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-12 order-1 col-sm-12 order-sm-1 col-md-4 order-md-2 col-lg-6">
-                    <div class="logo">
-                        <a href="/"><img src="{{ asset('assets/sneakers/assets/images/logo.png') }}" alt="Logo" class="img-fluid"></a>
-                    </div>
-                </div>
-                <div class="col-6 order-3 col-sm-6 col-md-4 col-lg-3">
-                    <div class="header-cart-area">
-                        <div class="header-cart">
-                            <div class="btn-group">
-                                <button class="btn-link dropdown-toggle icon-cart">
-                                    <i class="pe-7s-shopbag"></i>
-                                    <span class="count-style">2</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <div class="shopping-cart-content">
-                                        <ul class="list-unstyled">
-                                            <li class="single-cart-item media">
-                                                <div class="shopping-cart-img me-4">
-                                                    <a href="#">
-                                                        <img class="img-fluid" alt="Cart Item"
-                                                            src="{{ asset('assets/sneakers/assets/images/cart/cart-1.jpg') }}">
-                                                        <span class="product-quantity">1x</span>
-                                                    </a>
-                                                </div>
-                                                <div class="shopping-cart-title flex-grow-1">
-                                                    <h4><a href="#">Rival Field Messenger</a></h4>
-                                                    <p class="cart-price">$120.00</p>
-                                                    <div class="product-attr">
-                                                        <span>Size: S</span>
-                                                        <span>Color: Black</span>
-                                                    </div>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="ion ion-md-close"></i></a>
-                                                </div>
-                                            </li>
-                                            <li class="single-cart-item media">
-                                                <div class="shopping-cart-img me-4">
-                                                    <a href="#">
-                                                        <img class="img-fluid" alt="Cart Item"
-                                                            src="{{ asset('assets/sneakers/assets/images/cart/cart-2.jpg') }}">
-                                                        <span class="product-quantity">2x</span>
-                                                    </a>
-                                                </div>
-                                                <div class="shopping-cart-title flex-grow-1">
-                                                    <h4><a href="#">Fusion Backpack</a></h4>
-                                                    <p class="cart-price">$200.00</p>
-                                                    <div class="product-attr">
-                                                        <span>Color: White</span>
-                                                        <span>Accessories: Yes</span>
-                                                    </div>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="ion ion-md-close"></i></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="shopping-cart-total">
-                                            <h4>Sub-Total : <span>$320.00</span></h4>
-                                            <h4>Total : <span>$320.00</span></h4>
-                                        </div>
-                                        <div class="shopping-cart-btn">
-                                            <a class="default-btn" href="cart.html">view cart</a>
-                                            <a class="default-btn" href="checkout.html">checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <ul class="list-inline">
-                            <li class="top-links list-inline-item">
-                                <div class="btn-group">
-                                    <button class="btn-link dropdown-toggle"><i class="pe-7s-config"></i></button>
-                                    <div class="dropdown-menu">
-                                        <ul>
-                                            <li><a href="{{ route('register.form') }}">Đăng ký</a></li>
-                                            <li><a href="{{ route('login.form') }}">Đăng nhập</a></li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> <!-- end of header-cart-area -->
-                </div>
-            </div>
-        </div> <!-- end of container -->
-    </div> <!-- end of header-top -->
-
-
-
-    <!-- Start of Main and Mobile Navigation -->
-    <div class="main-nav-area bgc-white">
-        <div class="container">
-            <nav id="main_nav" class="stellarnav">
-                <ul>
-                    <li><a href="/"><span>Trang chủ</span></a></li>
-                    <li class="mega" data-columns="4"><a href="/collections/sneakers"><span>Sản phẩm</span></a>
-                        <ul class="mega-container">
-                            <li><a href="#" class="mega-menu-title">
-                                    <h3>Shop pages 01</h3>
-                                </a>
-                                <ul>
-                                    <li><a href="shop-grid.html">Shop Grid</a></li>
-                                    <li><a href="shop-list.html">Shop List</a></li>
-                                    <li><a href="shop-right-sidebar.html">Shop Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#" class="mega-menu-title">
-                                    <h3>Shop pages 02</h3>
-                                </a>
-                                <ul>
-                                    <li><a href="shop-fullwidth.html">Shop Full Width</a></li>
-                                    <li><a href="single-product.html">Single Product Page</a></li>
-                                    <li><a href="compare.html">Product Compare</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#" class="mega-menu-title">
-                                    <h3>Shop pages 03</h3>
-                                </a>
-                                <ul>
-                                    <li><a href="cart.html">Cart Page</a>
-                                    <li>
-                                    <li><a href="checkout.html">Checkout Page</a></li>
-                                    <li><a href="wishlist.html">Wishlist Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="last"><a href="#" class="mega-menu-title">
-                                    <h3>Shop pages 04</h3>
-                                </a>
-                                <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="{{ route('register.form') }}">Register</a></li>
-                                </ul>
-                            </li>
-                            <li class="fullwidth-banner">
-                                <a href="#"><img src="{{ asset('assets/sneakers/assets/images/banners/menu-banner.jpg') }}"
-                                        alt="Menu Banner"></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="/collections/sneakers"><span>Danh mục</span></a>
-                        <ul>
-                            <li><a href="">ADIDAS</a></li>
-                            <li><a href="">AF1</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/blog"><span>Tin tức</span></a>
-                        <ul>
-                            <li><a href="faqs.html">FAQs Page</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html"><span>Giới thiệu</span></a></li>
-                    <li><a href="contact.html"><span>Liên hệ</span></a></li>
-                </ul>
             </nav>
-        </div> <!-- end of container -->
-    </div>
-    <!-- End of Main and Mobile Navigation -->
-</header>
+        </div>
+
+        <div id="offcanvas-menu" uk-offcanvas="mode: push; overlay: true">
+            <div class="uk-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+                <ul class="uk-nav uk-nav-default">
+                    <li>
+                        <a href="{{ route('home')}}">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="{{route('category')}}">Danh mục sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="#">Sản phẩm nổi bật</a>
+                    </li>
+                    <li>
+                        <a href="#">Xu hướng thời trang</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contact')}}">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+</body>
+</html>
