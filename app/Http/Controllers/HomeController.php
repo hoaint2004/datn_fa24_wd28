@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function home()
     {
-        return view('client.home');
+        return view('client.homePage');
     }
+
+    public function about(){
+        return view('client.about');
+    }
+
+    
 }
