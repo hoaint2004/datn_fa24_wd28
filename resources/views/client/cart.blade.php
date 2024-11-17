@@ -1,13 +1,29 @@
-@extends('Client.layouts.master')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title')
-    Sneakers - Thế Giới Giày
-@endsection
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
+</head>
 
-@section('content')
-    @include('client.components.breadcrumb', [
-        'title' => 'Giỏ Hàng',
-    ])
+<body>
+    <div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
+        <nav aria-label="Breadcrumb alo">
+            <ul class="uk-breadcrumb">
+                <li><a href="#" class="breadcrumb-a">Trang chủ</a></li>
+                <li><a href="#" class="breadcrumb-a">Category</a></li>
+                <li><span aria-current="page" class="text-base">Giỏ Hàng</span></li>
+            </ul>
+        </nav>
+    </div>
 
     <section class="shopping-cart uk-container uk-container-large">
         <h1 class="cart-title">Giỏ Hàng Của Bạn</h1>
@@ -65,8 +81,12 @@
                                                     <button class="quantity-selector-button-plus"
                                                         data-cart-id="{{ $item->id }}">+</button>
                                                 </div>
-                                                <button class="cart-item-remove"><i
-                                                        class="fa-solid fa-trash-can"></i></button>
+                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="cart-item-remove btn-removeCart"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
@@ -102,70 +122,6 @@
         </div>
     </section>
 
-@endsection
+</body>
 
-@section('js')
-    <script>
-        // Thực hiện khi nhấn nút giảm số lượng
-        // Cập nhật khi nhấn nút giảm số lượng
-        $('.quantity-selector-button-minus').on('click', function() {
-            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-            var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
-
-            // Giảm số lượng nếu > 1
-            if (quantity > 1) {
-                quantity--;
-                quantityInput.val(quantity); // Cập nhật lại giá trị input
-                updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
-            }
-        });
-
-        // Cập nhật khi nhấn nút tăng số lượng
-        $('.quantity-selector-button-plus').on('click', function() {
-            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-            var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
-
-            quantity++; // Tăng số lượng
-            quantityInput.val(quantity); // Cập nhật lại giá trị input
-            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
-        });
-
-        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
-        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
-        function updateQuantity(cartId, quantity) {
-            $.ajax({
-                url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
-                method: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
-                    cart_id: cartId,
-                    quantity: quantity
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Cập nhật giá từng sản phẩm
-                        const newProductPrice = response.new_product_price; // Giá tiền mới của sản phẩm
-                        const totalCartPrice = response.total_cart_price; // Tổng tiền giỏ hàng mới
-
-                        // Cập nhật giá trị hiển thị của sản phẩm
-                        const productPriceElement = $(`[data-cart-id="${cartId}"]`)
-                            .closest('tr')
-                            .find('.product-price');
-                        productPriceElement.text(newProductPrice.toLocaleString('vi-VN') + ' đ');
-
-                        // Cập nhật tổng tiền giỏ hàng
-                        $('#total-price').text(totalCartPrice.toLocaleString('vi-VN') + ' đ');
-                    } else {
-                        alert(response.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Lỗi khi cập nhật số lượng:", error);
-                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
-                }
-            });
-        }
-    </script>
-@endsection
+</html>

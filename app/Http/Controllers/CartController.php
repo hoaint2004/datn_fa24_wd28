@@ -115,4 +115,16 @@ class CartController extends Controller
             'message' => 'Không tìm thấy sản phẩm trong giỏ hàng.',
         ]);
     }
+
+    public function delete($id)
+    {
+        $cartItem = Cart::where('user_id', auth()->user()->id ?? 0)->find($id);
+
+        if ($cartItem) {
+            $cartItem->delete();
+            return redirect()->route('showCart')->with('status', 'Xóa sản phẩm trong giỏ hàng thành công');
+        }
+
+        return redirect()->route('showCart')->with('status', 'Không tìm thấy sản phẩm trong giỏ hàng.');
+    }
 }
