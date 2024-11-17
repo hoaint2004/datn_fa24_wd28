@@ -36,7 +36,7 @@
                     <a class="nav-link menu-link" href="{{ route('admin.dashboard') }}">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Bảng điều khiển</span>
                     </a>
-                </li> <!-- end Dashboard Menu -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarCategories" data-bs-toggle="collapse" role="button"
@@ -52,6 +52,78 @@
                             <li class="nav-item">
                                 <a href="{{ route('admin.categories.create') }}" wire:navigate class="nav-link" data-key="t-chat">
                                     Thêm mới danh mục </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarProduct_variants" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="sidebarProduct_variants">
+                            <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí biến thể sản phẩm</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarProduct_variants">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.product_variants.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                        sách biến thể sản phẩm </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.product_variants.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                        Thêm mới biến thể sản phẩm </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarProducts">
+                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí sản phẩm</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarProducts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                    sách sản phẩm </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                    Thêm mới sản phẩm </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarVoucher" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarVoucher">
+                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí discount</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarVoucher">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.discounts.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                    sách discount</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.discounts.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                    Thêm mới discount</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#comments" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="comments">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí bình luận</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="comments">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.comments.index') }}" class="nav-link" data-key="t-chat"> Danh sách bình luận
+                                </a>
                             </li>
                         </ul>
                     </div>
