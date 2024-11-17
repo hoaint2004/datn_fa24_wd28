@@ -1,496 +1,600 @@
 @extends('Client.layouts.master')
 
 @section('title')
-    Sneakers - Thế Giới Giày
+    {{ $data['product']->name }}
 @endsection
 
 @section('content')
-    <div class="fixed-header-space"></div> <!-- empty placeholder div for Fixed Menu bar height-->
+    @include('client.components.breadcrumb', [
+        'title' => $data['product']->name,
+    ])
 
-    <!-- Start of Breadcrumbs -->
-    <div class="breadcrumb-section bgc-offset mb-full">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <nav class="breadcrumb">
-                        <a class="breadcrumb-item" href="/">Trang chủ</a>
-                        <a class="breadcrumb-item" href="shop-grid.html">Sản phẩm</a>
-                        <span class="breadcrumb-item active">{{ $sneakerDetail->product_name }}</span>
-                    </nav>
+    <section class="product-detail uk-container uk-container-large">
+        <form class="form-addToCart" action="{{ route('addToCart', ['id' => $data['product']->id]) }}" method="post">
+            @csrf
+            <input type="hidden" class="productId" value="{{ $data['product']->id }}">
+            <div class="product-detail-body uk-grid" uk-grid>
+                <div class="product-detail-left uk-width-1-2">
+                    <img alt="{{ $data['product']->name }}" class="w-full mb-4" height="500"
+                        src="{{ $data['product']->image }}" width="500" />
+                    <div class="product-detail-image-slide">
+                        @if (!empty($data['product']->images))
+                            @foreach ($data['product']->images as $image)
+                                <img class="swiper-slide" alt=""
+                                src="{{ $image->image_url }}" />
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div>
-    <!-- End of Breadcrumbs -->
 
-    <!-- Start of Main Content Wrapper -->
-    <div id="content" class="main-content-wrapper">
-
-        <!-- Start of Main Product Wrapper -->
-        <div class="main-product-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <main id="primary" class="site-main">
-                            <div class="single-product-wrapper">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="product-gallery">
-                                            <div class="gallery-with-thumbs">
-                                                <div class="product-image-container">
-                                                    <div class="product-full-image main-slider image-popup">
-
-                                                        <!-- Slides -->
-                                                        <div class="swiper-wrapper">
-                                                            @foreach (explode(',', $sneakerDetail->image) as $image)
-                                                                <figure class="swiper-slide">
-                                                                    <a href="{{ $image }}" data-size="600x600">
-                                                                        <img src="{{ $image }}" alt="Product Image">
-                                                                        <div class="image-overlay"><i
-                                                                                class="fa fa-search-plus"></i></div>
-                                                                    </a>
-                                                                    <figcaption class="visually-hidden">
-                                                                        <span>Product Image</span>
-                                                                    </figcaption>
-                                                                </figure>
-                                                            @endforeach
-                                                        </div>
-                                                    </div> <!-- end of product-full-image -->
-                                                </div>
-
-                                                <div class="product-thumb-container">
-                                                    <div class="product-thumb-image pos-r">
-                                                        <div class="nav-slider">
-                                                            <!-- Slides -->
-                                                            <div class="swiper-wrapper">
-                                                                @foreach (explode(',', $sneakerDetail->image) as $image)
-                                                                    <div class="swiper-slide">
-                                                                        <img src="{{ $image }}"
-                                                                            alt="{{ $image }}">
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                            <!-- Navigation -->
-                                                            <div class="swiper-arrow next"><i class="fa fa-angle-down"></i>
-                                                            </div>
-                                                            <div class="swiper-arrow prev"><i class="fa fa-angle-up"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- end of product-thumb-image -->
-                                                </div>
-                                            </div> <!-- end of gallery-with-thumbs -->
-                                        </div> <!-- end of product-gallery -->
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                                        <div class="product-details">
-                                            <h3 class="product-name">{{ $sneakerDetail->product_name }}</h3>
-                                            <div class="product-ratings d-flex">
-                                                <ul class="rating d-flex me-4">
-                                                    <li><i class="ion ion-md-star-outline"></i></li>
-                                                    <li><i class="ion ion-md-star-outline"></i></li>
-                                                    <li><i class="ion ion-md-star-outline"></i></li>
-                                                    <li><i class="ion ion-md-star-outline"></i></li>
-                                                    <li><i class="ion ion-md-star-outline disabled"></i></li>
-                                                </ul>
-                                                <ul class="comments-advices list-inline d-flex">
-                                                    <li class="list-inline-item me-3"><a href="#">2 Reviews</a></li>
-                                                    <li class="list-inline-item"><a href="#">Write a Review</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="product-price">
-                                                <p class="d-flex align-items-center">
-                                                    {{-- <span class="price-old">$54.65</span> --}}
-                                                    <span
-                                                        class="price-new">{{ number_format($sneakerDetail->price, 0, ',', '.') }}
-                                                        VNĐ</span>
-                                                    {{-- <span class="price-discount">-20%</span> --}}
-                                                </p>
-                                            </div>
-                                            <form action="{{ route('cartAdd', $sneakerDetail->slug) }}" method="post">
-                                                @csrf
-                                                <div class="product-actions">
-                                                    <h3>Tùy chọn sản phẩm</h3>
-                                                    <div class="product-size-color d-flex">
-                                                        <div class="product-size">
-                                                            <label>Size</label>
-                                                            <select name="productSize" id="productSize" class="nice-select productSize">
-                                                                @foreach ($variantProduct as $variant)
-                                                                    <option>{{ $variant->size }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-stock">
-                                                        <label>Số lượng</label>
-                                                        <ul class="d-flex flex-wrap align-items-center">
-                                                            <li class="box-quantity">
-                                                                <div class="cart-input">
-                                                                    <input class="cart-input-box productQuantity" type="text"
-                                                                        value="0" name="productQuantity">
-                                                                    <div class="dec qtybutton"><i
-                                                                            class="fa fa-angle-down"></i></div>
-                                                                    <div class="inc qtybutton"><i
-                                                                            class="fa fa-angle-up"></i></div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <button type="button" id="btnAddCart" class="default-btn btnAddCart">THÊM GIỎ
-                                                                    HÀNG</button>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="wishlist-compare">
-                                                        <button class="btn-wishlist" type="button"
-                                                            title="Thêm vào yêu thích">Thêm vào yêu thích</button>
-                                                        <button class="btn-compare" type="button"
-                                                            title="Thêm vào để so sánh">Thêm vào để so sánh</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-                                            <div class="social-sharing d-flex align-items-center">
-                                                <span>Chia sẻ</span>
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><a href="#" class="bg-facebook"
-                                                            data-bs-toggle="tooltip" data-position="top"
-                                                            data-original-title="Facebook" target="_blank"><i
-                                                                class="fa fa-facebook"></i><span>Share</span></a></li>
-                                                    <li class="list-inline-item"><a href="#" class="bg-twitter"
-                                                            data-bs-toggle="tooltip" data-position="top"
-                                                            data-original-title="Twitter" target="_blank"><i
-                                                                class="fa fa-twitter"></i><span>Tweet</span></a></li>
-                                                    <li class="list-inline-item"><a href="#" class="bg-gplus"
-                                                            data-bs-toggle="tooltip" data-position="top"
-                                                            data-original-title="Google Plus" target="_blank"><i
-                                                                class="fa fa-google-plus"></i><span>Google+</span></a></li>
-                                                    <li class="list-inline-item"><a href="#" class="bg-pinterest"
-                                                            data-bs-toggle="tooltip" data-position="top"
-                                                            data-original-title="Pinterest" target="_blank"><i
-                                                                class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div> <!-- end of product-details -->
-                                    </div>
-                                </div> <!-- end of row -->
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12">
-                                        <div class="product-info mt-half">
-                                            <ul class="nav nav-pills justify-content-center" id="pills-tab"
-                                                role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" id="nav_desctiption" data-bs-toggle="pill"
-                                                        href="#tab_description" role="tab"
-                                                        aria-controls="tab_description" aria-selected="true">Mô tả</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="nav_product_details" data-bs-toggle="pill"
-                                                        href="#tab_product_details" role="tab"
-                                                        aria-controls="tab_product_details" aria-selected="false">Thông
-                                                        tin chi tiết</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" id="nav_review" data-bs-toggle="pill"
-                                                        href="#tab_review" role="tab" aria-controls="tab_review"
-                                                        aria-selected="false">Reviews (2)</a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                                <div class="tab-pane fade show active" id="tab_description"
-                                                    role="tabpanel" aria-labelledby="nav_desctiption">
-                                                    {!! $sneakerDetail->describe !!}</div>
-                                                <div class="tab-pane fade" id="tab_product_details" role="tabpanel"
-                                                    aria-labelledby="nav_product_details">
-                                                    <div
-                                                        class="product-tab-details d-flex justify-content-center align-content-center">
-                                                        <div class="product-brand align-self-center me-md-5">
-                                                            <img src="assets/images/products/product-brand.jpg"
-                                                                alt="Brand Icon">
-                                                        </div>
-                                                        <div class="product-meta">
-                                                            <ul class="list-unstyled">
-                                                                <li>Brands <a href="#"><span>Studio Design</span></a>
-                                                                </li>
-                                                                <li>Product Code: <span>2</span></li>
-                                                                <li>Reward Points: <span>200</span></li>
-                                                                <li>Availability: <span>In Stock</span></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="tab_review" role="tabpanel"
-                                                    aria-labelledby="nav_review">
-                                                    <div class="product-review">
-                                                        <div class="customer-review">
-                                                            <table class="table table-striped table-bordered">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><strong>Pebona Themes</strong></td>
-                                                                        <td>09/04/2018</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <p>Nunc facilisis sagittis ullamcorper. Proin
-                                                                                lectus ipsum, gravida et mattis vulputate,
-                                                                                tristique ut lectus. Sed et lorem nunc.
-                                                                                Vestibulum ante ipsum primis in faucibus
-                                                                                orci luctus et ultrices posuere cubilia
-                                                                                Curae</p>
-                                                                            <div
-                                                                                class="product-ratings d-flex justify-content-center">
-                                                                                <ul class="rating d-flex mt-2">
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                            <table class="table table-striped table-bordered">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><strong>John Doe</strong></td>
-                                                                        <td>23/05/2018</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <p>Lorem ipsum dolor sit amet, consectetur
-                                                                                adipisicing elit. Rerum iusto reiciendis,
-                                                                                vitae porro, unde hic debitis, velit facere
-                                                                                culpa et nisi adipisci quis in aliquam
-                                                                                dolore iure. Iure, dolore praesentium!</p>
-                                                                            <div
-                                                                                class="product-ratings d-flex justify-content-center">
-                                                                                <ul class="rating d-flex mt-2">
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline"></i>
-                                                                                    </li>
-                                                                                    <li><i
-                                                                                            class="ion ion-md-star-outline disabled"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div> <!-- end of customer-review -->
-                                                        <form action="#" class="review-form">
-                                                            <h2>Write a review</h2>
-                                                            <div class="form-group row">
-                                                                <div class="col">
-                                                                    <label class="col-form-label"><span
-                                                                            class="text-danger">*</span> Your Name</label>
-                                                                    <input type="text" class="form-control" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col">
-                                                                    <label class="col-form-label"><span
-                                                                            class="text-danger">*</span> Your
-                                                                        Review</label>
-                                                                    <textarea class="form-control" required></textarea>
-                                                                    <div class="help-block"><span
-                                                                            class="text-danger">Note:</span> HTML is not
-                                                                        translated!</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col">
-                                                                    <label class="col-form-label"><span
-                                                                            class="text-danger">*</span> Rating</label>
-                                                                    &nbsp;&nbsp;&nbsp; Worst&nbsp;
-                                                                    <input type="radio" value="1" name="rating">
-                                                                    &nbsp;
-                                                                    <input type="radio" value="2" name="rating">
-                                                                    &nbsp;
-                                                                    <input type="radio" value="3" name="rating">
-                                                                    &nbsp;
-                                                                    <input type="radio" value="4" name="rating">
-                                                                    &nbsp;
-                                                                    <input type="radio" value="5" name="rating"
-                                                                        checked>
-                                                                    &nbsp;Best
-                                                                </div>
-                                                            </div>
-                                                            <div class="buttons d-flex justify-content-end">
-                                                                <button class="default-btn"
-                                                                    type="submit">Continue</button>
-                                                            </div>
-                                                        </form> <!-- end of review-form -->
-                                                    </div> <!-- end of product-review -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> <!-- end of row -->
-                            </div> <!-- end of single-product-wrapper -->
-                        </main> <!-- end of #primary -->
-                    </div>
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div>
-        <!-- End of Main Product Wrapper -->
-
-        <!-- Start of Related Products -->
-        <section class="related-products">
-            <div class="container">
-                <div class="row product-row">
-                    <div class="col-12 col-sm-12 col-md-12">
-                        <div class="section-title">
-                            <h2>SẢN PHẨM LIÊN QUAN</h2>
+                <div class="product-detail-right uk-width-1-2">
+                    <div class="product-detail-right-top">
+                        <h3 class="text-3xl">
+                            {{ $data['product']->name }}
+                        </h3>
+                        <div class="stock">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                                Còn hàng
+                            </span>
                         </div>
-                        <div class="latest-product-wrapper pos-r">
-                            <div class="element-carousel anime-element" data-visible-slide="4" data-loop="false"
-                                data-space-between="0" data-speed="1000">
-
-                                <!-- Slides -->
-                                <div class="swiper-wrapper">
-                                    @foreach ($relatedProducts as $product)
-                                        <article class="swiper-slide product-layout">
-                                            <div class="product-thumb">
-                                                <div class="product-inner">
-                                                    <div class="product-image">
-                                                        <div class="label-product label-new">New</div>
-                                                        <a href="/sneaker/{{ $product->slug }}">
-                                                            <img src="{{ explode(",", $product->image)[0] }}"
-                                                                alt="Fusion Backpack" title="Fusion Backpack">
-                                                        </a>
-                                                        <div class="action-links">
-                                                            <a class="action-btn btn-cart" href="#"
-                                                                title="Add to Cart"><i class="pe-7s-shopbag"></i></a>
-                                                            <a class="action-btn btn-wishlist" href="#"
-                                                                title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                            <a class="action-btn btn-compare" href="#"
-                                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                        </div>
-                                                    </div> <!-- end of product-image -->
-
-                                                    <div class="product-caption">
-                                                        <div
-                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                            <div class="product-manufacturer">
-                                                                <a href="/categories/{{ $product->slugCate }}">{{ $product->category_name }}</a>
-                                                            </div>
-                                                            <div class="product-ratings">
-                                                                <div class="rating-box">
-                                                                    <ul class="rating d-flex">
-                                                                        <li><i class="ion ion-md-star-outline"></i></li>
-                                                                        <li><i class="ion ion-md-star-outline"></i></li>
-                                                                        <li><i class="ion ion-md-star-outline"></i></li>
-                                                                        <li><i
-                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h4 class="product-name"><a href="/sneaker/{{ $product->slug }}">{{ $product->product_name }}</a></h4>
-                                                        <p class="product-price">
-                                                            <span class="price-new">{{ number_format($product->price, 0, ',', '.') }} VNĐ</span>
-                                                        </p>
-                                                    </div><!-- end of product-caption -->
-                                                </div><!-- end of product-inner -->
-                                            </div><!-- end of product-thumb -->
-                                        </article> <!-- end of product-layout -->
-                                    @endforeach
-                                </div> <!-- end of swiper-wrapper -->
-
-                                <!-- Slider Navigation -->
-                                <div class="swiper-arrow next"><i class="fa fa-angle-right"></i></div>
-                                <div class="swiper-arrow prev"><i class="fa fa-angle-left"></i></div>
-                            </div> <!-- end of element-carousel -->
-                        </div> <!-- end of latest-product-wrapper -->
                     </div>
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </section>
-        <!-- End of Related Products -->
-    </div>
-    <!-- End of Main Content Wrapper -->
-@endsection
 
-@section('scriptCart')
+                    <div class="flex items-center my-2 review">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                        </div>
+                        <p class="text-sm ml-2">
+                            5.0 (121 Reviews)
+                        </p>
+                    </div>
+
+                    <div class="flex items-center my-4 price">
+                        <span class="text-2xl font-bold text-red-500">
+                            {{ number_format($data['product']->price, 0, ',', '.') }} ₫
+                        </span>
+                        @if (!empty($data['product']->price_old))
+                            <span class="text-base text-gray-500 line-through ml-2">
+                                {{ number_format($data['product']->price_old, 0, ',', '.') }} ₫
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="product-info">
+                        <p class="text-gray-600 mb-2 product-info-sku">
+                            <strong>Mã sản phẩm:</strong>
+                            <a href="#" id="sku">Muckbang</a>
+                        </p>
+                        <p class="text-gray-600 mb-2 product-info-category">
+                            <strong>Danh mục:</strong>
+                            <a href="#" id="category">{{ $data['product']->category->name }}</a>
+                        </p>
+                        <p class="text-gray-600 mb-4 product-info-tag">
+                            <strong>Tags:</strong>
+                            <a href="#" id="tags">Mucbang ASMR, Mucbang</a>
+                        </p>
+                        <p class="text-gray-600 mb-4 product-info-vendor">
+                            <strong>Thương hiệu:</strong>
+                            <a href="#" id="vendor">Jordan</a>
+                        </p>
+
+                    </div>
+
+                    <p class=" mb-4 desc">
+                        {{ $data['product']->description }}
+                    </p>
+
+                    <div class="mb-4 color">
+                        <p class="text-lg font-bold">
+                            Màu sắc
+                        </p>
+                        <div class="flex space-x-2">
+                            <div class="product-color-options">
+                                @foreach ($data['groupedColors'] as $color => $variants)
+                                    <span class="product-sw-select-item">
+                                        <input type="radio" name="product-choose-color" value="{{ $color }}"
+                                            id="color-{{ $loop->index }}" class="trigger-option-sw">
+                                        <label for="color-{{ $loop->index }}" style="background-color: #fff"
+                                            class="sw-color-label">{{ $color }}</label>
+                                    </span>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-14 size">
+                        <p class="text-lg font-semibold mb-2 text-[#222]">
+                            Size
+                        </p>
+                        <div class="flex space-x-2 product-size-options" id="sizeOptions">
+                            <!-- Hiển thị tất cả các size mặc định -->
+                            @foreach ($data['allSizes'] as $size)
+                                <span class="product-sw-select-item all-sizes">
+                                    <input type="radio" name="product-choose-size" value="{{ $size }}"
+                                        id="product-choose-size-{{ $loop->index }}" class="trigger-option-sw">
+                                    <label for="product-choose-size-{{ $loop->index }}"
+                                        class="sw-size-label">{{ $size }}</label>
+                                </span>
+                            @endforeach
+
+                            <!-- Hiển thị các size theo từng màu (ẩn mặc định) -->
+                            @foreach ($data['groupedColors'] as $color => $variants)
+                                <div class="size-group flex space-x-2 product-size-options"
+                                    data-color="{{ $color }}" style="display: none;">
+                                    @foreach ($variants['sizes'] as $size)
+                                        <span class="product-sw-select-item">
+                                            <input type="radio" name="product-choose-size" value="{{ $size }}"
+                                                id="product-choose-size-{{ $color }}-{{ $loop->index }}"
+                                                class="trigger-option-sw">
+                                            <label for="product-choose-size-{{ $color }}-{{ $loop->index }}"
+                                                class="sw-size-label">{{ $size }}</label>
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+
+
+                    <div class="product-detail-add">
+                        <div class="quantity">
+                            <div class="quantity-selector">
+                                <button type="button" aria-label="Giảm số lượng"
+                                    class="quantity-selector-button-minus">-</button>
+                                <input class="quantity-selector-input" type="number" step="1" min="1"
+                                    max="9999" aria-label="Số lượng sản phẩm" name="quantity" value="1"
+                                    readonly="">
+                                <button type="button" aria-label="Tăng số lượng"
+                                    class="quantity-selector-button-plus">+</button>
+                            </div>
+                        </div>
+                        <div class="add-cart">
+                            <p class="mini-cart-button">
+                                {{-- <a href="#" class="pay-money" title="Tiếp tục mua hàng">Thêm Vào Giỏ Hàng</a> --}}
+                                <button class="pay-money" title="Tiếp tục mua hàng">Thêm Vào Giỏ Hàng</button>
+                            </p>
+                        </div>
+                        <div class="icon-heart-detail">
+                            <input type="checkbox" id="hong" class="icon-toggle-checkbox">
+                            <label for="hong" uk-icon="heart" class="sw-icon-heart-color"></label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="mb-4 product-extra-content">
+                        <p class="mb-1 free-deliver">
+                            Miễn phí vận chuyển trên toàn thế giới cho tất cả các đơn hàng của Hiếu
+                        </p>
+                        <p class=" mb-1 date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            30 ngày trả hàng dễ dàng
+                        </p>
+                        <p class="date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            Đặt hàng trước 00:00 khuya để được giao hàng trong ngày
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="tab-product-detail">
+            <ul class="uk-flex-center tab-product-detail-top" uk-tab>
+                <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
+                <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
+                <li><a class="tab-product-detail-title" href="#">Đánh giá (1)</a></li>
+            </ul>
+
+            <!-- Nội dung của tab -->
+            <ul class="uk-switcher uk-margin tab-product-detail-bt">
+                <!-- Tab des -->
+                <div class="tab-des">
+                    <p class="text-[#222]">{{ $data['product']->description }}</p>
+                </div>
+
+                <!-- Tab Info -->
+                <div class="tab-info">
+                    <div class="flex gap-10 pb-4">
+                        <span class="text-[#222] font-bold text-lg">Color</span>
+                        <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam ad!
+                            Molestias enim dolorem ipsa neque sunt repellat!</p>
+                    </div>
+                    <div class="flex gap-10 pb-4">
+                        <span class="text-[#222] font-bold text-lg">Size</span>
+                        <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam ad!
+                            Molestias enim dolorem ipsa neque sunt repellat!</p>
+                    </div>
+                </div>
+
+                <!-- Tab review -->
+                <div class="tab-review">
+
+                    <div class="flex items-start gap-x-8 pb-8 pt-8 tab-review-warp">
+                        <img alt="" class="w-16 h-16 rounded-full" height="60"
+                            src="https://storage.googleapis.com/a1aa/image/O7wLlOJVDnb5LBKc40Mw6jm10eUtoOpXp3VAMcG01y7e8ZwTA.jpg"
+                            width="60" />
+                        <div class="tab-review-body">
+                            <div class="tab-review-meta">
+                                <div>
+                                    <div class="text-sm text-gray-500">
+                                        02/07/2004
+                                    </div>
+                                    <div class="text-lg font-semibold pt-1 mb-1 text-[#222]">
+                                        Nguyễn Minh Hiếu
+                                    </div>
+                                </div>
+
+                                <div class="ml-auto flex items-center adfadf">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-review-desc">
+                                <div class="mt-2 text-[#555]">
+                                    Hayflower blends with fresh moss on this wine’s gentle nose. The palate adds a ripe
+                                    lemon freshness that is mouth-filling, smooth, and textured with the yeasty richness
+                                    that is aligned to chalky depth.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-x-8 pb-8 pt-8 tab-review-warp">
+                        <img alt="" class="w-16 h-16 rounded-full" height="60"
+                            src="https://storage.googleapis.com/a1aa/image/O7wLlOJVDnb5LBKc40Mw6jm10eUtoOpXp3VAMcG01y7e8ZwTA.jpg"
+                            width="60" />
+                        <div class="tab-review-body">
+                            <div class="tab-review-meta">
+                                <div>
+                                    <div class="text-sm text-gray-500">
+                                        02/07/2004
+                                    </div>
+                                    <div class="text-lg font-semibold pt-1 mb-1 text-[#222]">
+                                        Nguyễn Minh Hiếu
+                                    </div>
+                                </div>
+
+                                <div class="ml-auto flex items-center adfadf">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-review-desc">
+                                <div class="mt-2 text-[#555]">
+                                    Hayflower blends with fresh moss on this wine’s gentle nose. The palate adds a ripe
+                                    lemon freshness that is mouth-filling, smooth, and textured with the yeasty richness
+                                    that is aligned to chalky depth.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 comment-reply">
+                        <h2 class="text-[28px] font-semibold mt-16 comment-reply-title">
+                            Thêm đánh giá
+                        </h2>
+                        <form action="" class="mt-4 space-y-4">
+
+                            <div class="rating">
+                                <label class="block text-base font-medium text-[#555] ">
+                                    Your rating
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <div class="flex gap-2 items-center mt-1">
+                                    <a href="#" class="star" data-value="1"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="2"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="3"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="4"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="5"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="comment-reply-review pb-10">
+                                <label class="block text-base font-medium text-[#555] pb-3 pt-3">
+                                    Your review
+                                    <span class="text-red-500">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="mt-1 block w-full h-32 p-2 input-info"></textarea>
+                            </div>
+
+                            <div class="uk-grid comment-reply-review-info pb-5" uk-grid>
+                                <div class="comment-reply-name uk-width-1-2">
+                                    <label class="block text-base font-medium text-[#555] pb-3">
+                                        Name
+                                        <span class="text-red-500">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="mt-1 block w-full p-2 input-info" type="text" />
+                                </div>
+                                <div class="comment-reply-email uk-width-1-2">
+                                    <label class="block text-base font-medium text-[#555] pb-3">
+                                        Email
+                                        <span class="text-red-500">
+                                            *
+                                        </span>
+                                    </label>
+                                    <input class="mt-1 block w-full p-2 input-info" type="email" />
+                                </div>
+                            </div>
+
+                            <div class="flex items-center pb-8">
+                                <input class="h-4 w-4 text-red-500 border-gray-300 rounded" id="save-info"
+                                    type="checkbox" />
+                                <label class="ml-2 block text-base text-[#555]" for="save-info">
+                                    Lưu tên, email và trang web của tôi trên trình duyệt này cho lần bình luận kế tiếp.
+                                </label>
+                            </div>
+
+                            <button class="comment-reply-button " type="submit">
+                                Submit
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
+            uk-slider="autoplay: true; autoplay-interval: 3000;">
+            <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                <div class="title-related">
+                    <h2>Sản phẩm liên quan</h2>
+                </div>
+
+                <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                    @if (!empty($data['productRelated']))
+                        @foreach ($data['productRelated'] as $key => $item)
+                            <div class="product-item uk-width-1-4@m">
+                                <div class="product-image">
+                                    <a href="{{ route('productDetail', $item->id) }}">
+                                        <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    </a>
+                                    <span>-10%</span>
+                                    <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                    <div class="product-button">
+                                        <button>Thêm vào giỏ </button>
+                                        <button uk-toggle="target: #modal-container">Xem nhanh</button>
+                                    </div>
+                                </div>
+                                <div class="product-review">
+                                    <a href="{{ route('categories', $item->category->id) }}">
+                                        <span>{{ $item->category->name }}</span>
+                                    </a>
+                                    <div class="icon">
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    </div>
+                                </div>
+                                <a href="{{ route('productDetail', $item->id) }}"
+                                    class="product-name">{{ $item->name }}</a>
+                                <div class="product-price">
+                                    <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                    @if (!empty($item->price_old))
+                                        <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                    @endif
+                                </div>
+                                <div class="product-item-detail-gallery-items">
+                                    @if (!empty($item->images))
+                                        @foreach ($collection as $item)
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="{{ $item->image_url }}"
+                                                    alt="">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+                <button class="icon-left-product-detail uk-position-center-left uk-position-small uk-hidden-hover" href
+                    uk-slider-item="previous">
+                    <i>‹</i>
+                </button>
+                <button class="icon-right-product-detail uk-position-center-right uk-position-small uk-hidden-hover" href
+                    uk-slider-item="next">
+                    <i>›</i>
+                </button>
+            </div>
+            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+        </div>
+
+    </section>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const btnAddCart = document.querySelector('#btnAddCart');
-            
-            btnAddCart.addEventListener('click', function() {
+        $(document).ready(function() {
+            $('input[name="product-choose-color"]').on('change', function() {
+                const selectedColor = $(this).val();
 
-                const sizeProduct = document.querySelector('.productSize');
-                const productQuantity = document.querySelector('.productQuantity');
+                $('.size-group').hide();
+                $('.all-sizes').hide();
 
-                var formData = new FormData();
+                if (selectedColor) {
+                    $(`.size-group[data-color="${selectedColor}"]`).show();
+                } else {
+                    $('.all-sizes').show();
+                }
+            });
 
-                formData.append('size', sizeProduct.value);
-                formData.append('quantity', productQuantity.value);
-                formData.append('_token', '{{ csrf_token() }}');
+            $('.all-sizes').show();
+            $('.size-group').hide();
+        });
 
-                $.ajax({
-                    url: "{{ route('cartAdd', ['sneakerSlug' => $sneakerSlug]) }}",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if(response.successAddCart) {
-                            Swal.fire({
-                                position: "center",
-                                icon: "success",
-                                title: "Thêm vào giỏ hàng thành công",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
+        $('.quantity-selector-button-minus').on('click', function() {
+            var currentValue = parseInt($('.quantity-selector-input').val());
+            if (currentValue > 1) {
+                $('.quantity-selector-input').val(currentValue - 1);
+            }
+        });
 
-                        if(response.errorAddCart) {
-                            Swal.fire({
-                                position: "center",
-                                icon: "error",
-                                title: "Vui lòng thử lại",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                        }
-                    },
-                    error: function(xhr) {
+        $('.quantity-selector-button-plus').on('click', function() {
+            var currentValue = parseInt($('.quantity-selector-input').val());
+            $('.quantity-selector-input').val(currentValue + 1);
+        });
+
+        $('.quantity-selector-input').on('input', function() {
+            var value = parseInt($(this).val());
+            if (isNaN(value) || value < 1) {
+                $(this).val(1);
+            } else if (value > 9999) {
+                $(this).val(9999);
+            }
+        });
+
+
+        $('.form-addToCart').on('submit', function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr('action');
+            var productId = form.find('.productId').val();
+            var color = form.find('input[name="product-choose-color"]:checked').val();
+            var size = form.find('input[name="product-choose-size"]:checked').val();
+            var quantity = form.find('input[name="quantity"]').val();
+
+            if (color == null) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Vui lòng chọn màu sắc',
+                    showConfirmButton: true,
+                })
+
+                return false;
+            }
+
+            if (size == null) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Vui lòng chọn size',
+                    showConfirmButton: true,
+                })
+
+                return false;
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: productId,
+                    color: color,
+                    size: size,
+                    quantity: quantity
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status) {
                         Swal.fire({
-                            position: "top-end",
-                            icon: "error",
-                            title: `Đã xảy ra lỗi`,
-                            showConfirmButton: false,
-                            timer: 2500
-                        });
+                            position: 'center',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: true,
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: response.message,
+                            showConfirmButton: true,
+                        })
                     }
+                },
+                error: function() {
+                    alert('Lỗi khi thêm vào giỏ hàng');
+                }
+            });
+        });
+
+
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', (event) => {
+                event.preventDefault(); // k chuyển trang click vào sao
+
+                //lấy giá trị rating data-value
+                const ratingValue = parseInt(star.dataset.value);
+                //update màu sắc
+                document.querySelectorAll('.star').forEach((s) => {
+                    const currentValue = parseInt(s.dataset.value);
+                    const icon = s.querySelector('i');
+                    // sửa màu
+                    icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
+                    icon.classList.toggle('text-gray-400', currentValue > ratingValue);
                 });
 
-            })
-        })
+                //lưu vào ứng dụng, gửi lên backend
+                console.log("Rating value:", ratingValue);
+
+            });
+        });
+
+
+        const minusButton = document.querySelector('.quantity-selector-button-minus');
+        const plusButton = document.querySelector('.quantity-selector-button-plus');
+        const quantityInput = document.querySelector('.quantity-selector-input');
+
+        //giảm số lượng
+        minusButton.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        //tăng số lượng
+        plusButton.addEventListener('click', () => {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue < 9999) {
+                quantityInput.value = currentValue + 1;
+            }
+        });
     </script>
+@endsection
+
+@section('js')
 @endsection

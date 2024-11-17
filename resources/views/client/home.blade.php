@@ -5,973 +5,918 @@
 @endsection
 
 @section('content')
-    <!-- Start of Primary Slider Section -->
-    <!-- Start of Primary Slider Section -->
-    <section class="primary-slider-section mb0 pos-r">
-        <div id="primary_slider"
-            class="swiper-container slider-type-1 swiper-container-initialized swiper-container-horizontal">
-
-            <!-- Slides -->
-            <div class="swiper-wrapper" style="transform: translate3d(-2306px, 0px, 0px); transition-duration: 0ms;">
-                <div class="swiper-slide bg-img-wrapper swiper-slide-duplicate swiper-slide-duplicate-next"
-                    data-swiper-slide-index="2" style="width: 1153px; transition: all;">
-                    <div class="slide-inner image-placeholder"
-                        style="transform: translate3d(1153px, 0px, 0px); transition: all; background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-3.jpg&quot;); background-size: cover; background-position: center center;">
-                        <img src="http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-3.jpg"
-                            class="visually-hidden" alt="Slider Image">
-                        <div class="slide-progress"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12" style="height: 540px;">
-                                    <div class="slide-content white-scheme layer-animation-3">
-                                        <p class="promo-title"><span>
-                                                Giảm giá nóng</span>
-                                            Ưu đãi giảm giá 60% trong tuần này</p>
-                                        <h1 class="main-title"><span>
-                                                Giảm giá 20% hàng đầu</span> <span>Tháng lịch sử đen tối</span></h1>
-                                        <p class="subtitle">Bộ sưu tập phát triển mỗi năm với những câu chuyện nguyên
-                                            bản và
-                                            đặc điểm thiết kế chịu ảnh hưởng từ các nhân viên của Abalia.</p>
-                                        <div class="slide-button">
-                                            <a class="default-btn secondary" href="shop-grid.html" title="Shop Now">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div> <!-- end of slide-content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of slider-inner -->
-                </div>
-                <div class="swiper-slide bg-img-wrapper swiper-slide-prev" data-swiper-slide-index="0"
-                    style="width: 1153px; transition: all;">
-                    <div class="slide-inner image-placeholder"
-                        style="transform: translate3d(576.5px, 0px, 0px); transition: all; background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-1.jpg&quot;); background-size: cover; background-position: center center;">
-                        <img src="http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-1.jpg"
-                            class="visually-hidden" alt="Slider Image">
-                        <div class="slide-progress"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12" style="height: 540px;">
-                                    <div class="slide-content layer-animation-1">
-                                        <p class="promo-title"><span>Giới hạn</span>
-                                            Ưu đãi giảm giá 20% trong tuần này</p>
-                                        <h1 class="main-title"><span>VanhSneakers</span> <span>Giày Thể Thao 2024</span>
-                                        </h1>
-                                        <p class="subtitle">Thân giày được dệt kim nhẹ thích ứng với hình dạng bàn chân
-                                            của
-                                            bạn để chuyển động linh hoạt và tự nhiên.</p>
-                                        <div class="slide-button">
-                                            <a class="default-btn" href="shop-grid.html" title="Shop Now">Mua ngay</a>
-                                        </div>
-                                    </div> <!-- end of slide-content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of slider-inner -->
-                </div> <!-- end of swiper-slide -->
-
-                <div class="swiper-slide bg-img-wrapper swiper-slide-active" data-swiper-slide-index="1"
-                    style="width: 1153px; transition: all;">
-                    <div class="slide-inner image-placeholder"
-                        style="transform: translate3d(0px, 0px, 0px); transition: all; background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-2.jpg&quot;); background-size: cover; background-position: center center;">
-                        <img src="http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-2.jpg"
-                            class="visually-hidden" alt="Slider Image">
-                        <div class="slide-progress"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12" style="height: 540px;">
-                                    <div class="slide-content layer-animation-2">
-                                        <p class="promo-title"><span>Giới hạn</span> Ưu đãi giảm giá 20% trong tuần này
-                                        </p>
-                                        <h1 class="main-title"><span>VanhSneakers</span> <span>Cập Bến Giày Hot</span>
-                                        </h1>
-                                        <p class="subtitle">
-                                            Giày chạy bộ nam Nike Air Zoom Pegasus 34 có chất liệu Flymesh được cập
-                                            nhật,
-                                            nhẹ hơn giúp giảm nhiệt tích tụ khi bạn chạy.</p>
-                                        <div class="slide-button">
-                                            <a class="default-btn" href="shop-grid.html" title="Shop Now">Mua ngay</a>
-                                        </div>
-                                    </div> <!-- end of slide-content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of slider-inner -->
-                </div> <!-- end of swiper-slide -->
-
-                <div class="swiper-slide bg-img-wrapper swiper-slide-next" data-swiper-slide-index="2"
-                    style="width: 1153px; transition: all;">
-                    <div class="slide-inner image-placeholder"
-                        style="transform: translate3d(-576.5px, 0px, 0px); transition: all; background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-3.jpg&quot;); background-size: cover; background-position: center center;">
-                        <img src="http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-3.jpg"
-                            class="visually-hidden" alt="Slider Image">
-                        <div class="slide-progress"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12" style="height: 540px;">
-                                    <div class="slide-content white-scheme layer-animation-3">
-                                        <p class="promo-title"><span>
-                                                Giảm giá nóng</span>
-                                            Ưu đãi giảm giá 60% trong tuần này</p>
-                                        <h1 class="main-title"><span>
-                                                Giảm giá 20% hàng đầu</span> <span>Tháng lịch sử đen tối</span></h1>
-                                        <p class="subtitle">Bộ sưu tập phát triển mỗi năm với những câu chuyện nguyên
-                                            bản và
-                                            đặc điểm thiết kế chịu ảnh hưởng từ các nhân viên của Abalia.</p>
-                                        <div class="slide-button">
-                                            <a class="default-btn secondary" href="shop-grid.html" title="Shop Now">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div> <!-- end of slide-content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of slider-inner -->
-                </div> <!-- end of swiper-slide -->
-                <div class="swiper-slide bg-img-wrapper swiper-slide-duplicate swiper-slide-duplicate-prev"
-                    data-swiper-slide-index="0" style="width: 1153px; transition: all;">
-                    <div class="slide-inner image-placeholder"
-                        style="transform: translate3d(-1153px, 0px, 0px); transition: all; background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-1.jpg&quot;); background-size: cover; background-position: center center;">
-                        <img src="http://sneakers.test/assets/sneakers/assets/images/slider/home-1/slide-1.jpg"
-                            class="visually-hidden" alt="Slider Image">
-                        <div class="slide-progress"></div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12" style="height: 540px;">
-                                    <div class="slide-content layer-animation-1">
-                                        <p class="promo-title"><span>Giới hạn</span>
-                                            Ưu đãi giảm giá 20% trong tuần này</p>
-                                        <h1 class="main-title"><span>VanhSneakers</span> <span>Giày Thể Thao
-                                                2024</span>
-                                        </h1>
-                                        <p class="subtitle">Thân giày được dệt kim nhẹ thích ứng với hình dạng bàn chân
-                                            của
-                                            bạn để chuyển động linh hoạt và tự nhiên.</p>
-                                        <div class="slide-button">
-                                            <a class="default-btn" href="shop-grid.html" title="Shop Now">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div> <!-- end of slide-content -->
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end of slider-inner -->
-                </div>
-            </div> <!-- end of swiper-slide -->
-
-            <!-- Slider Navigation -->
-            <div class="swiper-arrow next slide" tabindex="0" role="button" aria-label="Next slide"><i
-                    class="fa fa-angle-right"></i></div>
-            <div class="swiper-arrow prev slide" tabindex="0" role="button" aria-label="Previous slide"><i
-                    class="fa fa-angle-left"></i></div>
-
-            <!-- Slider Pagination -->
-            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span
-                    class="swiper-pagination-bullet" tabindex="0" role="button"
-                    aria-label="Go to slide 1"></span><span
-                    class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
-                    aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0"
-                    role="button" aria-label="Go to slide 3"></span></div>
-            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    <div class="banner uk-position-relative uk-visible-toggle uk-light" tabIndex={-1}
+        uk-slideshow="animation: fade; autoplay: true; autoplay-interval: 3000">
+        <div class="uk-slideshow-items">
+            <div>
+                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/orange-sneaker-banner-design-template-c40c3bb0b3e78e695ea680fc49ab95e5_screen.jpg?ts=1680685160"
+                    alt="Slide 1" uk-cover="true" />
+            </div>
+            <div>
+                <img src="https://i.pinimg.com/736x/33/5c/7a/335c7a303b8839e6e491df45581a21c9.jpg" alt="Slide 2"
+                    uk-cover="true" />
+            </div>
+            <div>
+                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sneakers-mockup-banner-design-template-a168837d88ce417842e272c989245883_screen.jpg?ts=1678847642"
+                    alt="Slide 3" uk-cover="true" />
+            </div>
         </div>
-    </section>
-    <!-- End of Primary Slider Section -->
 
-    <!-- Start of Support Section -->
-    <section class="support-section mb0">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature-box">
-                    <div class="feature-content">
-                        <h2>Miễn phí vận chuyển</h2>
-                        <p>Miễn phí vận chuyển cho mọi đơn hàng</p>
-                    </div>
-                </div> <!-- end of feaure-box -->
+        <button class="icon-left uk-position-center-left uk-position-small uk-hidden-hover" uk-slideshow-item="previous">
+            <i>‹</i>
+        </button>
+        <button class="icon-right uk-position-center-right uk-position-small uk-hidden-hover" uk-slideshow-item="next">
+            <i>›</i>
+        </button>
+    </div>
 
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature-box">
-                    <div class="feature-content">
-                        <h2>Hoàn tiền</h2>
-                        <p>30 ngày đổi trả miễn phí</p>
-                    </div>
-                </div> <!-- end of feaure-box -->
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature-box">
-                    <div class="feature-content">
-                        <h2>Hỗ trợ trực tuyến</h2>
-                        <p>Hỗ trợ 24 giờ một ngày</p>
-                    </div>
-                </div> <!-- end of feaure-box -->
-
-                <div class="col-12 col-sm-6 col-md-3 col-lg-3 feature-box">
-                    <div class="feature-content">
-                        <h2>Ưu đãi &amp; Khuyến mãi</h2>
-                        <p>Tiết kiệm giá, giảm giá, phiếu giảm giá</p>
-                    </div>
-                </div> <!-- end of feaure-box -->
+    <section class="about-us uk-container uk-container-large">
+        <div class="about-us-container uk-grid" uk-grid="true">
+            <div class="content uk-width-1-2@m uk-width-1-2@s">
+                <div class="title">
+                    <a href="#">
+                        <h2>Về chúng tôi</h2>
+                    </a>
+                    <hr />
+                </div>
+                <span class="sub-span-title">Artisanal Nomad</span>
+                <p>
+                    Chủ đề này khám phá các loại vải sáng tạo, thiết kế tương lai và
+                    kiểu dáng đẹp mắt lấy cảm hứng từ thời đại kỹ thuật số. Quần áo
+                    kết hợp các yếu tố công nghệ có thể mặc, điểm nhấn sáng và tính
+                    thẩm mỹ hiện đại, phản ánh sự kết hợp giữa phong cách và chức năng
+                    dành cho tín đồ thời trang am hiểu công nghệ.
+                    <br /><br />
+                    Chủ đề này trưng bày các kết cấu phong phú, các chi tiết trang trí
+                    xa hoa và bảng màu lấy cảm hứng từ đồ trang sức hoàng gia. Những
+                    hình bóng toát lên sự tinh tế đồng thời kết hợp các họa tiết ma
+                    thuật, đưa người mặc đến một thế giới hùng vĩ và quyến rũ.
+                </p>
+                <div class="shopping">
+                    <a href="#">
+                        Men shoes
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#">
+                        Women shoes <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="image-about-us uk-width-1-2@m uk-width-1-2@s">
+                <img class="large-image"
+                    src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" />
+                <!-- <img class="small-image" src="https://bizweb.dktcdn.net/100/062/136/products/gta49-2.jpg?v=1711008704143" alt="" /> -->
             </div>
         </div>
     </section>
-    <!-- End of Support Section -->
 
-    <!-- Start of Banner Section -->
-    <div class="banner-section mb-half">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="promo-banner hover-effect-1">
-                        <a href="#">
-                            <img src="http://sneakers.test/assets/sneakers/assets/images/banners/banner-1.jpg"
-                                alt="Promo Banner">
-                        </a>
-                    </div> <!-- end of promo-banner -->
+    <section class="collection uk-container uk-container-large">
+        <div class="title">
+            <hr />
+            <a href="#">
+                <h2>Danh mục nổi bật</h2>
+            </a>
+            <hr />
+        </div>
+        <span class="sub-span-title">
+            List các nhóm sản phẩm nổi bật nhất
+        </span>
+        <div class="collection-list uk-grid" uk-grid>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
                 </div>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="promo-banner hover-effect-1">
-                        <a href="#">
-                            <img src="http://sneakers.test/assets/sneakers/assets/images/banners/banner-2.jpg"
-                                alt="Promo Banner">
-                        </a>
-                    </div> <!-- end of promo-banner -->
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
                 </div>
-                <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="promo-banner hover-effect-1">
-                        <a href="#">
-                            <img src="http://sneakers.test/assets/sneakers/assets/images/banners/banner-3.jpg"
-                                alt="Promo Banner">
-                        </a>
-                    </div> <!-- end of promo-banner -->
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
                 </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div>
-    <!-- End of Banner Section -->
-
-    <!-- Start of New Arrivals Section -->
-    <section class="new-arrivals-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="section-title">
-                        <h2>SẢN PHẨM MỚI NHẤT</h2>
-                        <p class="subtitle">Mọi người có thể tự do chăm sóc bản thân khi tích lũy sự sống dưới chân hồ
-                        </p>
-                    </div>
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
                 </div>
-            </div> <!-- end of row -->
-
-            <div class="row product-row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="new-products pos-r">
-                        <div class="element-carousel anime-element instance-0 swiper-container-initialized swiper-container-horizontal"
-                            data-visible-slide="4" data-loop="false" data-space-between="0" data-speed="1000">
-
-                            <!-- Slides -->
-                            <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                                <article class="swiper-slide product-layout swiper-slide-visible swiper-slide-active"
-                                    style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/asic-ban-best-quality-likeauth">
-                                                    <img src="/storage/products/ju5zGb3BaG00LUUrFCSjRL0ZUk5WaJovfDPK6xpw.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">CAMPUS</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">Asic Bản Best
-                                                        Quality Likeauth</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">200.000
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                                <article class="swiper-slide product-layout swiper-slide-visible swiper-slide-next"
-                                    style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/dior-test">
-                                                    <img src="/storage/products/i6XItds3STCJcUfJ8NyhEp2AT90rGz1wENYE0j0W.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">CONVES</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">dior test</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">200.000
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                                <article class="swiper-slide product-layout swiper-slide-visible" style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/jordan-ban-cao-cap">
-                                                    <img src="/storage/products/IYpspxbp8NiPA0vW83tL0cmJjfCk47rxrDkvxA3q.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">CAMPUS</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">Jordan Bản Cao
-                                                        Cấp</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">500.000
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                                <article class="swiper-slide product-layout swiper-slide-visible" style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/samba">
-                                                    <img src="/storage/products/HGPxtHnDmvGB1mPU3UyvfFcEjdwMAyGEeV3FJedV.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">DIOR</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">Samba</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">34.534.534
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                                <article class="swiper-slide product-layout" style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/adidas-samba-den-stussy">
-                                                    <img src="/storage/products/n4yLWr4LrbPWvX41P8Cfg0jzz6Ixboq8mdSAGISQ.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">ADIDAS</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">Adidas Samba
-                                                        Đen Stussy</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">578.000
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                                <article class="swiper-slide product-layout" style="width: 240px;">
-                                    <div class="product-thumb">
-                                        <div class="product-inner">
-                                            <div class="product-image">
-
-                                                <div class="label-product label-new">New</div>
-                                                <a href="http://sneakers.test/sneaker/asic-kem-de-nau-ban-cao-cap">
-                                                    <img src="http://sneakers.test/storage/products/W8P3gKe5eDV4nbZIaHahV0auNTBzVGAgnliK4WIb.jpg"
-                                                        alt="Compete Track Tote" title="Compete Track Tote">
-                                                </a>
-                                                <div class="action-links">
-                                                    <a class="action-btn btn-cart" href="#" title="Add to Cart"><i
-                                                            class="pe-7s-shopbag"></i></a>
-                                                    <a class="action-btn btn-wishlist" href="#"
-                                                        title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                    <a class="action-btn btn-compare" href="#"
-                                                        title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                    <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                        data-bs-target="#product_quick_view" href="#"
-                                                        title="Quick View"><i class="pe-7s-search"></i></a>
-                                                </div>
-                                            </div> <!-- end of product-image -->
-
-                                            <div class="product-caption">
-                                                <div
-                                                    class="product-meta d-flex justify-content-between align-items-center">
-                                                    <div class="product-manufacturer">
-                                                        <a href="#">ASIC</a>
-                                                    </div>
-                                                    <div class="product-ratings">
-                                                        <div class="rating-box">
-                                                            <ul class="rating d-flex">
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline"></i></li>
-                                                                <li><i class="ion ion-md-star-outline disabled"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <h4 class="product-name"><a href="single-product.html">Asic Kem Đế Nâu
-                                                        Bản Cao Cấp</a>
-                                                </h4>
-                                                <p class="product-price">
-
-                                                    <span class="price-new">450.000
-                                                        VNĐ</span>
-                                                </p>
-                                            </div><!-- end of product-caption -->
-                                        </div><!-- end of product-inner -->
-                                    </div><!-- end of product-thumb -->
-                                </article> <!-- end of product-layout -->
-                            </div> <!-- end of swiper-wrapper -->
-
-                            <!-- Slider Navigation -->
-                            <div class="swiper-arrow next next-0" tabindex="0" role="button" aria-label="Next slide"
-                                aria-disabled="false" fdprocessedid="9lbqpb"><i class="fa fa-angle-right"></i></div>
-                            <div class="swiper-arrow prev prev-0 swiper-button-disabled" tabindex="0" role="button"
-                                aria-label="Previous slide" aria-disabled="true" fdprocessedid="oxavl"><i
-                                    class="fa fa-angle-left"></i></div>
-                            <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                        </div> <!-- end of element-carousel -->
-                    </div> <!-- end of new-products -->
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
                 </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
+                </div>
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
+                </div>
+                <span>Flash Sale</span>
+            </a>
+            <a class="collection-list-item " href="#" title="Flash Sale">
+                <div class="home-collection-list-item-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
+                        fetchpriority="auto">
+                </div>
+                <span>Flash Sale</span>
+            </a>
+        </div>
     </section>
-    <!-- End of New Arrivals Section -->
 
-    <!-- Start of Promo Banner Section -->
-    <section class="promo-banner-section bg-img-wrapper">
-        <div class="image-placeholder pos-r"
-            style="background-image: url(&quot;http://sneakers.test/assets/sneakers/assets/images/backgrounds/bg-banner.jpg&quot;); background-size: cover; background-position: center center;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="banner-with-text">
-                            <img src="http://sneakers.test/assets/sneakers/assets/images/backgrounds/bg-banner.jpg"
-                                class="visually-hidden" alt="Promo Banner">
-                            <div class="promo-text">
-                                <h1>Hurry Up!</h1>
-                                <h2><span>Hurry Up!</span> Daily Deal Of The Day</h2>
-                                <p>Abdul, a young, widowed Muslim man, needed to leave Syria and not be delayed by the
-                                    authorities in getting to Europe. The best way to do this, he reasoned, was to
-                                    acquire
-                                    another family as cover, and he found one. It was all a sham, however, just a means
-                                    to
-                                    an end.</p>
-                                <a href="#" class="default-btn large">Discover Now</a>
-                            </div>
-                        </div> <!-- end of promo-banner -->
-                    </div>
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div> <!-- end of image-placeholder -->
-    </section>
-    <!-- End of Promo Banner Section -->
+    <section class="date-time-sale uk-container uk-container-large ">
+        <div class="uk-grid" uk-grid="true">
+            <div class="home-sale-left uk-width-1-3">
 
-    <!-- Start of Categories Section -->
-    <section class="categories-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="section-title">
-                        <h2>DANH MỤC CỦA TÔI</h2>
-                        <p class="subtitle">Nếu anh ta có một khối lượng lớn, hoặc nếu anh ta mắc một căn bệnh nào đó ở
-                            cổ
-                            họng, anh ta sẽ không thể làm được điều đó.</p>
+                <div class="date-time-image">
+                    <img src="https://bizweb.dktcdn.net/thumb/grande/100/520/624/themes/959507/assets/home_flashsale_d_img__1.jpg?1724041824574"
+                        alt="" />
+                </div>
+
+                <div class="date-time-info">
+                    <div class="countdown">
+                        <span class="days">
+                            <b>020</b>
+                            <br />
+                            <div class="days-content">Ngày</div>
+                        </span>
+                        <span class="hours">
+                            <b>07</b>
+                            <br />
+                            <div class="hours-content">Giờ</div>
+                        </span>
+                        <span class="minutes">
+                            <b>004</b>
+                            <br />
+                            <div class="minutes-content">Phút</div>
+                        </span>
+                        <span class="seconds">
+                            <b>01</b>
+                            <br />
+                            <div class="seconds-content">Giây</div>
+                        </span>
                     </div>
                 </div>
-            </div> <!-- end of row -->
 
-            <div class="row product-row">
-                <div class="col-12 col-sm-12 col-md-12">
+            </div>
 
-                    <!-- Nav Pills -->
-                    <ul class="nav nav-pills justify-content-center" id="our_categories" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="nav_shop_82" data-bs-toggle="pill" href="#shop_82"
-                                role="tab" aria-controls="shop_82" aria-selected="true">ADIDAS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " id="nav_shop_80" data-bs-toggle="pill" href="#shop_80" role="tab"
-                                aria-controls="shop_80" aria-selected="true">ASIC</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " id="nav_shop_77" data-bs-toggle="pill" href="#shop_77" role="tab"
-                                aria-controls="shop_77" aria-selected="true">DIOR</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " id="nav_shop_73" data-bs-toggle="pill" href="#shop_73" role="tab"
-                                aria-controls="shop_73" aria-selected="true">NIKE</a>
-                        </li>
-                    </ul> <!-- end of nav -->
-                    <!-- Tab Contents -->
-                    <div class="tab-content" id="our_categories_contents">
-                        <div class="tab-pane show active anime-tab" id="shop_82" role="tabpanel"
-                            aria-labelledby="nav_shop_82">
-                            <div class="new-products pos-r">
-                                <div class="element-carousel instance-1 swiper-container-initialized swiper-container-horizontal"
-                                    data-visible-slide="4" data-loop="false" data-space-between="0" data-speed="1000">
-
-                                    <!-- Slides -->
-                                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                                        <article
-                                            class="swiper-slide product-layout swiper-slide-visible swiper-slide-active"
-                                            style="width: 240px;">
-                                            <div class="product-thumb">
-                                                <div class="product-inner">
-                                                    <div class="product-image">
-
-                                                        <div class="label-product label-new">New</div>
-                                                        <a href="http://sneakers.test/sneaker/adidas-samba-den-stussy">
-                                                            <img src="/storage/products/n4yLWr4LrbPWvX41P8Cfg0jzz6Ixboq8mdSAGISQ.jpg"
-                                                                alt="Strive Shoulder Pack" title="Strive Shoulder Pack">
-                                                        </a>
-                                                        <div class="action-links">
-                                                            <a class="action-btn btn-cart" href="#"
-                                                                title="Add to Cart"><i class="pe-7s-shopbag"></i></a>
-                                                            <a class="action-btn btn-wishlist" href="#"
-                                                                title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                            <a class="action-btn btn-compare" href="#"
-                                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                            <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                                data-bs-target="#product_quick_view" href="#"
-                                                                title="Quick View"><i class="pe-7s-search"></i></a>
-                                                        </div>
-                                                    </div> <!-- end of product-image -->
-
-                                                    <div class="product-caption">
-                                                        <div
-                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                            <div class="product-manufacturer">
-                                                                <a
-                                                                    href="http://sneakers.test/sneaker/adidas-samba-den-stussy">ADIDAS</a>
-                                                            </div>
-                                                            <div class="product-ratings">
-                                                                <div class="rating-box">
-                                                                    <ul class="rating d-flex">
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h4 class="product-name"><a
-                                                                href="http://sneakers.test/sneaker/adidas-samba-den-stussy">Adidas
-                                                                Samba Đen Stussy</a></h4>
-                                                        <p class="product-price">
-
-                                                            <span class="price-new">578.000 VNĐ</span>
-                                                        </p>
-                                                    </div><!-- end of product-caption -->
-                                                </div><!-- end of product-inner -->
-                                            </div><!-- end of product-thumb -->
-                                        </article> <!-- end of product-layout -->
-
-                                    </div> <!-- end of swiper-wrapper -->
-
-                                    <!-- Slider Navigation -->
-                                    <div class="swiper-arrow next next-1 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Next slide" aria-disabled="true"><i
-                                            class="fa fa-angle-right"></i></div>
-                                    <div class="swiper-arrow prev prev-1 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Previous slide" aria-disabled="true"><i
-                                            class="fa fa-angle-left"></i></div>
-                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                                </div> <!-- end of element-carousel -->
-                            </div> <!-- end of new-products -->
-                        </div> <!-- end of tab-pane -->
-                        <div class="tab-pane  anime-tab" id="shop_80" role="tabpanel" aria-labelledby="nav_shop_80">
-                            <div class="new-products pos-r">
-                                <div class="element-carousel instance-2 swiper-container-initialized swiper-container-horizontal"
-                                    data-visible-slide="4" data-loop="false" data-space-between="0" data-speed="1000">
-
-                                    <!-- Slides -->
-                                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                                        <article
-                                            class="swiper-slide product-layout swiper-slide-visible swiper-slide-active"
-                                            style="width: 240px;">
-                                            <div class="product-thumb">
-                                                <div class="product-inner">
-                                                    <div class="product-image">
-
-                                                        <div class="label-product label-new">New</div>
-                                                        <a href="http://sneakers.test/sneaker/asic-kem-de-nau-ban-cao-cap">
-                                                            <img src="http://sneakers.test/storage/products/W8P3gKe5eDV4nbZIaHahV0auNTBzVGAgnliK4WIb.jpg"
-                                                                alt="Strive Shoulder Pack" title="Strive Shoulder Pack">
-                                                        </a>
-                                                        <div class="action-links">
-                                                            <a class="action-btn btn-cart" href="#"
-                                                                title="Add to Cart"><i class="pe-7s-shopbag"></i></a>
-                                                            <a class="action-btn btn-wishlist" href="#"
-                                                                title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                            <a class="action-btn btn-compare" href="#"
-                                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                            <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                                data-bs-target="#product_quick_view" href="#"
-                                                                title="Quick View"><i class="pe-7s-search"></i></a>
-                                                        </div>
-                                                    </div> <!-- end of product-image -->
-
-                                                    <div class="product-caption">
-                                                        <div
-                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                            <div class="product-manufacturer">
-                                                                <a
-                                                                    href="http://sneakers.test/sneaker/asic-kem-de-nau-ban-cao-cap">ASIC</a>
-                                                            </div>
-                                                            <div class="product-ratings">
-                                                                <div class="rating-box">
-                                                                    <ul class="rating d-flex">
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h4 class="product-name"><a
-                                                                href="http://sneakers.test/sneaker/asic-kem-de-nau-ban-cao-cap">Asic
-                                                                Kem Đế Nâu Bản Cao Cấp</a></h4>
-                                                        <p class="product-price">
-
-                                                            <span class="price-new">450.000 VNĐ</span>
-                                                        </p>
-                                                    </div><!-- end of product-caption -->
-                                                </div><!-- end of product-inner -->
-                                            </div><!-- end of product-thumb -->
-                                        </article> <!-- end of product-layout -->
-
-                                    </div> <!-- end of swiper-wrapper -->
-
-                                    <!-- Slider Navigation -->
-                                    <div class="swiper-arrow next next-2 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Next slide" aria-disabled="true"><i
-                                            class="fa fa-angle-right"></i></div>
-                                    <div class="swiper-arrow prev prev-2 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Previous slide" aria-disabled="true"><i
-                                            class="fa fa-angle-left"></i></div>
-                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                                </div> <!-- end of element-carousel -->
-                            </div> <!-- end of new-products -->
-                        </div> <!-- end of tab-pane -->
-                        <div class="tab-pane  anime-tab" id="shop_77" role="tabpanel" aria-labelledby="nav_shop_77">
-                            <div class="new-products pos-r">
-                                <div class="element-carousel instance-3 swiper-container-initialized swiper-container-horizontal"
-                                    data-visible-slide="4" data-loop="false" data-space-between="0" data-speed="1000">
-
-                                    <!-- Slides -->
-                                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-                                        <article
-                                            class="swiper-slide product-layout swiper-slide-visible swiper-slide-active"
-                                            style="width: 240px;">
-                                            <div class="product-thumb">
-                                                <div class="product-inner">
-                                                    <div class="product-image">
-
-                                                        <div class="label-product label-new">New</div>
-                                                        <a href="http://sneakers.test/sneaker/samba">
-                                                            <img src="/storage/products/HGPxtHnDmvGB1mPU3UyvfFcEjdwMAyGEeV3FJedV.jpg"
-                                                                alt="Strive Shoulder Pack" title="Strive Shoulder Pack">
-                                                        </a>
-                                                        <div class="action-links">
-                                                            <a class="action-btn btn-cart" href="#"
-                                                                title="Add to Cart"><i class="pe-7s-shopbag"></i></a>
-                                                            <a class="action-btn btn-wishlist" href="#"
-                                                                title="Add to Wishlist"><i class="pe-7s-like"></i></a>
-                                                            <a class="action-btn btn-compare" href="#"
-                                                                title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                                            <a class="action-btn btn-quickview" data-bs-toggle="modal"
-                                                                data-bs-target="#product_quick_view" href="#"
-                                                                title="Quick View"><i class="pe-7s-search"></i></a>
-                                                        </div>
-                                                    </div> <!-- end of product-image -->
-
-                                                    <div class="product-caption">
-                                                        <div
-                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                            <div class="product-manufacturer">
-                                                                <a href="http://sneakers.test/sneaker/samba">DIOR</a>
-                                                            </div>
-                                                            <div class="product-ratings">
-                                                                <div class="rating-box">
-                                                                    <ul class="rating d-flex">
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                        <li><i class="ion ion-md-star-outline"></i>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h4 class="product-name"><a
-                                                                href="http://sneakers.test/sneaker/samba">Samba</a>
-                                                        </h4>
-                                                        <p class="product-price">
-
-                                                            <span class="price-new">34.534.534 VNĐ</span>
-                                                        </p>
-                                                    </div><!-- end of product-caption -->
-                                                </div><!-- end of product-inner -->
-                                            </div><!-- end of product-thumb -->
-                                        </article> <!-- end of product-layout -->
-
-                                    </div> <!-- end of swiper-wrapper -->
-
-                                    <!-- Slider Navigation -->
-                                    <div class="swiper-arrow next next-3 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Next slide" aria-disabled="true"><i
-                                            class="fa fa-angle-right"></i></div>
-                                    <div class="swiper-arrow prev prev-3 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Previous slide" aria-disabled="true"><i
-                                            class="fa fa-angle-left"></i></div>
-                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                                </div> <!-- end of element-carousel -->
-                            </div> <!-- end of new-products -->
-                        </div> <!-- end of tab-pane -->
-                        <div class="tab-pane  anime-tab" id="shop_73" role="tabpanel" aria-labelledby="nav_shop_73">
-                            <div class="new-products pos-r">
-                                <div class="element-carousel instance-4 swiper-container-initialized swiper-container-horizontal"
-                                    data-visible-slide="4" data-loop="false" data-space-between="0" data-speed="1000">
-
-                                    <!-- Slides -->
-                                    <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-
-                                    </div> <!-- end of swiper-wrapper -->
-
-                                    <!-- Slider Navigation -->
-                                    <div class="swiper-arrow next next-4 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Next slide" aria-disabled="true"><i
-                                            class="fa fa-angle-right"></i></div>
-                                    <div class="swiper-arrow prev prev-4 swiper-button-disabled" tabindex="0"
-                                        role="button" aria-label="Previous slide" aria-disabled="true"><i
-                                            class="fa fa-angle-left"></i></div>
-                                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                                </div> <!-- end of element-carousel -->
-                            </div> <!-- end of new-products -->
-                        </div> <!-- end of tab-pane -->
-                    </div> <!-- end of tab-content -->
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section>
-    <!-- End of Categories Section -->
-
-    <!-- Start of Instagram Section -->
-    <section class="instagram-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="section-title type-2 pt-full top-bordered">
-                        <h2>Theo dõi chúng tôi trên Instagram</h2>
-                        <p class="subtitle">Điều này giúp bạn có thể sớm biết được những sản phẩm mới về shop.</p>
-                    </div>
-                </div>
-            </div> <!-- end of row -->
-
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <div class="instagram-container">
-                        <!-- Slides -->
-                        <div id="instagram_feed" class="swiper-wrapper image-popup" data-pswp-uid="1">
+            <div class="uk-width-2-3">
+                <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
+                    uk-slider="autoplay: true; autoplay-interval: 3000;">
+                    <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+                        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                            @if (!empty($data['productNews']))
+                                @foreach ($data['productNews'] as $key => $item)
+                                    <div class="product-item uk-width-1-4@m">
+                                        <div class="product-image">
+                                            <a href="{{ route('productDetail', $item->id) }}">
+                                                <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                            </a>
+                                            <span>-10%</span>
+                                            <i class="fas fa-heart icon-heart"
+                                                style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                            <div class="product-button">
+                                                {{-- <button type="submit" class="addToCart" data-id="{{ $item->id }}">Thêm vào giỏ </button> --}}
+                                                <button type="button" uk-toggle="target: #modal-container"
+                                                    class="quick-view-button" data-id="{{ $item->id }}">Xem
+                                                    nhanh</button>
+                                            </div>
+                                        </div>
+                                        <div class="product-review">
+                                            <a href="{{ route('categories', $item->category->id) }}">
+                                                <span>{{ $item->category->name }}</span>
+                                            </a>
+                                            <div class="icon">
+                                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('productDetail', $item->id) }}"
+                                            class="product-name">{{ $item->name }}</a>
+                                        <div class="product-price">
+                                            <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                            @if (!empty($item->price_old))
+                                                <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                            @endif
+                                        </div>
+                                        <div class="product-item-detail-gallery-items">
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                    alt="">
+                                            </div>
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                    alt="">
+                                            </div>
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                    alt="">
+                                            </div>
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
-                        <!-- end of swiper-wrapper -->
-                    </div> <!-- end of instagram-carousel -->
-                    <div class="follow-link">
-                        <a href="https://www.instagram.com/themeitems/" target="_blank">THEO DÕI INSTAGRAM </a>
+                        <button class="icon-left-product uk-position-center-left uk-position-small uk-hidden-hover" href
+                            uk-slider-item="previous">
+                            <i>‹</i>
+                        </button>
+                        <button class="icon-right-product uk-position-center-right uk-position-small uk-hidden-hover" href
+                            uk-slider-item="next">
+                            <i>›</i>
+                        </button>
+                    </div>
+                    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="banner2-home ">
+        <div class="home-banner2-wrapper">
+            <div class="home-banner-item">
+                <a href="#" title="" class="home-banner2-image-holder ">
+                    <img src="//bizweb.dktcdn.net/thumb/2048x2048/100/520/624/themes/959507/assets/home_banner_lg_image_d.jpg?1724041824574"
+                        alt="">
+                </a>
+                <div class="home-banner2-item-info">
+                    <div class="title">
+                        <a href="#">
+                            <h2>Bộ sưu tập mùa hè</h2>
+                        </a>
+                        <hr />
+                        <span class="sub-span-title">
+                            Vẻ Đẹp Trường Tồn Được Tái Tạo: Nghiên Cứu Sự Đối Lập trong Xu Hướng Thời Trang Mùa Hè 2024
+                        </span>
+                    </div>
+                    <a href="#" title="Khám phá ngay " class="home-banner2-button">
+                        <p>Khám phá ngay</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="name-shoes uk-container uk-container-large">
+        <div class="uk-grid" uk-grid="true">
+            @if (!empty($data['categoryLimit3']))
+                @foreach ($data['categoryLimit3'] as $item)
+                    <div class="name-shoes-item uk-width-1-3">
+                        <div class="name-shoes-image" style="height: 100%">
+                            <a href="{{ route('categories', ['id' => $item->id]) }}" style="height: 100%"
+                                class="a-img uk-inline-clip uk-transition-toggle" tabIndex={0}>
+                                <img style="height: 100%" class="uk-transition-scale-up uk-transition-opaque"
+                                    src="{{ $item->image }}" alt="{{ $item->name }}" /></a>
+                        </div>
+                        <div class="name-shoes-body">
+                            <a href="{{ route('categories', ['id' => $item->id]) }}" class="a-body">
+                                <p>{{ $item->name }}</p>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </section>
+
+    <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
+        uk-slider="autoplay: true; autoplay-interval: 3000;">
+        <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+            <div class="title">
+                <hr />
+                <a href="#">
+                    <h2>SẢN PHẨM MỚI CẬP NHẬT</h2>
+                </a>
+                <hr />
+            </div>
+            <span class="sub-span-title">
+                Top sản phẩm mới cập nhật
+            </span>
+
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                @if (!empty($data['productUpdateNews']))
+                    @foreach ($data['productUpdateNews'] as $key => $item)
+                        <div class="product-item uk-width-1-4@m">
+                            <div class="product-image">
+                                <a href="{{ route('productDetail', $item->id) }}">
+                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                </a>
+                                <span>-10%</span>
+                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                <div class="product-button">
+                                    {{-- <button>Thêm vào giỏ </button> --}}
+                                    <button type="button" uk-toggle="target: #modal-container" class="quick-view-button"
+                                        data-id="{{ $item->id }}">Xem
+                                        nhanh</button>
+                                </div>
+                            </div>
+                            <div class="product-review">
+                                <a href="{{ route('categories', $item->category->id) }}">
+                                    <span>{{ $item->category->name }}</span>
+                                </a>
+                                <div class="icon">
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                </div>
+                            </div>
+                            <a href="{{ route('productDetail', $item->id) }}"
+                                class="product-name">{{ $item->name }}</a>
+                            <div class="product-price">
+                                <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                @if (!empty($item->price_old))
+                                    <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                @endif
+                            </div>
+                            <div class="product-item-detail-gallery-items">
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <button class="icon-left-product uk-position-center-left uk-position-small uk-hidden-hover" href
+                uk-slider-item="previous">
+                <i>‹</i>
+            </button>
+            <button class="icon-right-product uk-position-center-right uk-position-small uk-hidden-hover" href
+                uk-slider-item="next">
+                <i>›</i>
+            </button>
+        </div>
+        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </section>
+
+    <section class="brand uk-container uk-container-large">
+        <div class="uk-grid brand-body" uk-grid>
+            <div class="uk-width-2-5 brand-left">
+                <div class="brand-left-image">
+                    <div class="title">
+                        <a href="#">
+                            <h2>Thương Hiệu</h2>
+                        </a>
+                        <hr />
+                    </div>
+                    <span class="sub-span-title">
+                        Các thương hiệu tin dùng chúng tôi
+                    </span>
+                </div>
+            </div>
+
+            <div class="uk-width-3-5 ">
+                <div class="uk-grid" uk-grid="true">
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/adidas.png') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/alexsander.png') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/gucci.jpg') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/nike.jpg') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
+                    </a>
+                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
+                        <img class="uk-transition-scale-up uk-transition-opaque"
+                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
+        uk-slider="autoplay: true; autoplay-interval: 3000;">
+        <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+            <div class="title">
+                <hr />
+                <a href="#">
+                    <h2>SẢN PHẨM PHỔ BIẾN</h2>
+                </a>
+                <hr />
+            </div>
+            <span class="sub-span-title">
+                Top các sản phẩm phổ biển nhất
+            </span>
+
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                @if (!empty($data['productPopulars']))
+                    @foreach ($data['productPopulars'] as $key => $item)
+                        <div class="product-item uk-width-1-4@m">
+                            <div class="product-image">
+                                <a href="{{ route('productDetail', $item->id) }}">
+                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                </a>
+                                <span>-10%</span>
+                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                <div class="product-button">
+                                    {{-- <button>Thêm vào giỏ </button> --}}
+                                    <button type="button" uk-toggle="target: #modal-container" class="quick-view-button"
+                                        data-id="{{ $item->id }}">Xem
+                                        nhanh</button>
+                                </div>
+                            </div>
+                            <div class="product-review">
+                                <a href="{{ route('categories', $item->category->id) }}">
+                                    <span>{{ $item->category->name }}</span>
+                                </a>
+                                <div class="icon">
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                </div>
+                            </div>
+                            <a href="{{ route('productDetail', $item->id) }}"
+                                class="product-name">{{ $item->name }}</a>
+                            <div class="product-price">
+                                <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                @if (!empty($item->price_old))
+                                    <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                @endif
+                            </div>
+                            <div class="product-item-detail-gallery-items">
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <button class="icon-left-product uk-position-center-left uk-position-small uk-hidden-hover" href
+                uk-slider-item="previous">
+                <i>‹</i>
+            </button>
+            <button class="icon-right-product uk-position-center-right uk-position-small uk-hidden-hover" href
+                uk-slider-item="next">
+                <i>›</i>
+            </button>
+        </div>
+        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </section>
+
+    <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
+        uk-slider="autoplay: true; autoplay-interval: 3000;">
+        <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+            <div class="title">
+                <hr />
+                <a href="#">
+                    <h2>{{ $data['categoryNewOne']->name }}</h2>
+                </a>
+                <hr />
+            </div>
+            <span class="sub-span-title">
+                Sản phẩm mới nhất của danh mục
+            </span>
+
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                @if (!empty($data['categoryNewOne']->products))
+                    @foreach ($data['categoryNewOne']->products as $key => $item)
+                        <div class="product-item uk-width-1-4@m">
+                            <div class="product-image">
+                                <a href="{{ route('productDetail', $item->id) }}">
+                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                </a>
+                                <span>-10%</span>
+                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                <div class="product-button">
+                                    {{-- <button>Thêm vào giỏ </button> --}}
+                                    <button type="button" uk-toggle="target: #modal-container" class="quick-view-button"
+                                        data-id="{{ $item->id }}">Xem
+                                        nhanh</button>
+                                </div>
+                            </div>
+                            <div class="product-review">
+                                <a href="{{ route('categories', $item->category->id) }}">
+                                    <span>{{ $item->category->name }}</span>
+                                </a>
+                                <div class="icon">
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                </div>
+                            </div>
+                            <a href="{{ route('productDetail', $item->id) }}"
+                                class="product-name">{{ $item->name }}</a>
+                            <div class="product-price">
+                                <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                @if (!empty($item->price_old))
+                                    <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                @endif
+                            </div>
+                            <div class="product-item-detail-gallery-items">
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <button class="icon-left-product uk-position-center-left uk-position-small uk-hidden-hover" href
+                uk-slider-item="previous">
+                <i>‹</i>
+            </button>
+            <button class="icon-right-product uk-position-center-right uk-position-small uk-hidden-hover" href
+                uk-slider-item="next">
+                <i>›</i>
+            </button>
+        </div>
+        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+    </section>
+
+    <!-- Modal xem nhanh-->
+    <div id="modal-container" class="uk-modal-container" uk-modal>
+        <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+            <input type="hidden" value="" class="modal-product-id">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body uk-grid" uk-grid>
+                <div class="uk-width-1-2">
+                    <img alt="" class="w-full rounded-lg" src=""
+                        style="width: 100%; max-height: 70vh; object-fit: cover;" />
+                    <div class="flex mt-4 space-x-2 box-image-url">
                     </div>
                 </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section>
-    <!-- End of Instagram Section -->
+
+                <div class="uk-width-1-2" style="overflow-y: hidden;">
+                    <h1 class="text-3xl font-bold"></h1>
+                    <p class="text-xl text-gray-600"></p>
+                    <div class="flex items-center mt-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-2xl font-bold modal-price"></span>
+                        <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
+                    </div>
+                    <p class="mt-4 text-gray-600 modal-description">
+
+                    </p>
+                    <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
+                        <div class="mt-4">
+                            <p class="font-bold">Màu sắc</p>
+                            <div class="flex space-x-2 mt-2 box-color">
+
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-bold">Size</p>
+                            <div class="flex space-x-2 mt-2 box-size">
+
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center space-x-4">
+                            <div class="flex items-center border border-gray-300 rounded-lg">
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
+                                <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
+                                    type="text" value="1" />
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
+                            </div>
+                            <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
+                                hàng</button>
+                            <button class="border border-gray-300 rounded-lg p-2">
+                                <i class="far fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-minus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
+                if (currentValue > 1) {
+                    $('.input-quantity-modal').val(currentValue - 1);
+                }
+            });
+
+            $('.btn-plus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
+                $('.input-quantity-modal').val(currentValue + 1);
+            });
+
+            $('.input-quantity-modal').on('input', function() {
+                var value = parseInt($(this).val());
+                if (isNaN(value) || value < 1) {
+                    $(this).val(1);
+                } else if (value > 9999) {
+                    $(this).val(9999);
+                }
+            });
+
+            // Đảm bảo rằng bạn sử dụng .on('click') để cập nhật khi người dùng chọn màu và size
+            $('.quick-view-button').on('click', function(e) {
+                e.preventDefault();
+
+                let productId = $(this).data('id');
+
+                $.ajax({
+                    url: `/quick-view/${productId}`,
+                    type: 'GET',
+                    success: function(response) {
+
+                        // Đổ dữ liệu vào modal
+                        $('#modal-container .uk-width-1-2 img').attr('src', response.image);
+                        $('#modal-container .modal-url').text(response.url);
+                        $('#modal-container .modal-product-id').val(response.id);
+                        $('#modal-container h1').text(response.name);
+                        $('#modal-container p.text-xl').text(response.category_name);
+                        $('#modal-container .product-price strong').text(response.price);
+                        $('#modal-container .modal-description').text(response.description);
+                        $('#modal-container .modal-price').text(response.price);
+                        $('#modal-container .modal-price-old').text(response.price_old);
+
+                        // Xóa các nội dung cũ
+                        $('.box-color').empty();
+                        $('.box-size').empty();
+
+                        // Cập nhật danh sách màu sắc và size
+                        response.variants.forEach(variant => {
+                            // Tạo nút màu sắc, thêm checkbox cho mỗi màu
+                            $('.box-color').append(
+                                `<label>
+                        <input type="radio" name="product-choose-color" value="${variant.color}" class="product-choose-color" />
+                        <span class="bg-gray-300 px-4 py-2 rounded-lg">${variant.color}</span>
+                    </label>`
+                            );
+
+                            // Cập nhật size theo màu khi nhấp nút màu
+                            $(`input[name="product-choose-color"][value="${variant.color}"]`)
+                                .on('change', function() {
+                                    $('.box-size').empty();
+                                    variant.sizes.forEach(size => {
+                                        $('.box-size').append(
+                                            `<label>
+                                <input type="radio" name="product-choose-size" value="${size}" class="product-choose-size" />
+                                <span class="bg-gray-200 px-4 py-2 rounded-lg">${size}</span>
+                            </label>`
+                                        );
+                                    });
+                                });
+                        });
+
+                        // Kích hoạt màu đầu tiên mặc định
+                        if (response.variants.length > 0) {
+                            const firstColor = response.variants[0];
+                            $(`input[name="product-choose-color"][value="${firstColor.color}"]`)
+                                .prop('checked', true);
+                            firstColor.sizes.forEach(size => {
+                                $('.box-size').append(
+                                    `<label>
+                                        <input type="radio" name="product-choose-size" value="${size}" class="product-choose-size" />
+                                        <span class="bg-gray-200 px-4 py-2 rounded-lg">${size}</span>
+                                    </label>`
+                                );
+                            });
+                        }
+
+                        if (response.images.length > 0) {
+                            const firstImage = response.images;
+
+                            firstImage.forEach(image => {
+                                $('.box-image-url').append(
+                                    `<img alt="Thumbnail 1" class="w-20 h-20 rounded-lg"
+                                    src="${image.image_url}"
+                                    style="width: 80px; height: 80px; object-fit: cover;" />`
+                                );
+                            });
+                        }
+
+                        // Hiển thị modal
+                        UIkit.modal('#modal-container').show();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Đã xảy ra lỗi khi tải sản phẩm:", error);
+                    }
+                });
+            });
+
+
+            $('#modal-container .form-modal-addToCart').on('submit', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            $('#modal-container .btnAddToCart').on('click', function(e) {
+                e.preventDefault(); // Ngừng hành động mặc định của nút
+
+                // Lấy giá trị từ form
+                var form = $('#modal-container .form-modal-addToCart');
+                var productId = $('#modal-container .modal-product-id').val();
+                var color = $('#modal-container input[name="product-choose-color"]:checked').val();
+                var size = $('#modal-container input[name="product-choose-size"]:checked').val();
+                var quantity = $('#modal-container input[name="quantity"]').val();
+
+                // Gửi dữ liệu qua AJAX
+                if (color == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Vui lòng chọn màu sắc',
+                        showConfirmButton: true,
+                    })
+
+                    return false;
+                }
+
+                if (size == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Vui lòng chọn size',
+                        showConfirmButton: true,
+                    })
+
+                    return false;
+                }
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: productId,
+                        color: color,
+                        size: size,
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: true,
+                            })
+                        } else {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: response.message,
+                                showConfirmButton: true,
+                            })
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Lỗi khi thêm vào giỏ hàng:", error);
+                    }
+                });
+            });
+        });
+
+        // Thực hiện khi nhấn nút giảm số lượng
+        $('.btn-minus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            // Giảm số lượng nếu > 1
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.val(quantity); // Cập nhật lại giá trị input
+                updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+            }
+        });
+
+        // Thực hiện khi nhấn nút tăng số lượng
+        $('.btn-plus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            quantity++; // Tăng số lượng
+            quantityInput.val(quantity); // Cập nhật lại giá trị input
+            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+        });
+
+        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateQuantity(cartId, quantity) {
+            $.ajax({
+                url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+                    cart_id: cartId,
+                    quantity: quantity
+                },
+                error: function(xhr, status, error) {
+                    console.error("Lỗi khi cập nhật số lượng:", error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            });
+        }
+    </script>
 @endsection

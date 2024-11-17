@@ -36,7 +36,7 @@
                     <a class="nav-link menu-link" href="{{ route('admin.dashboard') }}">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Bảng điều khiển</span>
                     </a>
-                </li> <!-- end Dashboard Menu -->
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarCategories" data-bs-toggle="collapse" role="button"
@@ -55,6 +55,25 @@
                             </li>
                         </ul>
                     </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#sidebarProduct_variants" data-bs-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="sidebarProduct_variants">
+                            <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí biến thể sản phẩm</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="sidebarProduct_variants">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.product_variants.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                        sách biến thể sản phẩm </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.product_variants.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                        Thêm mới biến thể sản phẩm </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </li>
 
                 <li class="nav-item">
@@ -75,7 +94,7 @@
                         </ul>
                     </div>
                 </li>
-{{-- voucher --}}
+                
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarVoucher" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarVoucher">
