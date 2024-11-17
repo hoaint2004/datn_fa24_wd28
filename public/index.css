@@ -1,0 +1,424 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #1b203d;
+    overflow: hidden;
+    font-family: system-ui;
+    overflow-y: auto; /* Cuộn theo chiều dọc */
+    overflow-x: hidden; /* Ẩn cuộn ngang */
+}
+
+.clearfix{
+    clear: both;
+}
+
+.logo{
+    margin: 0;
+    margin-left: 28px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 35px;
+}
+
+.logo span{
+    color: #f7403b;
+}
+
+.mySidenav{
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #272c4a;
+    overflow: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+}
+
+.mySidenav a{
+    padding: 15px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color:  #b6b0b0;
+    display: block;
+    transition: 0.3s;
+}
+
+.mySidenav a:hover{
+    color: #fff;
+    background-color: #1b203d;
+}
+
+#main{
+    transition: margin-left .5s;
+    padding: 16px;
+    margin-left: 300px;
+}
+
+.head{
+    padding: 20px;
+}
+
+.col-div-6{
+    width: 50%;
+    float: left;
+}
+
+.profile{
+    display: inline-block;
+    float: right;
+    width: 160px;
+}
+
+.pro-img{
+    float: left;
+    width: 40px;
+    margin-top: 5px;    
+}
+
+.profile p{
+    color: white;
+    font-weight: 500;
+    margin-left: 55px;
+    margin-top: 10px;
+    font-size: 13.5px;
+}
+
+.profile p span{
+    font-weight: 400;
+    font-size: 12px;
+    display: block;
+    color: #8e8b8b;
+}
+
+.nav2{
+    display: none;
+}
+
+.col-div-3{
+    width: 25%;
+    float: left;
+}
+
+.box{
+    width: 85%;
+    height: 100px;
+    background-color: #272c4a;
+    margin-left: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.box p{
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+    line-height: 30px;
+    padding-left: 10px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.box p span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #818181;
+}
+
+.box-icon{
+    font-size: 40px !important;
+    float: right;
+    margin-left: 20px;
+    /* margin-top: 35px !important; */
+    color:  #818181;
+    padding-right: 10px;
+}
+
+.col-div-8{
+    width: 70%;
+    float: left;
+}
+
+.col-div-4{
+    width: 30%;
+    float: left;
+}
+
+.content-box{
+    padding: 20px;
+}
+
+.content-box p{
+    margin: 0;
+    font-size: 20px;
+    color: #f7403b;
+}
+
+.content-box p span{
+    float: right;
+    background-color: #ddd;
+    padding: 3px 10px;
+    font-size: 15px;
+}
+
+.box-8, .box-4{
+    width: 96.5%;
+    background-color: #272c4a;
+    height: 330px;
+}
+
+.box-8{
+    margin-left: 10px;
+    width: 95%;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th{
+    text-align: left;
+    padding: 15px;
+    color: #ddd;
+    border-bottom: 1px solid #81818149;
+}
+
+.circle-wrap{
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill
+{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-wrap .circle .mask{
+    clip: rect(0px, 150px, 150px, 75px);
+}
+
+
+.circle-wrap .circle .fill{
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #f7403b;
+}
+
+.circle-wrap .circle .mask.full,
+.circle-wrap .circle .fill
+{
+    animation: fill ease-in-out 3s;
+    transform: rotate(126deg);
+}
+
+@keyframes fill{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(126deg);
+    }
+}
+
+.circle-wrap .inside-circle{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fff;
+    line-height: 130px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
+
+@media (max-width: 1200px) {
+    /* Thu hẹp sidebar và điều chỉnh phần chính */
+    .mySidenav {
+        width: 250px;
+    }
+
+    #main {
+        margin-left: 250px;
+    }
+
+    /* Thu nhỏ font logo */
+    .logo {
+        font-size: 30px;
+    }
+
+    #main {
+        margin-left: 250px;
+    }
+
+    /* Điều chỉnh logo cho phù hợp */
+    .logo {
+        font-size: 30px;
+    }
+
+    /* Điều chỉnh chiều rộng các cột */
+    .col-div-3 {
+        width: 50%;
+    }
+
+    .col-div-8 {
+        width: 65%;
+    }
+
+    .col-div-4 {
+        width: 35%;
+    }
+
+    /* Giảm kích thước font của nội dung trong box */
+    .box p {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Sidebar nhỏ hơn và phần chính sẽ mở rộng hơn */
+    .mySidenav {
+        width: 200px;
+    }
+
+    #main {
+        margin-left: 200px;
+    }
+
+    /* Thu nhỏ thêm logo */
+    .logo {
+        font-size: 25px;
+    }
+
+    /* Ẩn hoặc thu nhỏ các phần tử không cần thiết */
+    .icon-a {
+        font-size: 18px;
+    }
+    /* Điều chỉnh cột để chiếm toàn bộ chiều rộng khi cần thiết */
+    .col-div-3, .col-div-6 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .col-div-8, .col-div-4 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Điều chỉnh font và kích thước bảng */
+    .box p {
+        font-size: 25px;
+    }
+
+    table {
+        font-size: 15px;
+    }
+}
+@media (max-width: 768px) {
+    /* Thu nhỏ thanh sidebar */
+    .mySidenav {
+        width: 70px; /* Thu nhỏ sidebar */
+    }
+
+    #main {
+        margin-left: 70px;
+    }
+
+    /* Ẩn các chi tiết logo và giữ chỉ một chữ cái */
+    .logo {
+        font-size: 20px;
+    }
+
+    .logo span {
+        margin-left: -10px;
+    }
+
+    /* Thu nhỏ các biểu tượng và văn bản */
+    .icon-a {
+        font-size: 14px;
+    }
+
+    .icons {
+        font-size: 20px;
+    }
+
+    /* Điều chỉnh các khối box */
+    .col-div-3 {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .col-div-8,
+    .col-div-4 {
+        width: 100%;
+    }
+
+    .profile {
+        width: 100px;
+    }
+
+    /* Điều chỉnh bảng trong nội dung */
+    table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ẩn sidebar và cho phép menu hiện khi nhấn vào biểu tượng */
+    .mySidenav {
+        width: 0; /* Ẩn sidebar */
+        visibility: hidden;
+    }
+
+    #main {
+        margin-left: 0;
+    }
+
+    /* Hiển thị menu khi nhấn vào biểu tượng */
+    .nav, .nav2 {
+        display: block;
+    }
+
+    .nav2 {
+        display: none;
+    }
+    .profile {
+        display: none;
+    }
+
+    /* Thu nhỏ các khối box */
+    .box {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .box p {
+        font-size: 25px;
+    }
+}
