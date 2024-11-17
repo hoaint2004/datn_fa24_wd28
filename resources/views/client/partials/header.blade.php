@@ -35,8 +35,9 @@
                 <!-- Phần logo ở giữa -->
                 <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
                     <a href="">
-                        <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
-                            alt="" />
+                        <h1 style="font-size: 35px;">Wina Shoes</h1>
+                        {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
+                            alt="" /> --}}
                     </a>
                 </div>
 
@@ -54,13 +55,13 @@
                         class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
                         <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                             @if (Auth::check())
-                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                                <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
                                 <a class="user-header" href="{{ route('logout') }}">Logout</a>
                             @else
-                            <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
-                            <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
+                                <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
+                                <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
                             @endif
-                            </ul>
+                        </ul>
                     </div>
 
                     <div>
@@ -208,7 +209,7 @@
                 <!-- Menu chính -->
                 <div class="navbar-menu alo">
                     <ul class="flex justify-center m-0 p-0 gap-8 uk-subnav">
-                        <li><a href="{{ route('home')}}">Trang chủ</a></li>
+                        <li><a href="{{ route('home') }}">Trang chủ</a></li>
 
                         <!-- Danh mục sản phẩm với menu con và dropbar -->
                         <li class="uk-parent">
@@ -299,7 +300,7 @@
                         </li>
 
                         <li><a href="#">Xu hướng thời trang</a></li>
-                        <li><a href="{{ route('contact')}}">Liên hệ</a></li>
+                        <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                     </ul>
                 </div>
             </nav>
@@ -310,10 +311,10 @@
                 <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
                 <ul class="uk-nav uk-nav-default">
                     <li>
-                        <a href="{{ route('home')}}">Trang chủ</a>
+                        <a href="{{ route('home') }}">Trang chủ</a>
                     </li>
                     <li>
-                        <a href="{{route('category')}}">Danh mục sản phẩm</a>
+                        <a href="{{ route('category') }}">Danh mục sản phẩm</a>
                     </li>
                     <li>
                         <a href="#">Sản phẩm nổi bật</a>
@@ -322,7 +323,7 @@
                         <a href="#">Xu hướng thời trang</a>
                     </li>
                     <li>
-                        <a href="{{ route('contact')}}">Liên hệ</a>
+                        <a href="{{ route('contact') }}">Liên hệ</a>
                     </li>
                 </ul>
             </div>
@@ -330,4 +331,5 @@
 
     </header>
 </body>
+
 </html>
