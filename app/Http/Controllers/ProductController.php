@@ -18,7 +18,7 @@ class ProductController extends Controller
     }
 
     public function cart(){
-
+        return view('client.cart');
     }
     
     public function order(){

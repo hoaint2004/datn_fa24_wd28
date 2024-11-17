@@ -24,9 +24,22 @@ class RegisterRequest extends FormRequest
         return [
             'fullname' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:user', // Giả sử đăng ký chỉ có vai trò user
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[\w\.-]+@(?:gmail\.com|fpt\.edu\.vn)$/i',
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'unique:users',
+                'regex:/^(03|09|05|08)\d{8}$/', // Đầu số 03, 09, 05, hoặc 08 và 8 chữ số tiếp theo
+            ],
+            'password' => 'required|string|min:8',
+            'password_confirmation' => 'required|string|same:password', // Xác nhận mật khẩu trùng với mật khẩu
         ];
     }
 
@@ -36,14 +49,17 @@ class RegisterRequest extends FormRequest
             'fullname.required' => 'Họ và tên là bắt buộc.',
             'username.required' => 'Tên đăng nhập là bắt buộc.',
             'username.unique' => 'Tên đăng nhập đã được sử dụng.',
-            'email.required' => 'Email là bắt buộc.',
-            'email.email' => 'Email không hợp lệ.',
-            'email.unique' => 'Email đã được sử dụng.',
-            'password.required' => 'Mật khẩu là bắt buộc.',
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.unique' => 'Email này đã được đăng ký.',
+            'email.regex' => 'Email không hợp lệ.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'phone.regex' => 'Số điện thoại không hợp lệ.',
+            'phone.unique' => 'Số điện thoại này đã được đăng ký.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'password.confirmed' => 'Mật khẩu xác nhận không khớp.',
-            'role.required' => 'Vai trò là bắt buộc.',
-            'role.in' => 'Vai trò không hợp lệ.',
+            'password_confirmation.required' => 'Vui lòng nhập lại mật khẩu.',
+            'password_confirmation.same' => 'Mật khẩu xác nhận không khớp với mật khẩu đã nhập.',
         ];
     }
 }
