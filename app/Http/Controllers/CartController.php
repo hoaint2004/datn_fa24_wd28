@@ -64,7 +64,6 @@ class CartController extends Controller
                 $cartItem->quantity = $newQuantity;
                 $cartItem->price = $product->price * $newQuantity;
                 $cartItem->save();
-
             } else {
                 // Nếu chưa có variant này trong giỏ hàng, thêm mới
                 $cart = Cart::create([
@@ -80,7 +79,6 @@ class CartController extends Controller
 
             DB::commit();
             return response()->json(['status' => true, 'message' => 'Sản phẩm được thêm vào giỏ hàng thành công', 'data' => $cartItem ?? $cart]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -90,25 +88,43 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        try {
-            $cartItem = Cart::where('user_id', auth()->id() ?? 0)
-                ->where('id', $request->cart_id)
-                ->first();
+        $cartItem = Cart::find($request->cart_id);
 
-            if ($cartItem) {
-                $cartItem->quantity = $request->quantity;
-                $cartItem->save();
+        if ($cartItem) {
+            // Cập nhật số lượng
+            $cartItem->quantity = $request->quantity;
+            $cartItem->save();
 
-                return response()->json(['success' => true]);
-            }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            // Tính giá mới cho sản phẩm
+            $newProductPrice = $cartItem->product->price * $cartItem->quantity;
+
+            // Tính tổng tiền của giỏ hàng
+            $totalCartPrice = Cart::with('product')->get()->reduce(function ($carry, $item) {
+                return $carry + ($item->product->price * $item->quantity);
+            }, 0);
+
             return response()->json([
-                'success' => false,
-                'message' => 'Lỗi khi cập nhật số lượng',
-                'error' => $e->getMessage()
-            ], 400);
+                'success' => true,
+                'new_product_price' => $newProductPrice,
+                'total_cart_price' => $totalCartPrice,
+            ]);
         }
 
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy sản phẩm trong giỏ hàng.',
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $cartItem = Cart::where('user_id', auth()->user()->id ?? 0)->find($id);
+
+        if ($cartItem) {
+            $cartItem->delete();
+            return redirect()->route('showCart')->with('status', 'Xóa sản phẩm trong giỏ hàng thành công');
+        }
+
+        return redirect()->route('showCart')->with('status', 'Không tìm thấy sản phẩm trong giỏ hàng.');
     }
 }
