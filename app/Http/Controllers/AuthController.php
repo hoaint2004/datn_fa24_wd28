@@ -61,7 +61,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
-                'role' => User::TYPE_MEMBER,
+                'role' => User::TYPE_MEMBER
             ]);
 
             DB::commit();

@@ -43,7 +43,7 @@
             @enderror
 
             <div class="input-field">
-                <input type="phone" value="{{ old('phone') }}" name="phone">
+                <input type="text" value="{{ old('phone') }}" name="phone">
                 <label for=""> Số Điện Thoại</label>
             </div>
             @error('phone')
