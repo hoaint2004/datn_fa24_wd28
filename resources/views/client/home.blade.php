@@ -672,10 +672,10 @@
                         </div>
                         <div class="mt-4 flex items-center space-x-4">
                             <div class="flex items-center border border-gray-300 rounded-lg">
-                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus">-</button>
-                                <input name="quantity" class="w-12 h-10 text-center border-none quantity-selector-input"
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
+                                <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
                                     type="text" value="1" />
-                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus">+</button>
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
                             </div>
                             <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
                                 hàng</button>
@@ -696,19 +696,19 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('.quantity-selector-button-minus').on('click', function() {
-                var currentValue = parseInt($('.quantity-selector-input').val());
+            $('.btn-minus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
                 if (currentValue > 1) {
-                    $('.quantity-selector-input').val(currentValue - 1);
+                    $('.input-quantity-modal').val(currentValue - 1);
                 }
             });
 
-            $('.quantity-selector-button-plus').on('click', function() {
-                var currentValue = parseInt($('.quantity-selector-input').val());
-                $('.quantity-selector-input').val(currentValue + 1);
+            $('.btn-plus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
+                $('.input-quantity-modal').val(currentValue + 1);
             });
 
-            $('.quantity-selector-input').on('input', function() {
+            $('.input-quantity-modal').on('input', function() {
                 var value = parseInt($(this).val());
                 if (isNaN(value) || value < 1) {
                     $(this).val(1);
@@ -727,7 +727,7 @@
                     url: `/quick-view/${productId}`,
                     type: 'GET',
                     success: function(response) {
-                        
+
                         // Đổ dữ liệu vào modal
                         $('#modal-container .uk-width-1-2 img').attr('src', response.image);
                         $('#modal-container .modal-url').text(response.url);
@@ -785,7 +785,7 @@
 
                         if (response.images.length > 0) {
                             const firstImage = response.images;
-                            
+
                             firstImage.forEach(image => {
                                 $('.box-image-url').append(
                                     `<img alt="Thumbnail 1" class="w-20 h-20 rounded-lg"
@@ -821,7 +821,7 @@
                 var quantity = $('#modal-container input[name="quantity"]').val();
 
                 // Gửi dữ liệu qua AJAX
-                if(color == null) {
+                if (color == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -832,7 +832,7 @@
                     return false;
                 }
 
-                if(size == null) {
+                if (size == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -847,14 +847,14 @@
                     url: form.attr('action'),
                     method: 'POST',
                     data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'), 
+                        _token: $('meta[name="csrf-token"]').attr('content'),
                         id: productId,
                         color: color,
                         size: size,
                         quantity: quantity
                     },
                     success: function(response) {
-                        if(response.status) {
+                        if (response.status) {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
@@ -876,5 +876,47 @@
                 });
             });
         });
+
+        // Thực hiện khi nhấn nút giảm số lượng
+        $('.btn-minus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            // Giảm số lượng nếu > 1
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.val(quantity); // Cập nhật lại giá trị input
+                updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+            }
+        });
+
+        // Thực hiện khi nhấn nút tăng số lượng
+        $('.btn-plus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            quantity++; // Tăng số lượng
+            quantityInput.val(quantity); // Cập nhật lại giá trị input
+            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+        });
+
+        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateQuantity(cartId, quantity) {
+            $.ajax({
+                url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+                    cart_id: cartId,
+                    quantity: quantity
+                },
+                error: function(xhr, status, error) {
+                    console.error("Lỗi khi cập nhật số lượng:", error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            });
+        }
     </script>
 @endsection
