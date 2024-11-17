@@ -1,0 +1,210 @@
+@import "./_mixin.scss";
+@import "./font.scss";
+
+.filter-product {
+  .filter-top {
+    text-align: center;
+    margin-bottom: 60px;
+    .title-category {
+      font-family: $font-spectral;
+      font-size: 22px;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: $color-p;
+    }
+    .content-category {
+      text-align: center;
+      font-size: 13px;
+      color: $color-p;
+    }
+  }
+
+  .sidebar {
+    height: 550px;
+    overflow-y: scroll;
+    .sidebar-category,
+    .sidebar-size,
+    .sidebar-color,
+    .sidebar-price {
+      margin: 0 !important;
+      padding-bottom: 5px;
+      border: 1px solid #f8f8f8;
+      .uk-accordion-title {
+        font-size: 12.75px;
+        padding: 12px 20px 12px 15px;
+        background-color: #f8f8f8;
+        font-weight: $font-weight-bold;
+        color: $color-p;
+        text-transform: uppercase;
+        transition: all 0.8s;
+        &:hover {
+          color: $color;
+        }
+      }
+
+      .uk-accordion-content {
+        padding: 25px 0 45px 15px;
+        ul {
+          .sidebar-content-right {
+            color: $color-p;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            .custom-number {
+              color: #999;
+              padding-right: 30px;
+            }
+            .sidebar-color-body {
+              display: flex;
+              align-items: center;
+              .color-accordion {
+                background-color: red;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+        input[type="checkbox"] {
+          display: none;
+        }
+        /* Tạo giao diện tùy chỉnh cho checkbox */
+        input[type="checkbox"] + label {
+          position: relative;
+          padding-left: 30px; /* Khoảng cách cho biểu tượng checkbox */
+          cursor: pointer;
+          display: inline-block;
+        }
+        /* Tạo hình vuông cho checkbox */
+        input[type="checkbox"] + label:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 20px;
+          height: 20px;
+          border: 2px solid #333; /* Màu viền */
+          border-radius: 4px; /* Làm tròn góc */
+          background-color: #fff; /* Màu nền */
+        }
+        /* Khi checkbox được chọn */
+        input[type="checkbox"]:checked + label:before {
+          background-color: #333333; /* Màu nền khi được chọn */
+          border-color: #333333; /* Màu viền khi được chọn */
+        }
+        /* Biểu tượng tick khi checkbox được chọn */
+        input[type="checkbox"]:checked + label:after {
+          content: "\2713"; /* Ký tự dấu tick */
+          position: absolute;
+          left: 5px;
+          top: -2px;
+          font-size: 16px;
+          color: white; /* Màu tick */
+        }
+      }
+    }
+
+    .sidebar-price {
+      .sidebar-price-body {
+        display: flex;
+        gap: 15px;
+        margin-right: 30px;
+        .input-container {
+          position: relative;
+          border: 1px solid #999999;
+          border-radius: 5px;
+          .label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: white;
+            color: $color-p;
+            font-size: 14px;
+            padding: 0 5px;
+          }
+          .input-field {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 14px;
+            color: $color-p;
+          }
+          :focus {
+            border-color: #000000;
+          }
+        }
+        :focus-within {
+          border-color: #000000;
+        }
+      }
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .collection-right {
+    .product-list-filter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+     
+      .show-product {
+        color: $color-p;
+        font-size: 16px;
+      }
+      .shop-sort-by {
+        .shop-sort-by {
+          display: flex;
+          align-items: center;
+          .uk-form-label {
+            color: $color-p;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin: 0;
+          }
+          .uk-form-controls {
+            .uk-select {
+              border: none;
+              box-shadow: none;
+              color: $color-p;
+              font-weight: $font-weight-bold;
+              background-image: none;
+              &:hover {
+                cursor: pointer;
+              }
+              .option-filter {
+                color: $color-p;
+                padding: 10px;
+                font-size: 14px;
+                
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.uk-accordion-title::before {
+  content: "\f054";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: #222;
+  background-image: none;
+}
+.uk-open > .uk-accordion-title::before {
+  content: "\f078";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 8px;
+  color: #222;
+  background-image: none;
+}

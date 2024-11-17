@@ -5,1603 +5,459 @@
 @endsection
 
 @section('content')
-    <!-- Start of Breadcrumbs -->
-    <div class="breadcrumb-section bgc-offset mb-full">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-12 col-md-12">
-                    <nav class="breadcrumb">
-                        <a class="breadcrumb-item" href="/">Trang chủ</a>
-                        <span class="breadcrumb-item active">Sản Phẩm</span>
-                    </nav>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div>
-    <!-- End of Breadcrumbs -->
+    @include('client.components.breadcrumb', [
+        'title' => 'Sản phẩm',
+    ])
 
-    <!-- Start of Main Content Wrapper -->
-    <div id="content" class="main-content-wrapper">
+    <section class="filter-product uk-container uk-container-large">
+        <div class="filter-top uk-container uk-container-small">
+            <h2 class="title-category">{{ $data['categoryById']->name }}</h2>
+        </div>
+        <div class="uk-grid" uk-grid>
 
-        <!-- Start of Products Wrapper -->
-        <div class="products-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-9 order-1 order-md-1 order-lg-2">
-                        <main id="primary" class="site-main">
-                            <div class="shop-wrapper">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12">
-                                        <h1>Sản Phẩm</h1>
-                                        <div class="shop-toolbar">
-                                            <div class="toolbar-inner">
-                                                <div class="product-view-mode">
-                                                    <ul role="tablist" class="nav shop-item-filter-list">
-                                                        <li role="presentation" class="active"><a href="#grid"
-                                                                aria-controls="grid" role="tab" data-bs-toggle="tab"
-                                                                class="active show" aria-selected="true"><i
-                                                                    class="ion-md-grid"></i></a></li>
-                                                        <li role="presentation"><a href="#list" aria-controls="list"
-                                                                role="tab" data-bs-toggle="tab"><i
-                                                                    class="ion-md-list"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="toolbar-amount">
-                                                    <span>Showing 10 to 18 of 27</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-select-box">
-                                                <div class="product-sort">
-                                                    <p>Sort By:</p>
-                                                    <select class="nice-select" name="sortby">
-                                                        <option value="trending">Relevance</option>
-                                                        <option value="sales">Name (A - Z)</option>
-                                                        <option value="sales">Name (Z - A)</option>
-                                                        <option value="rating">Price (Low > High)</option>
-                                                        <option value="date">Rating (Lowest)</option>
-                                                        <option value="price-asc">Model (A - Z)</option>
-                                                        <option value="price-asc">Model (Z - A)</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+            <div class="sidebar uk-width-1-4">
+                <ul uk-accordion="multiple: true">
+
+                    <li class="uk-open sidebar-category">
+                        <a class="uk-accordion-title" href>Danh mục</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                @if (!empty($data['categories']))
+                                    @foreach ($data['categories'] as $item)
+                                        <li class="sidebar-content-right"><input type="checkbox" id="giay1" /><label
+                                                for="giay1">{{ $item->name }}</label> <span
+                                                class="custom-number">({{ $item->products->count() }})</span></li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="uk-open sidebar-size">
+                        <a class="uk-accordion-title" href>Kích thước</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay10" /><label
+                                        for="giay10">42</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay11" /><label
+                                        for="giay11">41</label> <span class="custom-number">(10)</span></li>
+                                <li class="sidebar-content-right"><input type="checkbox" id="giay12" /><label
+                                        for="giay12">40</label> <span class="custom-number">(10)</span></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="uk-open sidebar-color">
+                        <a class="uk-accordion-title" href>Màu sắc</a>
+                        <div class="uk-accordion-content">
+                            <ul>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay17" />
+                                        <label for="giay17">Xanh</label>
+                                        <div class="color-accordion">
                                         </div>
                                     </div>
-                                </div> <!-- end of row -->
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12">
-                                        <div class="shop-products-wrapper">
-                                            <div class="tab-content">
-                                                <div id="grid" class="tab-pane anime-tab active show" role="tabpanel">
-                                                    <div class="row">
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-sale">-20%</div>
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-1.jpg"
-                                                                                alt="Compete Track Tote"
-                                                                                title="Compete Track Tote">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare" href="#"
-                                                                                title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Studio Design</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Compete Track
-                                                                                Tote</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-old">$54.65</span>
-                                                                            <span class="price-new">$43.72</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-9.jpg"
-                                                                                alt="Wayfarer Messenger Bag"
-                                                                                title="Wayfarer Messenger Bag">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Studio Design</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Wayfarer
-                                                                                Messenger Bag</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$65.40</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-2.jpg"
-                                                                                alt="Fusion Backpack"
-                                                                                title="Fusion Backpack">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Fusion
-                                                                                Backpack</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$55.70</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-sale">-7%</div>
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-10.jpg"
-                                                                                alt="Strive Shoulder Pack"
-                                                                                title="Strive Shoulder Pack">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Strive Shoulder
-                                                                                Pack</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-old">$76.40</span>
-                                                                            <span class="price-new">$71.05</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-3.jpg"
-                                                                                alt="Rival Field Messenger 6"
-                                                                                title="Rival Field Messenger 6">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Rival Field
-                                                                                Messenger 6</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$54.40</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-11.jpg"
-                                                                                alt="Rival Field Messenger"
-                                                                                title="Rival Field Messenger">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Rival Field
-                                                                                Messenger</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$54.50</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-4.jpg"
-                                                                                alt="Rival Field Messenger"
-                                                                                title="Rival Field Messenger">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Rival Field
-                                                                                Messenger</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$67.50</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-12.jpg"
-                                                                                alt="Crown Summit Backpack"
-                                                                                title="Crown Summit Backpack">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Crown Summit
-                                                                                Backpack</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$78.90</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-
-                                                        <article class="product-layout col-6 col-sm-6 col-md-4 col-lg-4">
-                                                            <div class="product-thumb">
-                                                                <div class="product-inner">
-                                                                    <div class="product-image">
-                                                                        <div class="label-product label-new">New</div>
-                                                                        <a href="single-product.html">
-                                                                            <img src="assets/images/products/new/product-5.jpg"
-                                                                                alt="Crown Summit Backpack"
-                                                                                title="Crown Summit Backpack">
-                                                                        </a>
-                                                                        <div class="action-links">
-                                                                            <a class="action-btn btn-cart" href="#"
-                                                                                title="Add to Cart"><i
-                                                                                    class="pe-7s-shopbag"></i></a>
-                                                                            <a class="action-btn btn-wishlist"
-                                                                                href="#" title="Add to Wishlist"><i
-                                                                                    class="pe-7s-like"></i></a>
-                                                                            <a class="action-btn btn-compare"
-                                                                                href="#" title="Add to Compare"><i
-                                                                                    class="pe-7s-refresh-2"></i></a>
-                                                                            <a class="action-btn btn-quickview"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#product_quick_view"
-                                                                                href="#" title="Quick View"><i
-                                                                                    class="pe-7s-search"></i></a>
-                                                                        </div>
-                                                                    </div> <!-- end of product-image -->
-
-                                                                    <div class="product-caption">
-                                                                        <div
-                                                                            class="product-meta d-flex justify-content-between align-items-center">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <h4 class="product-name"><a
-                                                                                href="single-product.html">Crown Summit
-                                                                                Backpack</a></h4>
-                                                                        <p class="product-price">
-                                                                            <span class="price-new">$78.90</span>
-                                                                        </p>
-                                                                    </div><!-- end of product-caption -->
-                                                                </div><!-- end of product-inner -->
-                                                            </div><!-- end of product-thumb -->
-                                                        </article> <!-- end of product-layout -->
-                                                    </div>
-                                                </div>
-                                                <div id="list" class="tab-pane anime-tab" role="tabpanel">
-                                                    <div class="row">
-                                                        <div class="col-12 col-sm-12 col-md-12">
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-sale">-20%
-                                                                            </div>
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-1.jpg"
-                                                                                    title="Compete Track Tote"
-                                                                                    alt="Compete Track Tote">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Studio Design</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Compete Track
-                                                                                    Tote</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-old">$54.65</span>
-                                                                                <span class="price-new">$43.72</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-9.jpg"
-                                                                                    title="Wayfarer Messenger Bag"
-                                                                                    alt="Wayfarer Messenger Bag">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Studio Design</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Wayfarer
-                                                                                    Messenger Bag</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$65.40</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-2.jpg"
-                                                                                    title="Fusion Backpack"
-                                                                                    alt="Fusion Backpack">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Fusion
-                                                                                    Backpack</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$55.70</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-sale">-7%</div>
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-10.jpg"
-                                                                                    title="Strive Shoulder Pack"
-                                                                                    alt="Strive Shoulder Pack">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Studio Design</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Strive
-                                                                                    Shoulder Pack</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-old">$76.40</span>
-                                                                                <span class="price-new">$71.05</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-3.jpg"
-                                                                                    title="Rival Field Messenger 6"
-                                                                                    alt="Rival Field Messenger 6">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Rival Field
-                                                                                    Messenger 6</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$54.40</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-11.jpg"
-                                                                                    title="Rival Field Messenger"
-                                                                                    alt="Rival Field Messenger">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Rival Field
-                                                                                    Messenger</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$54.50</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-4.jpg"
-                                                                                    title="Rival Field Messenger"
-                                                                                    alt="Rival Field Messenger">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Rival Field
-                                                                                    Messenger</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$67.50</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-12.jpg"
-                                                                                    title="Crown Summit Backpack"
-                                                                                    alt="Crown Summit Backpack">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Crown Summit
-                                                                                    Backpack</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$78.90</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-
-                                                            <article class="product-layout product-list">
-                                                                <div class="product-thumb">
-                                                                    <div class="product-inner d-flex align-items-center">
-                                                                        <div
-                                                                            class="product-image mb-4 mb-md-0 me-md-4 me-xl-5">
-                                                                            <div class="label-product label-new">New</div>
-                                                                            <a href="single-product.html">
-                                                                                <img src="assets/images/products/new/product-5.jpg"
-                                                                                    title="Crown Summit Backpack"
-                                                                                    alt="Crown Summit Backpack">
-                                                                            </a>
-                                                                            <div class="action-links">
-                                                                                <a class="action-btn btn-cart"
-                                                                                    href="#" title="Add to Cart"><i
-                                                                                        class="pe-7s-shopbag"></i></a>
-                                                                                <a class="action-btn btn-wishlist"
-                                                                                    href="#"
-                                                                                    title="Add to Wishlist"><i
-                                                                                        class="pe-7s-like"></i></a>
-                                                                                <a class="action-btn btn-compare"
-                                                                                    href="#"
-                                                                                    title="Add to Compare"><i
-                                                                                        class="pe-7s-refresh-2"></i></a>
-                                                                                <a class="action-btn btn-quickview"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#product_quick_view"
-                                                                                    href="#" title="Quick View"><i
-                                                                                        class="pe-7s-search"></i></a>
-                                                                            </div>
-                                                                        </div> <!-- end of product-image -->
-
-                                                                        <div class="product-caption flex-grow-1">
-                                                                            <div class="product-manufacturer">
-                                                                                <a href="#">Graphic Corner</a>
-                                                                            </div>
-                                                                            <h4 class="product-name">
-                                                                                <a href="single-product.html">Crown Summit
-                                                                                    Backpack</a>
-                                                                            </h4>
-                                                                            <div class="product-ratings">
-                                                                                <div class="rating-box">
-                                                                                    <ul class="rating d-flex">
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline"></i>
-                                                                                        </li>
-                                                                                        <li><i
-                                                                                                class="ion ion-md-star-outline disabled"></i>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="product-price">
-                                                                                <span class="price-new">$78.90</span>
-                                                                            </p>
-                                                                            <div class="product-des">
-                                                                                <p>Nunc facilisis sagittis ullamcorper.
-                                                                                    Proin lectus ipsum, gravida et mattis
-                                                                                    vulputate, tristique ut lectus. Sed et
-                                                                                    lorem nunc. Vestibulum ante ipsum primis
-                                                                                    in faucibus orci luctus et ultrices
-                                                                                    posuere cubilia Curae; Aenean eleifend
-                                                                                    ..</p>
-                                                                            </div>
-                                                                        </div><!-- end of product-caption -->
-                                                                    </div><!-- end of product-inner -->
-                                                                </div><!-- end of product-thumb -->
-                                                            </article> <!-- end of product-layout -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- end of shop-products-wrapper -->
-
-                                        <div class="pagination-area">
-                                            <div class="row align-items-center">
-                                                <div class="col-12 order-2 col-sm-12 col-md-6 order-md-1 col-lg-6">
-                                                    <div
-                                                        class="page-amount d-flex justify-content-center justify-content-md-start">
-                                                        <p>Showing 10 to 18 of 27 (3 Pages)</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 order-1 col-sm-12 col-md-6 order-md-2 col-lg-6">
-                                                    <ul class="pagination">
-                                                        <li class="page-item"><a href="#" class="page-link"><i
-                                                                    class="fa fa-angle-left"></i> <span>Previous</span></a>
-                                                        </li>
-                                                        <li class="page-item"><a href="#" class="page-link">1</a>
-                                                        </li>
-                                                        <li class="page-item active"><span class="page-link">2</span></li>
-                                                        <li class="page-item"><a href="#" class="page-link">3</a>
-                                                        </li>
-                                                        <li class="page-item"><a href="#"
-                                                                class="page-link"><span>Next</span> <i
-                                                                    class="fa fa-angle-right"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div> <!-- end of pagination-area -->
-                                    </div>
-                                </div> <!-- end of row -->
-                            </div> <!-- end of shop-wrapper -->
-                        </main> <!-- end of #primary -->
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-2 order-md-2 order-lg-1">
-                        <aside id="secondary" class="widget-area">
-                            <div class="sidebar-widget list-categories-widget">
-                                <h2 class="widgettitle">Shop</h2>
-                                <div class="cat-accordion">
-                                    <div class="card">
-                                        <div class="card-header" id="headingOne">
-                                            <h5 class="mb-0">
-                                                <button type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseOne" aria-expanded="false"
-                                                    aria-controls="collapseOne">Art Gallery</button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
-                                            <div class="card-body">
-                                                <ul class="cat-sub-menu">
-                                                    <li><a href="#">blandit vehicula</a></li>
-                                                    <li><a href="#">Praesent molestie</a></li>
-                                                    <li><a href="#">sagittis ipsum</a></li>
-                                                </ul>
-                                            </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay18" />
+                                        <label for="giay18">Xanh</label>
+                                        <div class="color-accordion">
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                            <h5 class="mb-0">
-                                                <button type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseTwo" aria-expanded="false"
-                                                    aria-controls="collapseTwo">Rugs</button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-                                            <div class="card-body">
-                                                <ul class="cat-sub-menu">
-                                                    <li><a href="#">Fire Pits</a></li>
-                                                    <li><a href="#">Garden Accents</a></li>
-                                                    <li><a href="#">Outdoor Fountains</a></li>
-                                                </ul>
-                                            </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+                                <li class="sidebar-content-right">
+                                    <div class="sidebar-color-body">
+                                        <input type="checkbox" id="giay19" />
+                                        <label for="giay19">Xanh</label>
+                                        <div class="color-accordion">
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h5 class="mb-0">
-                                                <button type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                                    aria-controls="collapseThree">Accessories</button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
-                                            <div class="card-body">
-                                                <ul class="cat-sub-menu">
-                                                    <li><a href="#">Quard Trousers</a></li>
-                                                    <li><a href="#">Maroon Detail</a></li>
-                                                    <li><a href="#">Check Trousers</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingFour">
-                                            <h5 class="mb-0">
-                                                <button type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                                    aria-controls="collapseFour">Clothing</button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour">
-                                            <div class="card-body">
-                                                <ul class="cat-sub-menu">
-                                                    <li><a href="#">Moleskin Blazers</a></li>
-                                                    <li><a href="#">Wool Check Blazers</a></li>
-                                                    <li><a href="#">Combined Jackets</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingFive">
-                                            <h5 class="mb-0">
-                                                <button type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseFive" aria-expanded="false"
-                                                    aria-controls="collapseFive">Handbag</button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive">
-                                            <div class="card-body">
-                                                <ul class="cat-sub-menu">
-                                                    <li><a href="#">Moleskin Blazers</a></li>
-                                                    <li><a href="#">Wool Check Blazers</a></li>
-                                                    <li><a href="#">Biker Jackets</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <span class="custom-number">(10)</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="uk-open sidebar-price">
+                        <a class="uk-accordion-title" href="#">Giá</a>
+                        <div class="uk-accordion-content sidebar-price-body">
+                            <div class="input-container">
+                                <span class="label">Từ</span>
+                                <input type="text" placeholder="Nhập giá" class="input-field" />
+
+                            </div>
+                            <div class="input-container">
+                                <span class="label">Đến</span>
+                                <input type="text" placeholder="Nhập giá" class="input-field" />
+
                             </div>
 
-                            <div class="sidebar-widget list-widget">
-                                <h2 class="widgettitle">Categories</h2>
-                                <div class="list-widget-wrapper">
-                                    <div class="list-group">
-                                        <a href="#">Shoes (198)</a>
-                                        <a href="#">backpacks (70)</a>
-                                        <a href="#">Accessories (14)</a>
-                                        <a href="#">Dresses (10)</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of sidebar-widget -->
+                        </div>
+                    </li>
 
-                            <div class="sidebar-widget list-widget">
-                                <h2 class="widgettitle">Brands</h2>
-                                <div class="list-widget-wrapper">
-                                    <div class="list-group">
-                                        <a href="#">Graphic Corner (14)</a>
-                                        <a href="#">Studio Design (14)</a>
-                                        <a href="#">Tommy Hilfiger (14)</a>
-                                        <a href="#">Versace (14)</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of sidebar-widget -->
+                </ul>
+            </div>
 
-                            <div class="sidebar-widget list-widget">
-                                <h2 class="widgettitle">Price</h2>
-                                <div class="list-widget-wrapper">
-                                    <div class="list-group">
-                                        <a href="#">$43.00 - $45.00 (10)</a>
-                                        <a href="#">$54.00 - $58.00 (4)</a>
-                                        <a href="#">$62.00 - $70.00 (5)</a>
-                                        <a href="#">$78.00 - $83.00 (10)</a>
-                                        <a href="#">$85.00 - $89.00 (13)</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end of sidebar-widget -->
-
-                            <div class="sidebar-widget color-widget">
-                                <h2 class="widgettitle">Color</h2>
-                                <div class="color-widget-wrapper">
-                                    <ul class="color-options">
-                                        <li>
-                                            <span class="white"></span>
-                                            <a href="#">white (4)</a>
-                                        </li>
-                                        <li>
-                                            <span class="orange"></span>
-                                            <a href="#">Orange (2)</a>
-                                        </li>
-                                        <li>
-                                            <span class="blue"></span>
-                                            <a href="#">Blue (6)</a>
-                                        </li>
-                                        <li>
-                                            <span class="yellow"></span>
-                                            <a href="#">Yellow (8)</a>
-                                        </li>
-                                        <li>
-                                            <span class="black"></span>
-                                            <a href="#">black (6)</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> <!-- end of sidebar-widget -->
-
-                            <div class="sidebar-widget tag-cloud">
-                                <h2 class="widgettitle">Popular Tags</h2>
-                                <div class="tags-widget">
-                                    <ul>
-                                        <li><a href="#">Ecommerce</a></li>
-                                        <li><a href="#">Shoes</a></li>
-                                        <li><a href="#">bags</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                        <li><a href="#">Sunglasses</a></li>
-                                        <li><a href="#">Trending</a></li>
-                                        <li><a href="#">Clothing</a></li>
-                                        <li><a href="#">Smart</a></li>
-                                    </ul>
-                                </div>
-                            </div> <!-- end of sidebar-widget -->
-                        </aside> <!-- end of #secondary -->
+            <div class="uk-width-3-4 collection-right">
+                <div class="product-list-filter">
+                    <div class="show-product">
+                        Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span
+                            class="shoe-total">642</span> sản phẩm
                     </div>
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
+
+                    <form class="uk-form-stacked shop-sort-by">
+                        <div class="shop-sort-by">
+                            <label class="uk-form-label " for="sort-by">Sắp xếp theo:</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="sort-by" name="sort-by">
+                                    <option class="option-filter" value="">Phổ biến nhất</option>
+                                    <option class="option-filter" value="">Giá (Thấp đến cao)</option>
+                                    <option class="option-filter" value="">Giá (Cao đến thấp)</option>
+                                    <option class="option-filter" value="">Mới nhất</option>
+                                    <option class="option-filter" value="">Cũ nhất</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="product-list">
+                    <div class="home-product-list-wrapper uk-grid " uk-grid>
+                        @if (!empty($data['categoryById']->products))
+                            @foreach ($data['categoryById']->products as $key => $item)
+                                <div class="product-item uk-width-1-4">
+                                    <div class="product-image">
+                                        <a href="{{ route('productDetail', $item->id) }}">
+                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                        </a>
+                                        <span>-10%</span>
+                                        <i class="fas fa-heart icon-heart"
+                                            style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                        <div class="product-button">
+                                            {{-- <button>Thêm vào giỏ </button> --}}
+                                            <button type="button" uk-toggle="target: #modal-container"
+                                                class="quick-view-button" data-id="{{ $item->id }}">Xem
+                                                nhanh</button>
+                                        </div>
+                                    </div>
+                                    <div class="product-review">
+                                        <a href="{{ route('categories', $item->category->id) }}">
+                                            <span>{{ $item->category->name }}</span>
+                                        </a>
+                                        <div class="icon">
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('productDetail', $item->id) }}"
+                                        class="product-name">{{ $item->name }}</a>
+                                    <div class="product-price">
+                                        <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                        @if (!empty($item->price_old))
+                                            <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                        @endif
+                                    </div>
+                                    <div class="product-item-detail-gallery-items">
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                alt="">
+                                        </div>
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                alt="">
+                                        </div>
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                alt="">
+                                        </div>
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
+                                                alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+                <nav aria-label="Pagination">
+                    <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                        <li><a href="#"><span uk-pagination-previous></span></a></li>
+                        <li class="uk-active"><span aria-current="page">1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li class="uk-disabled"><span>…</span></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#"><span uk-pagination-next></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
         </div>
-        <!-- End of Products Wrapper -->
+    </section>
+
+    <!-- Modal xem nhanh-->
+    <div id="modal-container" class="uk-modal-container" uk-modal>
+        <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+            <input type="hidden" value="" class="modal-product-id">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-body uk-grid" uk-grid>
+                <div class="uk-width-1-2">
+                    <img alt="" class="w-full rounded-lg" src=""
+                        style="width: 100%; max-height: 70vh; object-fit: cover;" />
+                    <div class="flex mt-4 space-x-2 box-image-url">
+                    </div>
+                </div>
+
+                <div class="uk-width-1-2" style="overflow-y: hidden;">
+                    <h1 class="text-3xl font-bold"></h1>
+                    <p class="text-xl text-gray-600"></p>
+                    <div class="flex items-center mt-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                            <i class="fas fa-star text-yellow-500"></i>
+                        </div>
+                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-2xl font-bold modal-price"></span>
+                        <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
+                    </div>
+                    <p class="mt-4 text-gray-600 modal-description">
+
+                    </p>
+                    <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
+                        <div class="mt-4">
+                            <p class="font-bold">Màu sắc</p>
+                            <div class="flex space-x-2 mt-2 box-color">
+
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="font-bold">Size</p>
+                            <div class="flex space-x-2 mt-2 box-size">
+
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center space-x-4">
+                            <div class="flex items-center border border-gray-300 rounded-lg">
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus">-</button>
+                                <input name="quantity" class="w-12 h-10 text-center border-none quantity-selector-input"
+                                    type="text" value="1" />
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus">+</button>
+                            </div>
+                            <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
+                                hàng</button>
+                            <button class="border border-gray-300 rounded-lg p-2">
+                                <i class="far fa-heart text-gray-600"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- End of Main Content Wrapper -->
+@endsection
+
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.quantity-selector-button-minus').on('click', function() {
+                var currentValue = parseInt($('.quantity-selector-input').val());
+                if (currentValue > 1) {
+                    $('.quantity-selector-input').val(currentValue - 1);
+                }
+            });
+
+            $('.quantity-selector-button-plus').on('click', function() {
+                var currentValue = parseInt($('.quantity-selector-input').val());
+                $('.quantity-selector-input').val(currentValue + 1);
+            });
+
+            $('.quantity-selector-input').on('input', function() {
+                var value = parseInt($(this).val());
+                if (isNaN(value) || value < 1) {
+                    $(this).val(1);
+                } else if (value > 9999) {
+                    $(this).val(9999);
+                }
+            });
+
+            // Đảm bảo rằng bạn sử dụng .on('click') để cập nhật khi người dùng chọn màu và size
+            $('.quick-view-button').on('click', function(e) {
+                e.preventDefault();
+
+                let productId = $(this).data('id');
+
+                $.ajax({
+                    url: `/quick-view/${productId}`,
+                    type: 'GET',
+                    success: function(response) {
+                        
+                        // Đổ dữ liệu vào modal
+                        $('#modal-container .uk-width-1-2 img').attr('src', response.image);
+                        $('#modal-container .modal-url').text(response.url);
+                        $('#modal-container .modal-product-id').val(response.id);
+                        $('#modal-container h1').text(response.name);
+                        $('#modal-container p.text-xl').text(response.category_name);
+                        $('#modal-container .product-price strong').text(response.price);
+                        $('#modal-container .modal-description').text(response.description);
+                        $('#modal-container .modal-price').text(response.price);
+                        $('#modal-container .modal-price-old').text(response.price_old);
+
+                        // Xóa các nội dung cũ
+                        $('.box-color').empty();
+                        $('.box-size').empty();
+
+                        // Cập nhật danh sách màu sắc và size
+                        response.variants.forEach(variant => {
+                            // Tạo nút màu sắc, thêm checkbox cho mỗi màu
+                            $('.box-color').append(
+                                `<label>
+                        <input type="radio" name="product-choose-color" value="${variant.color}" class="product-choose-color" />
+                        <span class="bg-gray-300 px-4 py-2 rounded-lg">${variant.color}</span>
+                    </label>`
+                            );
+
+                            // Cập nhật size theo màu khi nhấp nút màu
+                            $(`input[name="product-choose-color"][value="${variant.color}"]`)
+                                .on('change', function() {
+                                    $('.box-size').empty();
+                                    variant.sizes.forEach(size => {
+                                        $('.box-size').append(
+                                            `<label>
+                                <input type="radio" name="product-choose-size" value="${size}" class="product-choose-size" />
+                                <span class="bg-gray-200 px-4 py-2 rounded-lg">${size}</span>
+                            </label>`
+                                        );
+                                    });
+                                });
+                        });
+
+                        // Kích hoạt màu đầu tiên mặc định
+                        if (response.variants.length > 0) {
+                            const firstColor = response.variants[0];
+                            $(`input[name="product-choose-color"][value="${firstColor.color}"]`)
+                                .prop('checked', true);
+                            firstColor.sizes.forEach(size => {
+                                $('.box-size').append(
+                                    `<label>
+                                        <input type="radio" name="product-choose-size" value="${size}" class="product-choose-size" />
+                                        <span class="bg-gray-200 px-4 py-2 rounded-lg">${size}</span>
+                                    </label>`
+                                );
+                            });
+                        }
+
+                        if (response.images.length > 0) {
+                            const firstImage = response.images;
+                            
+                            firstImage.forEach(image => {
+                                $('.box-image-url').append(
+                                    `<img alt="Thumbnail 1" class="w-20 h-20 rounded-lg"
+                                    src="${image.image_url}"
+                                    style="width: 80px; height: 80px; object-fit: cover;" />`
+                                );
+                            });
+                        }
+
+                        // Hiển thị modal
+                        UIkit.modal('#modal-container').show();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Đã xảy ra lỗi khi tải sản phẩm:", error);
+                    }
+                });
+            });
+
+
+            $('#modal-container .form-modal-addToCart').on('submit', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            $('#modal-container .btnAddToCart').on('click', function(e) {
+                e.preventDefault(); // Ngừng hành động mặc định của nút
+
+                // Lấy giá trị từ form
+                var form = $('#modal-container .form-modal-addToCart');
+                var productId = $('#modal-container .modal-product-id').val();
+                var color = $('#modal-container input[name="product-choose-color"]:checked').val();
+                var size = $('#modal-container input[name="product-choose-size"]:checked').val();
+                var quantity = $('#modal-container input[name="quantity"]').val();
+
+                // Gửi dữ liệu qua AJAX
+                if(color == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Vui lòng chọn màu sắc',
+                        showConfirmButton: true,
+                    })
+
+                    return false;
+                }
+
+                if(size == null) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Vui lòng chọn size',
+                        showConfirmButton: true,
+                    })
+
+                    return false;
+                }
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'), 
+                        id: productId,
+                        color: color,
+                        size: size,
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        if(response.status) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: true,
+                            })
+                        } else {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: response.message,
+                                showConfirmButton: true,
+                            })
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Lỗi khi thêm vào giỏ hàng:", error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
