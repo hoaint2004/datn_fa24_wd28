@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\User;
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -15,54 +17,68 @@ class AuthController extends Controller
         return view('client.auth.login');
     }
 
-    // public function showRegisterForm()
-    // {
-    //     return view('client.auth.register');
+    public function postLogin(Request $request)
+    {
+        $data = $request->only('email', 'password');
 
+        // Tìm user theo email
+        $user = User::where('email', $data['email'])->first();
 
-    // }
+        if ($user) {
+            // Kiểm tra mật khẩu
+            if ($user->password == $data['password']) {
+                // Đăng nhập thành công
+                Auth::login($user);
 
-    public function register(Request $request)
-{
-    // Xác thực dữ liệu đầu vào
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => [
-            'required','string', 'min:8', // Tối thiểu 8 ký tự
-            'regex:/[a-z]/',      // Ít nhất một chữ thường
-            'regex:/[A-Z]/',      // Ít nhất một chữ hoa
-            'regex:/[0-9]/',      // Ít nhất một số
-            'regex:/[@$!%*?&]/',  // Ít nhất một ký tự đặc biệt
-        ],
-        'password_confirmation' => 'required|same:password',
-    ]);
-
-    // Nếu xác thực thất bại
-    if ($validator->fails()) {
-        return response()->json([
-            'success' => false,
-            'errors' => $validator->errors(),
-        ], 422);
+                // Kiểm tra quyền của người dùng sau khi đăng nhập thành công
+                if (Auth::user()->role == 'admin') {
+                    return redirect()->intended(route('admin.dashboard'));
+                } elseif (Auth::user()->role == 'user') {
+                    return redirect()->intended(route('home'));
+                }
+            } else {
+                // Sai mật khẩu
+                return redirect()->route('login.form')->with('errorLogin', 'Mật khẩu không chính xác.');
+            }
+        } else {
+            // Sai email
+            return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại.');
+        }
     }
 
-    // Lưu thông tin người dùng
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
 
-    // Trả về phản hồi
-    return response()->json([
-        'success' => true,
-        'message' => 'Registration successful!',
-        'user' => $user,
-    ]);
+    public function showRegisterForm()
+    {
+        return view('client.auth.register');
+    }
+    public function postRegister(RegisterRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            User::create([
+                'fullname' => $request->fullname,
+                'username' => $request->username,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+                'role' => User::TYPE_MEMBER,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('register.form')->with('status', 'Đăng Ký Thành Công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Log::error($e->getMessage());
+
+            return redirect()->back()->with('error', 'Đăng Ký Thất Bài!');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login.form');
+    }
 }
-
-
-
-}
-
-
