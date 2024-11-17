@@ -1,3 +1,6 @@
+@extends('client.layouts.master')
+@section('title', 'Giỏ hàng của bạn')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,3 +195,5 @@
 </body>
 
 </html>
+
+@endsection

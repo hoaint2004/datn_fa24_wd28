@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 @section('title', 'Chi tiết sản phẩm')
-@section()
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 
