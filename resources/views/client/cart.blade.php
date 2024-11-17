@@ -21,7 +21,6 @@
                             <th class="text-[#333] text-xl font-normal">Tổng tiền</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @if ($data['carts']->isNotEmpty())
                             @php
@@ -66,16 +65,19 @@
                                                     <button class="quantity-selector-button-plus"
                                                         data-cart-id="{{ $item->id }}">+</button>
                                                 </div>
-                                                <button class="cart-item-remove"><i
-                                                        class="fa-solid fa-trash-can"></i></button>
+                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="cart-item-remove btn-removeCart"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
 
                                     <td class="shopping-cart-left-tbody-total">
                                         <div class="total-price-wrapper">
-                                            <span
-                                                class="product-price">{{ number_format($total_price, 0, ',', '.') }}
+                                            <span class="product-price">{{ number_format($total_price, 0, ',', '.') }}
                                                 đ</span>
                                         </div>
                                     </td>
@@ -92,36 +94,43 @@
 
             <div class="shopping-cart-right uk-width-1-3">
                 <h2 class="">Thông tin đơn hàng</h2>
-                <div class="discount-code">
-                    <span class="code">Mã giảm giá</span>
-                    <form action="">
-                        <input class="shopping-cart-right-input" type="text" autocapitalize="off" autocomplete="off"
-                            aria-label="Mã giảm giá" title="" value="" placeholder="Nhập mã giảm giá">
-                        <button type="submit" class="shopping-cart-right-button">
-                            <span class="shopping-cart-right-text">Apply</span>
-                        </button>
-                    </form>
-                </div>
                 <div class="shipping-fee">
-                    <span>Phí vẩn chuyển</span>
+                    <span>Phí vận chuyển</span>
                     <span>$200</span>
                 </div>
                 <div class="total-right">
                     <span>Tổng tiền</span>
-                    <span>{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
-                </div>
-                <div class="total-action">
-                    <a href="#" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-                    <a href="#" class="pay-money" title="Thanh toán">Thanh toán</a>
+                    <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
                 </div>
             </div>
         </div>
     </section>
+
 @endsection
 
 @section('js')
     <script>
+        $(document).ready(function() {
+            $(document).on('submit', '.form-deleteCart', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Bạn có muốn xóa sản phẩm này không?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Xóa',
+                    denyButtonText: `Hủy`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
+            });
+        });
+
+
+
         // Thực hiện khi nhấn nút giảm số lượng
+        // Cập nhật khi nhấn nút giảm số lượng
         $('.quantity-selector-button-minus').on('click', function() {
             var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
             var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
@@ -135,7 +144,7 @@
             }
         });
 
-        // Thực hiện khi nhấn nút tăng số lượng
+        // Cập nhật khi nhấn nút tăng số lượng
         $('.quantity-selector-button-plus').on('click', function() {
             var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
             var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
@@ -147,6 +156,7 @@
         });
 
         // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
+        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         function updateQuantity(cartId, quantity) {
             $.ajax({
                 url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
@@ -155,6 +165,24 @@
                     _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
                     cart_id: cartId,
                     quantity: quantity
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Cập nhật giá từng sản phẩm
+                        const newProductPrice = response.new_product_price; // Giá tiền mới của sản phẩm
+                        const totalCartPrice = response.total_cart_price; // Tổng tiền giỏ hàng mới
+
+                        // Cập nhật giá trị hiển thị của sản phẩm
+                        const productPriceElement = $(`[data-cart-id="${cartId}"]`)
+                            .closest('tr')
+                            .find('.product-price');
+                        productPriceElement.text(newProductPrice.toLocaleString('vi-VN') + ' đ');
+
+                        // Cập nhật tổng tiền giỏ hàng
+                        $('#total-price').text(totalCartPrice.toLocaleString('vi-VN') + ' đ');
+                    } else {
+                        alert(response.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error("Lỗi khi cập nhật số lượng:", error);
