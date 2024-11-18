@@ -116,6 +116,36 @@
                                {{-- Biến thể sản phẩm --}}
                                 <div class="form-group mt-4">
                                     <label class="form-label">Biến thể sản phẩm</label>
+                                    {{-- biến thể cũ --}}
+                                        @foreach (old('variants', []) as $index => $variant)
+                                        <div class="variant-item row g-3 align-items-center mb-2" id="variant_{{ $index }}">
+                                            <div class="col-md-3">
+                                                <label for="variantSize_{{ $index }}" class="form-label">Size</label>
+                                                <input type="text" id="variantSize_{{ $index }}" name="variants[{{ $index }}][size]" placeholder="Size" class="form-control" value="{{ old('variants.' . $index . '.size', $variant['size'] ?? '') }}" />
+                                                @error('variants.' . $index . '.size')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="variantColor_{{ $index }}" class="form-label">Color</label>
+                                                <input type="text" id="variantColor_{{ $index }}" name="variants[{{ $index }}][color]" placeholder="Color" class="form-control" value="{{ old('variants.' . $index . '.color', $variant['color'] ?? '') }}" />
+                                                @error('variants.' . $index . '.color')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="variantQuantity_{{ $index }}" class="form-label">Quantity</label>
+                                                <input type="number" id="variantQuantity_{{ $index }}" name="variants[{{ $index }}][quantity]" placeholder="Quantity" class="form-control" value="{{ old('variants.' . $index . '.quantity', $variant['quantity'] ?? '') }}" />
+                                                @error('variants.' . $index . '.quantity')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-3 d-flex align-items-end">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="removeVariant('variant_{{ $index }}')">Xóa</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    {{-- end biến thế cũ --}}
                                     <div id="variant-container" class="border p-3 rounded bg-light">
                                         <div class="variant-item row g-3 align-items-center mb-2" id="variant_0">
                                             {{-- <div class="col-md-3">
@@ -146,6 +176,9 @@
                                     </div>
                                     <button type="button" class="btn btn-sm btn-secondary mt-3" onclick="addVariant()">Thêm biến thể mới</button>
                                 </div>
+                                {{-- biến thể cũ  --}}
+                                  <!-- Các variant sẽ được thêm vào đây bằng JavaScript -->
+ 
                                 
 
                                 <!-- Nút hành động -->
