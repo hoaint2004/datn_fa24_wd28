@@ -112,7 +112,7 @@
                 </div>
                 <div class="total-action">
                     <a href="#" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-                    <a href="#" class="pay-money" title="Thanh toán">Thanh toán</a>
+                    <a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
                 </div>
             </div>
         </div>
