@@ -24,7 +24,6 @@ class HomeController extends Controller
                 $query->with('category','images', 'variants')->orderBy('id', 'DESC')->limit(20);
             }
         ])->orderBy('id', 'DESC')->limit(1)->first();
-
         return view('client.home', compact('data'));
     }
 

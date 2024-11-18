@@ -30,7 +30,7 @@ class ProductController extends Controller
                     ->orWhere('name', 'like', '%' . $request->name)
                     ->orWhere('name', 'like', $request->name . '%');
             })
-            ->orderBy('id', 'asc')  // Sắp xếp theo ID, bạn có thể thay đổi nếu cần
+            ->orderBy('id', 'asc')  // Sắp xếp theo ID
             ->paginate(10);  // Phân trang với 10 sản phẩm mỗi trang
 
 
@@ -43,7 +43,7 @@ class ProductController extends Controller
         return view('admin.pages.products.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         DB::beginTransaction();
 
@@ -87,7 +87,7 @@ class ProductController extends Controller
         return view('admin.pages.products.edit', compact('products', 'categories'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, ProductRequest $request)
     {
         DB::beginTransaction();
         try {

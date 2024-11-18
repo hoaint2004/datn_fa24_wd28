@@ -58,9 +58,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/show/{id}', 'show')->name('show');
             Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
+            Route::put('/update/{id}', 'update')->name('update');
             Route::get('/detail/{id}', 'detail')->name('detail');
-            Route::post('/delete/{id}', 'delete')->name('delete');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::controller(ProductVariantsController::class)->name('product_variants.')->prefix('product_variants')
