@@ -121,6 +121,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
+    Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');

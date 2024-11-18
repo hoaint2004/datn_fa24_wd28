@@ -17,14 +17,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    
-   protected $fillable = [
-    'fullname',  // Thêm trường fullname
-    'username',  // Thêm trường username
-    'email',
-    'password',
-    'role',      // Thêm trường role nếu cần
-];
+
+    const TYPE_ADMIN = 'admin';
+    const TYPE_MEMBER = 'user';
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,6 +43,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function isAdmin()
+    {
+        return $this->type === self::TYPE_ADMIN;
+    }
+
+    public function isMember()
+    {
+        return $this->type === self::TYPE_MEMBER;
+    }
 
     // public function reviews()
     // {

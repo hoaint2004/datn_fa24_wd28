@@ -1,13 +1,34 @@
-@extends('Client.layouts.master')
+@extends('client.layouts.master')
+@section('title', 'Chi tiết sản phẩm')
+@section()
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title')
-    {{ $data['product']->name }}
-@endsection
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
 
-@section('content')
-    @include('client.components.breadcrumb', [
-        'title' => $data['product']->name,
-    ])
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../src/styles/css/uikit-rtl.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
+</head>
+
+<body>
+    <div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
+        <nav aria-label="Breadcrumb">
+            <ul class="uk-breadcrumb">
+                <li><a href="#" class="breadcrumb-a">Trang chủ</a></li>
+                <li><a href="#" class="breadcrumb-a">Danh mục</a></li>
+                <li><span aria-current="page" class="text-base">Sản phẩm</span></li>
+            </ul>
+        </nav>
+    </div>
 
     <section class="product-detail uk-container uk-container-large">
         <form class="form-addToCart" action="{{ route('addToCart', ['id' => $data['product']->id]) }}" method="post">
