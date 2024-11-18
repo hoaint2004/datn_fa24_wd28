@@ -36,7 +36,7 @@ class ProductRequest extends FormRequest
 
             // Validation cho các biến thể sản phẩm
             'variants' => 'nullable|array', // Cho phép variants là một mảng hoặc không có
-            'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|string|max:50', 
+            'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|min:30|max:50', 
             'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string|max:50', 
             'variants.*.quantity' => 'required_with:variants.*.size,variants.*.color|integer|min:0', 
         ];
