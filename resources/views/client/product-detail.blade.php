@@ -33,7 +33,7 @@
                             {{ $data['product']->name }}
                         </h3>
                         <div class="stock">
-                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded ">
                                 Còn hàng
                             </span>
                         </div>
@@ -236,7 +236,7 @@
                                     </div>
                                 </div>
 
-                                <div class="ml-auto flex items-center adfadf">
+                                <div class="ml-auto flex items-center">
                                     <div class="text-yellow-400">
                                         <i class="fas fa-star ">
                                         </i>
@@ -574,25 +574,6 @@
         });
 
 
-        const minusButton = document.querySelector('.quantity-selector-button-minus');
-        const plusButton = document.querySelector('.quantity-selector-button-plus');
-        const quantityInput = document.querySelector('.quantity-selector-input');
-
-        //giảm số lượng
-        minusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        //tăng số lượng
-        plusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 9999) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
     </script>
 @endsection
 
