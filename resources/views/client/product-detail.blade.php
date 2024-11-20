@@ -59,7 +59,7 @@
                             {{ $data['product']->name }}
                         </h3>
                         <div class="stock">
-                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded ">
                                 Còn hàng
                             </span>
                         </div>
@@ -260,7 +260,7 @@
                                     </div>
                                 </div>
 
-                                <div class="ml-auto flex items-center adfadf">
+                                <div class="ml-auto flex items-center">
                                     <div class="text-yellow-400">
                                         <i class="fas fa-star ">
                                         </i>
@@ -397,6 +397,7 @@
                     </div>
                 </div>
 
+<<<<<<< HEAD
                 {{-- Tab comment --}}
                 <div class="tab-comment">
                     <div class="form-comment">
@@ -557,6 +558,9 @@
                     </div>
                     
                 </div>
+=======
+                
+>>>>>>> 15bc998dee70732cc18aaeea9cc73bbb37c3c027
             </ul>
         </div>
 
@@ -759,25 +763,6 @@
         });
 
 
-        const minusButton = document.querySelector('.quantity-selector-button-minus');
-        const plusButton = document.querySelector('.quantity-selector-button-plus');
-        const quantityInput = document.querySelector('.quantity-selector-input');
-
-        //giảm số lượng
-        minusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        //tăng số lượng
-        plusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 9999) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
     </script>
 
     <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>

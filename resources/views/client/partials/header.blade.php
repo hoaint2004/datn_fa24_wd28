@@ -5,8 +5,8 @@
             <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
                 <form action="" class="form-search">
                     <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
-                    <button>
-                        <SearchOutlined class="icon-search" />
+                    <button  uk-icon="search" class="icon-search"> 
+                        
                     </button>
                 </form>
             </div>
@@ -41,7 +41,7 @@
                             <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
                             <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
                         @endif
-                    </ul>
+                    </ul> 
                 </div>
 
                 <div>
