@@ -12,6 +12,21 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\Category::insert([
+            [
+                'name' => 'Sneaker',
+                'image' => 'sneaker.jpg',
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Mohican',
+                'image' => 'mohican.jpg', 
+                'status' => 1, 
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }
