@@ -1,0 +1,268 @@
+.form-comment h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Định dạng cho textarea */
+.text-note {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.text-note::placeholder {
+    color: #aaa;
+}
+
+/* Định dạng cho nút gửi bình luận */
+.btnsave {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btnsave:hover {
+    background-color: #0056b3;
+}
+
+/* Định dạng cho thông báo lỗi */
+.error-comment {
+    color: red;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+.error-comment:hover {
+    color: #ff0000;
+}
+
+/* Định dạng cho văn bản lỗi khi thiếu nội dung */
+span {
+    color: red;
+    font-size: 0.9rem;
+}
+
+
+/* .list-comment {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.media-comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-parent {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.comment-parent:last-child {
+    border-bottom: none;
+}
+
+.pull-left {
+    margin-right: 15px;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.media-comment-body {
+    flex-grow: 1;
+}
+
+h4[name="fullname"] {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.created_at {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+p[name="content"] {
+    font-size: 1rem;
+    color: #333;
+    margin: 8px 0 15px;
+}
+
+.text-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-edit, .btn-delete, .btn-reply, .btnsave-update, .btnsave-reply {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    /* color: white; */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    /* Các thuộc tính khác */
+}
+
+.btn-reply {
+    background-color: #28a745;
+    color: white;
+    /* Các thuộc tính khác */
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    /* Các thuộc tính khác */
+}
+
+.btnsave-update, .btnsave-reply {
+    background-color: #ffc107;
+    margin-top: 8px;
+}
+
+.form-edit-comment-parent, .form-post-comment-child {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+textarea.content-edit, textarea[name="content-reply"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 1rem;
+}
+
+textarea::placeholder {
+    color: #aaa;
+}
+
+
+/* Comment con */
+/* Đồng bộ giao diện bình luận cha và con */
+.comment-child {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+    margin-left: 20px; /* Tạo khoảng cách để phân biệt bình luận con */
+}
+
+.comment-child:last-child {
+    border-bottom: none;
+}
+
+.comment-child .pull-left {
+    margin-right: 15px;
+}
+
+.comment-child .avatar {
+    border-radius: 50%;
+    width: 50px; /* Kích thước nhỏ hơn để phân biệt */
+    height: 50px;
+    object-fit: cover;
+}
+
+.comment-child .media-comment-body {
+    flex-grow: 1;
+}
+
+.comment-child h4[name="fullname"] {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.comment-child .created_at {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.comment-child p[name="content"] {
+    font-size: 1rem;
+    color: #333;
+    margin: 8px 0 15px;
+}
+
+.comment-child .text-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.comment-child .btn-edit-child, 
+.comment-child .btn-delete-reply, 
+.comment-child .btn-reply-p2 {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Các màu sắc cho nút */
+.btn-edit-child {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-delete-reply {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-reply-p2 {
+    background-color: #28a745;
+    color: white;
+}
+
+.comment-child textarea.content-reply {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.comment-child textarea::placeholder {
+    color: #aaa;
+}
+
+.comment-child .btnsave-reply-p2 {
+    background-color: #ffc107;
+    margin-top: 8px;
+}

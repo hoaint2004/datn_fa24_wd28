@@ -92,7 +92,7 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="discount_value" class="form-label">Giá trị giảm giá</label>
                                     <input type="number" class="form-control" name="discount_value" id="discount_value"
-                                        value="{{ number_format(old('discount_value', $discount->discount_value),0,'.',',' ) }}" step="0.01" placeholder="Nhập giá trị giảm giá">
+                                        value="{{ old('discount_value', $discount->discount_value) }}" step="0.01" placeholder="Nhập giá trị giảm giá">
                                     @error('discount_value')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
