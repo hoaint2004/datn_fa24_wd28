@@ -1,297 +1,85 @@
-.profile-container {
-    display: flex;
-    gap: 1.5rem;
-    padding: 2rem;
-    flex-wrap: wrap;
-
-    .sidebar {
-        flex: 1;
-        max-width: 220px;
-        background-color: #f8f8f8;
-        padding: 1.5rem;
-        border-radius: 8px;
-
-        .profile-header {
-            text-align: center;
-
-            .profile-picture {
-                width: 90px;
-                height: 90px;
-                border-radius: 50%;
-                margin-bottom: 1rem;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-                line-height: 1.4;
-                color: #333;
-
-                span {
-                    display: block;
-                    font-weight: bold;
-                    font-size: 1.1rem;
-                    color: #666;
-                }
-            }
-        }
-
-        .menu {
-            margin-top: 2rem;
-
-            ul {
-                list-style: none;
-                padding: 0;
-
-                li {
-                    padding: 0.8rem;
-                    font-size: 1rem;
-                    cursor: pointer;
-                    border-radius: 5px;
-                    transition: background-color 0.3s ease, color 0.3s ease;
-
-                    &:hover {
-                        background-color: #ddd;
-                    }
-
-                    &.active {
-                        font-weight: bold;
-                        background-color: #000;
-                        color: #fff;
-                    }
-                }
-            }
-        }
-    }
-
-    .content {
-        flex: 2;
-        padding: 1.5rem;
-        border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-        .edit-profile {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.6rem 1.2rem;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-bottom: 10px;
-
-            .edit-profile:hover {
-                background-color: #333;
-            }
-        }
-
-        .profile-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-
-            .form-group {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 1rem;
-
-    
-                label {
-                    font-weight: bold;
-                    margin-bottom: 0.5rem;
-                }
-    
-                input {
-                    padding: 0.6rem;
-                    border: 1px solid #ddd;
-                    border-radius: 5px;
-                    font-size: 1rem;
-                }
-            }
-        }
-        
-        .full-width {
-            flex-basis: 100%;
-        }
-
-        /* Style for Change Password Section */
-        .change-password {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .change-password h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        .change-password {
-        
-            .form-group {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                margin-bottom: 1rem;
-
-    
-                label {
-                    font-weight: bold;
-                    margin-bottom: 0.5rem;
-                }
-    
-                input {
-                    padding: 0.6rem;
-                    border: 1px solid #ddd;
-                    border-radius: 5px;
-                    font-size: 1rem;
-                }
-            }
-    
-        
-        }
-
-        .change-password-form .form-group label {
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        .change-password-form .form-group input {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .save-password-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.6rem 1.2rem;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .save-password-btn:hover {
-            background-color: #333;
-        }
-
-    }
-}
-
-/* Kiểu cho thông báo thành công */
-.alert {
+/* body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
+}
+.order-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.order-item {
     display: flex;
     align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
 }
-
-/* Thông báo thành công */
-.alert-success {
-    background-color: #4CAF50;
-    padding: 10px;
-    /* Màu xanh lá cây */
-    color: white;
+.order-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 20px;
 }
-
-/* Thông báo lỗi */
-.alert-danger {
-    background-color: #f44336;
-    padding: 10px;
-    /* Màu đỏ */
-    color: white;
+.order-details {
+    flex: 1;
 }
-
-/* Kiểu cho icon trong thông báo */
-.alert .icon {
-    margin-right: 10px;
-}
-
-/* Kiểu cho thông báo đóng (x) */
-.alert .close-btn {
-    margin-left: auto;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
+.order-details h3 {
+    margin: 0;
+    font-size: 18px;
     font-weight: bold;
 }
-
-/* responsive */
-@media (max-width: 1200px) {
-    .profile-container {
-        flex-direction: column;
-        padding: 1.5rem;
-
-        .sidebar {
-            max-width: 250px;
-        }
-    }
+.order-details p {
+    margin: 5px 0;
+    font-size: 14px;
 }
-
-@media (max-width: 952px) {
-    .profile-container {
-        padding: 1rem;
-
-        .content .profile-form .form-group {
-            flex-basis: 100%;
-        }
-    }
+.order-price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
 }
-
-@media (max-width: 768px) {
-    .sidebar {
-        max-width: 100%;
-    }
-
-    .content {
-        padding: 1rem;
-    }
+.order-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
-
-@media (max-width: 573px) {
-    .profile-container {
-        padding: 0.5rem;
-
-        .content {
-            .edit-profile {
-                width: 100%;
-                text-align: center;
-            }
-
-            .change-password {
-                padding: 1rem;
-            }
-        }
-
-        .sidebar {
-            padding: 1rem;
-        }
-    }
+.order-actions button {
+    padding: 10px 20px;
+    border: 1px solid #333;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
 }
-
-@media (max-width: 350px) {
-    .profile-container {
-        .sidebar .menu ul li {
-            font-size: 0.9rem;
-            padding: 0.6rem;
-        }
-
-        .content .profile-form .form-group label {
-            font-size: 0.85rem;
-        }
-    }
+.order-actions button:last-child {
+    margin-bottom: 0;
 }
+.order-actions .review-button {
+    background-color: #000;
+    color: #fff;
+}
+.order-actions .cancel-button {
+    border-color: #ff6b6b;
+    background-color: #ff6b6b;
+    color: #fff;
+}
+.order-status {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.order-status span {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.order-status .delivered {
+    background-color: #d4edda;
+    color: #155724;
+}
+.order-status .in-process {
+    background-color: #fff3cd;
+    color: #856404;
+} */

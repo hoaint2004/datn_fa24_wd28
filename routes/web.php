@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
@@ -135,3 +136,8 @@ Route::middleware(['web'])->group(function () {
     Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
     Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 });
+
+Route::get('/filter', function(){
+    return view('user.filter-product');
+});
+
