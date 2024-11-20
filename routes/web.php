@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\BannerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -107,6 +108,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::post('/delete/{id}', 'delete')
                 ->name('delete');
+        });
+
+    Route::controller(BannerController::class)
+        ->name('banners.')
+        ->prefix('banners')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::resource('orders', AdminOrderController::class);
