@@ -8,18 +8,14 @@
     <div class="banner uk-position-relative uk-visible-toggle uk-light" tabIndex={-1}
         uk-slideshow="animation: fade; autoplay: true; autoplay-interval: 3000">
         <div class="uk-slideshow-items">
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/orange-sneaker-banner-design-template-c40c3bb0b3e78e695ea680fc49ab95e5_screen.jpg?ts=1680685160"
-                    alt="Slide 1" uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://i.pinimg.com/736x/33/5c/7a/335c7a303b8839e6e491df45581a21c9.jpg" alt="Slide 2"
-                    uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sneakers-mockup-banner-design-template-a168837d88ce417842e272c989245883_screen.jpg?ts=1678847642"
-                    alt="Slide 3" uk-cover="true" />
-            </div>
+            @if (!empty($data['banners']))
+                @foreach ($data['banners'] as $item)
+                    <div>
+                        <img src="{{ $item->image }}"
+                            alt="{{ $item->name }}" uk-cover="true" />
+                    </div>
+                @endforeach
+            @endif
         </div>
 
         <button class="icon-left uk-position-center-left uk-position-small uk-hidden-hover" uk-slideshow-item="previous">

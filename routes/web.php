@@ -60,9 +60,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/show/{id}', 'show')->name('show');
             Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
+            Route::put('/update/{id}', 'update')->name('update');
             Route::get('/detail/{id}', 'detail')->name('detail');
-            Route::post('/delete/{id}', 'delete')->name('delete');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::controller(ProductVariantsController::class)->name('product_variants.')->prefix('product_variants')
@@ -133,4 +133,9 @@ Route::middleware(['web'])->group(function () {
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
+
+    // Comment
+    Route::post('/comment/{id}', [ControllersCommentController::class, 'comment'])->name('post_comment');
+    Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
+    Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 });
