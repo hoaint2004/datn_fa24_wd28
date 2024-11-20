@@ -14,6 +14,11 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (url()->previous() == route('register.form')) {
+            session(['url.intended' => route('home')]); // Nếu trang trước là đăng ký, chuyển hướng tới trang home sau khi đăng nhập
+        } else {
+            session(['url.intended' => url()->previous()]); // Nếu trang trước là các trang khác, chuyển hướng về trang trước đó
+        }
         return view('client.auth.login');
     }
 
