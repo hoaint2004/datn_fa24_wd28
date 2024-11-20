@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -105,6 +105,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::post('/delete/{id}', 'delete')
                 ->name('delete');
+        });
+
+    Route::controller(BannerController::class)
+        ->name('banners.')
+        ->prefix('banners')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 });
 
