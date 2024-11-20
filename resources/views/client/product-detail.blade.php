@@ -452,10 +452,10 @@
                                                     <button type="submit" class="btn-delete"
                                                         data-comment_id="{{ $cmt->id }}">Delete</button>
                                                 </form>
-                                                <a class="btn-reply" href=""
+                                                @endcan
+                                            <a class="btn-reply" href=""
                                                     data-id_comment="{{ $cmt->id }}">Reply
                                                 </a>
-                                            @endcan
                                         </div>
                                         <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
                                             class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
