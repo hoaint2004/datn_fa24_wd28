@@ -397,7 +397,6 @@
                     </div>
                 </div>
 
-<<<<<<< HEAD
                 {{-- Tab comment --}}
                 <div class="tab-comment">
                     <div class="form-comment">
@@ -558,9 +557,6 @@
                     </div>
                     
                 </div>
-=======
-                
->>>>>>> 15bc998dee70732cc18aaeea9cc73bbb37c3c027
             </ul>
         </div>
 
