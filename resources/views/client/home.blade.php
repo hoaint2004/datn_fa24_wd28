@@ -204,8 +204,8 @@
                                             </div>
                                         </div>
                                         <div class="product-review">
-                                            <a href="{{ route('categories', $item->category->id) }}">
-                                                <span>{{ $item->category->name }}</span>
+                                            <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                                <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
                                             <div class="icon">
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -215,8 +215,8 @@
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                             </div>
                                         </div>
-                                        <a href="{{ route('productDetail', $item->id) }}"
-                                            class="product-name">{{ $item->name }}</a>
+                                        <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                            class="product-name">{{ !empty($item->name) ? $item->name :'' }}</a>
                                         <div class="product-price">
                                             <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                             @if (!empty($item->price_old))
@@ -296,11 +296,11 @@
                             <a href="{{ route('categories', ['id' => $item->id]) }}" style="height: 100%"
                                 class="a-img uk-inline-clip uk-transition-toggle" tabIndex={0}>
                                 <img style="height: 100%" class="uk-transition-scale-up uk-transition-opaque"
-                                    src="{{ $item->image }}" alt="{{ $item->name }}" /></a>
+                                    src="{{ $item->image }}" alt="{{ !empty($item->name) ? $item->name : '' }}" /></a>
                         </div>
                         <div class="name-shoes-body">
                             <a href="{{ route('categories', ['id' => $item->id]) }}" class="a-body">
-                                <p>{{ $item->name }}</p>
+                                <p>{{ !empty($item->name) ? $item->name : '' }}</p>
                             </a>
                         </div>
                     </div>
@@ -341,8 +341,8 @@
                                 </div>
                             </div>
                             <div class="product-review">
-                                <a href="{{ route('categories', $item->category->id) }}">
-                                    <span>{{ $item->category->name }}</span>
+                                <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                    <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                 </a>
                                 <div class="icon">
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -352,8 +352,8 @@
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                 </div>
                             </div>
-                            <a href="{{ route('productDetail', $item->id) }}"
-                                class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                class="product-name">{{ !empty($item->name) ?$item->name : '' }}</a>
                             <div class="product-price">
                                 <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                 @if (!empty($item->price_old))
@@ -541,7 +541,7 @@
             <div class="title">
                 <hr />
                 <a href="#">
-                    <h2>{{ $data['categoryNewOne']->name }}</h2>
+                    <h2>{{ !empty($data['categoryNewOne']->name) ? $data['categoryNewOne']->name : '' }}</h2>
                 </a>
                 <hr />
             </div>
