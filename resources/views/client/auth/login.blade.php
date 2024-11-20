@@ -6,6 +6,16 @@
             {{ session('errorLogin') }}
         </div>
     @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+    @endif
     <form action="{{ route('postLogin') }}" method="POST">
         @csrf
         <h2>Đăng nhập</h2>
