@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
             $table->text('content');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
