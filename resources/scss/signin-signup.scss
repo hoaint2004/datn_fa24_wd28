@@ -1,0 +1,164 @@
+@import "./font.scss";
+@import "./_mixin.scss";
+
+.icon-home-register {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 20px 20px;
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+    transition: all 0.8s;
+    color: $color-p;
+    &:hover {
+        color: $color-red;
+        text-decoration: none;
+    }
+}
+.wrapper-register {
+    .register-right {
+        padding: 0 80px;
+        h2 {
+            font-family: $font-spectral;
+            font-size: 32px;
+            font-weight: $font-weight-bold;
+            padding-bottom: 10px;
+        }
+    }
+
+    .btn-register {
+        color: #fff;
+        background-color: $color-p;
+        transition: all 0.8s;
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px 0;
+        margin: 40px 0 20px 0;
+        font-size: 18px;
+        &:hover {
+            color: $color-p;
+            background-color: #fff;
+            border: 1px solid $color-p;
+        }
+    }
+
+    .login {
+        p {
+            color: $color-p;
+            font-weight: $font-weight-semibold;
+            font-size: 18px;
+            a {
+                text-decoration: underline;
+                padding-left: 20px;
+                font-weight: 200;
+                &:hover {
+                    color: $color-red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.wrapper-login {
+    .login-right {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(0, -50%);
+        padding: 0 80px 0 60px;
+        h2 {
+            font-family: $font-spectral;
+            font-size: 32px;
+            font-weight: $font-weight-bold;
+            padding-bottom: 10px;
+        }
+    }
+
+    .btn-login {
+        color: #fff;
+        background-color: $color-p;
+        transition: all 0.8s;
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px 0;
+        margin: 40px 0 20px 0;
+        font-size: 18px;
+        &:hover {
+            color: $color-p;
+            background-color: #fff;
+            border: 1px solid $color-p;
+        }
+    }
+
+    .register {
+        p {
+            color: $color-p;
+            font-weight: $font-weight-semibold;
+            font-size: 18px;
+            a {
+                text-decoration: underline;
+                padding-left: 20px;
+                font-weight: 200;
+                &:hover {
+                    color: $color-red;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.forget {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    input[type="checkbox"] {
+        display: none;
+    }
+    input[type="checkbox"] + label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        color: $color-p;
+    }
+    input[type="checkbox"] + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #333;
+        border-radius: 4px;
+        background-color: #fff;
+        transition:
+            background-color 0.3s,
+            border-color 0.3s;
+    }
+    input[type="checkbox"]:checked + label:before {
+        background-color: #333333;
+        border-color: #333333;
+    }
+
+    input[type="checkbox"]:checked + label:after {
+        content: "\2713";
+        position: absolute;
+        left: 5px;
+        top: 0;
+        font-size: 16px;
+        color: white;
+    }
+    .pass-forget {
+        color: $color-p;
+        text-decoration: none;
+        transition: all 0.8s;
+        &:hover {
+            color: $color-red;
+        }
+    }
+}
