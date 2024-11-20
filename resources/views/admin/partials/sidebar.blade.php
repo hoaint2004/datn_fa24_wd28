@@ -132,6 +132,25 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="banners">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí banner</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="banners">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.banners.index') }}" class="nav-link" data-key="t-chat"> Danh sách banner
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.banners.index') }}" class="nav-link" data-key="t-chat"> Danh sách banner
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarVoucher" data-bs-toggle="collapse" role="button"
@@ -161,6 +180,20 @@
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('admin.comments.index') }}" class="nav-link" data-key="t-chat"> Danh sách bình luận
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="orders">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản đơn hàng</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="orders">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.orders.index') }}" class="nav-link" data-key="t-chat"> Danh sách đơn hàng
                                 </a>
                             </li>
                         </ul>

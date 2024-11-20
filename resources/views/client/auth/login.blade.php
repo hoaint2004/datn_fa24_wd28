@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
 
+<<<<<<< HEAD
 
 <section>
     <a href="#" class="icon-home-register">
@@ -19,6 +20,30 @@
     <div class="wrapper-login uk-grid" uk-grid>
         <div class="uk-width-1-2 login-left">
             <img src="https://s3-alpha-sig.figma.com/img/040c/c45a/2d79166cf646d5a5a0119f93bceae506?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XtJ9U5yNNXTF91j2NBmsgRmXb-ngUrtOmjP95bqX6bHuCO7lILxQexO9yiAE76HW3jRESlXGLWI-yefVNHapkWXblD8jMD7kClf1AvFqSRAYUKsuUfVr0Ce4Yh5LsUrvYSlIIky8PYL-l4KxASyl2iq9XhpaJ5KlFuIvmDNyXFzkpKeOPv2j5wfUCsH4LJAqX~uDwo6Qvq-lV5COpNIbp3Y5p5vqHLDIX28mI2ys6nEIY9hN4YnJbUBbIl-CMhmMK8uojZY~xL5vKOLFGibJwhQoYmNmcuBvAfVra3fs3~UAHoAnsA3YukYwJ0KvIuPvyTAOovAEk~Apch03kxGrRw__" alt="">
+=======
+<div class="wrapper">
+    @if (session('errorLogin'))
+        <div class="alert alert-danger">
+            {{ session('errorLogin') }}
+        </div>
+    @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+    @endif
+    <form action="{{ route('postLogin') }}" method="POST">
+        @csrf
+        <h2>Đăng nhập</h2>
+        <div class="input-field">
+            <input type="email" name="email" value="{{ old('email') }}" required>
+            <label for="">Email</label>
+>>>>>>> a808800514b261c4e6ee93292117a87987b98b3e
         </div>
 
         <div class="uk-width-1-2 login-right">

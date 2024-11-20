@@ -56,7 +56,7 @@
 
                     <div class="form-group uk uk-width-1-2 mt-7">
                         <label class="block text-base font-medium text-[#555] pb-1">Số điện thoại</label>
-                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="0988697904">
+                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="{{ $user->phone}}">
                     </div>
                 </form>
 

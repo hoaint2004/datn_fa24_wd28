@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ class HomeController extends Controller
 {
     public function home()
     {
+        $data['banners'] = Banner::where('status', 1)->limit(5)->get();
+        
         $data['productNews'] = Product::with('category', 'variants', 'images')->orderBy('id', 'DESC')->limit(8)->get();
 
         $data['productUpdateNews'] = Product::with('category', 'variants', 'images')->orderBy('updated_at', 'DESC')->limit(8)->get();

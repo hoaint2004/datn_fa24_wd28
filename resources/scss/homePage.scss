@@ -1,5 +1,5 @@
-@import "./_mixin.scss";
-@import "./font.scss";
+@import './_mixin.scss';
+@import './font.scss';
 
 .title {
     display: flex;
@@ -29,48 +29,48 @@
     @include span;
 }
 .icon-left,
-.icon-right {
-    @include button-style(#333, #fff, $color, red);
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .icon-right {
+      @include button-style(#333, #fff,  $color, red);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }  
 
 .icon-left-product {
-    @include button-style(#333, #fff, $color, red);
+    @include button-style(#333, #fff,  $color, red);
     font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -20px;
+    margin-left: -20px
 }
 .icon-right-product {
-    @include button-style(#333, #fff, $color, red);
+    @include button-style(#333, #fff,  $color, red);
     font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: -20px;
-}
+}    
 
 .banner {
     .uk-slideshow-items {
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center center;
-        }
+       img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover; 
+           object-position: center center;
+       }
     }
     .icon-left,
     .icon-right {
-        @include button-style(#333, #fff, $color, red);
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+      @include button-style(#333, #fff,  $color, red);
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }  
 }
 
 .about-us {
@@ -138,7 +138,7 @@
                 position: relative;
                 img {
                     border-radius: 10px;
-                }
+                } 
                 span {
                     position: absolute;
                     top: 10px;
@@ -166,12 +166,12 @@
                     flex-direction: column;
                     gap: 3px;
                     opacity: 0;
-                    transition: opacity 0.6s ease;
+                    transition: opacity 0.6s ease; 
                     button {
                         background-color: $color-button;
                         border: 2px solid $color-button;
                         color: $color-title;
-                        transition: all 0.8s;
+                        transition: all .8s;
                         font-family: $font-spectral;
                         border-radius: 5px;
                         font-size: 13px;
@@ -182,14 +182,13 @@
                             border: 2px solid $color;
                         }
                     }
-                }
-            }
-            &:hover {
-                .icon-heart,
+                } 
+            } &:hover {
+                .icon-heart, 
                 .product-button {
-                    opacity: 1;
+                  opacity: 1;
                 }
-            }
+              }
             .product-review {
                 display: flex;
                 align-items: center;
@@ -200,9 +199,9 @@
                     span {
                         color: $color-auth;
                         font-size: 14px;
-
-                        font-family: $font-spectral;
-                        transition: all 0.8s;
+                        
+                        font-family: $font-spectral; 
+                        transition: all .8s; 
                         &:hover {
                             color: $color;
                         }
@@ -221,9 +220,9 @@
                 font-size: 16.5px;
 
                 font-weight: $font-weight-medium;
-                transition: all 0.8s;
+                transition: all .8s;     
                 display: inline-block;
-                height: calc(1em * 1.4 * 2);
+                height: calc(1em* 1.4* 2);   
                 &:hover {
                     color: $color;
                     text-decoration: none;
@@ -255,9 +254,9 @@
                         cursor: pointer;
                         border: solid 3px $color;
                     }
-                }
-            }
-        }
+                } 
+            } 
+        }  
     }
     // .home-product-list-wrapper {
     //     .product-item {
@@ -389,76 +388,6 @@
 
 .brand {
     margin-top: 45px;
-    .brand-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .brand-left {
-            .brand-left-image {
-                position: relative;
-                background-image: url("https://bizweb.dktcdn.net/100/413/756/articles/gia-giay-nu-adidas-1.jpg?v=1620201708113");
-                background-repeat: no-repeat;
-                background-position: center top;
-                background-size: cover;
-                padding: 80px 0;
-                border-radius: 10px;
-                overflow: hidden;
-                clip-path: polygon(100% 0, 83% 100%, 50% 100%, 0 100%, 0 0);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-color: rgba(34, 34, 34, 0.1);
-                    backdrop-filter: blur(2px);
-                    z-index: 1;
-                    border-radius: 10px;
-                }
-                .title {
-                    display: flex;
-                    flex-direction: column;
-                    text-align: center;
-                    align-items: center;
-                    justify-content: center;
-                    grid-gap: 25px;
-
-                    a {
-                        text-decoration: none !important;
-                        z-index: 5;
-
-                        h2 {
-                            @include title-h2;
-                            color: $color-button;
-                            font-size: 30px;
-                        }
-                    }
-
-                    hr {
-                        height: 2.5px;
-                        width: 50px;
-                        background-color: $color-button;
-                        margin-top: 0.5rem;
-                        z-index: 5;
-                    }
-                }
-
-                .sub-span-title {
-                    @include span;
-                    position: relative;
-                    z-index: 5;
-                    color: $color-button;
-                    font-size: 15px;
-                    padding-top: 15px;
-                }
-            }
-        }
-    }
 }
 
 .name-shoes {
@@ -468,12 +397,6 @@
         .name-shoes-image {
             .a-img {
                 border-radius: 10px;
-                img {
-                    transition: all 0.8s;
-                    &:hover {
-                        transform: scale(1.1);
-                    }
-                }
             }
         }
         .name-shoes-body {
@@ -488,13 +411,15 @@
                 text-decoration: none;
                 @include button;
                 padding: 5px 16px;
-                p {
-                    margin: 0;
-                }
+              p {
+                margin: 0;
+              }
             }
         }
     }
 }
+
+
 
 .date-time-sale {
     margin-top: 45px;
@@ -508,8 +433,8 @@
             img {
                 object-fit: cover;
                 width: 100%;
-                height: 100%;
-                border-radius: 10px;
+                height: 100%;    
+                border-radius: 10px;       
             }
         }
         .date-time-info {
@@ -521,7 +446,7 @@
             bottom: 20%;
             left: 54.1%;
             transform: translateX(-50%);
-            width: 100%;
+            width: 100%;    
             .countdown {
                 display: flex;
                 flex-wrap: wrap;
@@ -547,8 +472,8 @@
                         width: 50px;
                         height: 50px;
                         display: flex;
-                        justify-content: center;
-                        align-items: center;
+                        justify-content: center; 
+                        align-items: center;   
                     }
                     .days-content,
                     .hours-content,
@@ -560,32 +485,22 @@
                         font-weight: $font-weight-semibold;
                     }
                 }
-            }
+            }    
         }
-    }
-    .icon-left-product {
-        margin-left: 0px;
-        margin-top: -52px;
-        padding: 1px 12px;
-    }
-    .icon-right-product {
-        margin-right: 0px;
-        margin-top: -52px;
-        padding: 1px 12px;
     }
 }
 
-.uk-light .uk-dotnav > * > * {
+.uk-light .uk-dotnav>*>* {
     margin-top: 20px;
     border: 2px solid $color;
     width: 13px;
     height: 13px;
-    &:hover {
-        background-color: $color;
-    }
+   &:hover {
+    background-color: $color;
+   }
 }
 
-.uk-light .uk-dotnav > .uk-active > * {
+.uk-light .uk-dotnav>.uk-active>* {
     background-color: $color;
 }
 

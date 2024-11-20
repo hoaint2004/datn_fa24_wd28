@@ -8,18 +8,14 @@
     <div class="banner uk-position-relative uk-visible-toggle uk-light" tabIndex={-1}
         uk-slideshow="animation: fade; autoplay: true; autoplay-interval: 3000">
         <div class="uk-slideshow-items">
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/orange-sneaker-banner-design-template-c40c3bb0b3e78e695ea680fc49ab95e5_screen.jpg?ts=1680685160"
-                    alt="Slide 1" uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://i.pinimg.com/736x/33/5c/7a/335c7a303b8839e6e491df45581a21c9.jpg" alt="Slide 2"
-                    uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sneakers-mockup-banner-design-template-a168837d88ce417842e272c989245883_screen.jpg?ts=1678847642"
-                    alt="Slide 3" uk-cover="true" />
-            </div>
+            @if (!empty($data['banners']))
+                @foreach ($data['banners'] as $item)
+                    <div>
+                        <img src="{{ $item->image }}"
+                            alt="{{ $item->name }}" uk-cover="true" />
+                    </div>
+                @endforeach
+            @endif
         </div>
 
         <button class="icon-left uk-position-center-left uk-position-small uk-hidden-hover" uk-slideshow-item="previous">
@@ -208,8 +204,8 @@
                                             </div>
                                         </div>
                                         <div class="product-review">
-                                            <a href="{{ route('categories', $item->category->id) }}">
-                                                <span>{{ $item->category->name }}</span>
+                                            <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                                <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
                                             <div class="icon">
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -219,8 +215,8 @@
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                             </div>
                                         </div>
-                                        <a href="{{ route('productDetail', $item->id) }}"
-                                            class="product-name">{{ $item->name }}</a>
+                                        <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                            class="product-name">{{ !empty($item->name) ? $item->name :'' }}</a>
                                         <div class="product-price">
                                             <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                             @if (!empty($item->price_old))
@@ -300,11 +296,11 @@
                             <a href="{{ route('categories', ['id' => $item->id]) }}" style="height: 100%"
                                 class="a-img uk-inline-clip uk-transition-toggle" tabIndex={0}>
                                 <img style="height: 100%" class="uk-transition-scale-up uk-transition-opaque"
-                                    src="{{ $item->image }}" alt="{{ $item->name }}" /></a>
+                                    src="{{ $item->image }}" alt="{{ !empty($item->name) ? $item->name : '' }}" /></a>
                         </div>
                         <div class="name-shoes-body">
                             <a href="{{ route('categories', ['id' => $item->id]) }}" class="a-body">
-                                <p>{{ $item->name }}</p>
+                                <p>{{ !empty($item->name) ? $item->name : '' }}</p>
                             </a>
                         </div>
                     </div>
@@ -345,8 +341,8 @@
                                 </div>
                             </div>
                             <div class="product-review">
-                                <a href="{{ route('categories', $item->category->id) }}">
-                                    <span>{{ $item->category->name }}</span>
+                                <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                    <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                 </a>
                                 <div class="icon">
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -356,8 +352,8 @@
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                 </div>
                             </div>
-                            <a href="{{ route('productDetail', $item->id) }}"
-                                class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                class="product-name">{{ !empty($item->name) ?$item->name : '' }}</a>
                             <div class="product-price">
                                 <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                 @if (!empty($item->price_old))
@@ -545,7 +541,7 @@
             <div class="title">
                 <hr />
                 <a href="#">
-                    <h2>{{ $data['categoryNewOne']->name }}</h2>
+                    <h2>{{ !empty($data['categoryNewOne']->name) ? $data['categoryNewOne']->name : '' }}</h2>
                 </a>
                 <hr />
             </div>

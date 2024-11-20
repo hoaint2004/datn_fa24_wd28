@@ -137,7 +137,7 @@
                             <p class="mini-cart-button">
                                 <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
                                     Hàng</a>
-                                <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                                <a href="{{ route('order.create') }}" class="continue-shopping" title="Thanh toán">Thanh toán</a>
                             </p>
                         </div>
                     </div>
