@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
+use App\Http\Controllers\CommentController as ControllersCommentController;
 use App\Http\Controllers\ProductController as ControllersProductController;
 
 /*
