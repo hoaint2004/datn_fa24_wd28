@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterMail;
 
 class AuthController extends Controller
 {
@@ -29,7 +32,7 @@ class AuthController extends Controller
     // Tìm user theo email
     $user = User::where('email', $data['email'])->first();
 
-    if ($user) {
+    if ($user && $user->email_verified_at) {
         // Kiểm tra mật khẩu
         if (Hash::check($data['password'], $user->password)) {
             // Đăng nhập thành công
@@ -47,7 +50,7 @@ class AuthController extends Controller
         }
     } else {
         // Sai email
-        return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại.');
+        return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại hoặc chưa xác thực vui lòng kiểm tra lại email.');
     }
 }
 
@@ -60,14 +63,17 @@ class AuthController extends Controller
     {
         DB::beginTransaction();
         try {
-            User::create([
+            $user = User::create([
                 'fullname' => $request->fullname,
                 'username' => $request->username,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
-                'role' => User::TYPE_MEMBER
+                'role' => User::TYPE_MEMBER,
+                'remember_token' => Str::random(10)
             ]);
+             // Gửi mail
+            Mail::to($user->email)->send(new RegisterMail($user));
 
             DB::commit();
 
@@ -80,6 +86,23 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Đăng Ký Thất Bài!');
         }
     }
+
+    public function verify($token)
+    {
+        // Tìm user theo token
+        $user = User::where('remember_token', $token)->first();
+
+        if (!$user) {
+            return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
+        }
+
+        $user->email_verified_at = now();
+        $user->remember_token = null; 
+        $user->save();
+
+        return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
+    }
+
 
     public function logout()
     {
