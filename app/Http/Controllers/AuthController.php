@@ -31,8 +31,8 @@ class AuthController extends Controller
 
     // Tìm user theo email
     $user = User::where('email', $data['email'])->first();
-
-    if ($user && $user->email_verified_at) {
+    if($user)    {
+    // if ($user && $user->email_verified_at) {
         // Kiểm tra mật khẩu
         if (Hash::check($data['password'], $user->password)) {
             // Đăng nhập thành công
@@ -73,7 +73,7 @@ class AuthController extends Controller
                 'remember_token' => Str::random(10)
             ]);
              // Gửi mail
-            Mail::to($user->email)->send(new RegisterMail($user));
+            // Mail::to($user->email)->send(new RegisterMail($user));
 
             DB::commit();
 
@@ -87,21 +87,21 @@ class AuthController extends Controller
         }
     }
 
-    public function verify($token)
-    {
-        // Tìm user theo token
-        $user = User::where('remember_token', $token)->first();
+    // public function verify($token)
+    // {
+    //     // Tìm user theo token
+    //     $user = User::where('remember_token', $token)->first();
 
-        if (!$user) {
-            return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
-        }
+    //     if (!$user) {
+    //         return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
+    //     }
 
-        $user->email_verified_at = now();
-        $user->remember_token = null; 
-        $user->save();
+    //     $user->email_verified_at = now();
+    //     $user->remember_token = null; 
+    //     $user->save();
 
-        return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
-    }
+    //     return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
+    // }
 
 
     public function logout()
