@@ -185,6 +185,20 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="orders">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản đơn hàng</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="orders">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.orders.index') }}" class="nav-link" data-key="t-chat"> Danh sách đơn hàng
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

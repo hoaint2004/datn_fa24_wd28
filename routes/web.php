@@ -1,25 +1,26 @@
 <?php
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CommentController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\ProductVariantsController;
-use App\Http\Controllers\admin\PostCommentController;
+
+use App\Http\Controllers\Admin\AdminOrderController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController as ControllersProductController;
-use App\Http\Controllers\CategoryController as ClientCategoryController;
-use App\Http\Controllers\CommentController as ControllersCommentController;
-use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
+use App\Http\Controllers\SneakerController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProductVariantsController;
+use App\Http\Controllers\CategoryController as ClientCategoryController;
+use App\Http\Controllers\ProductController as ControllersProductController;
 
 /*
 |--------------------------------------------------------------------------
-|WebRoutes
+| Web Routes
 |--------------------------------------------------------------------------
 |
 |Hereiswhereyoucanregisterwebroutesforyourapplication.These
@@ -108,17 +109,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 ->name('delete');
         });
 
-    Route::controller(BannerController::class)
-        ->name('banners.')
-        ->prefix('banners')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::put('/update/{id}', 'update')->name('update');
-            Route::delete('/delete/{id}', 'delete')->name('delete');
-        });
+    Route::resource('orders', AdminOrderController::class);
 });
 
 // Route user
@@ -136,7 +127,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
-    Route::get('/order', [ControllersProductController::class, 'order'])->name('checkout');
+    
+    Route::resource('/order', OrderController::class);
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
