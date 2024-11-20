@@ -34,6 +34,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
