@@ -124,7 +124,7 @@ $(document).ready(function () {
                             </div>
                         `;
 
-                    $('.list-comment-child').prepend(htmlComment);
+                    $('#list-comment-child-' + id ).prepend(htmlComment);
                     $(form_reply).slideUp();
                     $('#content-reply').val('');
                     // Cập nhật lại thời gian tương đối
