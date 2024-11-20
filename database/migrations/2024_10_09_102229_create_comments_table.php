@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
             $table->text('content');
+            $table->unsignedBigInteger('parent_id')->nullable(); // Lưu comment cha
             $table->timestamps();
         });
     }
