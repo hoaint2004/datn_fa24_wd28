@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Đăng nhập</title>
+    <title>Xác nhận mật khẩu</title>
     <link rel="stylesheet" href="{{ asset('register.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/sneakers/assets/images/favicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -22,39 +22,32 @@
 
 <body>
     <div class="wrapper">
-        <form action="{{ route('postLogin') }}" method="POST">
+        <form action="{{ route('password.update') }}" method="POST">
             @csrf
-            <h2>Đăng nhập</h2>
+            <h2>Xác nhận mật khẩu mới</h2>
             <div class="input-field">
-                <input type="email" name="email" value="{{ old('email') }}">
-                <label for="">Email</label>
-            </div>
-            @error('email')
-                <span style="color:red">{{ $message }}</span>
-            @enderror
-
-            <div class="input-field">
-                <input type="password" name="password" value="{{ old('password') }}">
+                <input id="password_new" type="password"
+                    value="{{ old('password') }}" name="password" autocomplete="new-password">
                 <label for="">Mật khẩu</label>
             </div>
             @error('password')
                 <span style="color:red">{{ $message }}</span>
             @enderror
 
-            <div class="forget">
-                <label for="remember">
-                    <input type="checkbox" name="" id="remember">
-                    <p>Ghi nhớ tôi</p>
-                </label>
-
-                <a href="{{ route('password.forgotPassword') }}">Quên mật khẩu?</a>
+            <div class="input-field">
+                <input id="password-confirm" type="password" name="password_confirmation"
+                    autocomplete="new-password">
+                <label for="">Xác nhận mật khẩu mới</label>
             </div>
+            @error('password_confirmation')
+                <span style="color:red">{{ $message }}</span>
+            @enderror
 
-            <button type="submit">Đăng nhập</button>
+            <button type="submit" class="mt-3">Xác nhận</button>
 
             <div class="register">
-                <p>Bạn chưa có tài khoản?
-                    <a href="{{ route('postRegister') }}">Đăng ký</a>
+                <p>
+                    <a href="{{ route('home') }}">Về trang chủ</a>
                 </p>
             </div>
         </form>
@@ -71,7 +64,7 @@
             showConfirmButton: true
         }).then(result => {
             if (result.isConfirmed) {
-                window.location.href = "{{ route('home') }}";
+                window.location.href = "{{ route('login.form') }}";
             }
         });
     </script>
@@ -84,11 +77,7 @@
             icon: 'error',
             title: '{{ session('error') }}',
             showConfirmButton: true
-        }).then(result => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ route('login.form') }}";
-            }
-        });
+        })
     </script>
 @endif
 
