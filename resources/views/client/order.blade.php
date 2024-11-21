@@ -202,8 +202,8 @@
                         <!-- Bước 3: Xác nhận đơn hàng -->
                         <div class="review">
                             <fieldset class="uk-fieldset review-body">
-                                <legend class="uk-legend order-title-item">Xác thực thanh toán</legend>
-                                <p class="order-name mt-5 mb-3">Vui lòng kiểm tra lại thông tin đơn hàng của bạn.</p>
+                                {{-- <legend class="uk-legend order-title-item">Xác thực thanh toán</legend> --}}
+                                <p class="order-name mt-5 mb-3">Sản phẩm đã đặt.</p>
                                 <div class="uk-list uk-list-divider review-content">
                                     @foreach ($carts as $item)
                                         <div class="warp">
@@ -228,7 +228,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-
+{{-- 
                                     <div class="shipping-adress mb-4">
                                         <p class="order-name mb-2">
                                             Địa chỉ giao hàng
@@ -265,7 +265,7 @@
                                                 </i>
                                             </button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </fieldset>
                         </div>
