@@ -67,11 +67,11 @@
                     <div class="collapse menu-dropdown" id="sidebarProduct">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                <a href="{{ route('admin.product_variants.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
                                     sách sản phẩm </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                <a href="{{ route('admin.product_variants.create') }}" wire:navigate class="nav-link" data-key="t-chat">
                                     Thêm mới sản phẩm </a>
                             </li>
                         </ul>
@@ -126,7 +126,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.banners.index') }}" class="nav-link" data-key="t-chat"> Danh sách banner
+                                <a href="{{ route('admin.banners.create') }}" class="nav-link" data-key="t-chat"> Thêm mới banner
                                 </a>
                             </li>
                         </ul>
@@ -169,7 +169,7 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="orders">
-                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản đơn hàng</span>
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đơn hàng</span>
                     </a>
                     <div class="collapse menu-dropdown" id="orders">
                         <ul class="nav nav-sm flex-column">
