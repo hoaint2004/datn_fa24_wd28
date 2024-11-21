@@ -160,13 +160,16 @@ $(document).ready(function () {
         $.ajax({
             url: commentUrl,
             method: 'POST',
-            data: { content: content },
+            data: { 
+                content: content 
+            },
             dataType: 'json',
             success: function (response) {
                 if (response.error) {
                     console.error("Có lỗi xảy ra:", error);
                 } else {
-                    if (response.data.comment.status === 1) { // Chỉ hiển thị khi status = 1
+                    console.log(response.data);
+                    // if (response.data.comment.status === 1) { // Chỉ hiển thị khi status = 1
                         var commentDestroy = '/comment/destroy/' + response.data.comment.id;
                         var htmlComment = `
                             <div class="comment-parent" id="comment-parent-${response.data.comment.id}">
@@ -193,7 +196,7 @@ $(document).ready(function () {
                         $('.media-comment').prepend(htmlComment);
                         $('#content').val('');
                         updateRelativeTime();
-                    }
+                    // }
                 }
             },
             error: function (xhr, status, error) {

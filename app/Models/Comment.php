@@ -10,7 +10,9 @@ class Comment extends Model
     use HasFactory;
 
     protected $table = 'comments';
-
+    protected $attributes = [
+        'status' => 1,
+    ];
     protected $guarded = [];
 
     public function product()
