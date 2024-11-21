@@ -115,25 +115,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProducts">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí sản phẩm</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarProducts">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
-                                    sách sản phẩm </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
-                                    Thêm mới sản phẩm </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="banners">
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí banner</span>

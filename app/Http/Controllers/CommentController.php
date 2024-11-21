@@ -24,6 +24,7 @@ class CommentController extends Controller
         'product_id' => $product_id,
         'user_id' => auth()->user()->id,
         'parent_id' => $request->parent_id ?? 0,
+        
     ];
 
     $addComment = Comment::create($data);
@@ -36,7 +37,7 @@ class CommentController extends Controller
     return response()->json([
         'message' => 'Thêm bình luận thành công!',
         'data' => [
-            'comment' => $comment,
+            'comment' => $addComment,
             'user' => auth()->user(),
         ],
     ]);
