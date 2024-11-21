@@ -155,6 +155,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
 
     Route::resource('/order', OrderController::class);
+    Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
