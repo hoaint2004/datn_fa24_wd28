@@ -8,18 +8,14 @@
     <div class="banner uk-position-relative uk-visible-toggle uk-light" tabIndex={-1}
         uk-slideshow="animation: fade; autoplay: true; autoplay-interval: 3000">
         <div class="uk-slideshow-items">
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/orange-sneaker-banner-design-template-c40c3bb0b3e78e695ea680fc49ab95e5_screen.jpg?ts=1680685160"
-                    alt="Slide 1" uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://i.pinimg.com/736x/33/5c/7a/335c7a303b8839e6e491df45581a21c9.jpg" alt="Slide 2"
-                    uk-cover="true" />
-            </div>
-            <div>
-                <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/sneakers-mockup-banner-design-template-a168837d88ce417842e272c989245883_screen.jpg?ts=1678847642"
-                    alt="Slide 3" uk-cover="true" />
-            </div>
+            @if (!empty($data['banners']))
+                @foreach ($data['banners'] as $item)
+                    <div>
+                        <img src="{{ $item->image }}"
+                            alt="{{ $item->name }}" uk-cover="true" />
+                    </div>
+                @endforeach
+            @endif
         </div>
 
         <button class="icon-left uk-position-center-left uk-position-small uk-hidden-hover" uk-slideshow-item="previous">
@@ -308,6 +304,7 @@
                             </a>
                         </div>
                     </div>
+                  
                 @endforeach
             @endif
         </div>
@@ -638,7 +635,7 @@
                 </div>
 
                 <div class="uk-width-1-2" style="overflow-y: hidden;">
-                    <h1 class="text-3xl font-bold"></h1>
+                    <h1 class="text-3xl font-bold title-model-detail"></h1>
                     <p class="text-xl text-gray-600"></p>
                     <div class="flex items-center mt-2">
                         <div class="flex items-center">
@@ -650,27 +647,38 @@
                         </div>
                         <p class="ml-2 text-gray-600">(121 Reviews)</p>
                     </div>
-                    <div class="mt-4">
+
+                    <div class="flex items-center my-4 price">
+                        <span class="text-2xl font-bold text-red-500 modal-price">
+                          
+                        </span>
+                       
+                        <span class="text-base text-gray-500 line-through ml-2">
+                           
+                        </span>
+                       
+                    </div>
+                    <!-- <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>
                         <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
-                    </div>
-                    <p class="mt-4 text-gray-600 modal-description">
+                    </div> -->
+                    <p class="mt-4  mb-4 desc text-gray-600 modal-description">
 
                     </p>
                     <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
-                        <div class="mt-4">
-                            <p class="font-bold">Màu sắc</p>
+                        <div class="mb-4 color ">
+                             <p class="text-lg font-bold mb-4">Màu sắc</p>
                             <div class="flex space-x-2 mt-2 box-color">
 
                             </div>
                         </div>
                         <div class="mt-4">
-                            <p class="font-bold">Size</p>
+                            <p class="font-bold text-lg text-[#222] mb-4">Size</p>
                             <div class="flex space-x-2 mt-2 box-size">
 
                             </div>
                         </div>
-                        <div class="mt-4 flex items-center space-x-4">
+                        <div class="mt-10 flex items-center space-x-4">
                             <div class="flex items-center border border-gray-300 rounded-lg">
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
                                 <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
@@ -684,7 +692,7 @@
                             </button>
                         </div>
                     </form>
-                    <div class="mt-4">
+                    <div class="mt-10">
                         <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
                     </div>
                 </div>
