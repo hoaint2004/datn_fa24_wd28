@@ -759,6 +759,28 @@
         });
 
 
+<<<<<<< HEAD
+=======
+        // const minusButton = document.querySelector('.quantity-selector-button-minus');
+        // const plusButton = document.querySelector('.quantity-selector-button-plus');
+        // const quantityInput = document.querySelector('.quantity-selector-input');
+
+        // //giảm số lượng
+        // minusButton.addEventListener('click', () => {
+        //     let currentValue = parseInt(quantityInput.value);
+        //     if (currentValue > 1) {
+        //         quantityInput.value = currentValue - 1;
+        //     }
+        // });
+
+        // //tăng số lượng
+        // plusButton.addEventListener('click', () => {
+        //     let currentValue = parseInt(quantityInput.value);
+        //     if (currentValue < 9999) {
+        //         quantityInput.value = currentValue + 1;
+        //     }
+        // });
+>>>>>>> dd77ecd0b099af197509a321ed0a72dd52257b1d
     </script>
 
     <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>
