@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Discount;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 use Exception;
 use Illuminate\Support\Facades\Storage;
@@ -68,8 +69,13 @@ class DiscountController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'is_active' => 'nullable|boolean', // Kiểm tra trạng thái kích hoạt
-            'discount_type' => 'required|in:percentage,fixed', // Kiểm tra loại giảm giá
-            'discount_value' => 'required|numeric|min:0', // Kiểm tra giá trị giảm giá
+            'discount_type' => ['required', Rule::in(['percentage', 'fixed'])], // Kiểm tra loại giảm giá
+            'discount_value' => [
+                'required',
+                'numeric',
+                'min:0',
+                Rule::when($request->discount_type === 'percentage', 'max:100') // Nếu là percentage, giới hạn tối đa 100
+            ],
             'min_order_value' => 'nullable|numeric|min:0', // Kiểm tra giá trị đơn hàng tối thiểu
             'usage_limit' => 'nullable|integer|min:1', // Kiểm tra giới hạn sử dụng
         ]);
