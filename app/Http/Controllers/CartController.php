@@ -14,7 +14,14 @@ class CartController extends Controller
 {
     public function showCart()
     {
+        if (!Auth::check()) {
+            return redirect()->route('home')->with([
+                'checkLogin' => 'Vui lòng đăng nhập để tiếp tục!'
+            ]);
+        }
+
         $data['carts'] = Cart::with('product', 'variant')->where('user_id', auth()->user()->id ?? 0)->get();
+
 
         return view('client.cart', compact('data'));
     }

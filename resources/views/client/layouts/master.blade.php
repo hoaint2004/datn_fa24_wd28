@@ -14,7 +14,7 @@
     ============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/sneakers/assets/images/favicon.ico') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/account.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/account.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
@@ -33,5 +33,14 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.js"></script>
 @yield('js')
-
+    @if (session()->has('checkLogin'))
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: '{{ session()->get("checkLogin") }}',
+                showDenyButton: false,
+                time: 1500
+            })
+        </script>
+    @endif
 </html>
