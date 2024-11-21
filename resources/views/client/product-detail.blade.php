@@ -759,25 +759,25 @@
         });
 
 
-        const minusButton = document.querySelector('.quantity-selector-button-minus');
-        const plusButton = document.querySelector('.quantity-selector-button-plus');
-        const quantityInput = document.querySelector('.quantity-selector-input');
+        // const minusButton = document.querySelector('.quantity-selector-button-minus');
+        // const plusButton = document.querySelector('.quantity-selector-button-plus');
+        // const quantityInput = document.querySelector('.quantity-selector-input');
 
-        //giảm số lượng
-        minusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
+        // //giảm số lượng
+        // minusButton.addEventListener('click', () => {
+        //     let currentValue = parseInt(quantityInput.value);
+        //     if (currentValue > 1) {
+        //         quantityInput.value = currentValue - 1;
+        //     }
+        // });
 
-        //tăng số lượng
-        plusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 9999) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
+        // //tăng số lượng
+        // plusButton.addEventListener('click', () => {
+        //     let currentValue = parseInt(quantityInput.value);
+        //     if (currentValue < 9999) {
+        //         quantityInput.value = currentValue + 1;
+        //     }
+        // });
     </script>
 
     <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>
