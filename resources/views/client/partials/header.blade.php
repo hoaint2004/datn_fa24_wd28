@@ -5,8 +5,8 @@
             <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
                 <form action="" class="form-search">
                     <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
-                    <button>
-                        <SearchOutlined class="icon-search" />
+                    <button uk-icon="search" class="icon-search">
+
                     </button>
                 </form>
             </div>
@@ -36,7 +36,10 @@
                     <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                         @if (Auth::check())
                             <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
-                            <a class="user-header" href="{{ route('logout') }}">Logout</a>
+                            @if (Auth::check() && Auth::user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="user-header">Trang quản trị</a>
+                            @endif
+                            <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
                         @else
                             <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
                             <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
@@ -117,7 +120,7 @@
                                                     action="{{ route('cart.delete', $item->id) }}" method="post">
                                                     @csrf
                                                     <button class="cart-item-remove"><i
-                                                        class="fa-solid fa-trash-can"></i></button>
+                                                            class="fa-solid fa-trash-can"></i></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -137,7 +140,8 @@
                             <p class="mini-cart-button">
                                 <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
                                     Hàng</a>
-                                <a href="{{ route('order.create') }}" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                                <a href="{{ route('order.create') }}" class="continue-shopping"
+                                    title="Thanh toán">Thanh toán</a>
                             </p>
                         </div>
                     </div>
@@ -210,37 +214,37 @@
                             </div>
                         </div>
                     </li>
-                        <li><a href="#">Xu hướng thời trang</a></li>
-                        <li><a href="{{ route('contact') }}">Liên hệ</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-
-        <div id="offcanvas-menu" uk-offcanvas="mode: push; overlay: true">
-            <div class="uk-offcanvas-bar">
-                <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
-                <ul class="uk-nav uk-nav-default">
-                    <li>
-                        <a href="{{ route('home') }}">Trang chủ</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('category') }}">Danh mục sản phẩm</a>
-                    </li>
-                    <li>
-                        <a href="#">Sản phẩm nổi bật</a>
-                    </li>
-                    <li>
-                        <a href="#">Xu hướng thời trang</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('contact') }}">Liên hệ</a>
-                    </li>
+                    <li><a href="#">Xu hướng thời trang</a></li>
+                    <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-    </header>
+
+    <div id="offcanvas-menu" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+            <ul class="uk-nav uk-nav-default">
+                <li>
+                    <a href="{{ route('home') }}">Trang chủ</a>
+                </li>
+                <li>
+                    <a href="{{ route('category') }}">Danh mục sản phẩm</a>
+                </li>
+                <li>
+                    <a href="#">Sản phẩm nổi bật</a>
+                </li>
+                <li>
+                    <a href="#">Xu hướng thời trang</a>
+                </li>
+                <li>
+                    <a href="{{ route('contact') }}">Liên hệ</a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+    </div>
+</header>
 </body>
 
 </html>
@@ -256,7 +260,8 @@
                 denyButtonText: `Hủy`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.submit();v
+                    this.submit();
+                    v
                 }
             });
         });

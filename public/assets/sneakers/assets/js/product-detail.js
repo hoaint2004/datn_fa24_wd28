@@ -124,7 +124,7 @@ $(document).ready(function () {
                             </div>
                         `;
 
-                    $('.list-comment-child').prepend(htmlComment);
+                    $('#list-comment-child-' + id ).prepend(htmlComment);
                     $(form_reply).slideUp();
                     $('#content-reply').val('');
                     // Cập nhật lại thời gian tương đối
@@ -160,38 +160,43 @@ $(document).ready(function () {
         $.ajax({
             url: commentUrl,
             method: 'POST',
-            data: { content: content },
+            data: { 
+                content: content 
+            },
             dataType: 'json',
             success: function (response) {
                 if (response.error) {
-                    console.error("Có lỗi xảy ra:", response.error);
+                    console.error("Có lỗi xảy ra:", error);
                 } else {
-                    const commentDestroy = `/comment/delete/${response.data.comment.id}`;
-                    const htmlComment = `
-                        <div class="comment-parent" id="comment-parent-${response.data.comment.id}">
-                            <a href="" class="pull-left">
-                                <img src="${path_img}" alt="" class="avatar" width="60px">
-                            </a>
-                            <div class="media-comment-body">
-                                <h4 name="fullname">${response.data.user.fullname}
-                                    <small class="created_at" style="color: #5555558f" data-time="${response.data.comment.created_at}">
-                                        ${calculateRelativeTime(response.data.comment.created_at)}
-                                    </small>
-                                </h4>
-                                <p name="content">${response.data.comment.content}</p>
-                                <div class="text-right">
-                                    <a href="" class="btn-edit" data-id_comment="${response.data.comment.id}" data-content="${response.data.comment.content}">Edit</a>
-                                    <form action="${commentDestroy}" method="post" class="delete-comment">
-                                        <button type="submit" class="btn-delete" data-comment_id="${response.data.comment.id}">Delete</button>
-                                    </form>
-                                    <a class="btn-reply" href="" data-id_comment="${response.data.comment.id}">Reply</a>
+                    console.log(response.data);
+                    // if (response.data.comment.status === 1) { // Chỉ hiển thị khi status = 1
+                        var commentDestroy = '/comment/destroy/' + response.data.comment.id;
+                        var htmlComment = `
+                            <div class="comment-parent" id="comment-parent-${response.data.comment.id}">
+                                <a href="" class="pull-left">
+                                    <img src="${path_img}" alt="" class="avatar" width="60px">
+                                </a>
+                                <div class="media-comment-body">
+                                    <h4 name="fullname">${response.data.user.fullname}
+                                        <small class="created_at" style="color: #5555558f" data-time="${response.data.comment.created_at}">
+                                            ${calculateRelativeTime(response.data.comment.created_at)}
+                                        </small>
+                                    </h4>
+                                    <p name="content">${response.data.comment.content}</p>
+                                    <div class="text-right">
+                                        <a href="" class="btn-edit" data-id_comment="${response.data.comment.id}" data-content="${response.data.comment.content}">Edit</a>
+                                        <form action="${commentDestroy}" method="post" class="delete-comment">
+                                            <button type="submit" class="btn-delete" data-comment_id="${response.data.comment.id}">Delete</button>
+                                        </form>
+                                        <a class="btn-reply" href="" data-id_comment="${response.data.comment.id}">Reply</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`;
-
-                    $('.media-comment').prepend(htmlComment);
-                    $('#content').val('');
-                    updateRelativeTime();
+                            </div>`;
+            
+                        $('.media-comment').prepend(htmlComment);
+                        $('#content').val('');
+                        updateRelativeTime();
+                    // }
                 }
             },
             error: function (xhr, status, error) {

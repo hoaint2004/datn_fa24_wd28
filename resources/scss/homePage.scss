@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     grid-gap: 2rem;
+    margin-top: 45px;
     a {
         text-decoration: none !important;
         h2 {
@@ -124,8 +125,7 @@
 }
 
 .product-list {
-    margin-top: 45px;
-    margin-bottom: 50px;
+    
     .title {
         display: flex;
         justify-content: center;
@@ -507,7 +507,7 @@
 
 
 .collection {
-    margin-top: 45px;
+   
     .collection-list {
         .collection-list-item {
             width: 12.5%;

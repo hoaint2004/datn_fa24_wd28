@@ -2,75 +2,290 @@
 @section('title', 'Sneakers - Thế Giới Giày')
 @section('content')
 @if (session('message'))
-    <div class="alert-success">
-        {{ session('message') }}
-    </div>
+<div class="alert-success">
+    {{ session('message') }}
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert-danger">
-        {{ session('error') }}
-    </div>
+<div class="alert-danger">
+    {{ session('error') }}
+</div>
 @endif
 
-<div class="profile-container">
-    <aside class="sidebar">
-        <div class="profile-header">
-            @if (Auth::check())
-                <h2>Xin Chào 👋 <span>{{ Auth::user()->fullname }}</span></h2>
-            @endif
-        </div>
-        <nav class="menu">
-            <ul>
-                <li class="active">Thông tin cá nhân</li>
-                <li>Đơn hàng của tôi</li>
-                <li>Quản lý địa chỉ</li>
-                <li>Mã giảm giá</li>
-                <li>Notifications</li>
-                <li>Cài đặt</li>
-            </ul>
-        </nav>
-    </aside>
+<div class="profile-container uk-container uk-container-large mt-16">
+    <div class="uk-grid" uk-grid>
 
-    <main class="content">
-        <button class="edit-profile"> <i class="fa-regular fa-pen-to-square"></i> Chỉnh sửa hồ sơ</button>
-        <form class="profile-form">
-            <div class="form-group">
-                <label>Họ và tên</label>
-                <input type="text" value="{{ $user->fullname }}">
+        <aside class="sidebar uk-width-1-4">
+            <div class="profile-header">
+                @if (Auth::check())
+                <h2>Xin Chào 👋</h2>
+                <span>{{ Auth::user()->fullname }}</span>
+                @endif
             </div>
-            <div class="form-group">
-                <label>Tên người dùng</label>
-                <input type="text" value="{{ $user->username }}">
-            </div>
-            <div class="form-group">
-                <label>Địa chỉ Email</label>
-                <input type="text" value="{{ $user->email }}">
-            </div>
-        </form>
+            <nav class="menu">
+                <ul>
+                    <li class="active" onclick="showContent('info')"> <i class="fa-solid fa-user pr-3"></i>Thông tin cá nhân</li>
+                    <li onclick="showContent('orders')"><i class="fa-solid fa-box pr-3"></i>Đơn hàng của tôi</li>
+                    <li onclick="showContent('wishlists')"><i class="fa-solid fa-heart pr-3"></i>Sản phẩm yêu thích</li>
+                    <li onclick="showContent('addresses')"><i class="fa-solid fa-map pr-3"></i>Quản lý địa chỉ</li>
+                    <li onclick="showContent('discounts')"><i class="fa-solid fa-money-bill pr-3"></i>Mã giảm giá</li>
+                    <li onclick="showContent('notifications')"><i class="fa-solid fa-bell pr-3"></i>Notifications</li>
+                    <li onclick="showContent('settings')"><i class="fa-solid fa-gear pr-3"></i>Cài đặt</li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- Form Thay Đổi Mật Khẩu -->
-        <div class="change-password">
-            <h3>Thay đổi mật khẩu</h3>
-            <form action="{{ route('changePassword', $user->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label>Mật khẩu hiện tại</label>
-                    <input type="password" placeholder="Nhập mật khẩu hiện tại" class="password_old" name="password_old" required>
+        <main class="content uk-width-3-4">
+            <div id="info-content" class="content-section personal">
+
+                <button class="edit-profile"> <i class="fa-regular fa-pen-to-square pr-2"></i> Chỉnh sửa hồ sơ</button>
+                <form class="profile-form uk-grid" uk-griduk uk-width-1-2>
+                    <div class="form-groupuk uk-width-1-2 mt-7">
+                        <label class="block text-base font-medium text-[#555] pb-1">Họ và tên</label>
+                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="{{ $user->fullname }}">
+                    </div>
+                    <div class="form-groupuk uk-width-1-2 mt-7">
+                        <label class="block text-base font-medium text-[#555] pb-1">Tên người dùng</label>
+                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="{{ $user->username }}">
+                    </div>
+                    <div class="form-groupuk uk-width-1-2 mt-7">
+                        <label class="block text-base font-medium text-[#555] pb-1">Địa chỉ Email</label>
+                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="{{ $user->email }}">
+                    </div>
+
+                    <div class="form-group uk uk-width-1-2 mt-7">
+                        <label class="block text-base font-medium text-[#555] pb-1">Số điện thoại</label>
+                        <input class="mt-1 block w-full p-2 input-info input-account-profile" type="text" value="{{ $user->phone}}">
+                    </div>
+                </form>
+
+                <!-- Form Thay Đổi Mật Khẩu -->
+                <div class="change-password">
+                    <h3>Thay đổi mật khẩu</h3>
+                    <form action="{{ route('changePassword', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group mb-7">
+                            <label class="block text-base font-medium text-[#555] pb-1">Mật khẩu hiện tại</label>
+                            <input class="mt-1 block w-full p-2 input-info input-account-profile    " type="password" placeholder="Nhập mật khẩu hiện tại" class="password_old" name="password_old" required>
+                        </div>
+                        <div class="form-group mb-7">
+                            <label class="block text-base font-medium text-[#555] pb-1">Mật khẩu mới</label>
+                            <input class="mt-1 block w-full p-2 input-info input-account-profile    " type="password" placeholder="Nhập mật khẩu mới" class="password_new" name="password_new" required>
+                        </div>
+                        <div class="form-group mb-7">
+                            <label class="block text-base font-medium text-[#555] pb-1">Xác nhận mật khẩu mới</label>
+                            <input class="mt-1 block w-full p-2 input-info input-account-profile    " type="password" placeholder="Xác nhận mật khẩu mới" class="password_confirm" name="password_confirm" required>
+                        </div>
+                        <button type="submit" class="save-password-btn">Lưu thay đổi</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>Mật khẩu mới</label>
-                    <input type="password" placeholder="Nhập mật khẩu mới" class="password_new" name="password_new" required>
+
+            </div>
+
+            <div id="orders-content" class="content-section my-order">
+                <form action="" class="form-search-my-order">
+                    <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order"/>
+                    <button uk-icon="search" class="icon-search">
+                    </button>
+                </form>
+
+                <div class="order-item">
+                    <div class="order-content">
+                        <div class="order-content-left">
+                            <img alt="" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" />
+                            <div class="order-details">
+                                <a href="#" class="order-details-nam-product">
+                                    <h3>
+                                        Giày búp bê da
+                                    </h3>
+                                </a>
+                                <p>
+                                    Size: S
+                                </p>
+                                <p>
+                                    Màu: Đen
+                                </p>
+                                <p>
+                                    Số lượng: 1
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="order-content-right">
+                            <div class="order-price">
+                                2.180.000₫
+                            </div>
+
+                            <div class="order-actions">
+                                <button class="view-order-bt">
+                                    Xem đơn hàng
+                                </button>
+                                <button class="review-button" data-uk-toggle="target: #modal-review-1">
+                                    Viết đánh giá
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="order-status">
+                        <span class="delivered">
+                            Đã giao hàng
+                        </span>
+                        <p>
+                            Sản phẩm của bạn đã được giao
+                        </p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Xác nhận mật khẩu mới</label>
-                    <input type="password" placeholder="Xác nhận mật khẩu mới" class="password_confirm" name="password_confirm" required>
+
+                <div class="order-item">
+                    <div class="order-content">
+                        <div class="order-content-left">
+                            <img alt="" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" />
+                            <div class="order-details">
+                                <a href="#" class="order-details-nam-product">
+                                    <h3>
+                                        Giày búp bê da
+                                    </h3>
+                                </a>
+                                <p>
+                                    Size: S
+                                </p>
+                                <p>
+                                    Màu: Đen
+                                </p>
+                                <p>
+                                    Số lượng: 1
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="order-content-right">
+                            <div class="order-price">
+                                2.180.000₫
+                            </div>
+
+                            <div class="order-actions">
+                                <button class="view-order-bt">
+                                    Xem đơn hàng
+                                </button>
+                                <button class="cancel-button">
+                                    Hủy đơn hàng
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="order-status">
+                        <span class="in-process">
+                            Đang xử lý
+                        </span>
+                        <p>
+                            Sản phẩm của bạn đang được xử lý
+                        </p>
+                    </div>
                 </div>
-                <button type="submit" class="save-password-btn">Lưu thay đổi</button>
+
+            </div>
+
+            <div id="discounts-content" class="content-section">
+
+            </div>
+        </main>
+
+    </div>
+
+
+    <div id="modal-review-1" class="uk-flex-top modal-review" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+            <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+
+            <h3 class="uk-modal-title font-bold">Đánh giá sản phẩm</h3>
+            <div class="uk-margin modal-review-name">
+                <p><strong>Tên sản phẩm:</strong> Giày búp bê da</p>
+                <p><strong>Màu sắc:</strong> Đen</p>
+                <p><strong>Size:</strong> S</p>
+            </div>
+
+
+            <form id="review-form">
+                <div class="uk-margin">
+                    <strong for="rating" class="rating-model">Đánh giá:</strong>
+                    <div class="flex gap-2 items-center mt-1">
+                        <a href="#" class="star" data-value="1"><i
+                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                        <a href="#" class="star" data-value="2"><i
+                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                        <a href="#" class="star" data-value="3"><i
+                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                        <a href="#" class="star" data-value="4"><i
+                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                        <a href="#" class="star" data-value="5"><i
+                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="uk-margin">
+                    <strong for="review-content" class="text-[#222] ">Nội dung đánh giá:</strong>
+                    <textarea id="review-content" class=" mt-2 block w-full h-32 p-2 input-info" rows="5" placeholder="Viết đánh giá của bạn về sản phẩm..."></textarea>
+                </div>
+
+
+                <button type="submit" class="bt-review">Gửi đánh giá</button>
             </form>
         </div>
-    </main>
+    </div>
+
+
+
+
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        showContent('info');
+    });
+
+    function showContent(section) {
+        // ẩn nd
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.style.display = 'none';
+        });
+        // hiện nd 
+        var activeSection = document.getElementById(section + '-content');
+        if (activeSection) {
+            activeSection.style.display = 'block';
+        }
+    }
+
+
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', (event) => {
+            event.preventDefault(); // k chuyển trang click vào sao
+            //lấy giá trị rating data-value
+            const ratingValue = parseInt(star.dataset.value);
+            //update màu sắc
+            document.querySelectorAll('.star').forEach((s) => {
+                const currentValue = parseInt(s.dataset.value);
+                const icon = s.querySelector('i');
+                // sửa màu
+                icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
+                icon.classList.toggle('text-gray-400', currentValue > ratingValue);
+            });
+
+            //lưu vào ứng dụng, gửi lên backend
+            console.log("Rating value:", ratingValue);
+
+        });
+    });
+</script>
 
 @endsection
