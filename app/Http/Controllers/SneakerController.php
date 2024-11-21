@@ -35,8 +35,12 @@ class SneakerController extends Controller
             ->where('category_id', '=', $product->category_id)
             ->where('id', '!=', $id)->limit(20)->get();
 
-        $comments = Comment::where('product_id', $id)->where('parent_id', 0)->orderBy('id', 'DESC')->get();
-
+        $comments = Comment::where('product_id', $id)
+            ->where('parent_id', 0)
+            ->where('status', 1)
+            ->orderBy('id', 'DESC')
+            ->get();
+            
         return view("client.product-detail", compact('data', 'comments'));
     }
 

@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Variants;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +14,14 @@ class CartController extends Controller
 {
     public function showCart()
     {
+        if (!Auth::check()) {
+            return redirect()->route('home')->with([
+                'checkLogin' => 'Vui lòng đăng nhập để tiếp tục!'
+            ]);
+        }
+
         $data['carts'] = Cart::with('product', 'variant')->where('user_id', auth()->user()->id ?? 0)->get();
+
 
         return view('client.cart', compact('data'));
     }
@@ -22,6 +30,10 @@ class CartController extends Controller
     {
         DB::beginTransaction();
         try {
+            if (!Auth::check()) {
+                return response()->json(['status' => false, 'message' => 'Vui lòng đăng nhập để tiếp tục']);
+            }
+
             // Tìm sản phẩm
             $product = Product::find($request->id);
             if (!$product) {

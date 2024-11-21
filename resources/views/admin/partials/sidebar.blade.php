@@ -67,11 +67,11 @@
                     <div class="collapse menu-dropdown" id="sidebarProduct">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.product_variants.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
                                     sách sản phẩm </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.product_variants.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
                                     Thêm mới sản phẩm </a>
                             </li>
                         </ul>

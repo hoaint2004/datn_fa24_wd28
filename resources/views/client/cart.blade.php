@@ -103,8 +103,8 @@
                     <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
                 </div>
                 <div class="total-action">
-					<a href="#" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-					<a href="#" class="pay-money" title="Thanh toán">Thanh toán</a>
+					<a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
+					<a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
 				</div>
             </div>
         </div>

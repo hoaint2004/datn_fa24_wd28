@@ -17,8 +17,9 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
-use App\Http\Controllers\ProductController as ControllersCommentController;
 use App\Http\Controllers\ProductController as ControllersProductController;
+use App\Http\Controllers\CommentController as ControllersCommentController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 
@@ -33,13 +34,14 @@ use App\Http\Controllers\ProductController as ControllersProductController;
 */
 
 
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
+Route::middleware([RedirectIfAuthenticated::class])->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
+});
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -113,8 +115,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 ->name('delete');
         });
 
-    Route::resource('banners', BannerController::class);
-    
+    Route::controller(BannerController::class)
+        ->name('banners.')
+        ->prefix('banners')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
+        });
+
     Route::resource('orders', AdminOrderController::class);
 });
 

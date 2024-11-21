@@ -604,7 +604,7 @@
                                 </div>
                                 <div class="product-item-detail-gallery-items">
                                     @if (!empty($item->images))
-                                        @foreach ($collection as $item)
+                                        @foreach ($item->images as $item)
                                             <div class="product-item-detail-gallery-item">
                                                 <img src="{{ $item->image_url }}"
                                                     alt="">
