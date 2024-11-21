@@ -85,7 +85,7 @@
                                         value="{{ Auth::user()->fullname ?? '' }}">
 
                                     @error('name')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span style="color: red">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div>
@@ -95,7 +95,7 @@
                                         placeholder="Nhập số điện thoại" name="phone"
                                         value="{{ Auth::user()->phone ?? '' }}">
                                     @error('phone')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span style="color: red">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div>
@@ -104,7 +104,7 @@
                                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black"
                                         placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address ?? '' }}">
                                     @error('address')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span style="color: red">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 {{-- <div>

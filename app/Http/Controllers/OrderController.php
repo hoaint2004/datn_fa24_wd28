@@ -63,30 +63,49 @@ class OrderController extends Controller
             $orderID = $order->id;
 
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-
             foreach($carts as $item) {
                 $order->orderDetails()->create([
                     'order_id' => $orderID,
                     'product_id' => $item->product_id,
                     'variant_id' => $item->variant_id,
-                    'price' => $item->price,
+                    'price' => $item->product->price ?? $item->product->price_old,
                     'size' => $item->size,
                     'color' => $item->color,
                     'quantity' => $item->quantity,
-                    'total' => $item->price * $item->quantity,
+                    'total' => ($item->product->price ?? $item->product->price_old) * $item->quantity,
                 ]);
             }
 
             DB::commit();
+
             foreach($carts as $item) {
+                foreach($item->product->variants as $variant) {
+                    $variant->update([
+                        'quantity' => $variant->quantity - $item->quantity
+                    ]);
+                }
                 $item->delete();
             }
-            return redirect()->route('home')->with('success', 'Tạo đơn hàng thành công');
+            
+            return redirect()->route('order.success')
+            ->with(
+                [
+                    'name' => $order->name,
+                    'phone' => $order->phone,
+                    'address' => $order->address,
+                    'payment_method' => $order->payment_method,
+                    'code' => $order->code,
+                ]
+            );
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi khi tạo đơn hàng');
         }
+    }
+
+    public function orderSuccess() {
+        return view('client.ordersuccess');
     }
 
     public function getRevenueAndProfitData(Request $request)
