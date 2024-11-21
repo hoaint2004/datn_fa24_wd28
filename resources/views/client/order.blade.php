@@ -10,7 +10,9 @@
             </ul>
         </nav>
     </div>
-
+    <span>
+        {{session('error')}}
+    </span>
     <section class="uk-container uk-container-large order mb-4">
         <h2 class="order-title">Thông tin nhận hàng</h2>
         <form action="{{ route('order.store') }}" method="POST">
