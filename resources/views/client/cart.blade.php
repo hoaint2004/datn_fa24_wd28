@@ -96,12 +96,16 @@
                 <h2 class="">Thông tin đơn hàng</h2>
                 <div class="shipping-fee">
                     <span>Phí vận chuyển</span>
-                    <span>$200</span>
+                    <span>30.000</span>
                 </div>
                 <div class="total-right">
                     <span>Tổng tiền</span>
                     <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
                 </div>
+                <div class="total-action">
+					<a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
+					<a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
+				</div>
             </div>
         </div>
     </section>

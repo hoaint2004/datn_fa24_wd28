@@ -8,33 +8,41 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function comment($product_id, Request $request)
-    {
-        $request->validate(
-            [
-                'content' => 'required'
-            ],
-            [
-                'content.required' => 'Nội dung bình luận không được bỏ trống!'
-            ]
-        );
+{
+    $request->validate(
+        [
+            'content' => 'required'
+        ],
+        [
+            'content.required' => 'Nội dung bình luận không được bỏ trống!'
+        ]
+    );
 
-        $data = [
-            'content' => $request->input('content'),
-            'product_id' => $product_id,
-            'user_id' => auth()->user()->id,
-            'parent_id' => $request->parent_id ?? 0
-        ];
+    // Tạo bình luận mới
+    $data = [
+        'content' => $request->input('content'),
+        'product_id' => $product_id,
+        'user_id' => auth()->user()->id,
+        'parent_id' => $request->parent_id ?? 0,
+        
+    ];
 
-        $comment = Comment::create($data);
+    $addComment = Comment::create($data);
 
-        return response()->json([
-            'message' => 'Thêm bình luận thành công!',
-            'data' => [
-                'comment' => $comment,
-                'user' => auth()->user()
-            ],
-        ]);
-    }
+    // Lấy các bình luận có status = 1 cho sản phẩm
+    $comment = Comment::where('product_id', $product_id)
+                             ->where('status', 1)
+                             ->get();
+
+    return response()->json([
+        'message' => 'Thêm bình luận thành công!',
+        'data' => [
+            'comment' => $addComment,
+            'user' => auth()->user(),
+        ],
+    ]);
+}
+
 
     public function destroy(Comment $id)
     {

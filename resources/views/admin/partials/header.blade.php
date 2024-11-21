@@ -820,6 +820,10 @@
                         <a class="dropdown-item" href="pages-profile.html"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Profile</span></a>
+                        <a class="dropdown-item" href="{{ route('home')}}">
+                            <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> 
+                                <span class="align-middle" data-key="t-home">Trang chủ</span>
+                        </a>
                         <a class="dropdown-item" href="apps-chat.html"><i
                                 class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Messages</span></a>
@@ -840,6 +844,7 @@
                         <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                 class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Lock screen</span></a>
+                        
                         <a class="dropdown-item" href="{{ route('logout')}}">
                             <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> 
                                 <span class="align-middle" data-key="t-logout" >Logout</span>

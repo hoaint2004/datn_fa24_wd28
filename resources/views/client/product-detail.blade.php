@@ -59,7 +59,7 @@
                             {{ $data['product']->name }}
                         </h3>
                         <div class="stock">
-                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded ">
                                 Còn hàng
                             </span>
                         </div>
@@ -260,7 +260,7 @@
                                     </div>
                                 </div>
 
-                                <div class="ml-auto flex items-center adfadf">
+                                <div class="ml-auto flex items-center">
                                     <div class="text-yellow-400">
                                         <i class="fas fa-star ">
                                         </i>
@@ -452,10 +452,10 @@
                                                     <button type="submit" class="btn-delete"
                                                         data-comment_id="{{ $cmt->id }}">Delete</button>
                                                 </form>
-                                                <a class="btn-reply" href=""
+                                                @endcan
+                                            <a class="btn-reply" href=""
                                                     data-id_comment="{{ $cmt->id }}">Reply
                                                 </a>
-                                            @endcan
                                         </div>
                                         <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
                                             class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
@@ -604,7 +604,7 @@
                                 </div>
                                 <div class="product-item-detail-gallery-items">
                                     @if (!empty($item->images))
-                                        @foreach ($collection as $item)
+                                        @foreach ($item->images as $item)
                                             <div class="product-item-detail-gallery-item">
                                                 <img src="{{ $item->image_url }}"
                                                     alt="">
@@ -759,25 +759,6 @@
         });
 
 
-        const minusButton = document.querySelector('.quantity-selector-button-minus');
-        const plusButton = document.querySelector('.quantity-selector-button-plus');
-        const quantityInput = document.querySelector('.quantity-selector-input');
-
-        //giảm số lượng
-        minusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        //tăng số lượng
-        plusButton.addEventListener('click', () => {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue < 9999) {
-                quantityInput.value = currentValue + 1;
-            }
-        });
     </script>
 
     <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>

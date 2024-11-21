@@ -943,6 +943,10 @@
     <!--Swiper slider js-->
     <script src="{{ asset('assets/theme/assets/libs/swiper/swiper-bundle.min.js') }}"></script>
 
+    <script src="{{ asset('assets/theme/assets/libs/chart.js/chart.umd.js') }}"></script>
+
+    <script src="{{ asset('assets/theme/assets/js/pages/chartjs.init.js') }}"></script>
+
     <!-- Dashboard init -->
     <script src="{{ asset('assets/theme/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
 
