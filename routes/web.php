@@ -39,6 +39,18 @@ Route::post('/register', [AuthController::class, 'postRegister'])->name('postReg
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
 
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
+    ->name('password.forgotPassword');
+
+Route::post('/password/email', [AuthController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
+
+Route::get('/forgot_password', [AuthController::class, 'showResetForm'])
+    ->name('password.reset');
+
+Route::post('/password/reset', [AuthController::class, 'reset'])
+    ->name('password.update');
+
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -141,7 +153,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
-    
+
     Route::resource('/order', OrderController::class);
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');

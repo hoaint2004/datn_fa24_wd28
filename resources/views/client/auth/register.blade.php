@@ -11,6 +11,13 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/sneakers/assets/images/favicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,7 +113,7 @@
     <script>
         Swal.fire({
             position: 'center',
-            icon: 'success',
+            icon: 'error',
             title: '{{ session('error') }}',
             showConfirmButton: true
         }).then(result => {

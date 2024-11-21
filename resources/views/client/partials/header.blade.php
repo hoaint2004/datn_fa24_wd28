@@ -36,7 +36,7 @@
                     <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                         @if (Auth::check())
                             <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
-                            <a class="user-header" href="{{ route('logout') }}">Logout</a>
+                            <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
                         @else
                             <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
                             <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
