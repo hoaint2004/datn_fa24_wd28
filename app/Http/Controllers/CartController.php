@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Variants;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -22,6 +23,10 @@ class CartController extends Controller
     {
         DB::beginTransaction();
         try {
+            if (!Auth::check()) {
+                return response()->json(['status' => false, 'message' => 'Vui lòng đăng nhập để tiếp tục']);
+            }
+
             // Tìm sản phẩm
             $product = Product::find($request->id);
             if (!$product) {
