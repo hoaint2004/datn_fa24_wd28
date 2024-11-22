@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
+    <title>Chi tiết sản phẩm</title>
 
     {{-- css --}}
     <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css')}}">
@@ -79,7 +79,7 @@
                             </i>
                         </div>
                         <p class="text-sm ml-2">
-                            5.0 (121 Reviews)
+                            5.0 (121 Đánh giá)
                         </p>
                     </div>
 
@@ -97,19 +97,15 @@
                     <div class="product-info">
                         <p class="text-gray-600 mb-2 product-info-sku">
                             <strong>Mã sản phẩm:</strong>
-                            <a href="#" id="sku">Muckbang</a>
+                            <a href="#" id="sku">SP01</a>
                         </p>
                         <p class="text-gray-600 mb-2 product-info-category">
                             <strong>Danh mục:</strong>
                             <a href="#" id="category">{{ $data['product']->category->name }}</a>
                         </p>
-                        <p class="text-gray-600 mb-4 product-info-tag">
-                            <strong>Tags:</strong>
-                            <a href="#" id="tags">Mucbang ASMR, Mucbang</a>
-                        </p>
                         <p class="text-gray-600 mb-4 product-info-vendor">
                             <strong>Thương hiệu:</strong>
-                            <a href="#" id="vendor">Jordan</a>
+                            <a href="#" id="vendor">Air Jordan</a>
                         </p>
 
                     </div>
@@ -218,7 +214,7 @@
                 <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
                 <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
                 <li><a class="tab-product-detail-title" href="#">Đánh giá (1)</a></li>
-                <li><a class="tab-product-detail-title" href="#">Comment</a></li>
+                <li><a class="tab-product-detail-title" href="#">Bình luận</a></li>
             </ul>
 
             <!-- Nội dung của tab -->
