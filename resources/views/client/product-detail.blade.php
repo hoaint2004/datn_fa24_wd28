@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
+    <title>Chi tiết sản phẩm</title>
 
     {{-- css --}}
     <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css')}}">
@@ -79,7 +79,7 @@
                             </i>
                         </div>
                         <p class="text-sm ml-2">
-                            5.0 (121 Reviews)
+                            5.0 (121 Đánh giá)
                         </p>
                     </div>
 
@@ -97,15 +97,11 @@
                     <div class="product-info">
                         <p class="text-gray-600 mb-2 product-info-sku">
                             <strong>Mã sản phẩm:</strong>
-                            <a href="#" id="sku">Muckbang</a>
+                            <a href="#" id="sku">SP01</a>
                         </p>
                         <p class="text-gray-600 mb-2 product-info-category">
                             <strong>Danh mục:</strong>
                             <a href="#" id="category">{{ $data['product']->category->name }}</a>
-                        </p>
-                        <p class="text-gray-600 mb-4 product-info-tag">
-                            <strong>Tags:</strong>
-                            <a href="#" id="tags">Mucbang ASMR, Mucbang</a>
                         </p>
                         <p class="text-gray-600 mb-4 product-info-vendor">
                             <strong>Thương hiệu:</strong>
@@ -218,7 +214,7 @@
                 <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
                 <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
                 <li><a class="tab-product-detail-title" href="#">Đánh giá (1)</a></li>
-                <li><a class="tab-product-detail-title" href="#">Comment</a></li>
+                <li><a class="tab-product-detail-title" href="#">Bình luận</a></li>
             </ul>
 
             <!-- Nội dung của tab -->
@@ -231,7 +227,7 @@
                 <!-- Tab Info -->
                 <div class="tab-info">
                     <div class="flex gap-10 pb-4">
-                        <span class="text-[#222] font-bold text-lg">Color</span>
+                        <span class="text-[#222] font-bold text-lg">Màu sắc</span>
                         <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam ad!
                             Molestias enim dolorem ipsa neque sunt repellat!</p>
                     </div>
@@ -400,8 +396,7 @@
                 {{-- Tab comment --}}
                 <div class="tab-comment">
                     <div class="form-comment">
-                        <h3 style="margin-top: 40px">Hãy để lại bình luận
-                        </h3>
+                        <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
     
                         @if (auth()->check())
                             <form action="{{ route('post_comment', $data['product']->id ) }}" method="POST" id="form-post-comment">
@@ -444,13 +439,13 @@
                                         <div class="text-right">
                                             @can('my-comment', $cmt)
                                                 <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id}}" data-id_comment="{{ $cmt->id }}"
-                                                    data-content="{{ $cmt->content }}">Edit</a>
+                                                    data-content="{{ $cmt->content }}">Sửa</a>
                                                 <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
                                                     class="delete-comment">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-delete"
-                                                        data-comment_id="{{ $cmt->id }}">Delete</button>
+                                                        data-comment_id="{{ $cmt->id }}">Xóa</button>
                                                 </form>
                                                 @endcan
                                             <a class="btn-reply" href=""
@@ -466,7 +461,7 @@
                                             </textarea>
 
                                             <button class="btnsave-update" type="submit"
-                                                data-id_comment="{{ $cmt->id }}">Update Content</button>
+                                                data-id_comment="{{ $cmt->id }}">Cập nhật</button>
                                         </form>
 
                                         <form action="" method="POST" style="display:none"
@@ -478,7 +473,7 @@
                                                 class="text-note-{{ $cmt->id }}" required="required" id="content-reply"></textarea>
 
                                             <button class="btnsave-reply" type="submit"
-                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Send reply content</button>
+                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
                                         </form>
 
                                         {{-- Các bình luận con --}}
@@ -504,17 +499,17 @@
                                                         <div class="text-right">
                                                             @can('my-comment', $child)
                                                             <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
-                                                                data-content="{{ $child->content }}">Edit</a>                                                                
+                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
                                                                 <form action="{{ route('destroy_comment', $child->id) }}"
                                                                     method="post" class="delete-comment">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn-delete-reply"
-                                                                        data-comment_id="{{ $child->id }}">Delete
+                                                                        data-comment_id="{{ $child->id }}">Xóa
                                                                     </button>
                                                                 </form>
                                                                 <a class="btn-reply-p2" href=""
-                                                                    data-id_comment="{{ $child->id }}">Reply
+                                                                    data-id_comment="{{ $child->id }}">Trả lời
                                                                 </a>
                                                             @endcan
                                                         </div>
@@ -528,8 +523,7 @@
                                                                 class="content-edit" required="required"></textarea>
 
                                                             <button class="btnsave-update" type="submit"
-                                                                data-id_comment="{{ $child->id }}">Update
-                                                                Content</button>
+                                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
                                                         </form>
 
                                                         {{-- Form reply --}}
@@ -542,8 +536,7 @@
                                                                 class="content-reply" required="required"></textarea>
 
                                                             <button class="btnsave-reply-p2" type="submit"
-                                                                data-id_comment="{{ $child->id }}"> Send reply
-                                                                content</button>
+                                                                data-id_comment="{{ $child->id }}"> Gửi</button>
                                                         </form>
                                                     </div>
                                                 </div>

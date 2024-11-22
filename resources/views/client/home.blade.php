@@ -644,7 +644,7 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
                     <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>
