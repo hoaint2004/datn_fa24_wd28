@@ -19,7 +19,6 @@ use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
 use App\Http\Controllers\CommentController as ControllersCommentController;
 use App\Http\Controllers\ProductController as ControllersProductController;
-use App\Http\Controllers\CommentController as ControllersCommentController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -34,15 +33,15 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 |
 */
 
-
-Route::middleware([RedirectIfAuthenticated::class])->group(function () {
+// Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
-});
+// });
+
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgotPassword');
