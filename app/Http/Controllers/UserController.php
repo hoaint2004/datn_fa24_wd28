@@ -14,7 +14,6 @@ class UserController extends Controller
 
     public function account(){
         $user = Auth::user();
-        // dd($user);
         return view('client.account', compact('user'));
     }
 

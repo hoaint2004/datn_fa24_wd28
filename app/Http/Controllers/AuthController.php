@@ -97,7 +97,7 @@ class AuthController extends Controller
 
             Log::error($e->getMessage());
 
-            return redirect()->back()->with('error', 'Đăng Ký Thất Bài!');
+            return redirect()->back()->with('error', 'Đăng Ký Thất Bại!');
         }
     }
 
