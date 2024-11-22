@@ -105,7 +105,7 @@
                         </p>
                         <p class="text-gray-600 mb-4 product-info-vendor">
                             <strong>Thương hiệu:</strong>
-                            <a href="#" id="vendor">Air Jordan</a>
+                            <a href="#" id="vendor">Jordan</a>
                         </p>
 
                     </div>
@@ -227,7 +227,7 @@
                 <!-- Tab Info -->
                 <div class="tab-info">
                     <div class="flex gap-10 pb-4">
-                        <span class="text-[#222] font-bold text-lg">Color</span>
+                        <span class="text-[#222] font-bold text-lg">Màu sắc</span>
                         <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam ad!
                             Molestias enim dolorem ipsa neque sunt repellat!</p>
                     </div>
@@ -396,8 +396,7 @@
                 {{-- Tab comment --}}
                 <div class="tab-comment">
                     <div class="form-comment">
-                        <h3 style="margin-top: 40px">Hãy để lại bình luận
-                        </h3>
+                        <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
     
                         @if (auth()->check())
                             <form action="{{ route('post_comment', $data['product']->id ) }}" method="POST" id="form-post-comment">
@@ -440,13 +439,13 @@
                                         <div class="text-right">
                                             @can('my-comment', $cmt)
                                                 <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id}}" data-id_comment="{{ $cmt->id }}"
-                                                    data-content="{{ $cmt->content }}">Edit</a>
+                                                    data-content="{{ $cmt->content }}">Sửa</a>
                                                 <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
                                                     class="delete-comment">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-delete"
-                                                        data-comment_id="{{ $cmt->id }}">Delete</button>
+                                                        data-comment_id="{{ $cmt->id }}">Xóa</button>
                                                 </form>
                                                 @endcan
                                             <a class="btn-reply" href=""
@@ -462,7 +461,7 @@
                                             </textarea>
 
                                             <button class="btnsave-update" type="submit"
-                                                data-id_comment="{{ $cmt->id }}">Update Content</button>
+                                                data-id_comment="{{ $cmt->id }}">Cập nhật</button>
                                         </form>
 
                                         <form action="" method="POST" style="display:none"
@@ -474,7 +473,7 @@
                                                 class="text-note-{{ $cmt->id }}" required="required" id="content-reply"></textarea>
 
                                             <button class="btnsave-reply" type="submit"
-                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Send reply content</button>
+                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
                                         </form>
 
                                         {{-- Các bình luận con --}}
@@ -500,17 +499,17 @@
                                                         <div class="text-right">
                                                             @can('my-comment', $child)
                                                             <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
-                                                                data-content="{{ $child->content }}">Edit</a>                                                                
+                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
                                                                 <form action="{{ route('destroy_comment', $child->id) }}"
                                                                     method="post" class="delete-comment">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn-delete-reply"
-                                                                        data-comment_id="{{ $child->id }}">Delete
+                                                                        data-comment_id="{{ $child->id }}">Xóa
                                                                     </button>
                                                                 </form>
                                                                 <a class="btn-reply-p2" href=""
-                                                                    data-id_comment="{{ $child->id }}">Reply
+                                                                    data-id_comment="{{ $child->id }}">Trả lời
                                                                 </a>
                                                             @endcan
                                                         </div>
@@ -524,8 +523,7 @@
                                                                 class="content-edit" required="required"></textarea>
 
                                                             <button class="btnsave-update" type="submit"
-                                                                data-id_comment="{{ $child->id }}">Update
-                                                                Content</button>
+                                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
                                                         </form>
 
                                                         {{-- Form reply --}}
@@ -538,8 +536,7 @@
                                                                 class="content-reply" required="required"></textarea>
 
                                                             <button class="btnsave-reply-p2" type="submit"
-                                                                data-id_comment="{{ $child->id }}"> Send reply
-                                                                content</button>
+                                                                data-id_comment="{{ $child->id }}"> Gửi</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -755,28 +752,6 @@
         });
 
 
-<<<<<<< HEAD
-=======
-        // const minusButton = document.querySelector('.quantity-selector-button-minus');
-        // const plusButton = document.querySelector('.quantity-selector-button-plus');
-        // const quantityInput = document.querySelector('.quantity-selector-input');
-
-        // //giảm số lượng
-        // minusButton.addEventListener('click', () => {
-        //     let currentValue = parseInt(quantityInput.value);
-        //     if (currentValue > 1) {
-        //         quantityInput.value = currentValue - 1;
-        //     }
-        // });
-
-        // //tăng số lượng
-        // plusButton.addEventListener('click', () => {
-        //     let currentValue = parseInt(quantityInput.value);
-        //     if (currentValue < 9999) {
-        //         quantityInput.value = currentValue + 1;
-        //     }
-        // });
->>>>>>> dd77ecd0b099af197509a321ed0a72dd52257b1d
     </script>
 
     <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>

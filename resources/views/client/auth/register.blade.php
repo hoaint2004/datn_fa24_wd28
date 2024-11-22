@@ -11,7 +11,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/sneakers/assets/images/favicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css" rel="stylesheet">
-<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
@@ -19,15 +18,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
-=======
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-    </style>
->>>>>>> 1e0522c80124e638fbea6d6a0375ff11a0dddff8
 </head>
 
 <body>
@@ -130,7 +120,6 @@
 @endif
 
 @if (session('error'))
-<<<<<<< HEAD
 <script>
     Swal.fire({
         position: 'center',
@@ -144,20 +133,6 @@
         }
     });
 </script>
-=======
-    <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: '{{ session('error') }}',
-            showConfirmButton: true
-        }).then(result => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ route('register.form') }}";
-            }
-        });
-    </script>
->>>>>>> 1e0522c80124e638fbea6d6a0375ff11a0dddff8
 @endif
 
 </html>
