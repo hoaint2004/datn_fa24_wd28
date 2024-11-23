@@ -17,88 +17,76 @@
         <div class="uk-grid" uk-grid>
 
             <div class="sidebar uk-width-1-4">
-                <ul uk-accordion="multiple: true">
-
-                    <li class="uk-open sidebar-category">
-                        <a class="uk-accordion-title" href>Danh mục</a>
-                        <div class="uk-accordion-content">
-                            <ul>
-                                @if (!empty($data['categories']))
-                                    @foreach ($data['categories'] as $item)
-                                        <li class="sidebar-content-right"><input type="checkbox" id="giay1" /><label
-                                                for="giay1">{{ $item->name }}</label> <span
-                                                class="custom-number">({{ $item->products->count() }})</span></li>
+                {{-- start filler --}}
+                {{-- <form action="" class=""> --}}
+                    <ul uk-accordion="multiple: true">
+                        <!-- Danh mục -->
+                        <li class="uk-open sidebar-category">
+                            <a class="uk-accordion-title" href="#">Danh mục</a>
+                            <div class="uk-accordion-content">
+                                <ul>
+                                    @if (!empty($data['categories']))
+                                        @foreach ($data['categories'] as $item)
+                                            <li class="sidebar-content-right padding">
+                                                <input type="checkbox" name="category[]" id="category-{{ $item->id }}" value="{{ $item->id }}" />
+                                                <label for="category-{{ $item->id }}">{{ $item->name }}</label>
+                                                <span class="custom-number">({{ $item->products->count() }})</span>
+                                            </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <!-- Kích thước -->
+                        <li class="uk-open sidebar-size">
+                            <a class="uk-accordion-title" href="#">Kích thước</a>
+                            <div class="uk-accordion-content">
+                                <ul>
+                                    @foreach ([40, 42, 44, 46] as $size)
+                                        <li class="sidebar-content-right">
+                                            <input type="checkbox" name="size[]" id="size-{{ $size }}" value="{{ $size }}" />
+                                            <label for="size-{{ $size }}">{{ $size }}</label>
+                                        </li>
                                     @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="uk-open sidebar-size">
-                        <a class="uk-accordion-title" href>Kích thước</a>
-                        <div class="uk-accordion-content">
-                            <ul>
-                                <li class="sidebar-content-right"><input type="checkbox" id="giay10" /><label for="giay10">42</label> <span class="custom-number">(10)</span></li>
-                                <li class="sidebar-content-right"><input type="checkbox" id="giay11" /><label for="giay11">41</label> <span class="custom-number">(10)</span></li>
-                                <li class="sidebar-content-right"><input type="checkbox" id="giay12" /><label for="giay12">40</label> <span class="custom-number">(10)</span></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="uk-open sidebar-color">
-                        <a class="uk-accordion-title" href>Màu sắc</a>
-                        <div class="uk-accordion-content">
-                            <ul>
-                                <li class="sidebar-content-right">
-                                    <div class="sidebar-color-body">
-                                        <input type="checkbox" id="giay17" />
-                                        <label for="giay17">Xanh</label>
-                                        <div class="color-accordion">
-                                        </div>
-                                    </div>
-                                    <span class="custom-number">(10)</span>
-                                </li>
-                                <li class="sidebar-content-right">
-                                    <div class="sidebar-color-body">
-                                        <input type="checkbox" id="giay18" />
-                                        <label for="giay18">Xanh</label>
-                                        <div class="color-accordion">
-                                        </div>
-                                    </div>
-                                    <span class="custom-number">(10)</span>
-                                </li>
-                                <li class="sidebar-content-right">
-                                    <div class="sidebar-color-body">
-                                        <input type="checkbox" id="giay19" />
-                                        <label for="giay19">Xanh</label>
-                                        <div class="color-accordion">
-                                        </div>
-                                    </div>
-                                    <span class="custom-number">(10)</span>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="uk-open sidebar-price">
-                        <a class="uk-accordion-title" href="#">Giá</a>
-                        <div class="uk-accordion-content sidebar-price-body">
-                            <div class="input-container">
-                                <span class="label">Từ</span>
-                                <input type="text" placeholder="Nhập giá" class="input-field" />
-
+                                </ul>
                             </div>
-                            <div class="input-container">
-                                <span class="label">Đến</span>
-                                <input type="text" placeholder="Nhập giá" class="input-field" />
-
+                        </li>
+                        
+                        <!-- Màu sắc -->
+                        <li class="uk-open sidebar-color">
+                            <a class="uk-accordion-title" href="#">Màu sắc</a>
+                            <div class="uk-accordion-content">
+                                <ul>
+                                    @foreach (['Trắng', 'Đỏ', 'Xanh', 'Hồng'] as $color)
+                                        <li class="sidebar-content-right">
+                                            <input type="checkbox" name="color[]" id="color-{{ strtolower($color) }}" value="{{ $color }}" />
+                                            <label for="color-{{ strtolower($color) }}">{{ $color }}</label>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
-
-                        </div>
-                    </li>
-
-                </ul>
+                        </li>
+                        
+                        <!-- Giá -->
+                        <li class="uk-open sidebar-price">
+                            <a class="uk-accordion-title" href="#">Giá</a>
+                            <div class="uk-accordion-content sidebar-price-body">
+                                <div class="input-container">
+                                    <span class="label">Từ</span>
+                                    <input type="number" name="price_from" placeholder="Nhập giá" class="input-field" />
+                                </div>
+                                <div class="input-container">
+                                    <span class="label">Đến</span>
+                                    <input type="number" name="price_to" placeholder="Nhập giá" class="input-field" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    
+                {{-- </form> --}}
+                {{-- end filler --}}
             </div>
 
             <div class="uk-width-3-4 collection-right">
@@ -106,17 +94,20 @@
                     <div class="show-product">
                         Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
                     </div>
+                    <div class="product-list-filter">
+                        <span class="">sản phẩm chính của danh mục</span>
+                    </div>
 
                     <form class="uk-form-stacked shop-sort-by">
                         <div class="shop-sort-by">
-                            <label class="uk-form-label " for="sort-by">Sắp xếp theo:</label>
+                            <label class="uk-form-label" for="sort-by">Sắp xếp theo:</label>
                             <div class="uk-form-controls">
                                 <select class="uk-select" id="sort-by" name="sort-by">
-                                    <option class="option-filter" value="">Phổ biến nhất</option>
-                                    <option class="option-filter" value="">Giá (Thấp đến cao)</option>
-                                    <option class="option-filter" value="">Giá (Cao đến thấp)</option>
-                                    <option class="option-filter" value="">Mới nhất</option>
-                                    <option class="option-filter" value="">Cũ nhất</option>
+                                    <option class="option-filter" value="popular">Phổ biến nhất</option>
+                                    <option class="option-filter" value="price_asc">Giá (Thấp đến cao)</option>
+                                    <option class="option-filter" value="price_desc">Giá (Cao đến thấp)</option>
+                                    <option class="option-filter" value="newest">Mới nhất</option>
+                                    <option class="option-filter" value="oldest">Cũ nhất</option>
                                 </select>
                             </div>
                         </div>
@@ -125,6 +116,7 @@
                 </div>
 
                 <div class="product-list">
+                   
                     <div class="home-product-list-wrapper uk-grid " uk-grid>
 
                         @if (!empty($data['categoryById']->products))
@@ -138,7 +130,7 @@
                                         <i class="fas fa-heart icon-heart"
                                             style="color: #c90d0d; font-size: 1.25rem;"></i>
                                         <div class="product-button">
-                                            {{-- <button>Thêm vào giỏ </button> --}}
+                                            <button>Thêm vào giỏ </button>
                                             <button type="button" uk-toggle="target: #modal-container"
                                                 class="quick-view-button" data-id="{{ $item->id }}">Xem
                                                 nhanh</button>
@@ -187,8 +179,63 @@
                         @endif
 
                     </div>
+                   
 
                 </div>
+                <div class="product-list">
+                    <div class="home-product-list-wrapper uk-grid" uk-grid>
+                        <div id="filter-id"></div>
+                    </div>
+                </div>
+                {{-- test --}}
+               
+                
+
+                {{-- <div class="product-list">
+                    <div class="home-product-list-wrapper uk-grid " uk-grid>
+                        @if (!empty($products))
+                            @foreach ($products as $key => $item)
+                                <div class="product-item uk-width-1-4">
+                                    <div class="product-image">
+                                        <a href="{{ route('productDetail', $item->id) }}">
+                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                        </a>
+                                        <span>-10%</span>
+                                        <i class="fas fa-heart icon-heart"
+                                            style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                        <div class="product-button">
+                                            <button type="button" uk-toggle="target: #modal-container"
+                                                class="quick-view-button" data-id="{{ $item->id }}">Xem
+                                                nhanh</button>
+                                        </div>
+                                    </div>
+                                    <div class="product-review">
+                                        <a href="{{ route('categories', $item->category->id) }}">
+                                            <span>{{ $item->category->name }}</span>
+                                        </a>
+                                        <div class="icon">
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('productDetail', $item->id) }}"
+                                        class="product-name">{{ $item->name }}</a>
+                                    <div class="product-price">
+                                        <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                        @if (!empty($item->price_old))
+                                            <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div> --}}
+                
+                {{-- end test --}}
                 <nav aria-label="Pagination">
                     <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
                         <li><a href="#"><span uk-pagination-previous></span></a></li>
@@ -283,7 +330,7 @@
 
 
 @section('js')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('.quantity-selector-button-minus').on('click', function() {
                 var currentValue = parseInt($('.quantity-selector-input').val());
@@ -465,5 +512,9 @@
                 });
             });
         });
-    </script>
+    </script> --}}
+    {{-- filter--}}
+   
+    
+    
 @endsection

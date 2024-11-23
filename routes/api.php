@@ -25,3 +25,10 @@ Route::prefix('orders')
             ->name('getRevenueAndProfitData');
         // end api thống kê đơn hàng
 });
+
+// Route::name('api.admin.')
+// ->controller(ClientProductController::class)
+// ->group( function(){
+//     Route::post('/filler')->name('filler');
+   
+// });
