@@ -551,8 +551,76 @@
                 return filterData;
             }
     
-           
+            function renderProducts(products) {
+                const productList = $('#filter-id'); // Phần chứa danh sách sản phẩm
 
+                // khởi tạo UIkit-gird toàn cục
+                    UIkit.grid(productList);
+
+                if (products.length === 0) {
+                    // Nếu không có sản phẩm, hiển thị thông báo "Không tìm thấy sản phẩm nào"
+                    productList.empty(); // Xóa nội dung cũ trước khi thêm thông báo
+                    productList.append('<p>Không tìm thấy sản phẩm nào.</p>');
+                    return; // Dừng lại ở đây nếu không có sản phẩm
+                }
+
+                // Xóa nội dung cũ
+                productList.empty();
+
+                // Lặp qua các sản phẩm và tạo HTML cho từng sản phẩm
+                products.forEach(product => {
+                    const productHTML = `
+                        <div class="product-item uk-width-1-4">
+                            <div class="product-image">
+                                <a href="${product.productDetailUrl}">
+                                    <img src="${product.image}" alt="error" />
+                                </a>
+                                <span>-10%</span>
+                                <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                <div class="product-button">
+                                    <button>Thêm vào giỏ </button>
+                                    <button type="button" uk-toggle="target: #modal-container" class="quick-view-button" data-id="${product.id}">Xem nhanh</button>
+                                </div>
+                            </div>
+                            <div class="product-review">
+                                <a href="${product.categoryUrl}">
+                                    <span>${product.category.name}</span>
+                                </a>
+                                <div class="icon">
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                </div>
+                            </div>
+                            <a href="${product.productDetailUrl}" class="product-name">${product.name}</a>
+                            <div class="product-price">
+                                <strong>${product.price.toLocaleString()} ₫</strong>
+                                <del>${product.price_old.toLocaleString()} ₫</del>
+                            </div>
+                            <div class="product-item-detail-gallery-items">
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
+                                </div>
+                                <div class="product-item-detail-gallery-item">
+                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    // Thêm sản phẩm vào danh sách
+                    productList.append(productHTML);
+                    
+
+                });
+            }
     
             
         });
