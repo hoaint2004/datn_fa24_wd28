@@ -8,7 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -157,6 +157,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
+    // lọc client
+    Route::post('/filter',[FilterController::class,'filterProducts'])->name('filter');
 
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');

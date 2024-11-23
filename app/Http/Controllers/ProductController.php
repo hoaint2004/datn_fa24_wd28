@@ -2,11 +2,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     public function category(){
-
+        
     }
 
     public function product_detail(){
@@ -34,7 +35,7 @@ class ProductController extends Controller
     public function notFound(){
 
     }
-    
+
 
 }
 
