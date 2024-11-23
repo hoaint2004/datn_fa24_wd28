@@ -558,7 +558,7 @@
                     UIkit.grid(productList);
 
                 if (products.length === 0) {
-                    // Nếu không có sản phẩm, hiển thị thông báo "Không tìm thấy sản phẩm nào"
+                 
                     productList.empty(); // Xóa nội dung cũ trước khi thêm thông báo
                     productList.append('<p>Không tìm thấy sản phẩm nào.</p>');
                     return; // Dừng lại ở đây nếu không có sản phẩm
@@ -622,7 +622,52 @@
                 });
             }
     
-            
+            // Bắt sự kiện của các nút và call dữ liệu
+             
+              $('input[type="checkbox"], .sidebar-price-body input').on('change', function () {
+                const filterData = getFilterData();
+                
+                // kiểm tra khi quay lại trang 
+               
+                    localStorage.setItem('filterData', JSON.stringify(filterData));
+
+              
+                if (Object.keys(filterData).length !== 0) {
+                    $.ajax({
+                        url: '/filter',
+                        method: 'POST',
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: filterData,
+                        success: function (products) {
+                            renderProducts(products); 
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+
+
+                // Kiểm tra nếu không có bộ lọc nào được chọn thì không gửi yêu cầu AJAX
+                if (Object.keys(filterData).length == 0) {
+                    window.location.reload();
+                    return; 
+                }
+    
+              
+                $.ajax({
+                    url: '/filter', 
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    data: filterData,
+                    success: function (products) {
+                        renderProducts(products); 
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    },
+                });
+            });
         });
     </script>
     {{-- end filter --}}
