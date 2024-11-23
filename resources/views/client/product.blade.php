@@ -514,7 +514,50 @@
         });
     </script> --}}
     {{-- filter--}}
-   
+    <script>
+        $(document).ready(function () {
+            function getFilterData() {
+                let selectedCategories = [];
+                let selectedSizes = [];
+                let selectedColors = [];
+                let priceRange = {};
+    
+                // Lấy các danh mục được chọn
+                $('.sidebar-category input:checked').each(function () {
+                    selectedCategories.push($(this).val());
+                });
+    
+                // Lấy các kích thước được chọn
+                $('.sidebar-size input:checked').each(function () {
+                    selectedSizes.push($(this).val());
+                });
+    
+                // Lấy các màu sắc được chọn
+                $('.sidebar-color input:checked').each(function () {
+                    selectedColors.push($(this).val());
+                });
+    
+                // Lấy khoảng giá
+                priceRange.from = $('.sidebar-price-body input:first').val();
+                priceRange.to = $('.sidebar-price-body input:last').val();
+    
+                // Trả về dữ liệu lọc, chỉ gửi các giá trị đã được chọn
+                let filterData = {};
+                if (selectedCategories.length > 0) filterData.categories = selectedCategories;
+                if (selectedSizes.length > 0) filterData.sizes = selectedSizes;
+                if (selectedColors.length > 0) filterData.colors = selectedColors;
+                if (priceRange.from && priceRange.to) filterData.price = priceRange;
+    
+                return filterData;
+            }
+    
+           
+
+    
+            
+        });
+    </script>
+    {{-- end filter --}}
     
     
 @endsection
