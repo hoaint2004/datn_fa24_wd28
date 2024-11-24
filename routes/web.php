@@ -153,7 +153,8 @@ Route::middleware(['web'])->group(function () {
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
     Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-
+    // sp nổi bật
+    Route::get('/featured-products/{id}',[ControllersProductController::class,'featured_products'])->name('featured_products');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');

@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('title')
-    Chỉnh sửa Discount
+    Chỉnh sửa phiếu giảm giá
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Chỉnh sửa Discount</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Chỉnh sửa phiếu giảm giá</h4>
                         <div class="flex-shrink-0">
                             <div class="form-check form-switch form-switch-right form-switch-md">
                                 <label for="gutters-showcode" class="form-label text-muted">Xem Code</label>
@@ -27,7 +27,7 @@
                             <div class="live-preview">
                                 <!-- Discount Code -->
                                 <div class="col-md-12">
-                                    <label for="discount_code" class="form-label">Discount Code</label>
+                                    <label for="discount_code" class="form-label">Mã giảm giá</label>
                                     <input type="text" class="form-control" name="discount_code" id="discount_code"
                                         value="{{  $discount->discount_code }}" readonly>
                                     @error('discount_code')
@@ -37,7 +37,7 @@
 
                                 <!-- Description -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Mô tả</label>
                                     <textarea class="form-control" id="description" name="description" rows="3"
                                         placeholder="Nhập mô tả">{{ old('description', $discount->description) }}</textarea>
                                     @error('description')
@@ -47,7 +47,7 @@
 
                                 <!-- Start Date -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="start_date" class="form-label">Start Date</label>
+                                    <label for="start_date" class="form-label">Ngày bắt đầu</label>
                                     <input type="datetime-local" class="form-control" name="start_date" id="start_date"
                                         value="{{ old('start_date', $discount->start_date ) }}">
                                     @error('start_date')
@@ -57,7 +57,7 @@
 
                                 <!-- End Date -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="end_date" class="form-label">End Date</label>
+                                    <label for="end_date" class="form-label">Ngày kết thúc</label>
                                     <input type="datetime-local" class="form-control" name="end_date" id="end_date"
                                         value="{{ old('end_date', $discount->end_date ) }}">
                                     @error('end_date')
@@ -122,7 +122,7 @@
                                 <div class="col-12 mt-3">
                                     <div class="text-start">
                                         <button type="submit" id="btnEditDiscount"
-                                            class="btn btn-primary">Cập nhật Discount</button>
+                                            class="btn btn-primary">Cập nhật phiếu giảm giá</button>
                                         <a href="{{ route('admin.discounts.index') }}" class="btn btn-outline-warning">Quay lại</a>
                                     </div>
                                 </div>

@@ -48,7 +48,7 @@ class ProductController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = $request->only(['name', 'category_id', 'price', 'description','price_old']);
+            $data = $request->only(['name', 'category_id', 'price', 'description','price_old','status']);
 
             $data['code'] = 'P' . date('YmdHis') . Str::upper(Str::random(5));
 
@@ -92,7 +92,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             $products = Product::findOrFail($id);
-            $data = $request->only(['name', 'category_id', 'price', 'description','price_old','code']);
+            $data = $request->only(['name', 'category_id', 'price', 'description','price_old','code','status']);
 
             if ($request->hasFile('image')) {
                 $path = $request->file('image')->storePublicly('public/products');

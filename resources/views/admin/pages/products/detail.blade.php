@@ -21,7 +21,21 @@
                             <div class="col-md-7">
                                 <h5 class="mb-3">Tên sản phẩm: <span class="text-primary">{{ $product->name }}</span></h5>
                                 <p><strong>Danh mục:</strong> {{ $product->category->name ?? 'Không có danh mục' }}</p>
-                                <p><strong>Giá Cũ:</strong> <span class="text-danger">{{ number_format($product->price_old, 0, ',', '.') }} đ</span></p>
+                                <p>
+                                    <strong>Trạng thái:</strong>
+                                    <span style="color: {{$product->status === 0 ? '#28a745' : 'red'}}; 
+                                                border: 2px solid {{$product->status === 0 ? 'green' : 'red'}}; 
+                                                padding: 5px 10px; 
+                                                border-radius: 5px; 
+                                                font-weight: bold;">
+                                        {{ $product->status === 0 ? 'Hiện' : 'Ẩn' }}
+                                    </span>
+                                </p>
+                                <p><strong>Giá Cũ:</strong> 
+                                    <span class="text-warning" style="text-decoration: line-through;">
+                                        {{ number_format($product->price_old, 0, ',', '.') }} đ
+                                    </span>
+                                </p>
                                 <p><strong>Giá sale:</strong> <span class="text-danger">{{ number_format($product->price, 0, ',', '.') }} đ</span></p>
                                 <p><strong>Mô tả:</strong> {{ $product->description }}</p>
 

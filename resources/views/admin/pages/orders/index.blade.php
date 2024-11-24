@@ -77,6 +77,7 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th scope="col" class="text-center">STT</th>
+                                                <th scope="col">Thông tin người nhận</th>
                                                 <th scope="col">Mã đơn hàng</th>
                                                 <th scope="col">Tổng tiền</th>
                                                 <th scope="col">Trạng thái</th>
@@ -88,8 +89,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($orders as $key => $item)
-                                                <tr>
-                                                    <td class="text-center">{{ $key + 1 }}</td>
+                                                <tr class="text-center">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td> 
+                                                        <p>Tên: {{ $item->name }}</p>
+                                                        <p>Số điện thoại: {{ $item->phone }}</p>
+                                                    </td>
+
                                                     <td>{{ $item->code }}</td>
                                                     <td>{{ number_format($item->total_price, 0, ',', '.') }} đ</td>
                                                     <td>{{ $item->status }}</td>

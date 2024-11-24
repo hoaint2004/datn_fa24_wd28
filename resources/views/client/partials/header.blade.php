@@ -193,22 +193,40 @@
                     <li class="uk-parent">
                         <a href="#">Sản phẩm nổi bật <span>›</span></a>
                         <div class="uk-dropdown uk-width-2xlarge">
-                            <div class="uk-child-width-1-4@m" uk-grid>
+                            <div class="uk-child-width-1-3@m" uk-grid>
                                 <!-- Nổi bật -->
                                 <div>
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="#">Nổi bật 1</a></li>
-                                        <li><a href="#">Nổi bật 2</a></li>
+                                    <ul class="uk-nav uk-navbar-dropdown-nav uk-grid uk-grid-medium uk-child-width-1-1 uk-margin-remove">
+                                        @php
+                                            $data['productFeatured'] = \App\Models\Variants::select('variants.product_id')
+                                                ->selectRaw('SUM(variants.quantity) as quan')
+                                                ->join('products', 'products.id', '=', 'variants.product_id')
+                                                ->where('products.status', 0)
+                                                ->groupBy('variants.product_id')
+                                                ->orderByDesc('quan')
+                                                ->with('product')
+                                                ->take(2)
+                                                ->get();                                 
+                                        @endphp
+                                
+                                        @foreach($data['productFeatured'] as $item => $product)
+                                            <li class="uk-margin-small-bottom">
+                                                <a href="{{ route('featured_products', $product->product_id) }}">
+                                                    {{ $product->product->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
+                                
 
                                 <!-- Giày nam -->
-                                <div>
+                                {{-- <div>
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li><a href="#">Nổi bật 3</a></li>
                                         <li><a href="#">Nổi bật 4</a></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- Giày nam -->
 
                             </div>

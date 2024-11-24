@@ -92,7 +92,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($order->orderDetail as $key => $item)
+
+                                            @foreach ($order->orderDetails as $key => $item)
+
                                                 <tr>
                                                     <td class="text-center">{{ $key + 1 }}</td>
                                                     <td>{{ $item->product->code }}</td>

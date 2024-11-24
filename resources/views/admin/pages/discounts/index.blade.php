@@ -61,7 +61,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $discount->discount_type }}</td>
-                                                    <td>{{ number_format($discount->discount_value, 0, '.', ',' ) }}{{ $discount->discount_type == 'percentage' ? '%' : 'Đ' }}</td>
+                                                    <td>{{ number_format($discount->discount_value, 0, '.', ',' ) }}{{ $discount->discount_type == '%' ? '%' : 'Đ' }}</td>
                                                     <td>{{ number_format($discount->min_order_value, 0, '.', ',').' VND'}}</td>
                                                     <td>{{ $discount->usage_limit }}</td>
                                                     
