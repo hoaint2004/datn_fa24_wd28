@@ -86,62 +86,19 @@
                 </div>
                 <span>Flash Sale</span>
             </a>
+           
+            @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                    <img src="{{$category3->image}}"
                         alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
                         fetchpriority="auto">
                 </div>
-                <span>Flash Sale</span>
+                <span>{{$category3->name}}</span>
             </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
+            @endforeach
+          
+       
         </div>
     </section>
 
@@ -644,7 +601,7 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
                     <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>

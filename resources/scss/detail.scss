@@ -43,11 +43,13 @@
             .product-detail-right-top {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
                 h3 {
                     color: $color-p;
                     font-family: $font-spectral;
                     font-weight: $font-weight-bold;
+                }
+                span {
+                    white-space: nowrap; 
                 }
             }
             .desc {
@@ -66,7 +68,7 @@
                             display: none;
                         }
                         .sw-color-label {
-                            padding: 16px;
+                            padding: 10px;
                             border: 2px solid #ccc;
                             background-color: greenyellow;
                             border-radius: 10px;
@@ -76,7 +78,7 @@
                         .trigger-option-sw:checked + .sw-color-label {
                             background-color: red;
                             border: 2px solid red;
-                            transform: scale(1.1);
+                            transform: scale(1.03);
                             transition: all 0.3s ease;
                         }
                     }
@@ -91,7 +93,7 @@
                             display: none;
                         }
                         .sw-size-label {
-                            padding: 6px 10px ;
+                            padding: 6px 10px;
                             border: 2px solid #ccc;
                             border-radius: 10px;
                             cursor: pointer;
@@ -101,7 +103,7 @@
                             background-color: aqua;
                             color: black;
                             border: 2px solid aqua;
-                            transform: scale(1.1);
+                            transform: scale(1.03);
                             transition: all 0.3s ease;
                         }
                     }

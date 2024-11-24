@@ -96,7 +96,7 @@
                 <h2 class="">Thông tin đơn hàng</h2>
                 <div class="shipping-fee">
                     <span>Phí vận chuyển</span>
-                    <span>$200</span>
+                    <span>30.000</span>
                 </div>
                 <div class="total-right">
                     <span>Tổng tiền</span>

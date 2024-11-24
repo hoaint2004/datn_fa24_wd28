@@ -31,7 +31,7 @@
             <div id="two-column-menu">
             </div>
             <ul class="navbar-nav" id="navbar-nav">
-                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                <li class="menu-title"><span data-key="t-menu">Mục Lục</span></li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('admin.dashboard') }}">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Bảng điều khiển</span>
@@ -145,7 +145,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.banners.index') }}" class="nav-link" data-key="t-chat"> Danh sách banner
+                                <a href="{{ route('admin.banners.create') }}" class="nav-link" data-key="t-chat"> Thêm mới banner
                                 </a>
                             </li>
                         </ul>
@@ -155,17 +155,17 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarVoucher" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarVoucher">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí discount</span>
+                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí mã giảm giá</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarVoucher">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('admin.discounts.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
-                                    sách discount</a>
+                                    sách mã giảm giá</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('admin.discounts.create') }}" wire:navigate class="nav-link" data-key="t-chat">
-                                    Thêm mới discount</a>
+                                    Thêm mới mã giảm giá</a>
                             </li>
                         </ul>
                     </div>
@@ -188,7 +188,7 @@
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="orders">
-                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản đơn hàng</span>
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đơn hàng</span>
                     </a>
                     <div class="collapse menu-dropdown" id="orders">
                         <ul class="nav nav-sm flex-column">

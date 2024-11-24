@@ -8,7 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -17,10 +17,12 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
-use App\Http\Controllers\ProductController as ControllersProductController;
 use App\Http\Controllers\CommentController as ControllersCommentController;
+use App\Http\Controllers\ProductController as ControllersProductController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -31,13 +33,15 @@ use App\Http\Controllers\CommentController as ControllersCommentController;
 |
 */
 
+// Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
+// });
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
 
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgotPassword');
@@ -153,6 +157,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
+    // lọc client
+    Route::post('/filter',[FilterController::class,'filterProducts'])->name('filter');
 
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
@@ -167,3 +173,8 @@ Route::middleware(['web'])->group(function () {
     Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
     Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 });
+
+Route::get('/filter', function(){
+    return view('user.filter-product');
+});
+
