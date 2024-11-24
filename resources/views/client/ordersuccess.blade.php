@@ -53,7 +53,7 @@
             <p>{{ session('phone') }}</p>
             <p>{{ session('address') }}</p>
             <p><strong>Phương thức thanh toán</strong></p>
-            <p>thanh toán giao hàng({{ session('payment_method') }})</p>
+            <p>({{ session('payment_method') }})</p>
             <a href="{{ route('home') }}" class="btn">Tiếp tục mua hàng</a>
         </div>
     </div>

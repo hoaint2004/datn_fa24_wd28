@@ -21,26 +21,26 @@ return new class extends Migration
             $table->decimal('total_price', 30, 2);
 
             $table->enum('status', [
-                'pending',         // Chờ xác nhận
-                'confirmed',       // Đã xác nhận
-                'shipping',        // Đang giao
-                'delivering',      // Giao hàng thành công
-                'failed',          // Giao hàng thất bại
-                'cancelled',       // Đã hủy
-                'completed'        // Hoàn thành
-            ])->default('pending');
+                'Chờ xác nhận',         // Chờ xác nhận
+                'Đã xác nhận',       // Đã xác nhận
+                'Đang giao',        // Đang giao
+                'Giao hàng thành công',      // Giao hàng thành công
+                'Giao hàng thất bại',          // Giao hàng thất bại
+                'Đã hủy',       // Đã hủy
+                'Hoàn thành'        // Hoàn thành
+            ])->default('Chờ xác nhận');
 
             // Hình thức thanh toán
-            $table->enum('payment_method', ['cod', 'vnpay'])
-                ->default('cod');
+            $table->enum('payment_method', ['Thanh toán khi nhận hàng', 'vnpay'])
+                ->default('Thanh toán khi nhận hàng');
             //  cod: Thanh toán khi nhận,
             //  vnpay: Thanh toan vnpay,
 
             $table->string('shipping_fee', 255); // Phí vận chuyển
 
             // Trạng thái thanh toán
-            $table->enum('payment_status', ['unpaid', 'paid'])
-                ->default('unpaid');
+            $table->enum('payment_status', ['Chưa thanh toán', 'Đã thanh toán'])
+                ->default('Chưa thanh toán');
             //  unpaid: Đơn hàng chưa được thanh toán.
             //  paid: Đơn hàng đã được thanh toán thành công.
             $table->timestamps();

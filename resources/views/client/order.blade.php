@@ -155,7 +155,7 @@
                                 <div class="uk-margin payments-card">
                                     <label class="flex items-center mb-2 payments-card-title">
                                         <input type="radio" name="payment_method" class="form-radio text-black"
-                                            value="cod" checked>
+                                            value="Thanh toán khi nhận hàng" checked>
                                         <span class="ml-2 font-bold order-name">Thanh toán khi nhận hàng</span>
                                     </label>
                                     <div>

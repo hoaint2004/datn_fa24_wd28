@@ -83,7 +83,6 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th scope="col" class="text-center">STT</th>
-                                                <th scope="col">Mã sản phẩm</th>
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Tên sản phẩm</th>
                                                 <th scope="col">Đơn giá</th>
@@ -92,7 +91,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($order->orderDetail as $key => $item)
+                                            @foreach ($order->orderDetails as $key => $item)
                                                 <tr>
                                                     <td class="text-center">{{ $key + 1 }}</td>
                                                     <td>{{ $item->product->code }}</td>
