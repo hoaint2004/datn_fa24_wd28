@@ -5,17 +5,19 @@
             <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
                 <form action="" class="form-search">
                     <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
-                    <button  uk-icon="search" class="icon-search"> 
-                        
+                    <button uk-icon="search" class="icon-search">
+
                     </button>
                 </form>
             </div>
 
             <!-- Phần logo ở giữa -->
+            <!-- Phần logo ở giữa -->
             <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
                 <a href="{{ route('home') }}">
-                    <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
-                        alt="" />
+                    <h1 style="font-size: 35px;">Wina Shoes</h1>
+                    {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
+                        alt="" /> --}}
                 </a>
             </div>
 
@@ -33,13 +35,13 @@
                     class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
                     <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                         @if (Auth::check())
-                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
-                            <a class="user-header" href="{{ route('logout') }}">Logout</a>
+                        <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                        <a class="user-header" href="{{ route('logout') }}">Logout</a>
                         @else
-                            <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
-                            <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
+                        <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
+                        <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
                         @endif
-                    </ul> 
+                    </ul>
                 </div>
 
                 <div>
@@ -47,10 +49,10 @@
                 </div>
 
                 @php
-                    $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
-                        ->orderBy('id', 'DESC')
-                        ->limit(5)
-                        ->get();
+                $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                ->orderBy('id', 'DESC')
+                ->limit(5)
+                ->get();
                 @endphp
 
                 <!-- cart -->
@@ -64,7 +66,6 @@
                 <div class="offcanvas-cart" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
                     <div class="uk-offcanvas-bar offcanvas-cart-body">
                         <button class="uk-offcanvas-close" type="button" uk-close style="color: red;"></button>
-
                         <div class="modal-header">
                             <h3 class="modal-title">Giỏ hàng của tôi
                                 <span class="cart-panel-counter"
@@ -77,51 +78,51 @@
 
                         <div class="mini-cart-product">
                             @if (!empty($carts))
-                                @php
-                                    $total = 0;
-                                @endphp
-                                @foreach ($carts as $item)
-                                    @php
-                                        $total += $item->quantity * $item->product->price;
-                                    @endphp
-                                    <div class="warp">
-                                        <a href="#">
-                                            <img src="{{ $item->product->image }}" alt="" width="120px"></a>
-                                        <div class="warp-body">
-                                            <a href="#" class="product-name">{{ $item->name }}</a>
-                                            <div class="price">
-                                                <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
-                                            </div>
-                                            <div class="data-size">
-                                                <span>{{ $item->color }} / {{ $item->size }}</span>
-                                            </div>
-                                            <div class="quantity">
-                                                <div class="quantity-selector">
-                                                    <button aria-label="Giảm số lượng"
-                                                        data-cart-id="{{ $item->id }}"
-                                                        class="quantity-selector-button-minus btn-minus-header">
-                                                        -
-                                                    </button>
-                                                    <input class="quantity-selector-input input-cart-header"
-                                                        type="number" step="1" min="1" max="9999"
-                                                        aria-label="Số lượng sản phẩm"
-                                                        data-cart-id="{{ $item->id }}"
-                                                        value="{{ $item->quantity }}" readonly="">
-                                                    <button aria-label="Tăng số lượng"
-                                                        data-cart-id="{{ $item->id }}"
-                                                        class="quantity-selector-button-plus btn-plus-header">+
-                                                    </button>
-                                                </div>
-                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
-                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
-                                                    @csrf
-                                                    <button class="cart-item-remove"><i
-                                                        class="fa-solid fa-trash-can"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
+                            @php
+                            $total = 0;
+                            @endphp
+                            @foreach ($carts as $item)
+                            @php
+                            $total += $item->quantity * $item->product->price;
+                            @endphp
+                            <div class="warp">
+                                <a href="#">
+                                    <img src="{{ $item->product->image }}" alt="" width="120px"></a>
+                                <div class="warp-body">
+                                    <a href="#" class="product-name">{{ $item->name }}</a>
+                                    <div class="price">
+                                        <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
                                     </div>
-                                @endforeach
+                                    <div class="data-size">
+                                        <span>{{ $item->color }} / {{ $item->size }}</span>
+                                    </div>
+                                    <div class="quantity">
+                                        <div class="quantity-selector">
+                                            <button aria-label="Giảm số lượng"
+                                                data-cart-id="{{ $item->id }}"
+                                                class="quantity-selector-button-minus btn-minus-header">
+                                                -
+                                            </button>
+                                            <input class="quantity-selector-input input-cart-header"
+                                                type="number" step="1" min="1" max="9999"
+                                                aria-label="Số lượng sản phẩm"
+                                                data-cart-id="{{ $item->id }}"
+                                                value="{{ $item->quantity }}" readonly="">
+                                            <button aria-label="Tăng số lượng"
+                                                data-cart-id="{{ $item->id }}"
+                                                class="quantity-selector-button-plus btn-plus-header">+
+                                            </button>
+                                        </div>
+                                        <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                            action="{{ route('cart.delete', $item->id) }}" method="post">
+                                            @csrf
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
                             @endif
                         </div>
 
@@ -134,9 +135,16 @@
                                 </bdi>
                             </p>
                             <p class="mini-cart-button">
-                                <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
-                                    Hàng</a>
-                                <a href="#" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                                <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
+                                <a href="{{ route('order.create') }}" class="continue-shopping" title="Thanh toán">Thanh toán</a>
+                                
+                               
+
+                            <form action="{{ route('vnpay_payment') }}" method="POST" class="vnpay">
+                                @csrf
+                                <input type="hidden" name="total" value="{{ $total }}">
+                                <button type="submit" name="redirect" class="vnpay-button">Thanh toán bằng VnPay</button>
+                            </form>
                             </p>
                         </div>
                     </div>
@@ -166,19 +174,19 @@
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
                                 <!-- Nổi bật -->
                                 @php
-                                    $categories = \App\Models\Category::orderBy('id', 'DESC')->get();
+                                $categories = \App\Models\Category::orderBy('id', 'DESC')->get();
                                 @endphp
                                 @if (!empty($categories))
-                                    <div>
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            @foreach ($categories as $item)
-                                                <li class="uk-nav-header">
-                                                    <a
-                                                        href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                                <div>
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        @foreach ($categories as $item)
+                                        <li class="uk-nav-header">
+                                            <a
+                                                href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -209,7 +217,6 @@
                             </div>
                         </div>
                     </li>
-
                     <li><a href="#">Xu hướng thời trang</a></li>
                     <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                 </ul>
@@ -238,9 +245,12 @@
                 </li>
             </ul>
         </div>
+        </nav>
     </div>
-
 </header>
+</body>
+
+</html>
 <script>
     $(document).ready(function() {
         $(document).on('submit', '.form-deleteCart', function(e) {
@@ -253,7 +263,8 @@
                 denyButtonText: `Hủy`,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.submit();v
+                    this.submit();
+                    v
                 }
             });
         });

@@ -1,24 +1,31 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CommentController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\ProductVariantsController;
-
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\BannerController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController as ControllersProductController;
-use App\Http\Controllers\CategoryController as ClientCategoryController;
-use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
+use App\Http\Controllers\SneakerController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ProductVariantsController;
+use App\Http\Controllers\CategoryController as ClientCategoryController;
+use App\Http\Controllers\CommentController as ControllersCommentController;
+use App\Http\Controllers\ProductController as ControllersProductController;
+
+
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
-|WebRoutes
+| Web Routes
 |--------------------------------------------------------------------------
 |
 |Hereiswhereyoucanregisterwebroutesforyourapplication.These
@@ -34,6 +41,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -59,9 +67,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/show/{id}', 'show')->name('show');
             Route::get('/edit/{id}', 'edit')->name('edit');
-            Route::post('/update/{id}', 'update')->name('update');
+            Route::put('/update/{id}', 'update')->name('update');
             Route::get('/detail/{id}', 'detail')->name('detail');
-            Route::post('/delete/{id}', 'delete')->name('delete');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::controller(ProductVariantsController::class)->name('product_variants.')->prefix('product_variants')
@@ -106,6 +114,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/delete/{id}', 'delete')
                 ->name('delete');
         });
+        Route::resource('banners', BannerController::class);
+
+    Route::resource('orders', AdminOrderController::class);
 });
 
 // Route user
@@ -123,15 +134,37 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
-    Route::get('/order', [ControllersProductController::class, 'order'])->name('checkout');
+    
+    Route::resource('/order', OrderController::class);
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
+
+    // Comment
+    Route::post('/comment/{id}', [ControllersCommentController::class, 'comment'])->name('post_comment');
+    Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
+    Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
+
+    //Coongr thanh toán
+    Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
+    // Route::get('/success-vnpay', [PaymentController::class, 'success-vnpay'])->name('success-vnpay');
+
 });
 
 Route::get('/filter', function(){
     return view('user.filter-product');
 });
+
+Route::get('/detailorder', function(){
+    return view('client.order-detail');
+});
+
+
+Route::get('/success-vnpay', function(){
+    return view('client.success-vnpay');
+});
+
+
 

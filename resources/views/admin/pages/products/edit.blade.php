@@ -23,6 +23,7 @@
                     <div class="card-body">
                         <form action="{{ route('admin.products.update', $products->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="live-preview">
                                 <!-- Tên sản phẩm -->
                                 <div class="col-md-12">
