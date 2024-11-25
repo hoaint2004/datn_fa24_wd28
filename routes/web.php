@@ -114,7 +114,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/delete/{id}', 'delete')
                 ->name('delete');
         });
-        Route::resource('banners', BannerController::class);
 
     Route::resource('orders', AdminOrderController::class);
 });
@@ -156,15 +155,4 @@ Route::middleware(['web'])->group(function () {
 Route::get('/filter', function(){
     return view('user.filter-product');
 });
-
-Route::get('/detailorder', function(){
-    return view('client.order-detail');
-});
-
-
-Route::get('/success-vnpay', function(){
-    return view('client.success-vnpay');
-});
-
-
 

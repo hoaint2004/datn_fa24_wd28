@@ -222,7 +222,10 @@ body {
 .status-order {
     margin-bottom: 30px;
     .status-body {
+
         background-image: url("/storage/images/Banner/4.png");
+        background-image: url('/storage/images/Banner/4.png');
+
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
