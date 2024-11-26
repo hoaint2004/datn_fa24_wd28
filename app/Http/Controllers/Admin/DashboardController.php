@@ -12,18 +12,21 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        // Đếm số lượng đơn hàng theo trạng thái
-        $statuses = ['pending', 'confirmed', 'shipping', 'delivering', 'failed', 'cancelled', 'completed'];
+        $statuses = ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thành công', 'Giao hàng thất bại', 'Đã hủy', 'Hoàn thành'];
         $data = [];
 
-        foreach ($statuses as $status) {
-            $data["order_{$status}"] = Order::where('status', $status)->count();
-        }
+        $data['order_pending'] = Order::where('status', 'Chờ xác nhận')->count();
+        $data['order_confirmed'] = Order::where('status', 'Đã xác nhận')->count();
+        $data['order_shipping'] = Order::where('status', 'Đang giao')->count();
+        $data['order_delivering'] = Order::where('status', 'Giao hàng thành công')->count();
+        $data['order_failed'] = Order::where('status', 'Giao hàng thất bại')->count();
+        $data['order_cancelled'] = Order::where('status', 'Đã hủy')->count();
+        $data['order_completed'] = Order::where('status', 'Hoàn thành')->count();
 
         $currentMonth = now()->month;
         $currentYear = now()->year;
 
-        $totalRevenueThisMonth = Order::where('status', 'completed')
+        $totalRevenueThisMonth = Order::where('status', 'Hoàn thành')
             ->whereYear('created_at', $currentYear)
             ->whereMonth('created_at', $currentMonth)
             ->with('orderDetails') // Load mối quan hệ orderDetails
@@ -34,7 +37,7 @@ class DashboardController extends Controller
                 });
             });
 
-        $totalOrders = Order::where('status', 'completed')->count();
+        $totalOrders = Order::where('status', 'Hoàn thành')->count();
 
         $data['users'] = User::all()->count();
 

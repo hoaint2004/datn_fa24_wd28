@@ -86,7 +86,7 @@ class OrderController extends Controller
                 }
                 $item->delete();
             }
-            
+
             return redirect()->route('order.success')
             ->with(
                 [
@@ -151,7 +151,7 @@ class OrderController extends Controller
             $endDate = Carbon::now()->endOfMonth();
         }
 
-        $data = Order::where('status', 'completed')
+        $data = Order::where('status', 'Hoàn thành')
             ->whereBetween('created_at', [$startDate, $endDate])
             ->with(['orderDetails', 'orderDetails.variant'])
             ->get();
