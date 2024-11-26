@@ -194,7 +194,7 @@
             </div>
 
             <div id="discounts-content" class="content-section">
-
+                <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
             </div>
         </main>
 

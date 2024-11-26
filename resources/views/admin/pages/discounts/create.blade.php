@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('title')
-    Thêm mới phiếu giảm giá
+    Thêm mới mã giảm giá
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Thêm mới phiếu giảm giá</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Thêm mới mã giảm giá</h4>
                         <div class="flex-shrink-0">
                             <div class="form-check form-switch form-switch-right form-switch-md">
                                 <label for="gutters-showcode" class="form-label text-muted">Xem Code</label>
@@ -24,6 +24,11 @@
                         <form action="{{ route('admin.discounts.store') }}" method="POST">
                             @csrf
                             <div class="live-preview">
+                                @if(session('messages'))
+                                <div class="alert alert-success">
+                                    {{ session('messages') }}
+                                </div>
+                                @endif
                                 <!-- Discount Code -->
                                 <div class="col-md-12">
                                     <label for="discount_code" class="form-label">Mã giảm giá</label>
@@ -79,8 +84,8 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="discount_type" class="form-label">Loại giảm giá</label>
                                     <select class="form-control" name="discount_type" id="discount_type">
-                                        <option value="%" {{ old('discount_type') == '%' ? 'selected' : '' }}>%</option>
-                                        <option value="VND" {{ old('discount_type') == 'VND' ? 'selected' : '' }}>VND</option>
+                                        <option value="%" {{ old('discount_type') == '%' ? 'selected' : '' }}>Phần trăm</option>
+                                        <option value="VND" {{ old('discount_type') == 'VND' ? 'selected' : '' }}>Giá trị cụ thể</option>
                                     </select>
                                     @error('discount_type')
                                         <span class="text-danger">{{ $message }}</span>
