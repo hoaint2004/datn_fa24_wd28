@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('title')
-    Chỉnh sửa phiếu giảm giá
+    Chỉnh sửa mã giảm giá
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Chỉnh sửa phiếu giảm giá</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Chỉnh sửa mã giảm giá</h4>
                         <div class="flex-shrink-0">
                             <div class="form-check form-switch form-switch-right form-switch-md">
                                 <label for="gutters-showcode" class="form-label text-muted">Xem Code</label>
@@ -80,8 +80,8 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="discount_type" class="form-label">Loại giảm giá</label>
                                     <select class="form-control" name="discount_type" id="discount_type">
-                                        <option value="percentage" {{ old('discount_type' , $discount->discount_type) == 'percentage' ? 'selected' : '' }}>Phần trăm</option>
-                                        <option value="fixed" {{ old('discount_type' , $discount->discount_type) == 'fixed' ? 'selected' : '' }}>Giảm giá cố định</option>
+                                        <option value="%" {{ old('discount_type' , $discount->discount_type) == '%' ? 'selected' : '' }}>Phần trăm</option>
+                                        <option value="VND" {{ old('discount_type' , $discount->discount_type) == 'VND' ? 'selected' : '' }}>Giá trị cụ thể</option>
                                     </select>
                                     @error('discount_type')
                                         <span class="text-danger">{{ $message }}</span>

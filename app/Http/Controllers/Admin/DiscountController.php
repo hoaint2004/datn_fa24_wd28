@@ -33,7 +33,7 @@ class DiscountController extends Controller
         $this->discountValidate($request);
 
         Discount::create($request->all());
-        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount created successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Thêm mã giảm giá mới thành công');
     }
 
     // Hiển thị form chỉnh sửa discount
@@ -49,7 +49,7 @@ class DiscountController extends Controller
         $this->discountValidate($request, $id);
         $discount = Discount::findOrFail($id);
         $discount->update($request->all());
-        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount updated successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Cập nhật mã giảm giá thành công');
     }
 
     // Xóa discount
@@ -57,7 +57,7 @@ class DiscountController extends Controller
     {
         $discount = Discount::findOrFail($id);
         $discount->delete();
-        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Discount deleted successfully');
+        return redirect()->route('admin.discounts.index')->with('status_succeed', 'Xóa mã giảm giá thành công');
     }
 
     // validate discount
