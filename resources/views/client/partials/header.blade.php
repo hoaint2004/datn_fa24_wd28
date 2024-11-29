@@ -56,13 +56,16 @@
                         ->orderBy('id', 'DESC')
                         ->limit(5)
                         ->get();
+                    $cartsAll = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                        ->orderBy('id', 'DESC')
+                        ->get();
                 @endphp
 
                 <!-- cart -->
                 <div>
                     <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
                         uk-toggle="target: #offcanvas-flip">
-                        <span class="cart-counter">{{ !empty($carts) ? $carts->count() : '' }}</span>
+                        <span class="cart-counter">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
                     </a>
                 </div>
 
@@ -72,7 +75,7 @@
                         <div class="modal-header">
                             <h3 class="modal-title">Giỏ hàng của tôi
                                 <span class="cart-panel-counter"
-                                    style="opacity: 1;">({{ !empty($carts) ? $carts->count() : '' }})</span>
+                                    style="opacity: 1;">({{ !empty($cartsAll) ? $cartsAll->count() : '' }})</span>
                             </h3>
                             <a href="#" class="close-account-panel button-close">
                                 <i class="fas fa-close"></i>
