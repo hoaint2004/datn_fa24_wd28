@@ -39,7 +39,11 @@ class AdminOrderController extends Controller
     public function show(string $id)
     {
         $order = Order::findOrFail($id);
-        return view('admin.pages.orders.show', compact('order'));
+        $totalProduct = 0;
+        foreach($order->orderDetails as $item) {
+            $totalProduct += $item->price * $item->quantity;
+        }
+        return view('admin.pages.orders.show', compact('order', 'totalProduct'));
     }
 
     /**
