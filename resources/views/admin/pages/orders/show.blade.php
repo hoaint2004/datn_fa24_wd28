@@ -62,11 +62,16 @@
                                 <li>Trạng thái đơn hàng: <b>{{ $order->status }}</b></li>
                                 <li>Trạng thái thanh toán: <b>{{ $order->payment_status }}</b></li>
                                 <li>Phương thức thanh toán thanh toán: <b>{{ $order->payment_method }}</b></li>
-                                <li>Tiền hàng: <b>{{ number_format($order->total_price, 0, ',', '.') }} đ</b></li>
+                                <li>
+                                    Tiền hàng: 
+                                    <b>
+                                        {{ number_format($totalProduct, 0, ',', '.') }} đ
+                                    </b>
+                                </li>
                                 <li>Tiền ship: <b>{{ number_format($order->shipping_fee, 0, ',', '.') }} đ</b></li>
                                 <li style="font-size: 18px">Tổng tiền: <b>
 
-                                        {{ number_format($order->total_price + $order->shipping_fee, 0, ',', '.') }} đ</b>
+                                        {{ number_format($totalProduct + $order->shipping_fee, 0, ',', '.') }} đ</b>
                                 </li>
                             </ul>
                         </div><!-- end card-body -->
@@ -104,7 +109,7 @@
                                                     <td>{{ number_format($item->product->price, 0, ',', '.') ?? number_format($item->product->price_old, 0, ',', '.') }}
                                                         đ</td>
                                                     <td>{{ $item->quantity }}</td>
-                                                    <td>{{ $item->total }}</td>
+                                                    <td>{{ number_format($item->total, 0, ',', '.') }} đ</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
