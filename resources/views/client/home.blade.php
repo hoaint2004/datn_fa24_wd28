@@ -164,7 +164,7 @@
                                             <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
                                                 <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
-                                            <div class="icon">
+                                            <div class="icon text-[10px]">
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -666,10 +666,10 @@
                 if (isNaN(value) || value < 1) {
                     $(this).val(1);
                 } else if (value > 9999) {
-                    $(this).val(9999);
+                    $(this).val(9999);  
                 }
             });
-
+                                                                                                                                                                                                                        
             // Đảm bảo rằng bạn sử dụng .on('click') để cập nhật khi người dùng chọn màu và size
             $('.quick-view-button').on('click', function(e) {
                 e.preventDefault();

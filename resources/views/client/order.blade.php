@@ -308,4 +308,56 @@
             </div>
         </form>
     </section>
+
+    <div class="uk-container uk-container-large">
+        <div class="checkout-form uk-card uk-card-default uk-card-body">
+            <h2 class="uk-card-title">Thanh toán qua VNPay</h2>
+            
+            <form action="{{ route('vnpay_payment') }}" method="POST" id="vnpay-form">
+                @csrf
+                <div class="uk-margin">
+                    <label class="uk-form-label">Họ và tên</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="name" value="{{ Auth::user()->fullname }}" required>
+                    </div>
+                </div>
+    
+                <div class="uk-margin">
+                    <label class="uk-form-label">Số điện thoại</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="phone" value="{{ Auth::user()->phone }}" required>
+                    </div>
+                </div>
+    
+                <div class="uk-margin">
+                    <label class="uk-form-label">Địa chỉ giao hàng</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="address" required>
+                    </div>
+                </div>
+    
+                <div class="uk-margin">
+                    <h4>Thông tin đơn hàng</h4>
+                    <div class="uk-grid">
+                        <div class="uk-width-expand">Tổng tiền hàng:</div>
+                        <div class="uk-width-auto">{{ number_format($total - $shipping) }}đ</div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-expand">Phí vận chuyển:</div>
+                        <div class="uk-width-auto">{{ number_format($shipping) }}đ</div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-expand"><strong>Tổng thanh toán:</strong></div>
+                        <div class="uk-width-auto"><strong>{{ number_format($total) }}đ</strong></div>
+                    </div>
+                </div>
+    
+                <input type="hidden" name="total" value="{{ $total }}">
+                
+                <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
+                    Thanh toán qua VNPay
+                </button>
+            </form>
+        </div>
+    </div>
 @endsection

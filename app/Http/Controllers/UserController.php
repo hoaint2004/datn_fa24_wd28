@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,15 @@ class UserController extends Controller
         } else {
             return redirect()->back()->with('error', 'Mật khẩu cũ không chính xác');
         }
+    }
+
+    public function order_history(){
+        $orders = Order::where('user_id', Auth::id())
+        ->with('orderDetails')
+        ->orderBy('created_at', 'desc') 
+        ->get();
+        dd($orders);
+        return view('client.account');
     }
 }
 
