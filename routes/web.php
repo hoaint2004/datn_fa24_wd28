@@ -41,7 +41,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
+Route::get('/verify/{token}', [AuthController::class, 'verify'])->name('verify');
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -133,7 +133,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
-    
+
     Route::resource('/order', OrderController::class);
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
@@ -148,11 +148,17 @@ Route::middleware(['web'])->group(function () {
 
     //Coongr thanh toán
     Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
-    // Route::get('/success-vnpay', [PaymentController::class, 'success-vnpay'])->name('success-vnpay');
+    Route::get('/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
 
 });
 
-Route::get('/filter', function(){
+Route::get('/filter', function () {
     return view('user.filter-product');
 });
+Route::get('/order-detail', function () {
+    return view('client.order-detail');
+});
 
+Route::get('/success-vnpay', function () {
+    return view('client.success-vnpay');
+});

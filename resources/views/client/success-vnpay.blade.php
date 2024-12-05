@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,9 +27,16 @@
             <img src="https://shop.sandisk.com/content/dam/spinco/en-us/assets/support/home/icon-productregistration.svg" alt="" width="150px">
             <p class="thankyou-success">Cảm ơn bạn đã đặt hàng</p>
             <p class="payment-success-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat saepe animi recusandae, aut magni quas voluptates consequatur perferendis commodi earum! A in doloremque quia fugit moles</p>
-            <a href="#" class="payment-success-btn">Tài khoản của tôi <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="{{ route('home') }}" class="payment-success-btn">Về trang chủ <i class="fa-solid fa-arrow-right"></i></a>
         </div>
+       
+</div>
+
+
     </div>
 </body>
 
 </html>
+
+
+

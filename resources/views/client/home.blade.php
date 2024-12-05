@@ -542,7 +542,7 @@
             <div class="title">
                 <hr />
                 <a href="#">
-                    <h2>{{ $data['categoryNewOne']->name }}</h2>
+                    
                 </a>
                 <hr />
             </div>

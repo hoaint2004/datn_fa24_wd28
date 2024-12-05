@@ -137,14 +137,34 @@
                             <p class="mini-cart-button">
                                 <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
                                 <a href="{{ route('order.create') }}" class="continue-shopping" title="Thanh toán">Thanh toán</a>
-                                
-                               
 
-                            <form action="{{ route('vnpay_payment') }}" method="POST" class="vnpay">
+
+
+                            <form action="{{ route('vnpay_payment') }}" method="POST" class="vnpay" id="vnpay-form">
                                 @csrf
                                 <input type="hidden" name="total" value="{{ $total }}">
                                 <button type="submit" name="redirect" class="vnpay-button">Thanh toán bằng VnPay</button>
                             </form>
+
+                            @if(!Auth::check())
+                            <script>
+                                document.getElementById('vnpay-form').addEventListener('submit', function(event) {
+                                    event.preventDefault();
+                                    Swal.fire({
+                                        title: 'Bạn cần đăng nhập để thanh toán!',
+                                        text: 'Vui lòng đăng nhập để tiếp tục thanh toán.',
+                                        icon: 'warning',
+                                        confirmButtonText: 'Đăng nhập',
+                                        showCancelButton: true,
+                                        cancelButtonText: 'Đóng'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = "{{ route('login.form') }}";
+                                        }
+                                    });
+                                });
+                            </script>
+                            @endif
                             </p>
                         </div>
                     </div>
