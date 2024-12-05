@@ -86,62 +86,19 @@
                 </div>
                 <span>Flash Sale</span>
             </a>
+           
+            @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
+                    <img src="{{$category3->image}}"
                         alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
                         fetchpriority="auto">
                 </div>
-                <span>Flash Sale</span>
+                <span>{{$category3->name}}</span>
             </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
+            @endforeach
+          
+       
         </div>
     </section>
 
@@ -204,8 +161,8 @@
                                             </div>
                                         </div>
                                         <div class="product-review">
-                                            <a href="{{ route('categories', $item->category->id) }}">
-                                                <span>{{ $item->category->name }}</span>
+                                            <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                                <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
                                             <div class="icon">
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -215,8 +172,8 @@
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                             </div>
                                         </div>
-                                        <a href="{{ route('productDetail', $item->id) }}"
-                                            class="product-name">{{ $item->name }}</a>
+                                        <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                            class="product-name">{{ !empty($item->name) ? $item->name :'' }}</a>
                                         <div class="product-price">
                                             <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                             @if (!empty($item->price_old))
@@ -296,11 +253,11 @@
                             <a href="{{ route('categories', ['id' => $item->id]) }}" style="height: 100%"
                                 class="a-img uk-inline-clip uk-transition-toggle" tabIndex={0}>
                                 <img style="height: 100%" class="uk-transition-scale-up uk-transition-opaque"
-                                    src="{{ $item->image }}" alt="{{ $item->name }}" /></a>
+                                    src="{{ $item->image }}" alt="{{ !empty($item->name) ? $item->name : '' }}" /></a>
                         </div>
                         <div class="name-shoes-body">
                             <a href="{{ route('categories', ['id' => $item->id]) }}" class="a-body">
-                                <p>{{ $item->name }}</p>
+                                <p>{{ !empty($item->name) ? $item->name : '' }}</p>
                             </a>
                         </div>
                     </div>
@@ -342,8 +299,8 @@
                                 </div>
                             </div>
                             <div class="product-review">
-                                <a href="{{ route('categories', $item->category->id) }}">
-                                    <span>{{ $item->category->name }}</span>
+                                <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                    <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                 </a>
                                 <div class="icon">
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -353,8 +310,8 @@
                                     <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                 </div>
                             </div>
-                            <a href="{{ route('productDetail', $item->id) }}"
-                                class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
+                                class="product-name">{{ !empty($item->name) ?$item->name : '' }}</a>
                             <div class="product-price">
                                 <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                 @if (!empty($item->price_old))
@@ -542,7 +499,9 @@
             <div class="title">
                 <hr />
                 <a href="#">
-                    
+
+                    <h2>{{ !empty($data['categoryNewOne']->name) ? $data['categoryNewOne']->name : '' }}</h2>
+
                 </a>
                 <hr />
             </div>
@@ -645,7 +604,7 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
 
                     <div class="flex items-center my-4 price">

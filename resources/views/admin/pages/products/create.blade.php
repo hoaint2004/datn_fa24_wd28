@@ -32,6 +32,17 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                {{-- Trạng thái sản phẩm --}}
+                                <div class="col-md-12 mt-2">
+                                    <label for="productInput" class="form-label">Trạng thái</label><br>
+                                    <input type="radio" class="btn-check statusProduct" value="0" name="status"
+                                        id="success-outlined" autocomplete="off" checked>
+                                    <label class="btn btn-outline-success" for="success-outlined">Hiện</label>
+    
+                                    <input type="radio" class="btn-check statusProduct" value="1" name="status"
+                                        id="danger-outlined" autocomplete="off">
+                                    <label class="btn btn-outline-danger" for="danger-outlined">Ẩn</label>
+                                </div>
                             
                                 <!-- Ảnh sản phẩm -->
                                 <div class="col-md-12 mt-3">

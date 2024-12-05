@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
+    <title>Chi tiết sản phẩm</title>
 
     {{-- css --}}
     <!-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css')}}"> -->
@@ -79,7 +79,7 @@
                             </i>
                         </div>
                         <p class="text-sm ml-2">
-                            5.0 (121 Reviews)
+                            5.0 (121 Đánh giá)
                         </p>
                     </div>
 
@@ -97,15 +97,11 @@
                     <div class="product-info">
                         <p class="text-gray-600 mb-2 product-info-sku">
                             <strong>Mã sản phẩm:</strong>
-                            <a href="#" id="sku">Muckbang</a>
+                            <a href="#" id="sku">SP01</a>
                         </p>
                         <p class="text-gray-600 mb-2 product-info-category">
                             <strong>Danh mục:</strong>
                             <a href="#" id="category">{{ $data['product']->category->name }}</a>
-                        </p>
-                        <p class="text-gray-600 mb-4 product-info-tag">
-                            <strong>Tags:</strong>
-                            <a href="#" id="tags">Mucbang ASMR, Mucbang</a>
                         </p>
                         <p class="text-gray-600 mb-4 product-info-vendor">
                             <strong>Thương hiệu:</strong>
@@ -218,7 +214,7 @@
                 <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
                 <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
                 <li><a class="tab-product-detail-title" href="#">Đánh giá (1)</a></li>
-                <li><a class="tab-product-detail-title" href="#">Comment</a></li>
+                <li><a class="tab-product-detail-title" href="#">Bình luận</a></li>
             </ul>
 
             <!-- Nội dung của tab -->
@@ -231,7 +227,7 @@
                 <!-- Tab Info -->
                 <div class="tab-info mt-10">
                     <div class="flex gap-10 pb-4">
-                        <span class="text-[#222] font-bold text-lg">Color</span>
+                        <span class="text-[#222] font-bold text-lg">Màu sắc</span>
                         <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam ad!
                             Molestias enim dolorem ipsa neque sunt repellat!</p>
                     </div>
@@ -400,8 +396,9 @@
                 {{-- Tab comment --}}
                 <div class="tab-comment">
                     <div class="form-comment">
-                        <h3 class="title-cmt mt-10">Hãy để lại bình luận
-                        </h3>
+
+                        <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
+    
 
                         @if (auth()->check())
                         <form action="{{ route('post_comment', $data['product']->id ) }}" method="POST" id="form-post-comment">
@@ -439,16 +436,26 @@
                                         </small>
                                     </h4>
 
-                                    <p name="content" id="content-{{ $cmt->id }}" >
-                                        {{ $cmt->content }}
-                                    </p>
 
-                                    <div class="text-right">
-                                        @can('my-comment', $cmt)
-                                        <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id}}" data-id_comment="{{ $cmt->id }}"
-                                            data-content="{{ $cmt->content }}">Sửa</a>
-                                        <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
-                                            class="delete-comment">
+                                        <div class="text-right">
+                                            @can('my-comment', $cmt)
+                                                <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id}}" data-id_comment="{{ $cmt->id }}"
+                                                    data-content="{{ $cmt->content }}">Sửa</a>
+                                                <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
+                                                    class="delete-comment">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn-delete"
+                                                        data-comment_id="{{ $cmt->id }}">Xóa</button>
+                                                </form>
+                                                @endcan
+                                            <a class="btn-reply" href=""
+                                                    data-id_comment="{{ $cmt->id }}">Reply
+                                                </a>
+                                        </div>
+                                        <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
+                                            class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
+
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn-delete"
@@ -468,9 +475,11 @@
                                             required="required">
                                             </textarea>
 
-                                        <button class="btnsave-update" type="submit"
-                                            data-id_comment="{{ $cmt->id }}">Cập nhật</button>
-                                    </form>
+
+                                            <button class="btnsave-update" type="submit"
+                                                data-id_comment="{{ $cmt->id }}">Cập nhật</button>
+                                        </form>
+
 
                                     <form action="" method="POST" style="display:none"
                                         class="form-post-comment-child" id="form-reply-{{ $cmt->id }}">
@@ -480,9 +489,11 @@
                                         <textarea name="content-reply" cols="70"placeholder="Enter content (*)"
                                             class="text-note-{{ $cmt->id }}" required="required" id="content-reply"></textarea>
 
-                                        <button class="btnsave-reply" type="submit"
-                                            data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Nội dung trả lời</button>
-                                    </form>
+
+                                            <button class="btnsave-reply" type="submit"
+                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
+                                        </form>
+
 
 
 
@@ -521,7 +532,62 @@
                                                     <a class="btn-reply-p2" href=""
                                                         data-id_comment="{{ $child->id }}">Trả lời
                                                     </a>
-                                                    @endcan
+
+
+                                                    <div class="media-comment-body">
+                                                        <h4 name="fullname"> {{ $child->user->fullname }} 
+                                                            <small class="created_at" style="color: #5555558f">
+                                                                {{ $child->created_at->diffForHumans() }}
+                                                            </small>
+                                                        </h4>
+                                                        <p name="content" id="content-{{ $child->id }}">
+                                                            {{ $child->content }}
+                                                        </p>
+    
+                                                        <div class="text-right">
+                                                            @can('my-comment', $child)
+                                                            <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
+                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
+                                                                <form action="{{ route('destroy_comment', $child->id) }}"
+                                                                    method="post" class="delete-comment">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn-delete-reply"
+                                                                        data-comment_id="{{ $child->id }}">Xóa
+                                                                    </button>
+                                                                </form>
+                                                                <a class="btn-reply-p2" href=""
+                                                                    data-id_comment="{{ $child->id }}">Trả lời
+                                                                </a>
+                                                            @endcan
+                                                        </div>
+                                                        {{-- Form edit --}}
+                                                        <form action="" method="POST" style="display:none"
+                                                            class="form-edit-comment-parent"
+                                                             id="form-edit-{{ $child->id }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
+                                                                class="content-edit" required="required"></textarea>
+
+                                                            <button class="btnsave-update" type="submit"
+                                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
+                                                        </form>
+
+                                                        {{-- Form reply --}}
+                                                        <form action="" method="POST" style="display:none"
+                                                            class="form-post-comment-grandchildren"
+                                                            id="form-reply-{{ $child->id }}">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
+                                                                class="content-reply" required="required"></textarea>
+
+                                                            <button class="btnsave-reply-p2" type="submit"
+                                                                data-id_comment="{{ $child->id }}"> Gửi</button>
+                                                        </form>
+                                                    </div>
+
                                                 </div>
                                                 {{-- Form edit --}}
                                                 <form action="" method="POST" style="display:none"
@@ -573,17 +639,51 @@
 
                 <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
                     @if (!empty($data['productRelated']))
-                    @foreach ($data['productRelated'] as $key => $item)
-                    <div class="product-item uk-width-1-4@m">
-                        <div class="product-image">
-                            <a href="{{ route('productDetail', $item->id) }}">
-                                <img src="{{ $item->image }}" alt="{{ $item->name }}" />
-                            </a>
-                            <span>-10%</span>
-                            <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
-                            <div class="product-button">
-                                <button>Thêm vào giỏ </button>
-                                <button uk-toggle="target: #modal-container">Xem nhanh</button>
+
+                        @foreach ($data['productRelated'] as $key => $item)
+                            <div class="product-item uk-width-1-4@m">
+                                <div class="product-image">
+                                    <a href="{{ route('productDetail', $item->id) }}">
+                                        <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    </a>
+                                    <span>-10%</span>
+                                    <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                    <div class="product-button">
+                                        <button>Thêm vào giỏ </button>
+                                        <button uk-toggle="target: #modal-container">Xem nhanh</button>
+                                    </div>
+                                </div>
+                                <div class="product-review">
+                                    <a href="{{ route('categories', $item->category->id) }}">
+                                        <span>{{ $item->category->name }}</span>
+                                    </a>
+                                    <div class="icon">
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                    </div>
+                                </div>
+                                <a href="{{ route('productDetail', $item->id) }}"
+                                    class="product-name">{{ $item->name }}</a>
+                                <div class="product-price">
+                                    <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                    @if (!empty($item->price_old))
+                                        <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                    @endif
+                                </div>
+                                <div class="product-item-detail-gallery-items">
+                                    @if (!empty($item->images))
+                                        @foreach ($item->images as $item)
+                                            <div class="product-item-detail-gallery-item">
+                                                <img src="{{ $item->image_url }}"
+                                                    alt="">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+
                             </div>
                         </div>
                         <div class="product-review">

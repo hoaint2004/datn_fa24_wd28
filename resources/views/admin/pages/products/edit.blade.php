@@ -42,6 +42,17 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                  {{--  Trạng thái sản phẩm --}}
+                                  <div class="col-md-12 mt-2">
+                                    <label for="productInput" class="form-label">Trạng thái</label><br>
+                                    <input type="radio" class="btn-check statusProducts" value="0" name="status"
+                                        id="success-outlined" autocomplete="off" {{ old('status', $products->status) == 0 ? 'checked' : '' }}>
+                                    <label class="btn btn-outline-success" for="success-outlined">Hiện</label>
+    
+                                    <input type="radio" class="btn-check statusProducts" value="1" name="status"
+                                        id="danger-outlined" autocomplete="off" {{ old('status', $products->status) == 1 ? 'checked' : '' }}>
+                                    <label class="btn btn-outline-danger" for="danger-outlined">Ẩn</label>
+                                </div>
                                 
                                 <!-- Ảnh sản phẩm -->
                                 <div class="col-md-12 mt-3">
@@ -80,7 +91,7 @@
 
                                 {{-- chú thích --}}
                                 <div class="col-md-12 mt-3">
-                                    <label for="productDescription" class="form-label">Description</label>
+                                    <label for="productDescription" class="form-label">Chú thích</label>
                                     <input type="text" class="form-control" name="description" id="productDescription" value="{{ old('description', $products->description) }}" placeholder="Nhập chú thích...">
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
@@ -106,7 +117,7 @@
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <div class="card-header align-items-center d-flex">
-                                                <h4 class="card-title mb-0 flex-grow-1">Gallery</h4>
+                                                <h4 class="card-title mb-0 flex-grow-1">Thư viện ảnh</h4>
                                                 <button type="button" class="btn btn-primary" onclick="addImageGallery()">Thêm ảnh</button>
                                             </div><!-- end card header -->
                                             <div class="card-body">
@@ -129,7 +140,7 @@
                                                             @endforeach
                                                         @else
                                                             <div class="col-md-4" id="gallery_default_item">
-                                                                <label for="gallery_default" class="form-label">Image</label>
+                                                                <label for="gallery_default" class="form-label">Ảnh</label>
                                                                 <div class="d-flex">
                                                                     <input type="file" class="form-control" name="product_galleries[]"
                                                                         id="gallery_default">
@@ -139,9 +150,9 @@
                                                     </div>
                         
                                                     {{-- Thằng này dùng để lưu ảnh xóa --}}
-                                                    <div id=""></div>
+                                                    <div id="delete_galleries"></div>
                                                 </div>
-                        delete_galleries
+                       
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +171,7 @@
                                         <div class="variant-item row g-3 align-items-center mb-2" id="variant_{{ $index }}">
                                             <input type="hidden" name="variants[{{ $index }}][id]" value="{{ $variant->id ?? '' }}">
                                             <div class="col-md-3">
-                                                <label for="variantSize_{{ $index }}" class="form-label">Size</label>
+                                                <label for="variantSize_{{ $index }}" class="form-label">Kích cỡ</label>
                                                 <input type="text" id="variantSize_{{ $index }}" name="variants[{{ $index }}][size]" 
                                                        value="{{ old("variants.{$index}.size", $variant['size'] ?? '') }}" class="form-control" required>
                                                        @error("variants.{$index}.size")
@@ -168,15 +179,15 @@
                                                    @enderror
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="variantColor_{{ $index }}" class="form-label">Color</label>
+                                                <label for="variantColor_{{ $index }}" class="form-label">Màu</label>
                                                 <input type="text" id="variantColor_{{ $index }}" name="variants[{{ $index }}][color]" 
                                                        value="{{ old("variants.{$index}.color", $variant['color'] ?? '') }}" class="form-control" required>
                                                        @error("variants.{$index}.color")
                                                        <span class="text-danger">{{ $message }}</span>
                                                    @enderror
                                             </div>
-                                            <div class="col-md-3">adsfsf
-                                                <label for="variantQuantity_{{ $index }}" class="form-label">Quantity</label>
+                                            <div class="col-md-3">
+                                                <label for="variantQuantity_{{ $index }}" class="form-label">Số lượng</label>
                                                 <input type="number" id="variantQuantity_{{ $index }}" name="variants[{{ $index }}][quantity]" 
                                                        value="{{ old("variants.{$index}.quantity", $variant['quantity'] ?? '') }}" class="form-control" required>
                                                        @error("variants.{$index}.quantity")

@@ -35,8 +35,13 @@
                     class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
                     <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                         @if (Auth::check())
-                        <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
-                        <a class="user-header" href="{{ route('logout') }}">Logout</a>
+
+                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                            @if (Auth::check() && Auth::user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="user-header">Trang quản trị</a>
+                            @endif
+                            <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
+
                         @else
                         <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
                         <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
@@ -49,17 +54,22 @@
                 </div>
 
                 @php
-                $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
-                ->orderBy('id', 'DESC')
-                ->limit(5)
-                ->get();
+
+                    $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                        ->orderBy('id', 'DESC')
+                        ->limit(5)
+                        ->get();
+                    $cartsAll = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                        ->orderBy('id', 'DESC')
+                        ->get();
+
                 @endphp
 
                 <!-- cart -->
                 <div>
                     <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
                         uk-toggle="target: #offcanvas-flip">
-                        <span class="cart-counter">{{ !empty($carts) ? $carts->count() : '' }}</span>
+                        <span class="cart-counter">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
                     </a>
                 </div>
 
@@ -69,7 +79,7 @@
                         <div class="modal-header">
                             <h3 class="modal-title">Giỏ hàng của tôi
                                 <span class="cart-panel-counter"
-                                    style="opacity: 1;">({{ !empty($carts) ? $carts->count() : '' }})</span>
+                                    style="opacity: 1;">({{ !empty($cartsAll) ? $cartsAll->count() : '' }})</span>
                             </h3>
                             <a href="#" class="close-account-panel button-close">
                                 <i class="fas fa-close"></i>
@@ -78,20 +88,51 @@
 
                         <div class="mini-cart-product">
                             @if (!empty($carts))
-                            @php
-                            $total = 0;
-                            @endphp
-                            @foreach ($carts as $item)
-                            @php
-                            $total += $item->quantity * $item->product->price;
-                            @endphp
-                            <div class="warp">
-                                <a href="#">
-                                    <img src="{{ $item->product->image }}" alt="" width="120px"></a>
-                                <div class="warp-body">
-                                    <a href="#" class="product-name">{{ $item->name }}</a>
-                                    <div class="price">
-                                        <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
+
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach ($carts as $item)
+                                    @php
+                                        $total += $item->quantity * $item->product->price;
+                                    @endphp
+                                    <div class="warp">
+                                        <a href="#">
+                                            <img src="{{ $item->product->image }}" alt="" width="120px"></a>
+                                        <div class="warp-body">
+                                            <a href="#" class="product-name">{{ $item->name }}</a>
+                                            <div class="price">
+                                                <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
+                                            </div>
+                                            <div class="data-size">
+                                                <span>{{ $item->color }} / {{ $item->size }}</span>
+                                            </div>
+                                            <div class="quantity">
+                                                <div class="quantity-selector">
+                                                    <button aria-label="Giảm số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-minus btn-minus-header">
+                                                        -
+                                                    </button>
+                                                    <input class="quantity-selector-input input-cart-header"
+                                                        type="number" step="1" min="1" max="9999"
+                                                        aria-label="Số lượng sản phẩm"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        value="{{ $item->quantity }}" readonly="">
+                                                    <button aria-label="Tăng số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-plus btn-plus-header">+
+                                                    </button>
+                                                </div>
+                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="cart-item-remove"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+>>>>>>> main
                                     </div>
                                     <div class="data-size">
                                         <span>{{ $item->color }} / {{ $item->size }}</span>
@@ -135,36 +176,12 @@
                                 </bdi>
                             </p>
                             <p class="mini-cart-button">
-                                <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ Hàng</a>
-                                <a href="{{ route('order.create') }}" class="continue-shopping" title="Thanh toán">Thanh toán</a>
 
+                                <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
+                                    Hàng</a>
+                                <a href="{{ route('order.create') }}" class="continue-shopping"
+                                    title="Thanh toán">Thanh toán</a>
 
-
-                            <form action="{{ route('vnpay_payment') }}" method="POST" class="vnpay" id="vnpay-form">
-                                @csrf
-                                <input type="hidden" name="total" value="{{ $total }}">
-                                <button type="submit" name="redirect" class="vnpay-button">Thanh toán bằng VnPay</button>
-                            </form>
-
-                            @if(!Auth::check())
-                            <script>
-                                document.getElementById('vnpay-form').addEventListener('submit', function(event) {
-                                    event.preventDefault();
-                                    Swal.fire({
-                                        title: 'Bạn cần đăng nhập để thanh toán!',
-                                        text: 'Vui lòng đăng nhập để tiếp tục thanh toán.',
-                                        icon: 'warning',
-                                        confirmButtonText: 'Đăng nhập',
-                                        showCancelButton: true,
-                                        cancelButtonText: 'Đóng'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = "{{ route('login.form') }}";
-                                        }
-                                    });
-                                });
-                            </script>
-                            @endif
                             </p>
                         </div>
                     </div>
@@ -216,22 +233,40 @@
                     <li class="uk-parent">
                         <a href="#">Sản phẩm nổi bật <span>›</span></a>
                         <div class="uk-dropdown uk-width-2xlarge">
-                            <div class="uk-child-width-1-4@m" uk-grid>
+                            <div class="uk-child-width-1-3@m" uk-grid>
                                 <!-- Nổi bật -->
                                 <div>
-                                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="#">Nổi bật 1</a></li>
-                                        <li><a href="#">Nổi bật 2</a></li>
+                                    <ul class="uk-nav uk-navbar-dropdown-nav uk-grid uk-grid-medium uk-child-width-1-1 uk-margin-remove">
+                                        @php
+                                            $data['productFeatured'] = \App\Models\Variants::select('variants.product_id')
+                                                ->selectRaw('SUM(variants.quantity) as quan')
+                                                ->join('products', 'products.id', '=', 'variants.product_id')
+                                                ->where('products.status', 0)
+                                                ->groupBy('variants.product_id')
+                                                ->orderByDesc('quan')
+                                                ->with('product')
+                                                ->take(2)
+                                                ->get();                                 
+                                        @endphp
+                                
+                                        @foreach($data['productFeatured'] as $item => $product)
+                                            <li class="uk-margin-small-bottom">
+                                                <a href="{{ route('featured_products', $product->product_id) }}">
+                                                    {{ $product->product->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
+                                
 
                                 <!-- Giày nam -->
-                                <div>
+                                {{-- <div>
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li><a href="#">Nổi bật 3</a></li>
                                         <li><a href="#">Nổi bật 4</a></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                                 <!-- Giày nam -->
 
                             </div>

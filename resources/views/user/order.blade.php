@@ -1,20 +1,32 @@
-@extends('client.layouts.master')
-@section('title', 'Trang đặt hàng')
-@section('content')
-<div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
-    <nav aria-label="Breadcrumb alo">
-        <ul class="uk-breadcrumb">
-            <li><a href="{{ route('home') }}" class="breadcrumb-a">Trang chủ</a></li>
-            <li><a href="{{ route('showCart') }}" class="breadcrumb-a">Giỏ hàng</a></li>
-            <li><span aria-current="page" class="text-base">Đặt hàng</span></li>
-        </ul>
-    </nav>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<section class="uk-container uk-container-large order mb-4">
-    <h2 class="order-title">Thông tin nhận hàng</h2>
-    <form action="{{ route('order.store') }}" method="POST">
-        @csrf
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css','resources/scss/app.scss', 'resources/js/app.js'])
+</head>
+
+<body>
+    <div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
+        <nav aria-label="Breadcrumb alo">
+            <ul class="uk-breadcrumb">
+                <li><a href="#" class="breadcrumb-a">Trang chủ</a></li>
+                <li><a href="#" class="breadcrumb-a">Giỏ hàng</a></li>
+                <li><span aria-current="page" class="text-base">Đặt hàng</span></li>
+            </ul>
+        </nav>
+    </div>
+
+    <section class="uk-container uk-container-large order">
+        <h2 class="order-title">Thông tin nhận hàng</h2>
         <div class="uk-grid order-body" uk-grid>
             <article class="uk-margin-top uk-width-2-3 order-left">
 
@@ -39,10 +51,8 @@
 
                 <ul class="order-left-body uk-switcher uk-margin">
                     <div class="address">
-                        {{-- <h2 class="text-xl font-semibold mb-4">Địa chỉ giao hàng</h2>
-                        <p class="text-sm text-gray-600 mb-6">Địa chỉ bạn muốn sử dụng có được hiển thị bên dưới không? Nếu
-                            có, hãy nhấp vào nút "Giao hàng đến địa chỉ này" tương ứng. Hoặc bạn có thể nhập địa chỉ giao
-                            hàng mới.</p>
+                        <h2 class="text-xl font-semibold mb-4">Địa chỉ giao hàng</h2>
+                        <p class="text-sm text-gray-600 mb-6">Địa chỉ bạn muốn sử dụng có được hiển thị bên dưới không? Nếu có, hãy nhấp vào nút "Giao hàng đến địa chỉ này" tương ứng. Hoặc bạn có thể nhập địa chỉ giao hàng mới.</p>
                         <div class="space-y-4">
                             <div class="border rounded-lg p-4 flex justify-between items-center">
                                 <div>
@@ -69,70 +79,40 @@
                         </div>
                         <button class="w-full bg-black text-white py-2 rounded-lg mt-6">Giao Hàng</button>
 
-                        <hr class="my-6"> --}}
+                        <hr class="my-6">
 
-                        <h2 class="text-xl font-semibold mb-4">Thông tin khách hàng</h2>
+                        <h2 class="text-xl font-semibold mb-4">Thêm địa chỉ mới</h2>
 
-                        <div class="space-y-4">
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <form class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Họ tên</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black"
-                                    placeholder="Nhập Họ và Tên" name="name"
-                                    value="{{ Auth::user()->fullname ?? '' }}">
-
-                                @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black" placeholder="Nhập Họ và Tên">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Số điện thoại</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black"
-                                    placeholder="Nhập số điện thoại" name="phone"
-                                    value="{{ Auth::user()->phone ?? '' }}">
-                                @error('phone')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black" placeholder="Nhập số điện thoại">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700">Địa chỉ</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black"
-                                    placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address ?? '' }}">
-                                @error('address')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Căn hộ, Số nhà, Công ty, Tòa
-                                    nhà</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
+                                <label class="block text-sm font-medium text-gray-700">Căn hộ, Số nhà, Công ty, Tòa nhà</label>
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Khu vực, Đường, Làng</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Thành phố</label>
-                                <select
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
+                                <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
                                     <option>Select City</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Pin Code</label>
-                                <input type="text"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black"
-                                    placeholder="Enter Pin Code">
+                                <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black" placeholder="Enter Pin Code">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">State</label>
-                                <select
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
+                                <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-black focus:border-black">
                                     <option>Select State</option>
                                 </select>
                             </div>
@@ -141,7 +121,7 @@
                                 <label class="ml-2 block text-sm text-gray-900">Sử dụng làm địa chỉ mặc định.</label>
                             </div>
                             <button class="w-full bg-black text-white py-2 rounded-lg">Thêm Địa Chỉ </button>
-                        </div>
+                        </form>
 
                     </div>
 
@@ -151,45 +131,37 @@
                             <legend class="uk-legend order-title-item">Phương thức thanh toán</legend>
 
                             <div class="uk-margin payments-card">
-                                <label class="flex items-center mb-2 payments-card-title">
-                                    <input type="radio" name="payment_method" class="form-radio text-black"
-                                        value="cod" checked>
-                                    <span class="ml-2 font-bold order-name">Thanh toán khi nhận hàng</span>
-                                </label>
-                                <div>
+                                <form action="" method="post">
                                     <!-- <input class="uk-radio" type="radio" name="payment" checked> Thanh toán qua thẻ -->
                                     <label class="flex items-center mb-2 payments-card-title">
-                                        <input type="radio" name="payment_method" value="vnpay"
-                                            class="form-radio text-black">
+                                        <input type="radio" name="payment-method" class="form-radio text-black" checked>
                                         <span class="ml-2 font-bold order-name">Thanh toán qua thẻ</span>
                                     </label>
                                     <div class="mb-4">
                                         <label class="block mb-2 payments-card-label">Card Number</label>
-                                        <input type="text"
-                                            class="w-full border border-gray-400 p-2 rounded payments-card-input"
-                                            value="0988697904">
+                                        <input type="text" class="w-full border border-gray-400 p-2 rounded payments-card-input" value="0988697904">
                                     </div>
                                     <div class="mb-4">
                                         <label class="block mb-2 payments-card-label">Card Name</label>
-                                        <input type="text"
-                                            class="w-full border border-gray-400 p-2 rounded payments-card-input"
-                                            value="Hiếu">
+                                        <input type="text" class="w-full border border-gray-400 p-2 rounded payments-card-input" value="Hiếu">
                                     </div>
                                     <div class="uk-grid mb-4" uk-grid>
                                         <div class="uk-width-1-2 ">
                                             <label class="block mb-2 payments-card-label">Expiry Date</label>
-                                            <input type="text"
-                                                class="w-full border border-gray-400 p-2 rounded payments-card-input"
-                                                value="02/-7">
+                                            <input type="text" class="w-full border border-gray-400 p-2 rounded payments-card-input" value="02/-7">
                                         </div>
                                         <div class="uk-width-1-2">
                                             <label class="block mb-2 payments-card-label">CVV</label>
-                                            <input type="text"
-                                                class="w-full border border-gray-400 p-2 rounded payments-card-input"
-                                                value="02072004">
+                                            <input type="text" class="w-full border border-gray-400 p-2 rounded payments-card-input" value="02072004">
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+
+                                <label class="flex items-center mb-2 payments-card-title">
+                                    <input type="radio" name="payment-method" class="form-radio text-black" checked>
+                                    <span class="ml-2 font-bold order-name">Thanh toán khi nhận hàng</span>
+                                </label>
+
                             </div>
 
                             <button type="button" class="uk-button uk-button-primary">Tiếp tục</button>
@@ -203,29 +175,32 @@
                             <legend class="uk-legend order-title-item">Xác thực thanh toán</legend>
                             <p class="order-name mt-5 mb-3">Vui lòng kiểm tra lại thông tin đơn hàng của bạn.</p>
                             <div class="uk-list uk-list-divider review-content">
-                                @foreach ($carts as $item)
                                 <div class="warp">
-                                    <a href="{{ route('productDetail', $item->product_id) }}"><img
-                                            src="{{ asset($item->product->image) }}" alt=""
-                                            width="120px"></a>
+                                    <a href="#"><img src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" width="120px"></a>
                                     <div class="warp-body">
-                                        <a href="{{ route('productDetail', $item->product_id) }}"
-                                            class="product-name">{{ $item->product->name }}</a>
+                                        <a href="#" class="product-name">Giày búp bê da</a>
                                         <div class="price">
-                                            <span>Giá:
-                                                <strong>{{ number_format($item->product->price ?? 0, 0, ',', '.') }}
-                                                    đ</strong>
-                                                <del>({{ number_format($item->product->price_old ?? 0, 0, ',', '.') }})
-                                                    đ</del></span>
+                                            <span>Giá: <strong>150$</strong> <del>(100$)</del></span>
                                         </div>
                                         <div class="data-size">
                                             <label>Size: </label>
-                                            <span>{{ $item->variant->color }} / {{ $item->variant->size }}.</span>
-                                            <span>Số lượng: {{ $item->quantity }}</span>
+                                            <span>Trắng / 35</span>
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                                <div class="warp">
+                                    <a href="#"><img src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" width="120px"></a>
+                                    <div class="warp-body">
+                                        <a href="#" class="product-name">Giày búp bê da</a>
+                                        <div class="price">
+                                            <span>Giá: <strong>150$</strong> <del>(100$)</del></span>
+                                        </div>
+                                        <div class="data-size">
+                                            <label>Size: </label>
+                                            <span>Trắng / 35</span>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="shipping-adress mb-4">
                                     <p class="order-name mb-2">
@@ -275,90 +250,65 @@
                 <div class="discount-code">
                     <span class="code">Mã giảm giá</span>
                     <form action="">
-                        <input class="shopping-cart-right-input" type="text" autocapitalize="off"
-                            autocomplete="off" aria-label="Mã giảm giá" title="" value=""
-                            placeholder="Nhập mã giảm giá">
+                        <input class="shopping-cart-right-input" type="text" autocapitalize="off" autocomplete="off" aria-label="Mã giảm giá" title="" value="" placeholder="Nhập mã giảm giá">
                         <button type="submit" class="shopping-cart-right-button">
                             <span class="shopping-cart-right-text">Apply</span>
                         </button>
                     </form>
                 </div>
-                <div class="total-right">
-                    <span>Tổng phụ</span>
-                    <span>{{ $subTotal }} đ</span>
-                </div>
                 <div class="shipping-fee">
                     <span>Phí vẩn chuyển</span>
-                    <span>{{ $shipping }} đ</span>
-                    <input type="hidden" name="shipping_fee" value="{{ $shipping }}" id="">
+                    <span>$200</span>
                 </div>
                 <div class="total-right">
                     <span>Tổng tiền</span>
-                    <span>{{ $total }} đ</span>
-                    <input type="hidden" name="total_price" value="{{ $total }}" id="">
+                    <span>$10000</span>
                 </div>
                 <div class="total-action">
                     <button type="submit" class="pay-money" title="Đặt hàng">Đặt hàng</button>
                 </div>
             </article>
         </div>
-    </form>
+    </section>
 
-    
-    </div>
-</div>
-</section>
 
-<div class="uk-container uk-container-large">
-    <div class="checkout-form uk-card uk-card-default uk-card-body">
-        <h2 class="uk-card-title">Thanh toán qua VNPay</h2>
-        
-        <form action="{{ route('vnpay_payment') }}" method="POST" id="vnpay-form">
-            @csrf
-            <div class="uk-margin">
-                <label class="uk-form-label">Họ và tên</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input" type="text" name="name" value="{{ Auth::user()->fullname }}" required>
-                </div>
-            </div>
 
-            <div class="uk-margin">
-                <label class="uk-form-label">Số điện thoại</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input" type="text" name="phone" value="{{ Auth::user()->phone }}" required>
-                </div>
-            </div>
+</body>
 
-            <div class="uk-margin">
-                <label class="uk-form-label">Địa chỉ giao hàng</label>
-                <div class="uk-form-controls">
-                    <input class="uk-input" type="text" name="address" required>
-                </div>
-            </div>
+</html>
+<!-- <div class="uk-margin">
+                                    <label>
+                                        <input class="uk-radio" type="radio" name="payment"> Ví điện tử
+                                    </label>
+                                </div>
 
-            <div class="uk-margin">
-                <h4>Thông tin đơn hàng</h4>
-                <div class="uk-grid">
-                    <div class="uk-width-expand">Tổng tiền hàng:</div>
-                    <div class="uk-width-auto">{{ number_format($total - $shipping) }}đ</div>
-                </div>
-                <div class="uk-grid">
-                    <div class="uk-width-expand">Phí vận chuyển:</div>
-                    <div class="uk-width-auto">{{ number_format($shipping) }}đ</div>
-                </div>
-                <div class="uk-grid">
-                    <div class="uk-width-expand"><strong>Tổng thanh toán:</strong></div>
-                    <div class="uk-width-auto"><strong>{{ number_format($total) }}đ</strong></div>
-                </div>
-            </div>
+                                <div class="uk-margin">
+                                    <label>
+                                        <input class="uk-radio" type="radio" name="payment"> Tiền mặt khi nhận hàng
+                                    </label>
+                                </div> -->
 
-            <input type="hidden" name="total" value="{{ $total }}">
-            
-            <button type="submit" class="uk-button uk-button-primary uk-width-1-1">
-                Thanh toán qua VNPay
-            </button>
-        </form>
-    </div>
-</div>
 
-@endsection
+<!-- 
+                                <form>
+                            <fieldset class="uk-fieldset">
+                                <legend class="uk-legend">Thông tin giao hàng</legend>
+
+                                <div class="uk-margin">
+                                    <label>Tên người nhận</label>
+                                    <input class="uk-input" type="text" placeholder="Nhập tên người nhận">
+                                </div>
+
+                                <div class="uk-margin">
+                                    <label>Địa chỉ giao hàng</label>
+                                    <input class="uk-input" type="text" placeholder="Nhập địa chỉ">
+                                </div>
+
+                                <div class="uk-margin">
+                                    <label>Số điện thoại</label>
+                                    <input class="uk-input" type="tel" placeholder="Nhập số điện thoại">
+                                </div>
+
+                                <button type="button" class="uk-button uk-button-primary">Tiếp tục</button>
+                            </fieldset>
+                        </form> -->

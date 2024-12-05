@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('title')
-    Thêm mới Discount
+    Thêm mới mã giảm giá
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="col-xxl-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Thêm mới Discount</h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Thêm mới mã giảm giá</h4>
                         <div class="flex-shrink-0">
                             <div class="form-check form-switch form-switch-right form-switch-md">
                                 <label for="gutters-showcode" class="form-label text-muted">Xem Code</label>
@@ -24,9 +24,14 @@
                         <form action="{{ route('admin.discounts.store') }}" method="POST">
                             @csrf
                             <div class="live-preview">
+                                @if(session('messages'))
+                                <div class="alert alert-success">
+                                    {{ session('messages') }}
+                                </div>
+                                @endif
                                 <!-- Discount Code -->
                                 <div class="col-md-12">
-                                    <label for="discount_code" class="form-label">Discount Code</label>
+                                    <label for="discount_code" class="form-label">Mã giảm giá</label>
                                     <input type="text" class="form-control" name="discount_code" id="discount_code"
                                         value="{{ old('discount_code') }}" placeholder="Nhập mã giảm giá...">
                                     @error('discount_code')
@@ -36,7 +41,7 @@
 
                                 <!-- Description -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Mô tả</label>
                                     <textarea class="form-control" id="description" name="description" rows="3"
                                         placeholder="Nhập mô tả">{{ old('description') }}</textarea>
                                     @error('description')
@@ -46,7 +51,7 @@
 
                                 <!-- Start Date -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="start_date" class="form-label">Start Date</label>
+                                    <label for="start_date" class="form-label">Ngày bắt đầu</label>
                                     <input type="date" class="form-control" name="start_date" id="start_date"
                                         value="{{ old('start_date') }}">
                                     @error('start_date')
@@ -56,7 +61,7 @@
 
                                 <!-- End Date -->
                                 <div class="col-md-12 mt-3">
-                                    <label for="end_date" class="form-label">End Date</label>
+                                    <label for="end_date" class="form-label">Ngày kết thúc</label>
                                     <input type="date" class="form-control" name="end_date" id="end_date"
                                         value="{{ old('end_date') }}">
                                     @error('end_date')
@@ -79,8 +84,8 @@
                                 <div class="col-md-12 mt-3">
                                     <label for="discount_type" class="form-label">Loại giảm giá</label>
                                     <select class="form-control" name="discount_type" id="discount_type">
-                                        <option value="percentage" {{ old('discount_type') == 'percentage' ? 'selected' : '' }}>Phần trăm</option>
-                                        <option value="fixed" {{ old('discount_type') == 'fixed' ? 'selected' : '' }}>Giảm giá cố định</option>
+                                        <option value="%" {{ old('discount_type') == '%' ? 'selected' : '' }}>Phần trăm</option>
+                                        <option value="VND" {{ old('discount_type') == 'VND' ? 'selected' : '' }}>Giá trị cụ thể</option>
                                     </select>
                                     @error('discount_type')
                                         <span class="text-danger">{{ $message }}</span>
@@ -121,7 +126,7 @@
                                 <div class="col-12 mt-3">
                                     <div class="text-start">
                                         <button type="submit" id="btnAddDiscount"
-                                            class="btn btn-primary">Thêm Discount</button>
+                                            class="btn btn-primary">Thêm phiếu giảm giá</button>
                                         <a href="{{ route('admin.discounts.index') }}" class="btn btn-outline-warning">Quay lại</a>
                                     </div>
                                 </div>

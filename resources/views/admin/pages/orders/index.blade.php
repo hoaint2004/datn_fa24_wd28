@@ -77,9 +77,10 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th scope="col" class="text-center">STT</th>
+                                                <th scope="col">Thông tin người nhận</th>
                                                 <th scope="col">Mã đơn hàng</th>
                                                 <th scope="col">Tổng tiền</th>
-                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Trạng thái giao hàng</th>
                                                 <th scope="col">Phương thức thanh toán</th>
                                                 <th scope="col">Trạng thái thanh toán</th>
                                                 <th scope="col">Ngày đặt</th>
@@ -88,8 +89,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($orders as $key => $item)
-                                                <tr>
-                                                    <td class="text-center">{{ $key + 1 }}</td>
+                                                <tr class="text-center">
+                                                    <td>{{ $key + 1 }}</td>
+                                                    <td> 
+                                                        <p>Tên: {{ $item->name }}</p>
+                                                        <p>Số điện thoại: {{ $item->phone }}</p>
+                                                    </td>
+
                                                     <td>{{ $item->code }}</td>
                                                     <td>{{ number_format($item->total_price, 0, ',', '.') }} đ</td>
                                                     <td>{{ $item->status }}</td>
@@ -100,9 +106,9 @@
                                                         <a href="{{ route('admin.orders.edit', $item->id) }}" class="btn btn-sm btn-success">
                                                             <i class="ri-settings-4-line"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#topmodal{{ $item->id }}">
+                                                        {{-- <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#topmodal{{ $item->id }}">
                                                             <i class="ri-delete-bin-5-line"></i>
-                                                        </a>
+                                                        </a> --}}
                                                         <a href="{{ route('admin.orders.show', $item->id) }}" class="btn btn-sm btn-info">
                                                             <i class="ri-eye-line"></i>
                                                         </a>

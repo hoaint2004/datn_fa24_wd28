@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('title')
-    Danh sách giảm giá
+    Danh sách mã giảm giá
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Danh sách giảm giá</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Danh sách mã giảm giá</h4>
 
                             <div class="flex-shrink-0">
                                 <div class="form-check form-switch form-switch-right form-switch-md">
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <div class="live-preview">
                                 <div class="table-responsive table-card">
-                                    <a href="{{ route('admin.discounts.create') }}" class="btn btn-primary m-3">Thêm mới giảm giá</a>
+                                    <a href="{{ route('admin.discounts.create') }}" class="btn btn-primary m-3">Thêm mới mã giảm giá</a>
                                     {{-- Lọc theo danh mục (bỏ chú thích để sử dụng) --}}
                                    
 
@@ -61,7 +61,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $discount->discount_type }}</td>
-                                                    <td>{{ number_format($discount->discount_value, 0, '.', ',' ) }}{{ $discount->discount_type == 'percentage' ? '%' : 'Đ' }}</td>
+                                                    <td>{{ number_format($discount->discount_value, 0, '.', ',' ) }}{{ $discount->discount_type == '%' ? '%' : 'Đ' }}</td>
                                                     <td>{{ number_format($discount->min_order_value, 0, '.', ',').' VND'}}</td>
                                                     <td>{{ $discount->usage_limit }}</td>
                                                     

@@ -8,7 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\SneakerController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ProductController;
@@ -19,11 +19,13 @@ use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
 use App\Http\Controllers\CommentController as ControllersCommentController;
 use App\Http\Controllers\ProductController as ControllersProductController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 
 use App\Http\Controllers\PaymentController;
 
 /*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -34,14 +36,29 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
+// Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/verify/{token}',[AuthController::class,'verify'])->name('verify');
+// });
 
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/verify/{token}', [AuthController::class, 'verify'])->name('verify');
+
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
+    ->name('password.forgotPassword');
+
+Route::post('/password/email', [AuthController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
+
+Route::get('/forgot_password', [AuthController::class, 'showResetForm'])
+    ->name('password.reset');
+
+Route::post('/password/reset', [AuthController::class, 'reset'])
+    ->name('password.update');
+
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -115,6 +132,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 ->name('delete');
         });
 
+    Route::controller(BannerController::class)
+        ->name('banners.')
+        ->prefix('banners')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'delete')->name('delete');
+        });
+
     Route::resource('orders', AdminOrderController::class);
 });
 
@@ -129,12 +158,18 @@ Route::middleware(['web'])->group(function () {
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
     Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-
+    // sp nổi bật
+    Route::get('/featured-products/{id}',[ControllersProductController::class,'featured_products'])->name('featured_products');
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
 
+    // lọc client
+    Route::post('/filter',[FilterController::class,'filterProducts'])->name('filter');
+
+
     Route::resource('/order', OrderController::class);
+    Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
     Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
