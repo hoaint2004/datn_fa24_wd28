@@ -25,6 +25,11 @@ class OrderController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect()->route('home')->with([
+                'checkLogin' => 'Vui lòng đăng nhập để tiếp tục!'
+            ]);
+        }
         $carts = Cart::where('user_id', Auth::user()->id)->get();
         $total = 0;
         $subTotal = 0;
@@ -242,7 +247,12 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $totalProduct = 0;
+        foreach($order->orderDetails as $item) {
+            $totalProduct += $item->price * $item->quantity;
+        }
+        return view('client.order-detail', compact('order', 'totalProduct'));
     }
 
     /**
@@ -258,7 +268,19 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        DB::beginTransaction();
+        
+        try {
+            $order->update([
+                'status' => 'Đã hủy'
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+        return redirect()->back();
     }
 
     /**

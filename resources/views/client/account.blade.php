@@ -218,54 +218,49 @@
                                 <th>Mã đơn hàng</th>
                                 <th>Người nhận</th>
                                 <th>Tổng tiền</th>
-                                <th>Thanh toán</th>
+                                <th>Ngày đặt</th>
                                 <th>Trạng thái giao hàng</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>ORDER-1733413700</td>
-                                <td>
-                                    <p class="uk-margin-remove">Nguyễn Minh Hiếu</p>
-                                </td>
-                                <td>2.180.000₫</td>
-                                <td>
-                                    <p class="uk-margin-remove">VNPay</p>
-                                    <p class="uk-margin-remove payment-status">Đã thanh toán</p>
-                                </td>
-                                <td><span class="status-delivered">Đã giao hàng</span></td>
-                               
-                                <td>
-                                    <div class="uk-button-group">
-                                        <button class=" view-order-bt">Chi tiết</button>
-                                        <button class="cancel-button">Hủy đơn hàng</button>
-                                        <!-- <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button> -->
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>1</td>
-                                <td>ORDER-1733413700</td>
-                                <td>
-                                    <p class="uk-margin-remove">Nguyễn Minh Hiếu</p>
-                                </td>
-                                <td>2.180.000₫</td>
-                                <td>
-                                    <p class="uk-margin-remove">VNPay</p>
-                                    <p class="uk-margin-remove payment-status">Đã thanh toán</p>
-                                </td>
-                                <td><span class="in-process"> Đang xử lý</span></td>
-                               
-                                <td>
-                                    <div class="uk-button-group">
-                                        <button class="view-order-bt">Chi tiết</button>
-                                        <button class="cancel-button">Hủy đơn hàng</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($orders as $key => $item)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $item->code }}</td>
+                                    <td>
+                                        <p class="uk-margin-remove">{{ $item->name }}</p>
+                                    </td>
+                                    <td>{{ number_format($item->total_price, 0, ',', '.') }} đ</td>
+                                    <td>
+                                        {{-- <p class="uk-margin-remove payment-status">{{ $item->payment_status }}</p> --}}
+                                        {{ date_format($item->created_at, 'Y-m-d') }}
+                                    </td>
+                                    <td>
+                                        @if ($item->status == 'Giao hàng thành công')
+                                            <span class="status-delivered">{{ $item->status }}</span>
+                                        @elseif($item->status == 'Đã hủy')
+                                            <span class="in-process" style="background-color: red; color: white">{{ $item->status }}</span>
+                                        @else
+                                            <span class="in-process">{{ $item->status }}</span>
+                                        @endif
+                                    </td>
+                                
+                                    <td>
+                                        <div class="uk-button-group">
+                                            <a href="{{ route('order.show', $item->id) }}" class=" view-order-bt"><button style="text-transform: uppercase">Chi tiết</button></a>
+                                            @if ($item->status == 'Chờ xác nhận')
+                                                <form action="{{ route('order.update', $item->id) }}" method="post" class="cancel-button form-cancel" style="text-transform: uppercase;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" style="text-transform: uppercase;">Hủy đơn hàng</button>
+                                                </form>
+                                            @endif
+                                            <!-- <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -344,7 +339,27 @@
             activeSection.style.display = 'block';
         }
     }
-
+    $(document).ready(function() {
+        $(document).on('submit', '.form-cancel', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có muốn hủy đơn hàng này không?',
+                showDenyButton: true,
+                confirmButtonText: 'Có',
+                denyButtonText: `Hủy`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hủy đơn hàng thành công',
+                        showConfirmButton: false,
+                    });
+                }
+            });
+        });
+    });
 </script>
 
 @endsection
