@@ -65,10 +65,10 @@ class User extends Authenticatable
     // }
 
     // // Quan hệ một-nhiều với orders
-    // public function orders()
-    // {
-    //     return $this->hasMany(Order::class);
-    // }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 
     // // Quan hệ một-nhiều với comments
     // public function comments()
