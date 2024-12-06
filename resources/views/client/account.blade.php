@@ -83,10 +83,10 @@
                 </div>
 
             </div>
-
+<!--             
             <div id="orders-content" class="content-section my-order">
                 <form action="" class="form-search-my-order">
-                    <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order"/>
+                    <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
                     <button uk-icon="search" class="icon-search">
                     </button>
                 </form>
@@ -191,7 +191,81 @@
                     </div>
                 </div>
 
+            </div> -->
+
+
+            <div id="orders-content" class="content-section my-order">
+                <div class="order-header">
+                    <div class="order-search">
+                        <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
+                        <button uk-icon="search" class="icon-search"></button>
+                    </div>
+                    <div class="order-filter">
+                        <select class="uk-select text-[#222] border-none">
+                            <option>Tất cả đơn hàng</option>
+                            <option>Đã giao hàng</option>
+                            <option>Đang xử lý</option>
+                            <option>Đã hủy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-middle uk-table-divider order-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Tổng tiền</th>
+                                <th>Ngày đặt</th>
+                                <th>Trạng thái giao hàng</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $key => $item)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $item->code }}</td>
+                                    <td>
+                                        <p class="uk-margin-remove">{{ $item->name }}</p>
+                                    </td>
+                                    <td>{{ number_format($item->total_price, 0, ',', '.') }} đ</td>
+                                    <td>
+                                        {{-- <p class="uk-margin-remove payment-status">{{ $item->payment_status }}</p> --}}
+                                        {{ date_format($item->created_at, 'Y-m-d') }}
+                                    </td>
+                                    <td>
+                                        @if ($item->status == 'Giao hàng thành công')
+                                            <span class="status-delivered">{{ $item->status }}</span>
+                                        @elseif($item->status == 'Đã hủy')
+                                            <span class="in-process" style="background-color: red; color: white">{{ $item->status }}</span>
+                                        @else
+                                            <span class="in-process">{{ $item->status }}</span>
+                                        @endif
+                                    </td>
+                                
+                                    <td>
+                                        <div class="uk-button-group">
+                                            <a href="{{ route('order.show', $item->id) }}" class=" view-order-bt"><button style="text-transform: uppercase">Chi tiết</button></a>
+                                            @if ($item->status == 'Chờ xác nhận')
+                                                <form action="{{ route('order.update', $item->id) }}" method="post" class="cancel-button form-cancel" style="text-transform: uppercase;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" style="text-transform: uppercase;">Hủy đơn hàng</button>
+                                                </form>
+                                            @endif
+                                            <!-- <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
 
             <div id="discounts-content" class="content-section">
                 <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
@@ -265,25 +339,25 @@
             activeSection.style.display = 'block';
         }
     }
-
-
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('click', (event) => {
-            event.preventDefault(); // k chuyển trang click vào sao
-            //lấy giá trị rating data-value
-            const ratingValue = parseInt(star.dataset.value);
-            //update màu sắc
-            document.querySelectorAll('.star').forEach((s) => {
-                const currentValue = parseInt(s.dataset.value);
-                const icon = s.querySelector('i');
-                // sửa màu
-                icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
-                icon.classList.toggle('text-gray-400', currentValue > ratingValue);
+    $(document).ready(function() {
+        $(document).on('submit', '.form-cancel', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Bạn có muốn hủy đơn hàng này không?',
+                showDenyButton: true,
+                confirmButtonText: 'Có',
+                denyButtonText: `Hủy`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hủy đơn hàng thành công',
+                        showConfirmButton: false,
+                    });
+                }
             });
-
-            //lưu vào ứng dụng, gửi lên backend
-            console.log("Rating value:", ratingValue);
-
         });
     });
 </script>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
@@ -23,6 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 
+
     <style>
         * {
             margin: 0;
@@ -32,6 +34,7 @@
     </style>
 </head>
 
+
 <body>
     {{-- <section> --}}
         <a href="{{ route('home') }}" class="icon-home-register">
@@ -39,6 +42,7 @@
             </span>
             <div> Quay lại trang chủ </div>
         </a>
+
 
         <div class="wrapper-login uk-grid" uk-grid>
             <div class="uk-width-1-2 login-left">

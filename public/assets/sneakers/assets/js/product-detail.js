@@ -58,7 +58,7 @@ $(document).ready(function () {
 
         var commentUrl = '/comment/' + id_post;
 
-        var path_img = window.location.origin + '/storage/images/logo_webWinashoes.png';
+        var path_img = window.location.origin + '/storage/images/img_user.jpg';
 
         $.ajaxSetup({
             headers: {
@@ -98,15 +98,15 @@ $(document).ready(function () {
                                     </p>
 
                                     <div class="text-right">
-                                        <a href="" class="btn-edit">Edit</a>
+                                        <a href="" class="btn-edit">Sửa</a>
                                         <form action="` + commentDestroy + `" method="post" class="delete-comment">
                                             <button 
                                                 type="submit" class="btn-delete-reply" data-comment_id="` + response
-                            .data.comment.id + `">Delete
+                            .data.comment.id + `">Xóa
                                             </button>
                                         </form>
                                         <a class="btn-reply" href=""
-                                            data-id_comment="` + response.data.comment.id + `">Reply
+                                            data-id_comment="` + response.data.comment.id + `">Trả lời
                                         </a>
                                     </div>
 
@@ -117,15 +117,16 @@ $(document).ready(function () {
                                         <texta name="content-reply" id="" cols="70" rows="6" placeholder="Enter content (*)"
                                             class="text-note-` + response.data.comment.id + `" required="required"></texta
                                         <button class="btnsave-reply" type="submit"
-                                            data-id_comment="` + response.data.comment.id + `"> Send reply
-                                            content</button>
+                                            data-id_comment="` + response.data.comment.id + `"> Gửi</button>
                                     </form>
                                 </div>
                             </div>
                         `;
 
+
                     $('#list-comment-child-' + id ).prepend(htmlComment);
                     $(form_reply).slideUp();
+
                     $('#content-reply').val('');
                     // Cập nhật lại thời gian tương đối
                     updateRelativeTime();
@@ -143,7 +144,7 @@ $(document).ready(function () {
 
         const content = $('#content').val();
         const product_id = $(this).data('comment');
-        const path_img = window.location.origin + '/storage/images/logo_webWinashoes.png';
+        const path_img = window.location.origin + '/storage/images/img_user.jpg';
         const commentUrl = `/comment/${product_id}`;
 
         if (content.trim() === "") {
@@ -168,6 +169,7 @@ $(document).ready(function () {
                 if (response.error) {
                     console.error("Có lỗi xảy ra:", error);
                 } else {
+
                     console.log(response.data);
                     // if (response.data.comment.status === 1) { // Chỉ hiển thị khi status = 1
                         var commentDestroy = '/comment/destroy/' + response.data.comment.id;
@@ -190,6 +192,7 @@ $(document).ready(function () {
                                         </form>
                                         <a class="btn-reply" href="" data-id_comment="${response.data.comment.id}">Reply</a>
                                     </div>
+
                                 </div>
                             </div>`;
             

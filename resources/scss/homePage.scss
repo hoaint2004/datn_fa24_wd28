@@ -394,6 +394,20 @@
     margin-top: 45px;
     
     .name-shoes-item {
+
+        background-image: url('/storage/images/Banner/4.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        // background-image: url('/storage/images/Banner/4.png');
+        // background-position: center center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
+
+        padding: 200px 0;
+        margin-left: 40px;
+        
         position: relative;
         margin-left: 40px;
         
@@ -682,3 +696,41 @@
 }
 
 
+.title-model-detail{
+    font-family: $font-spectral;
+}
+
+.desc {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Giới hạn số dòng */
+    color: #555;
+}
+
+
+.color {
+    color: $color-p;
+    .product-color-options {
+        margin-top: 12px;
+        .product-sw-select-item {
+            .trigger-option-sw {
+                display: none;
+            }
+            .sw-color-label {
+                padding: 10px;
+                border: 2px solid #ccc;
+                background-color: greenyellow;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            .trigger-option-sw:checked + .sw-color-label {
+                background-color: red;
+                border: 2px solid red;
+                transform: scale(1.03);
+                transition: all 0.3s ease;
+            }
+        }
+    }
+}

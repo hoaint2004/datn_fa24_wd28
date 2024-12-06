@@ -59,6 +59,7 @@ header {
                 background-color: #f45d56;
                 display: inline-block;
                 z-index: 5;
+
             }
         }
         .offcanvas-cart {
@@ -216,6 +217,7 @@ header {
                         }
                     }
                 }
+
             }
         }
     }
@@ -307,6 +309,7 @@ header {
     flex-direction: column;
 }
 
+
 .uk-dropnav-dropbar {
     left: 30% !important;
     right: 15%;
@@ -332,4 +335,5 @@ header {
 
 .uk-modal-body {
     padding: 30px;
+
 }
