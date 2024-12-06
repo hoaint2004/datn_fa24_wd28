@@ -34,32 +34,42 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
-    $data = $request->only('email', 'password');
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required'
+            ],
+            [
+                'email.required' => 'Vui lòng nhập email',
+                'email.email' => 'Email không hợp lệ',
+                'password.required' => 'Vui lòng nhập mật khẻu',
+            ]
+        );
 
-    // Tìm user theo email
-    $user = User::where('email', $data['email'])->first();
+        $data = $request->only('email', 'password');
 
-    if ($user && $user->email_verified_at) {
-        // Kiểm tra mật khẩu
-        if (Hash::check($data['password'], $user->password)) {
-            // Đăng nhập thành công
-            Auth::login($user);
+        // Tìm user theo email
+        $user = User::where('email', $data['email'])->first();
+        if ($user) {
+            if (Hash::check($data['password'], $user->password)) {
 
-            // Kiểm tra quyền của người dùng sau khi đăng nhập thành công
-            if (Auth::user()->role == 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
-            } elseif (Auth::user()->role == 'user') {
-                return redirect()->intended(route('home'));
+                Auth::login($user);
+
+                $user->createToken('AuthToken')->plainTextToken;
+
+                if (Auth::user()->role == 'admin') {
+                    return redirect()->intended(route('admin.dashboard'));
+                } elseif (Auth::user()->role == 'user') {
+                    return redirect()->intended(route('home'));
+                }
+            } else {
+                // Sai mật khẩu
+                return redirect()->route('login.form')->with('error', 'Mật khẩu không chính xác.');
             }
         } else {
-            // Sai mật khẩu
-            return redirect()->route('login.form')->with('errorLogin', 'Mật khẩu không chính xác.');
+            return redirect()->route('login.form')->with('error', 'Email không tồn tại hoặc chưa xác thực vui lòng kiểm tra lại email.');
         }
-    } else {
-        // Sai email
-        return redirect()->route('login.form')->with('errorLogin', 'Email không tồn tại hoặc chưa xác thực vui lòng kiểm tra lại email.');
     }
-}
 
 
     public function showRegisterForm()
@@ -94,21 +104,22 @@ class AuthController extends Controller
         }
     }
 
-    public function verify($token)
-    {
-        // Tìm user theo token
-        $user = User::where('remember_token', $token)->first();
+    // public function verify($token)
+    // {
+    //     // Tìm user theo token
+    //     $user = User::where('remember_token', $token)->first();
 
-        if (!$user) {
-            return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
-        }
+    //     if (!$user) {
+    //         return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
+    //     }
 
-        $user->email_verified_at = now();
-        $user->remember_token = null; 
-        $user->save();
+    //     $user->email_verified_at = now();
+    //     $user->remember_token = null; 
+    //     $user->save();
 
-        return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
-    }
+    //     return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
+    // }
+
 
 
     public function logout()

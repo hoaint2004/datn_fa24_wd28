@@ -83,10 +83,10 @@
                 </div>
 
             </div>
-
+            <!-- 
             <div id="orders-content" class="content-section my-order">
                 <form action="" class="form-search-my-order">
-                    <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order"/>
+                    <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
                     <button uk-icon="search" class="icon-search">
                     </button>
                 </form>
@@ -191,7 +191,85 @@
                     </div>
                 </div>
 
+            </div> -->
+
+
+            <div id="orders-content" class="content-section my-order">
+                <div class="order-header">
+                    <div class="order-search">
+                        <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
+                        <button uk-icon="search" class="icon-search"></button>
+                    </div>
+                    <div class="order-filter">
+                        <select class="uk-select">
+                            <option>Tất cả đơn hàng</option>
+                            <option>Đã giao hàng</option>
+                            <option>Đang xử lý</option>
+                            <option>Đã hủy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-middle uk-table-divider order-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã đơn hàng</th>
+                                <th>Người nhận</th>
+                                <th>Tổng tiền</th>
+                                <th>Thanh toán</th>
+                                <th>Trạng thái giao hàng</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>ORDER-1733413700</td>
+                                <td>
+                                    <p class="uk-margin-remove">Nguyễn Minh Hiếu</p>
+                                </td>
+                                <td>2.180.000₫</td>
+                                <td>
+                                    <p class="uk-margin-remove">VNPay</p>
+                                    <p class="uk-margin-remove payment-status">Đã thanh toán</p>
+                                </td>
+                                <td><span class="status-delivered">Đã giao hàng</span></td>
+                               
+                                <td>
+                                    <div class="uk-button-group">
+                                        <button class=" view-order-bt">Chi tiết</button>
+                                        <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>ORDER-1733413700</td>
+                                <td>
+                                    <p class="uk-margin-remove">Nguyễn Minh Hiếu</p>
+                                </td>
+                                <td>2.180.000₫</td>
+                                <td>
+                                    <p class="uk-margin-remove">VNPay</p>
+                                    <p class="uk-margin-remove payment-status">Đã thanh toán</p>
+                                </td>
+                                <td><span class="in-process"> Đang xử lý</span></td>
+                               
+                                <td>
+                                    <div class="uk-button-group">
+                                        <button class="view-order-bt">Chi tiết</button>
+                                        <button class="cancel-button">Hủy đơn hàng</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
 
             <div id="discounts-content" class="content-section">
                 <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
