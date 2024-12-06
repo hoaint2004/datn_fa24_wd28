@@ -21,13 +21,16 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        if (url()->previous() == route('register.form')) {
-            session(['url.intended' => route('home')]); // Nếu trang trước là đăng ký, chuyển hướng tới trang home sau khi đăng nhập
+        $previousUrl = url()->previous();
+        if ($previousUrl === route('register.form')) {
+            session(['url.intended' => route('home')]);
         } else {
-            session(['url.intended' => url()->previous()]); // Nếu trang trước là các trang khác, chuyển hướng về trang trước đó
+            session(['url.intended' => $previousUrl]);
         }
+
         return view('client.auth.login');
     }
+
 
     public function postLogin(Request $request)
     {
@@ -100,6 +103,24 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Đăng Ký Thất Bại!');
         }
     }
+
+    // public function verify($token)
+    // {
+    //     // Tìm user theo token
+    //     $user = User::where('remember_token', $token)->first();
+
+    //     if (!$user) {
+    //         return redirect('/login')->with('error', 'Link xác thực không hợp lệ hoặc đã hết hạn.');
+    //     }
+
+    //     $user->email_verified_at = now();
+    //     $user->remember_token = null; 
+    //     $user->save();
+
+    //     return redirect('/login')->with('status', 'Tài khoản của bạn đã được kích hoạt thành công!');
+    // }
+
+
 
     public function logout()
     {

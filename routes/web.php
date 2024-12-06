@@ -46,6 +46,7 @@ use App\Http\Controllers\PaymentController;
 // });
 
 
+
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgotPassword');
 
@@ -57,6 +58,7 @@ Route::get('/forgot_password', [AuthController::class, 'showResetForm'])
 
 Route::post('/password/reset', [AuthController::class, 'reset'])
     ->name('password.update');
+
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -161,8 +163,10 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
+
     // lọc client
     Route::post('/filter',[FilterController::class,'filterProducts'])->name('filter');
+
 
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
@@ -185,7 +189,7 @@ Route::middleware(['web'])->group(function () {
  
 });
 
-Route::get('/filter', function(){
+Route::get('/filter', function () {
     return view('user.filter-product');
 });
 
@@ -193,3 +197,6 @@ Route::get('/succes', function(){
     return view('client.success-vnpay');
 });
 
+Route::get('/success-vnpay', function () {
+    return view('client.success-vnpay');
+});
