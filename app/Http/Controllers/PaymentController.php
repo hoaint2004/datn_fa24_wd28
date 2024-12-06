@@ -123,7 +123,7 @@ class PaymentController extends Controller
             
             throw new Exception('Thanh toán thất bại');
             
-        } catch (Exception $e) {
+        } catch (Exception $e) { 
             // Rollback nếu có lỗi
             DB::rollBack();
             Log::error('Lỗi thanh toán VNPay: ' . $e->getMessage());

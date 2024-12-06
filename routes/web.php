@@ -170,28 +170,31 @@ Route::middleware(['web'])->group(function () {
 
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
-    Route::get('/order-history', [ControllersProductController::class, 'order_history'])->name('order_history');
+    Route::get('/order-history', [UserController::class, 'order_history'])->name('order_history');
     Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
+    // Route::get('/', [UserController::class, 'account'])->name('account');
 
     // Comment
     Route::post('/comment/{id}', [ControllersCommentController::class, 'comment'])->name('post_comment');
     Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
     Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 
-    //Coongr thanh toán
-    Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
-    Route::get('/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
 
+     //Coongr thanh toán
+     Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
+     Route::get('/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
+ 
 });
 
 Route::get('/filter', function () {
     return view('user.filter-product');
 });
-Route::get('/order-detail', function () {
-    return view('client.order-detail');
+
+Route::get('/succes', function(){
+    return view('client.success-vnpay');
 });
 
 Route::get('/success-vnpay', function () {
