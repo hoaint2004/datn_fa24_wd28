@@ -79,7 +79,7 @@
                 </li>
 
                 {{-- Sidebar Product_variants --}}
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link menu-link" href="#sidebarProduct_variants" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarProduct_variants">
                         <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí biến thể sản phẩm</span>
