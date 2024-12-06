@@ -307,13 +307,30 @@ body {
     .tb-order-detail {
         width: 100%;
         border-collapse: collapse;
-        .th-order-detail {
-            th {
-                padding: 10px 0;
-                padding-right: 50px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
+        th,
+        td {
+            padding: 10px 0;
+        }
+        th:nth-child(1) {
+            width: 40%;
+        }
+        th:nth-child(2) {
+            width: 15%;
+        }
+        th:nth-child(3) {
+            width: 15%;
+        }
+        th:nth-child(4) {
+            width: 15%;
+        }
+        th:nth-child(5) {
+            width: 15%;
+        }
+
+        td {
+            width: inherit;
+            color: $color-p;
+            font-size: 14px;
         }
 
         .tbody-order-detail {
@@ -335,20 +352,30 @@ body {
                         }
                     }
                 }
+                .review-button {
+                    padding: 9px 20px;
+                    border: 1px solid $color;
+                    color: #fff;
+                    background-color: $color;
+                    cursor: pointer;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    transition: all 0.8s;
+                    &:hover {
+                        color: $color;
+                        border: 1px solid $color;
+                        background-color: #fff;
+                    }
+                    &:focus {
+                        outline: none;  
+                    }
+                }
             }
         }
     }
 }
 
-.th-order-detail th:nth-child(2),
-.tbody-order-detail td:nth-child(2) {
-    width: 0;
-}
 
-.th-order-detail th:nth-child(1),
-.tbody-order-detail td:nth-child(1) {
-    width: 480px;
-}
 
 .payment-success {
     font-family: $font-spectral;

@@ -207,7 +207,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 43px;
 
         .order-search {
             flex: 0 0 300px;
@@ -309,25 +309,8 @@
             }
         }
 
-        .review-button {
-            padding: 9px 0;
-            border: 1px solid $color;
-            color: #fff;
-            background-color: $color;
-            cursor: pointer;
-            margin-bottom: 10px;
-            font-size: 12px;
-            transition: all 0.8s;
-            text-transform: uppercase;
-            &:hover {
-                color: $color;
-                border: 1px solid $color;
-                background-color: #fff;
-            }
-        }
-
         .cancel-button {
-            padding: 9px 0;
+            padding: 10px 0;
             border: 1px solid #ff7262;
             color: #fff;
             background-color: #ff7262;

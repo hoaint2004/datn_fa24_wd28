@@ -83,7 +83,7 @@
                 </div>
 
             </div>
-            <!-- 
+<!--             
             <div id="orders-content" class="content-section my-order">
                 <form action="" class="form-search-my-order">
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
@@ -201,7 +201,7 @@
                         <button uk-icon="search" class="icon-search"></button>
                     </div>
                     <div class="order-filter">
-                        <select class="uk-select">
+                        <select class="uk-select text-[#222] border-none">
                             <option>Tất cả đơn hàng</option>
                             <option>Đã giao hàng</option>
                             <option>Đang xử lý</option>
@@ -240,7 +240,8 @@
                                 <td>
                                     <div class="uk-button-group">
                                         <button class=" view-order-bt">Chi tiết</button>
-                                        <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button>
+                                        <button class="cancel-button">Hủy đơn hàng</button>
+                                        <!-- <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button> -->
                                     </div>
                                 </td>
                             </tr>
@@ -344,26 +345,6 @@
         }
     }
 
-
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('click', (event) => {
-            event.preventDefault(); // k chuyển trang click vào sao
-            //lấy giá trị rating data-value
-            const ratingValue = parseInt(star.dataset.value);
-            //update màu sắc
-            document.querySelectorAll('.star').forEach((s) => {
-                const currentValue = parseInt(s.dataset.value);
-                const icon = s.querySelector('i');
-                // sửa màu
-                icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
-                icon.classList.toggle('text-gray-400', currentValue > ratingValue);
-            });
-
-            //lưu vào ứng dụng, gửi lên backend
-            console.log("Rating value:", ratingValue);
-
-        });
-    });
 </script>
 
 @endsection
