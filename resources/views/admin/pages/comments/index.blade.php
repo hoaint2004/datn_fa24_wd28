@@ -55,9 +55,8 @@
                                                     </td>
                                                     <td>
                                                         <ul>
-                                                            <li><img src="{{ $comment->product->image }}" width="50px" alt=""></li>
-                                                            <li>Tên sản phẩm: {{ $comment->product->name }}</li>
-                                                            <li>Giá: {{ number_format($comment->product->price, 0, ',', '.') }} VND</li>
+                                                            <li>Tên sản phẩm: <a href="{{ route('productDetail', $comment->product->id) }}">{{ $comment->product->name }}</a></li>
+                                                            <li><a href="{{ route('productDetail', $comment->product->id) }}">Xem sản phẩm</a></li>
                                                         </ul>
                                                     </td>
                                                     <td>{{ $comment->content }}</td>

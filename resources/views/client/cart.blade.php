@@ -92,6 +92,8 @@
                 </table>
             </div>
 
+
+
             <div class="shopping-cart-right uk-width-1-3">
                 <h2 class="">Thông tin đơn hàng</h2>
                 <div class="shipping-fee">
@@ -103,9 +105,9 @@
                     <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
                 </div>
                 <div class="total-action">
-					<a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-					<a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
-				</div>
+                    <a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
+                    <a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
+                </div>
             </div>
         </div>
     </section>
@@ -159,7 +161,6 @@
             updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
         });
 
-        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         function updateQuantity(cartId, quantity) {
             $.ajax({

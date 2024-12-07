@@ -398,7 +398,7 @@
                     <div class="form-comment">
 
                         <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
-    
+
 
                         @if (auth()->check())
                         <form action="{{ route('post_comment', $data['product']->id ) }}" method="POST" id="form-post-comment">
@@ -419,7 +419,7 @@
 
                     {{-- List comment --}}
                     <h3 class="list-cmt-title">Danh sách bình luận</h3>
-                    
+
                     <div class="list-comment">
                         <div class="media-comment">
                             @foreach ($comments as $cmt)
@@ -448,7 +448,7 @@
                                                     <button type="submit" class="btn-delete"
                                                         data-comment_id="{{ $cmt->id }}">Xóa</button>
                                                 </form>
-                                                @endcan
+                                            @endcan
                                             <a class="btn-reply" href=""
                                                     data-id_comment="{{ $cmt->id }}">Reply
                                                 </a>
@@ -461,7 +461,6 @@
                                             <button type="submit" class="btn-delete"
                                                 data-comment_id="{{ $cmt->id }}">Xóa</button>
                                         </form>
-                                        @endcan
                                         <a class="btn-reply" href=""
                                             data-id_comment="{{ $cmt->id }}">Trả lời
                                         </a>
@@ -535,7 +534,7 @@
 
 
                                                     <div class="media-comment-body">
-                                                        <h4 name="fullname"> {{ $child->user->fullname }} 
+                                                        <h4 name="fullname"> {{ $child->user->fullname }}
                                                             <small class="created_at" style="color: #5555558f">
                                                                 {{ $child->created_at->diffForHumans() }}
                                                             </small>
@@ -543,11 +542,11 @@
                                                         <p name="content" id="content-{{ $child->id }}">
                                                             {{ $child->content }}
                                                         </p>
-    
+
                                                         <div class="text-right">
                                                             @can('my-comment', $child)
                                                             <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
-                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
+                                                                data-content="{{ $child->content }}">Sửa</a>
                                                                 <form action="{{ route('destroy_comment', $child->id) }}"
                                                                     method="post" class="delete-comment">
                                                                     @csrf
@@ -621,7 +620,6 @@
                                 </div>
                             </div>
                             @endforeach
-
                         </div>
                     </div>
 
