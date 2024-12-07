@@ -53,23 +53,23 @@ class User extends Authenticatable
         return $this->type === self::TYPE_MEMBER;
     }
 
-    // public function reviews()
-    // {
-    //     return $this->hasMany(Review::class);
-    // }
+    public function reviews()
+    {
+        return $this->hasMany(Reviews::class);
+    }
 
     // // Quan hệ một-nhiều với order histories
     // public function orderHistories()
     // {
     //     return $this->hasMany(OrderHistory::class);
     // }
-
     // // Quan hệ một-nhiều với orders
     public function orders()
     {
-        return $this->hasMany(Order::class);
-    }
 
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+    
     // // Quan hệ một-nhiều với comments
     // public function comments()
     // {

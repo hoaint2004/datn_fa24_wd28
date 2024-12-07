@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReviewsController;
+
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
 use App\Http\Controllers\CommentController as ControllersCommentController;
@@ -144,6 +146,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
+    Route::resource('reviews',ReviewsController::class);    
+
     Route::resource('orders', AdminOrderController::class);
 });
 
@@ -182,11 +186,14 @@ Route::middleware(['web'])->group(function () {
     Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
     Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 
-
      //Coongr thanh toán
      Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
      Route::get('/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
  
+
+    // review
+    Route::post('/reviews',[ReviewsController::class,'store'])->name('reviews.store');
+
 });
 
 Route::get('/filter', function () {
