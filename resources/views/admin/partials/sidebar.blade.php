@@ -165,6 +165,21 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#reviews" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="reviews">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đánh giá</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="reviews">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.reviews.index') }}" class="nav-link" data-key="t-chat"> Danh sách đánh giá
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="orders">

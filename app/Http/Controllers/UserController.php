@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\alert;
+use App\Events\OrderStatusUpdated;
+
 class UserController extends Controller
 {
     public function changeInfo(){
@@ -15,10 +17,31 @@ class UserController extends Controller
     }
 
     public function account(){
-        $user = Auth::user();
-        
-        $orders = $user->orders;
-        return view('client.account', compact('user', 'orders'));
+
+        $user = User::find(Auth::user()->id);
+        $orders = $user->orders()
+                ->with('orderDetails.product', 'orderDetails.variant','review')
+                ->get();
+                // dd($orders);
+        return view('client.account', compact('user','orders'));
+    }
+
+    public function updateOrderStatus($orderId){
+        $order = Order::findOrFail($orderId);
+        if($order->status === 'Giao hàng thành công' && $order->payment_status === 'Đã thanh toán'){
+            $order->status = 'Hoàn thành';
+            $order->save();
+            // Phát sự kiện khi client nhấn hoàn thành
+            event(new OrderStatusUpdated($order));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Cảm ơn quý khách đã mua hàng.'
+            ]);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Vui lòng thanh toán cho Shipper để hoàn tất đơn hàng. Hoặc chờ trong giây lát!'
+        ]);
     }
 
     public function changePassword($id_user, Request $request){
