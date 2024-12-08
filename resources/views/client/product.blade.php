@@ -42,7 +42,7 @@
                         <li class="uk-open sidebar-size">
                             <a class="uk-accordion-title" href="#">Kích thước</a>
                             <div class="uk-accordion-content ">
-                                <ul class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                                <ul >
                                     @foreach ([40,41,42,43,44,45,46,47,48,49,50] as $size)
                                         <li class="sidebar-content-right">
                                             <input type="checkbox" name="size[]" id="size-{{ $size }}" value="{{ $size }}" />
@@ -94,9 +94,7 @@
                     <div class="show-product">
                         Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
                     </div>
-                    <div class="product-list-filter">
-                        <span class="">sản phẩm chính của danh mục</span>
-                    </div>
+                   
 
                     <form class="uk-form-stacked shop-sort-by">
                         <div class="shop-sort-by">

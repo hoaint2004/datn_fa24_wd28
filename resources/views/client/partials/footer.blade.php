@@ -37,12 +37,8 @@
         <div class="ft-warp pt-[5rem]">
             <div class="ft-top uk-grid " uk-grid="true">
             <div class="ft-top-item-one uk-width-1-4 uk-width-1-4@l uk-width-1-2@s uk-width-1-4@m">
-              <a href="{{ route('home')}}">
-                <h1 style="font-size: 35px;">Wina Shoes</h1>
-                {{-- <img height={29} width={160} 
-                  src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
-                  alt=""
-                /> --}}
+              <a href="{{ route('home')}}" class="no-underline logo-page">
+                <h1>Wina Shoes</h1>
               </a>
               <p class="m-0 mt-4 mb-1 leading-7 text-[15px]">
                 WIna Shoes luôn cam kết, đảm bảo bàn giao sản phẩm đạt chất lượng

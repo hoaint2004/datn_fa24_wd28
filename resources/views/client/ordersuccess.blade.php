@@ -59,8 +59,11 @@
             </div>
 
 
-            <!-- <p class="payment-success-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat saepe animi recusandae, aut magni quas voluptates consequatur perferendis commodi earum! A in doloremque quia fugit moles</p> -->
-            <a href="{{ route('home') }}" class="payment-success-btn">Về trang chủ <i class="fa-solid fa-arrow-right"></i></a>
+           <div class="payment-success-direction">
+            <a href="{{ route('home') }}" class="payment-success-btn-left"><i class="fa-solid fa-arrow-left"></i>Về trang chủ </a>
+            <a href="{{ route('home') }}" class="payment-success-btn">Xem đơn hàng <i class="fa-solid fa-arrow-right"></i></a>
+           </div>
+           
         </div>
 
     </div>
@@ -74,22 +77,4 @@
 
 
 
-<!-- <div class="main">
-    <div class="container1">
-        <h1 style="font-size: 24px">Cảm ơn bạn đã đặt hàng!</h1>
-        <p>Mã đơn hàng {{ session('code') }}</p>
-        <p><strong>Thông tin giao hàng</strong></p>
-        <p>
-            {{ session('name') }}
-        </p>
-        <p>{{ session('phone') }}</p>
-        <p>{{ session('address') }}</p>
-        <p><strong>Phương thức thanh toán</strong></p>
-
-        <p>({{ session('payment_method') }})</p>
-
-
-        <a href="{{ route('home') }}" class="btn">Tiếp tục mua hàng</a>
-    </div>
-</div> -->
 @endsection

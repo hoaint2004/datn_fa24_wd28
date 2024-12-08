@@ -227,50 +227,127 @@ body {
     h1 {
         font-family: $font-spectral;
         font-size: 34px;
-        color: transparent; 
-        -webkit-text-stroke: 2px #5ca75c; 
-       
+        color: transparent;
+        -webkit-text-stroke: 2px #5ca75c;
     }
     .payment-success-body {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 25px;
-        padding: 150px 450px;
+        padding: 50px 450px;
         .payment-success-content {
             text-align: center;
             color: $color-p;
             font-size: 14px;
             font-weight: 300;
         }
-        .thankyou-success {
-            font-size: 20px;
-            font-weight: $font-weight-bold;
-        }
-        .payment-success-btn {
-            display: flex;
-            align-items: center;
-            background-color: #222;
-            color: #fff;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.8s;
-            i {
-                margin-left: 15px;
-                transition: all 0.8s;
+        .info-success {
+            background: #f8f9fa !important;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 500px;
+
+            .thankyou-success {
+                color: $color-p;
+                font-size: 24px;
+                margin-bottom: 25px;
+                text-align: center;
+                font-weight: $font-weight-bold;
+                font-family: $font-spectral;
             }
-            &:hover {
-                i {
-                   color: #222;
-                    transform: translateX(5px);
+
+            .order-info {
+                .info-group {
+                    margin: 20px 0;
+                    padding: 15px 0;
+                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+                    h3 {
+                        color: $color-p;
+                        font-size: 18px;
+                        margin-bottom: 15px;
+                        font-weight: $font-weight-semibold;
+                        font-family: $font-spectral;
+                    }
+                }
+
+                .info-item {
+                    display: flex;
+                    margin: 10px 0;
+
+                    .info-label {
+                        min-width: 150px;
+                        color: $color-p;
+                        font-weight: $font-weight-semibold;
+                    }
+
+                    .info-value {
+                        color: $color-p;
+                        flex: 1;
+                    }
                 }
             }
-            &:hover {
-                border: 2px solid #222;
-                background-color: #fff;
-                color: #222;
-                
+        }
+        .payment-success-direction {
+            padding: 0 30px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .payment-success-btn {
+                display: flex;
+                align-items: center;
+                background-color: #222;
+                color: #fff;
+                padding: 12px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: all 0.8s;
+                i {
+                    margin-left: 15px;
+                    transition: all 0.8s;
+                }
+                &:hover {
+                    i {
+                        color: #222;
+                        transform: translateX(5px);
+                    }
+                }
+                &:hover {
+                    border: 2px solid #222;
+                    background-color: #fff;
+                    color: #222;
+                }
+            }
+
+             .payment-success-btn-left {
+                display: flex;
+                align-items: center;
+                background-color: #222;
+                color: #fff;
+                padding:12px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: all 0.8s;
+                i {
+                    margin-right: 15px;
+                    transition: all 0.8s;
+                }
+                &:hover {
+                    i {
+                        color: #222;
+                        transform: translateX(-5px);
+                    }
+                }
+                &:hover {
+                    border: 2px solid #222;
+                    background-color: #fff;
+                    color: #222;
+                }
             }
         }
     }
@@ -280,3 +357,165 @@ body {
     color: red;
     transform: translateX(5px);
 }
+
+
+
+.status-order {
+    margin-bottom: 30px;
+    .status-body {
+        background-image: url("/storage/images/Banner/4.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        margin-bottom: 10px;
+        padding: 50px 50px;
+
+        h4 {
+            font-family: $font-spectral;
+            color: $color-p;
+            font-size: 24px;
+            font-weight: 600;
+            padding-bottom: 10px;
+        }
+        span {
+            color: $color-p;
+        }
+    }
+}
+
+.order-detail-right {
+    .card {
+        padding: 16px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid hsla(0, 0%, 7%, 0.11);
+
+        .card-body {
+            position: relative;
+
+            .card-title-order {
+                font-weight: bold;
+                margin-bottom: 0;
+                font-size: 22px;
+                font-family: $font-spectral;
+            }
+
+            .card-text {
+                margin-top: 0.5rem;
+                font-size: 14px;
+                color: #5c5f6a;
+            }
+        }
+    }
+
+    .payment-summary {
+        margin-top: 10px;
+        border-radius: 4px;
+        padding: 38px 18px;
+        border: 1px solid hsla(0, 0%, 7%, 0.11);
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        #promo-section,
+        #discount-section {
+            display: none;
+        }
+
+        .divider {
+            border: none;
+            height: 1px;
+            background-color: #808080;
+            margin: 18px 0;
+
+            &.bold {
+                height: 3px;
+            }
+        }
+
+        .total {
+            font-weight: bold;
+        }
+    }
+}
+
+.order-detail-left {
+    .tb-order-detail {
+        width: 100%;
+        border-collapse: collapse;
+        th,
+        td {
+            padding: 10px 0;
+            text-align: unset;
+            color: #222222;
+        }
+        th:nth-child(1) {
+            width: 40%;
+        }
+        th:nth-child(2) {
+            width: 15%;
+        }
+        th:nth-child(3) {
+            width: 15%;
+        }
+        th:nth-child(4) {
+            width: 15%;
+        }
+        th:nth-child(5) {
+            width: 15%;
+        }
+
+        td {
+            width: inherit;
+            color: $color-p;
+            font-size: 14px;
+        }
+
+        .tbody-order-detail {
+            .tr-order-detail {
+                border-bottom: 1px solid #ddd;
+                .tbody-td-order-detail {
+                    padding: 20px 0;
+                    .product-row {
+                        display: flex;
+                        .product-image {
+                            width: 100px;
+                            height: 100px;
+                            margin-right: 10px;
+                        }
+                        .product-row-body {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 7px;
+                        }
+                    }
+                }
+                .review-button {
+                    padding: 9px 20px;
+                    border: 1px solid $color;
+                    color: #fff;
+                    background-color: $color;
+                    cursor: pointer;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    transition: all 0.8s;
+                    &:hover {
+                        color: $color;
+                        border: 1px solid $color;
+                        background-color: #fff;
+                    }
+                    &:focus {
+                        outline: none;  
+                    }
+                }
+            }
+        }
+    }
+}
+
+

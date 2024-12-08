@@ -84,8 +84,8 @@
                                 </tr>
                             @endforeach
                         @else
-                            <div class="d-flex justify-content-center align-items-center p-5">
-                                Chưa có sản phẩm
+                            <div class="text-[20px] text-[#222] my-10 flex justify-center">
+                               Bạn không có sản phẩm nào trong giỏ hàng
                             </div>
                         @endif
                     </tbody>

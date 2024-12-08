@@ -1,12 +1,22 @@
 @extends('client.layouts.master')
 @section('title', 'Chi tiết đơn hàng')
 @section('content')
-    <div class="uk-container uk-container-large" style="padding: 54px 0px; margin-bottom: 120px;">
+<div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
+    <nav aria-label="Breadcrumb alo">
+        <ul class="uk-breadcrumb">
+            <li><a href="{{ route('home') }}" class="breadcrumb-a">Trang chủ</a></li>
+            <li><a href="{{ route('showCart') }}" class="breadcrumb-a">Đơn hàng của tôi</a></li>
+            <li><span aria-current="page" class="text-base">Chi tiết đơn hàng</span></li>
+        </ul>
+    </nav>
+</div>
+
+    <div class="uk-container uk-container-large"  style="padding: 0 0 54px 0px; margin-bottom: 120px;">
 
         <div class="status-order">
             <div class="status-body">
                 <h4>{{ $order->status }}</h4>
-                <span>Thnh toán bằng hình thức thanh toán khi nhận hàng. Chúng tôi sẽ sớm đóng gói hàng của bạn!</span>
+                <span>Thanh toán bằng hình thức thanh toán khi nhận hàng. Chúng tôi sẽ sớm đóng gói hàng của bạn!</span>
             </div>
         </div>
 

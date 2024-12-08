@@ -35,7 +35,7 @@ class PaymentController extends Controller
         session(['cart_data' => $carts]);
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_ReturnUrl = route('vnpay.return');
+        $vnp_ReturnUrl = route('order.success');
         $vnp_TmnCode = "IH2ONX1B";
         $vnp_HashSecret = "8V2791JGIMTNOOI4338HD0RGFBSUWIB2";
         $vnp_TxnRef = time();

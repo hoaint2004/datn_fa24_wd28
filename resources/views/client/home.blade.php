@@ -78,15 +78,7 @@
             List các nhóm sản phẩm nổi bật nhất
         </span>
         <div class="collection-list uk-grid" uk-grid>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-           
+     
             @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">

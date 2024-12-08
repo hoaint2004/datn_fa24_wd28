@@ -14,8 +14,8 @@
             <!-- Phần logo ở giữa -->
             <!-- Phần logo ở giữa -->
             <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
-                <a href="{{ route('home') }}">
-                    <h1 style="font-size: 35px;">Wina Shoes</h1>
+                <a href="{{ route('home') }}" class="logo-page">
+                    <h1>Wina Shoes</h1>
                     {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
                         alt="" /> --}}
                 </a>
