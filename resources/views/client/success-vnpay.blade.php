@@ -1,3 +1,6 @@
+@extends('client.layouts.master')
+@section('title', 'cảm ơn')
+@section('content')
 
 
 <!DOCTYPE html>
@@ -21,16 +24,67 @@
 
 <body>
     <div class="payment-success uk-container uk-container-large">
-        <h1>Đặt hàng thành công</h1>
+        <!-- <h1>Đặt hàng thành công</h1> -->
 
         <div class="payment-success-body">
             <img src="https://shop.sandisk.com/content/dam/spinco/en-us/assets/support/home/icon-productregistration.svg" alt="" width="150px">
-            <p class="thankyou-success">Cảm ơn bạn đã đặt hàng</p>
-            <p class="payment-success-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat saepe animi recusandae, aut magni quas voluptates consequatur perferendis commodi earum! A in doloremque quia fugit moles</p>
-            <a href="{{ route('home') }}" class="payment-success-btn">Về trang chủ <i class="fa-solid fa-arrow-right"></i></a>
+
+            <div class="info-success">
+                <h2 class="thankyou-success">Cảm ơn bạn đã đặt hàng</h2>
+                <div class="order-info">
+                    <div class="info-item border-b border-black border-opacity-10 pb-[15px]">
+                        <span class="info-label !text-[17px]">Mã đơn hàng:</span>
+                        <span class="info-value">{{ session('order_success.code') }}</span>
+                    </div>
+                    <div class="info-group !mt-0">
+                        <h3>Thông tin giao hàng:</h3>
+                        <div class="info-item">
+                            <span class="info-label">Người nhận:</span>
+                            <span class="info-value">{{ session('order_success.name') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Số điện thoại:</span>
+                            <span class="info-value">{{ session('order_success.phone') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Địa chỉ:</span>
+                            <span class="info-value">{{ session('order_success.address') }}</span>
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <h3>Thông tin thanh toán:</h3>
+                        <div class="info-item">
+                            <span class="info-label mr-4">Phương thức thanh toán:</span>
+                            <span class="info-value">{{ session('order_success.payment_method') }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Tổng tiền sản phẩm:</span>
+                            <span class="info-value">{{ number_format(session('order_success.subtotal')) }}đ</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Phí vận chuyển:</span>
+                            <span class="info-value">{{ number_format(session('order_success.shipping_fee')) }}đ</span>
+                        </div>
+                    </div>
+
+                    <div class="info-group !border-b-0 !py-0">
+                        <div class="info-item">
+                            <span class="info-label !text-[22px] mr-5">Tổng thanh toán:</span>
+                            <span class="info-value !text-[22px]">{{ number_format(session('order_success.total')) }}đ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="payment-success-direction">
+                <a href="{{ route('home') }}" class="payment-success-btn">Về trang chủ <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="{{ route('account') }}" class="payment-success-btn">Xem đơn hàng <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
         </div>
-       
-</div>
+
+
+    </div>
 
 
     </div>
@@ -40,3 +94,23 @@
 
 
 
+
+<!-- <div class="main">
+    <div class="container1">
+        <h1 style="font-size: 24px">Cảm ơn bạn đã đặt hàng!</h1>
+        <p>Mã đơn hàng {{ session('code') }}</p>
+        <p><strong>Thông tin giao hàng</strong></p>
+        <p>
+            {{ session('name') }}
+        </p>
+        <p>{{ session('phone') }}</p>
+        <p>{{ session('address') }}</p>
+        <p><strong>Phương thức thanh toán</strong></p>
+
+        <p>({{ session('payment_method') }})</p>
+
+
+        <a href="{{ route('home') }}" class="btn">Tiếp tục mua hàng</a>
+    </div>
+</div> -->
+@endsection

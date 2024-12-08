@@ -60,7 +60,10 @@
 
 
             <!-- <p class="payment-success-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto fugiat saepe animi recusandae, aut magni quas voluptates consequatur perferendis commodi earum! A in doloremque quia fugit moles</p> -->
+            <div class="payment-success-direction">
             <a href="{{ route('home') }}" class="payment-success-btn">Về trang chủ <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="{{ route('home') }}" class="payment-success-btn">Xem đơn hàng <i class="fa-solid fa-arrow-right"></i></a>
+           </div>
         </div>
 
     </div>

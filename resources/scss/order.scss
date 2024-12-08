@@ -21,8 +21,9 @@ body {
 
 .order-name {
     color: $color-title;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: $font-weight-bold;
+    margin-bottom: 16px;
 }
 
 .order {
@@ -36,6 +37,9 @@ body {
                     .payments-body {
                         .payments-card {
                             .payments-card-title {
+                                &:hover {
+                                    cursor: pointer;
+                                }
                             }
                             .payments-card-input:focus {
                                 outline: none;
@@ -59,7 +63,7 @@ body {
                                     justify-content: space-between;
                                     padding-left: 30px;
                                     .product-name {
-                                        font-size: 18px;
+                                        font-size: 16px;
                                         color: $color-title;
                                         font-weight: $font-weight-bold;
                                         text-decoration: none;
@@ -73,7 +77,7 @@ body {
                                     .price {
                                         margin-bottom: 5px;
                                         span {
-                                            font-size: 18px;
+                                            font-size: 16px;
                                             color: $color-title;
                                             strong {
                                                 color: $color-red;
@@ -87,7 +91,7 @@ body {
                                     }
                                     .data-size {
                                         color: $color-title;
-                                        font-size: 18px;
+                                        font-size: 16px;
                                         margin-bottom: 5px;
                                     }
                                 }
@@ -367,15 +371,13 @@ body {
                         background-color: #fff;
                     }
                     &:focus {
-                        outline: none;  
+                        outline: none;
                     }
                 }
             }
         }
     }
 }
-
-
 
 .payment-success {
     font-family: $font-spectral;
@@ -416,14 +418,12 @@ body {
 
             .order-info {
                 .info-group {
-                    margin: 20px 0;
-                    padding: 15px 0;
-                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                    margin: 15px 0;
                     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
+                    padding: 5px 0;
                     h3 {
                         color: $color-p;
-                        font-size: 18px;
+                        font-size: 17px;
                         margin-bottom: 15px;
                         font-weight: $font-weight-semibold;
                         font-family: $font-spectral;
@@ -437,39 +437,46 @@ body {
                     .info-label {
                         min-width: 150px;
                         color: $color-p;
+                        font-size: 14px;
                         font-weight: $font-weight-semibold;
                     }
 
                     .info-value {
                         color: $color-p;
                         flex: 1;
+                        font-size: 14px;
                     }
                 }
             }
         }
-        .payment-success-btn {
+        .payment-success-direction {
             display: flex;
-            align-items: center;
-            background-color: #222;
-            color: #fff;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.8s;
-            i {
-                margin-left: 15px;
+            flex-direction: row;
+            justify-content: space-between;
+            .payment-success-btn {
+                display: flex;
+                align-items: center;
+                background-color: #222;
+                color: #fff;
+                padding: 12px 20px;
+                text-decoration: none;
+                border-radius: 5px;
                 transition: all 0.8s;
-            }
-            &:hover {
                 i {
-                    color: #222;
-                    transform: translateX(5px);
+                    margin-left: 15px;
+                    transition: all 0.8s;
                 }
-            }
-            &:hover {
-                border: 2px solid #222;
-                background-color: #fff;
-                color: #222;
+                &:hover {
+                    i {
+                        color: #222;
+                        transform: translateX(5px);
+                    }
+                }
+                &:hover {
+                    border: 2px solid #222;
+                    background-color: #fff;
+                    color: #222;
+                }
             }
         }
     }
@@ -478,4 +485,22 @@ body {
 .payment-success-btn:hover i {
     color: red;
     transform: translateX(5px);
+}
+
+#id-vnpay {
+    .uk-card-title {
+        font-family: $font-spectral;
+    }
+    #vnpay-form {
+        .bt-vnpay {
+            @include ctn-pay-shopping;
+            padding: 5px 0 !important;
+            border: 1px solid $color-title;
+            color: $color-title;
+            &:hover {
+                color: $color;
+                border-color: $color !important;
+            }
+        }
+    }
 }
