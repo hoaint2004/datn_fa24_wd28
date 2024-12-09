@@ -11,13 +11,25 @@
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
                         <h4 class="card-title mb-0 flex-grow-1">Danh sách đánh giá</h4>
-
-                        <div class="flex-shrink-0">
-                            <div class="form-check form-switch form-switch-right form-switch-md">
-                                <label for="card-tables-showcode" class="form-label text-muted">Show Code</label>
-                                <input class="form-check-input code-switcher" type="checkbox" id="card-tables-showcode">
-                            </div>
-                        </div>
+                        <form method="GET" action="{{ route('admin.reviews.index') }}" class="d-flex align-items-center">
+                            <!-- Lọc theo sao đánh giá -->
+                            <select name="rating" class="form-select form-select-sm me-2">
+                                <option value="0">Lọc theo sao đánh giá</option>
+                                <option value="1">1 sao</option>
+                                <option value="2">2 sao</option>
+                                <option value="3">3 sao</option>
+                                <option value="4">4 sao</option>
+                                <option value="5">5 sao</option>
+                            </select>
+                        
+                            <!-- Lọc theo ngày -->
+                            <input type="date" name="start_date" class="form-control form-control-sm me-2">
+                            <input type="date" name="end_date" class="form-control form-control-sm me-2">
+                        
+                            <button type="submit" class="btn btn-primary btn-sm">Lọc</button>
+                        </form>
+                        
+                       
                     </div><!-- end card header -->
 
                     <div class="card-body">
@@ -34,83 +46,85 @@
                                                 </div>
                                             </th>
                                             <th scope="col">STT</th>
-                                            <th scope="col">Tên sản phẩm</th>
-                                            <th scope="col">Mã sản phẩm</th>
-                                            <th scope="col">Ảnh sản phẩm</th>
-                                            <th scope="col">Kích cỡ</th>
-                                            <th scope="col">Màu</th>
-                                            <th scope="col">Trạng thái đơn hàng</th>
-                                            <th scope="col">Mã đơn hàng</th>
-                                            <th scope="col">Sao</th>
                                             <th scope="col">Người đánh giá</th>
+                                            <th scope="col">Số sao</th>
                                             <th scope="col">Nội dung đánh giá</th>
-
+                                            <th scope="col">Đánh giá</th>
                                             <th scope="col" style="width: 150px;">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reviews_order as $key => $review)
-                                            <tr data-id-tr="{{ $review->id }}">
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="" id="cardtableCheck03">
-                                                        <label class="form-check-label" for="cardtableCheck03"></label>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $key + 1 }}</td>
-                                                <td>{{ $review->product->name }}</td>
-                                                <td>{{ $review->product->code }}</td>
-                                                <td><img src="{{ asset($review->product->image) }}" width="100px" height="100px" alt="Product Image"></td>
-                                                <td>{{ $review->size }}</td>
-                                                <td>{{ $review->color }}</td>
-                                                <td>{{ $review->order_detail->order->status }}</td>
-                                                <td>{{ $review->order_detail->order->code }}</td>
-                                                <td>
-                                                    @for ($i = 1; $i <= 5; $i++)
-                                                        @if ($i <= $review->rating)
-                                                            <i class="ri-star-fill text-warning"></i>
-                                                        @else
-                                                            <i class="ri-star-line text-muted"></i>
-                                                        @endif
-                                                    @endfor
-                                                </td>
-                                                <td>{{ $review->user->name }}</td>
-                                                <td>{{ $review->content }}</td>
-                                                <td>
-                                                    <a style="margin: 0 5px; cursor: pointer;" href="{{ route('admin.reviews.edit', $review->id) }}" class="link-primary">
-                                                        <i class="ri-settings-4-line" style="font-size:18px;"></i>
-                                                    </a>
-                                                    <a style="margin: 0 5px; cursor: pointer;" class="link-danger">
-                                                        <i class="ri-delete-bin-5-line" style="font-size:18px;" data-bs-toggle="modal" data-bs-target="#topmodal{{ $review->id }}"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                    @foreach ($reviews as $review)
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ $loop->iteration }}</td> 
+                                            <td>{{ $review->user->username }}</td> 
+                                            <td>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="ri-star-fill text-warning"></i> <!-- Hiển thị sao đánh giá -->
+                                                    @else
+                                                        <i class="ri-star-line text-muted"></i>
+                                                    @endif
+                                                @endfor
+                                            </td>
+                                            <td>{{ $review->content }}</td> <!-- Nội dung đánh giá -->
+                                            <td>{{$review->created_at->diffForHumans()}}</td>
+                                            <td>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#reviewModal{{ $review->id }}">Chi tiết</a>
+                                            </td>
+                                        </tr>
                                     
-                                            <!-- Modal Xóa -->
-                                            <div id="topmodal{{ $review->id }}" class="modal fade" tabindex="-1" aria-hidden="true" style="display: none;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-body text-center p-5">
-                                                            <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f7b84b,secondary:#405189" style="width:130px;height:130px"></lord-icon>
-                                                            <div class="mt-4">
-                                                                <h4 class="mb-3">Bạn muốn xóa đánh giá '{{ $review->content }}'?</h4>
-                                                                <p class="text-muted mb-4">Nó sẽ bị xóa vĩnh viễn khỏi website của bạn</p>
-                                                                <div class="hstack gap-2 justify-content-center">
-                                                                    <a href="javascript:void(0);" class="btn btn-link link-success fw-medium btnClose{{ $review->id }}" data-bs-dismiss="modal">
-                                                                        <i class="ri-close-line me-1 align-middle"></i> Hủy
-                                                                    </a>
-                                                                    <form action="{{ route('admin.reviews.destroy', $review->id) }}" method="post">
-                                                                        @csrf
-                                                                       
-                                                                        <button type="submit" class="btn btn-danger">Xóa</button>
-                                                                    </form>
-                                                                </div>
+                                        <!-- Modal hiển thị chi tiết đánh giá -->
+                                        <div class="modal fade" id="reviewModal{{ $review->id }}" tabindex="-1" aria-labelledby="reviewModalLabel{{ $review->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="reviewModalLabel{{ $review->id }}">Chi tiết đánh giá</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p><strong>Người đánh giá:</strong> {{ $review->user->username }}</p>
+                                                        <p><strong>Email:</strong> {{ $review->user->email }}</p>
+                                                        <p><strong>Thời gian đánh giá:</strong> {{ $review->created_at->format('d/m/Y H:i A') }}</p>
+                                                        <p><strong>Nội dung đánh giá:</strong> {{ $review->content }}</p>
+                                                        <p><strong>Hình ảnh đánh giá:</strong> <img src="{{ $review->image }}" alt="link" width="400px" height="300px"></p>
+
+                                                        <p><strong>Đánh giá:</strong>
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                                @if ($i <= $review->rating)
+                                                                    <i class="ri-star-fill text-warning"></i>
+                                                                @else
+                                                                    <i class="ri-star-line text-muted"></i>
+                                                                @endif
+                                                            @endfor
+                                                        </p>
+                                                        <p><strong>Mã đơn hàng:</strong>{{ $review->order->code }}</p>
+                                                       
+                                                        <p><strong>Sản phẩm trong đơn hàng:</strong></p>
+                                                            <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
+                                                                <ul class="list-group">
+                                                                    @foreach ($review->order->orderDetails as $orderDetail)
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                            <div>
+                                                                                <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->variant->product->name }}</p>
+                                                                                <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color }}</p>
+                                                                                <p><strong>Kích thước:</strong> {{ $orderDetail->variant->size }}</p>
+                                                                                <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
+                                                                            </div>
+                                                                                <img src="{{ $orderDetail->variant->product->image }}" alt="Hình sản phẩm" width="250" height="200">                                                                      
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
-                                        @endforeach
+                                                        
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    
                                     </tbody>
                                     
                                 </table>

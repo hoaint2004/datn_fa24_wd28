@@ -270,15 +270,8 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         $order = Order::findOrFail($id);
-
         // Kiểm tra và cập nhật trạng thái
         $status = $request->input('status');
-        $validStatuses = ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Hoàn thành', 'Đã hủy']; // Các trạng thái hợp lệ
-        
-        if (!in_array($status, $validStatuses)) {
-            return response()->json(['status' => 'error', 'message' => 'Trạng thái không hợp lệ.'], 400);
-        }
-        
         DB::beginTransaction();
         
         try {
