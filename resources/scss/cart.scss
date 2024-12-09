@@ -243,16 +243,16 @@ tbody td:nth-child(2) {
     width: 620px;
 }
 
-
-
 .shopping-cart-right-info {
     border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
     padding: 10px 0;
+    max-height: 250px; 
+    overflow-y: auto;
     .info-item {
         display: flex;
         justify-content: space-between;
         flex-wrap: nowrap;
-        padding: 10px 0; 
+        padding: 10px 0;
         .bg-img-cart {
             background-size: cover;
             background-position: center;

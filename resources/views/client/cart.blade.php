@@ -116,6 +116,16 @@ Sneakers - Thế Giới Giày
                         <span>Giá: <strong>1000000đ</strong></span>
                     </div>
                 </div>
+                <div class="info-item" >
+                    <div style="background-image: url('https://i.pinimg.com/736x/08/ca/d3/08cad393ca98017aeb237551d59e8336.jpg')" class="bg-img-cart">
+                    </div>
+                    <div>
+                        <span>Số lượng: <strong>2</strong></span>
+                    </div>
+                    <div>
+                        <span>Giá: <strong>1000000đ</strong></span>
+                    </div>
+                </div>
             </div>
 
             <div class="shipping-fee">
