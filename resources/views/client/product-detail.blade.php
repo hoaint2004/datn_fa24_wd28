@@ -453,6 +453,7 @@
                                                     </form>
                                                 @endcan
                                                 <a class="btn-reply" href=""
+
                                                     data-id_comment="{{ $cmt->id }}">Reply
                                                 </a>
                                             </div>
@@ -474,9 +475,24 @@
                                             style="display:none" class="form-edit-comment-parent"
                                             id="form-edit-{{ $cmt->id }}">
                                             @csrf
-                                            @method('PUT')
-                                            <textarea name="content-edit" id="text-edit-{{ $cmt->id }}" cols="70" placeholder="Enter content (*)"
-                                                required="required">
+
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-delete"
+                                                data-comment_id="{{ $cmt->id }}">Xóa</button>
+                                        </form>
+                                       
+                                        <a class="btn-reply" href=""
+                                            data-id_comment="{{ $cmt->id }}">Trả lời
+                                        </a>
+                                    </div>
+
+                                    <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
+                                        class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <textarea name="content-edit" id="text-edit-{{$cmt->id}}" cols="70"  placeholder="Enter content (*)"
+                                            required="required">
+
                                             </textarea>
 
 
@@ -517,9 +533,9 @@
                                                         <p name="content" id="content-{{ $child->id }}">
                                                             {{ $child->content }}
                                                         </p>
-
-                                                        <div class="text-right">
-                                                            {{-- @can('my-comment', $child) --}}
+                                                        {{-- @endcan --}}
+                                                            {{-- <div class="text-right">
+                                                            @can('my-comment', $child)
                                                                 <a href="" class="btn-edit-child"
                                                                     id="btn-edit-child-{{ $child->id }}"
                                                                     data-id_comment="{{ $child->id }}"
@@ -545,7 +561,7 @@
                                                                     </h4>
                                                                     <p name="content" id="content-{{ $child->id }}">
                                                                         {{ $child->content }}
-                                                                    </p>
+                                                                    </p> --}}
 
                                                                     <div class="text-right">
                                                                         @can('my-comment', $child)
@@ -623,13 +639,14 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                @endforeach
+                                    @endforeach
                                         </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
-                </div>
+                    </div>
+                    {{-- end tab --}}
                 </ul>
                 <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
                     uk-slider="autoplay: true; autoplay-interval: 3000;">
@@ -711,7 +728,7 @@
                 </div>
                 <div class="product-item-detail-gallery-items">
                     @if (!empty($item->images))
-                        @foreach ($collection as $item)
+                        @foreach ($item->images as $item)
                             <div class="product-item-detail-gallery-item">
                                 <img src="{{ $item->image_url }}" alt="">
                             </div>

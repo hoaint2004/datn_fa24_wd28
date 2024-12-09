@@ -111,42 +111,58 @@
                                     <!-- Nút hành động -->
                                     <div class="order-actions">
                                         <button class="view-order-bt" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
-                                        @if ($order->status === 'Hoàn thành' && (!$order->review && !$order->user_id===$order->review->user_id)) 
-                                            <!-- Kiểm tra nếu chưa có đánh giá -->
-                                            <button class="review-button" data-uk-toggle="target: #modal-review-{{ $order->id }}">
-                                                Viết đánh giá 
-                                            </button>
-                                        @elseif($order->status === 'Hoàn thành' && $order->review)
-                                            <!-- Nếu đã có đánh giá hoặc trạng thái không phải "Hoàn thành" -->
-                                            <button class="review-button" disabled>
-                                                Đã đánh giá
-                                            </button>
-                                        @else
+                                        
+                                        @if ($order->status === 'Hoàn thành')
+                                            @if (!$order->review || $order->review->user_id !== $order->user_id)
+                                                <!-- Kiểm tra nếu chưa có đánh giá hoặc đánh giá không thuộc user hiện tại -->
+                                                <button class="review-button" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                    Viết đánh giá
+                                                </button>
+                                            @else
+                                                <!-- Nếu đã có đánh giá -->
+                                                <button class="review-button" disabled>
+                                                    Đã đánh giá
+                                                </button>
+                                            @endif
+                                        @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
                                             <span class="" style="color:red">Bình tĩnh để đánh giá</span>
                                         @endif
                                     </div>
                                 </div>
+                                
                             </div>
             
                             <!-- Trạng thái đơn hàng -->
                             <div class="order-status">
-                                @php
-                                    $result = match($order->status) {
-                                        'Hoàn thành' => '<span class="delivered" style="color:green;">Đã giao hàng</span>',
-                                        'Chờ xác nhận' => '<span class="pending" style="color:orange;">Đang chờ xác nhận</span>',
-                                        'Đã xác nhận' => '<span class="confirmed" style="color:blue;">Đã xác nhận</span>',
-                                        'Đang giao' => '<span class="shipping" style="color:yellow;">Đang giao hàng</span>',
-                                        'Giao hàng thành công' => sprintf(
-                                            '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span> 
-                                            <button style="color:green" class="complete-btn" data-order-id="%s">Hoàn thành</button>',
-                                            $order->id,
-                                        ),
-                                        'Giao hàng thất bại' => '<span class="failed" style="color:red;">Giao hàng thất bại</span>',
-                                        'Đã hủy' => '<span class="canceled" style="color:gray;">Đã hủy</span>',
-                                        default => '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>',
-                                    };
-                                 
+                              @php
+                                $result = match($order->status) {
+                                    'Hoàn thành' => '<span class="delivered" style="color:green;">Đã giao hàng</span>',
+                                    'Chờ xác nhận' => sprintf(
+                                        '<span class="pending" style="color:orange;">Đang chờ xác nhận</span> 
+                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
+                                        $order->id,
+                                    ),
+                                    'Đã xác nhận' => sprintf(
+                                        '<span class="confirmed" style="color:blue;">Đã xác nhận</span> 
+                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
+                                        $order->id,
+                                    ),
+                                    'Đang giao' => '<span class="shipping" style="color:yellow;">Đang giao hàng</span>',
+                                    'Giao hàng thành công' => sprintf(
+                                        '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span> 
+                                        <button style="color:green" class="complete-btn" data-order-id="%s">Hoàn thành</button>',
+                                        $order->id,
+                                    ),
+                                    'Giao hàng thất bại' => sprintf(
+                                        '<span class="failed" style="color:red;">Giao hàng thất bại vui lòng liên hệ để được xử lý</span> 
+                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
+                                        $order->id,
+                                    ),
+                                    'Đã hủy' => '<span class="canceled" style="color:gray;">Đã hủy</span>',
+                                    default => '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>',
+                                };
                                 @endphp
+
                                 
                                 {!! $result !!}
                             
@@ -180,7 +196,7 @@
                 @endif
             </div>
               
-    {{-- voucher --}}
+        {{-- voucher --}}
             <div id="discounts-content" class="content-section">
                 <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
             </div>
@@ -313,7 +329,7 @@ $(document).ready(function() {
                 success: function (data) {
                     if (data.status == 'success') {
                         alert("Send thành công: " + (data.message ? data.message : 'Không có thông điệp'));
-                        // location.reload(); 
+                        location.reload(); 
                     } else {
                         alert('Có lỗi xảy ra: ' + data.message);
                     }
@@ -328,26 +344,33 @@ $(document).ready(function() {
 
 
         // update order status hoàn thành
-        $('.complete-btn').click(function() {
-        var orderId = $(this).data('order-id');
-        var messageDiv = $('#order-status-message');
-        var button = $(this); 
+        $('.complete-btn').click(function () {
+            var orderId = $(this).data('order-id');
+            var messageDiv = $('#order-status-message');
+            var button = $(this);
+
             $.ajax({
                 url: "{{ route('thongtinOrder.updateOrder', ':id') }}".replace(':id', orderId),
                 type: 'POST',
                 data: {
-                    _token: '{{ csrf_token() }}' 
+                    _token: '{{ csrf_token() }}',
                 },
-                success: function(data) {
+                success: function (data) {
                     if (data.status === 'success') {
                         messageDiv.html(`<span style="color:green;">${data.message}</span>`);
-                        button.prop('disabled', true);  // Vô hiệu hóa nút sau khi đã cập nhật
-                        button.html('Hoàn thành');
+                        button.prop('disabled', true); // Vô hiệu hóa nút sau khi đã cập nhật
+                        button.text('Đã hoàn thành'); // Đổi chữ trên nút
+                    } else {
+                        messageDiv.html(
+                            `<span style="color:orange;">Cập nhật không thành công: ${data.message}</span>`
+                        );
                     }
                 },
-                error: function(xhr, status, error) {
-                    messageDiv.html(`<span style="color:red;">Có lỗi xảy ra, vui lòng thử lại. ${error}</span>`);
-                }
+                error: function (xhr, status, error) {
+                    messageDiv.html(
+                        `<span style="color:red;">Có lỗi xảy ra, vui lòng thử lại. Lỗi: ${xhr.responseText}</span>`
+                    );
+                },
             });
         });
 
@@ -355,41 +378,93 @@ $(document).ready(function() {
 });
 </script>
 <script>
-    window.Echo.channel('order-status.' + {{ $order->id }})
-        .listen('OrderStatusUpdated', (event) => {
-            const status = event.status;
-            const messageDiv = document.getElementById('order-status-message');
 
-            let statusHtml = '';
-            switch (status) {
-                case 'Hoàn thành':
-                    statusHtml = '<span class="delivered" style="color:green;">Đã giao hàng</span>';
-                    break;
-                case 'Chờ xác nhận':
-                    statusHtml = '<span class="pending" style="color:orange;">Đang chờ xác nhận</span>';
-                    break;
-                case 'Đã xác nhận':
-                    statusHtml = '<span class="confirmed" style="color:blue;">Đã xác nhận</span>';
-                    break;
-                case 'Đang giao':
-                    statusHtml = '<span class="shipping" style="color:yellow;">Đang giao hàng</span>';
-                    break;
-                case 'Giao hàng thành công':
-                    statusHtml = '<span style="color:green;">Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span>';
-                    break;
-                case 'Giao hàng thất bại':
-                    statusHtml = '<span class="failed" style="color:red;">Giao hàng thất bại</span>';
-                    break;
-                case 'Đã hủy':
-                    statusHtml = '<span class="canceled" style="color:gray;">Đã hủy</span>';
-                    break;
-                default:
-                    statusHtml = '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>';
-                    break;
+
+// if (typeof window.Echo !== 'undefined') {
+//     window.Echo.channel('order-status.' + '{{ $order->id }}')
+//     .listen('OrderStatusUpdated', (event) => {
+//         const status = event.status;
+//         const messageDiv = document.getElementById('order-status-message');
+
+//         let statusHtml = '';
+//         switch (status) {
+//             case 'Hoàn thành':
+//                 statusHtml = '<span class="delivered" style="color:green;">Đã giao hàng</span>';
+//                 break;
+//             case 'Chờ xác nhận':
+//                 statusHtml = `
+//                     <span class="pending" style="color:orange;">Đang chờ xác nhận</span> 
+//                     <button style="color:red" class="cancel-btn" data-order-id="${event.order.id}">Hủy đơn</button>
+//                 `;
+//                 break;
+//             case 'Đã xác nhận':
+//                 statusHtml = `
+//                     <span class="confirmed" style="color:blue;">Đã xác nhận</span> 
+//                     <button style="color:red" class="cancel-btn" data-order-id="${event.order.id}">Hủy đơn</button>
+//                 `;
+//                 break;
+//             case 'Đang giao':
+//                 statusHtml = '<span class="shipping" style="color:yellow;">Đang giao hàng</span>';
+//                 break;
+//             case 'Giao hàng thành công':
+//                 statusHtml = `
+//                     <span style="color:green;">Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span> 
+//                     <button style="color:green" class="complete-btn" data-order-id="${event.order.id}">Hoàn thành</button>
+//                 `;
+//                 break;
+//             case 'Giao hàng thất bại':
+//                 statusHtml = `
+//                     <span class="failed" style="color:red;">Giao hàng thất bại vui lòng liên hệ để được xử lý</span> 
+//                     <button style="color:red" class="cancel-btn" data-order-id="${event.order.id}">Hủy đơn</button>
+//                 `;
+//                 break;
+//             case 'Đã hủy':
+//                 statusHtml = '<span class="canceled" style="color:gray;">Đã hủy</span>';
+//                 break;
+//             default:
+//                 statusHtml = '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>';
+//                 break;
+//         }
+
+//         messageDiv.innerHTML = statusHtml;
+
+//         // Đính kèm sự kiện click vào nút hủy đơn nếu có
+       
+//     });
+// }else{
+//     console.log('ko ton tai');
+// }
+
+    console.log(document.querySelectorAll('.cancel-btn'));
+    document.body.addEventListener('click',function(event){
+       
+        if(event.target.classList.contains('cancel-btn')){
+            console.log('Đã bấm nút hủy đơn');
+            const orderId = event.target.getAttribute('data-order-id');
+            console.log('Order ID:', orderId);
+            if(confirm('bạn có muốn hủy đơn chứ?')){
+                fetch(`api/thongtinOrder/cancel/${orderId}`,{
+                    method :'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+                    },
+                    body :JSON.stringify({}),
+                })
+                .then(response=>response.json())
+                .then(data=>{
+                    alert(data.message);
+                    if (data.status === 'success') {
+                        location.reload(); // Tải lại trang để cập nhật trạng thái
+                    }
+           
+                })
+                .catch(error => console.error('Lỗi:', error));
             }
+        }
+    });
+      
 
-            messageDiv.innerHTML = statusHtml;
-        });
 </script>
 
 @endsection
