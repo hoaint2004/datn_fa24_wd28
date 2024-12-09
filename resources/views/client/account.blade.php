@@ -83,190 +83,104 @@
                 </div>
 
             </div>
-<!--             
+
+
             <div id="orders-content" class="content-section my-order">
+                <!-- Form tìm kiếm đơn hàng -->
                 <form action="" class="form-search-my-order">
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
-                    <button uk-icon="search" class="icon-search">
-                    </button>
+
+            
+                    <button uk-icon="search" class="icon-search"></button>
+
                 </form>
-
-                <div class="order-item">
-                    <div class="order-content">
-                        <div class="order-content-left">
-                            <img alt="" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" />
-                            <div class="order-details">
-                                <a href="#" class="order-details-nam-product">
-                                    <h3>
-                                        Giày búp bê da
-                                    </h3>
-                                </a>
-                                <p>
-                                    Size: S
-                                </p>
-                                <p>
-                                    Màu: Đen
-                                </p>
-                                <p>
-                                    Số lượng: 1
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <div class="order-content-right">
-                            <div class="order-price">
-                                2.180.000₫
-                            </div>
-
-                            <div class="order-actions">
-                                <button class="view-order-bt">
-                                    Xem đơn hàng
-                                </button>
-                                <button class="review-button" data-uk-toggle="target: #modal-review-1">
-                                    Viết đánh giá
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="order-status">
-                        <span class="delivered">
-                            Đã giao hàng
-                        </span>
-                        <p>
-                            Sản phẩm của bạn đã được giao
-                        </p>
-                    </div>
-                </div>
-
-                <div class="order-item">
-                    <div class="order-content">
-                        <div class="order-content-left">
-                            <img alt="" src="https://img.mwc.com.vn/giay-thoi-trang?w=640&h=640&FileInput=/Resources/Product/2024/08/17/3.png" />
-                            <div class="order-details">
-                                <a href="#" class="order-details-nam-product">
-                                    <h3>
-                                        Giày búp bê da
-                                    </h3>
-                                </a>
-                                <p>
-                                    Size: S
-                                </p>
-                                <p>
-                                    Màu: Đen
-                                </p>
-                                <p>
-                                    Số lượng: 1
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <div class="order-content-right">
-                            <div class="order-price">
-                                2.180.000₫
-                            </div>
-
-                            <div class="order-actions">
-                                <button class="view-order-bt">
-                                    Xem đơn hàng
-                                </button>
-                                <button class="cancel-button">
-                                    Hủy đơn hàng
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="order-status">
-                        <span class="in-process">
-                            Đang xử lý
-                        </span>
-                        <p>
-                            Sản phẩm của bạn đang được xử lý
-                        </p>
-                    </div>
-                </div>
-
-            </div> -->
-
-
-            <div id="orders-content" class="content-section my-order">
-                <div class="order-header">
-                    <div class="order-search">
-                        <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
-                        <button uk-icon="search" class="icon-search"></button>
-                    </div>
-                    <div class="order-filter">
-                        <select class="uk-select text-[#222] border-none">
-                            <option>Tất cả đơn hàng</option>
-                            <option>Đã giao hàng</option>
-                            <option>Đang xử lý</option>
-                            <option>Đã hủy</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-middle uk-table-divider order-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Mã đơn hàng</th>
-                                <th>Người nhận</th>
-                                <th>Tổng tiền</th>
-                                <th>Ngày đặt</th>
-                                <th>Trạng thái giao hàng</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($orders as $key => $item)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->code }}</td>
-                                    <td>
-                                        <p class="uk-margin-remove">{{ $item->name }}</p>
-                                    </td>
-                                    <td>{{ number_format($item->total_price, 0, ',', '.') }} đ</td>
-                                    <td>
-                                        {{-- <p class="uk-margin-remove payment-status">{{ $item->payment_status }}</p> --}}
-                                        {{ date_format($item->created_at, 'Y-m-d') }}
-                                    </td>
-                                    <td>
-                                        @if ($item->status == 'Giao hàng thành công')
-                                            <span class="status-delivered">{{ $item->status }}</span>
-                                        @elseif($item->status == 'Đã hủy')
-                                            <span class="in-process" style="background-color: red; color: white">{{ $item->status }}</span>
+            
+                <!-- Kiểm tra nếu không có đơn hàng -->
+                @if ($orders->isEmpty())
+                    <span style="color:red">Không có đơn nào</span>
+                @else
+                    <!-- Hiển thị danh sách đơn hàng -->
+                    @foreach ($orders as $order)
+                        <div class="order-item">
+                            <div class="order-content">
+                                <div class="order-content-left"> 
+                                    <div class="order-code">Mã đơn hàng: {{$order->code}}</div>
+                                </div>
+            
+                                <div class="order-content-right">
+                                    <!-- Nút hành động -->
+                                    <div class="order-actions">
+                                        <button class="view-order-bt" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
+                                        @if ($order->status === 'Hoàn thành' && (!$order->review && !$order->user_id===$order->review->user_id)) 
+                                            <!-- Kiểm tra nếu chưa có đánh giá -->
+                                            <button class="review-button" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                Viết đánh giá 
+                                            </button>
+                                        @elseif($order->status === 'Hoàn thành' && $order->review)
+                                            <!-- Nếu đã có đánh giá hoặc trạng thái không phải "Hoàn thành" -->
+                                            <button class="review-button" disabled>
+                                                Đã đánh giá
+                                            </button>
                                         @else
-                                            <span class="in-process">{{ $item->status }}</span>
+                                            <span class="" style="color:red">Bình tĩnh để đánh giá</span>
                                         @endif
-                                    </td>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Trạng thái đơn hàng -->
+                            <div class="order-status">
+                                @php
+                                    $result = match($order->status) {
+                                        'Hoàn thành' => '<span class="delivered" style="color:green;">Đã giao hàng</span>',
+                                        'Chờ xác nhận' => '<span class="pending" style="color:orange;">Đang chờ xác nhận</span>',
+                                        'Đã xác nhận' => '<span class="confirmed" style="color:blue;">Đã xác nhận</span>',
+                                        'Đang giao' => '<span class="shipping" style="color:yellow;">Đang giao hàng</span>',
+                                        'Giao hàng thành công' => sprintf(
+                                            '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span> 
+                                            <button style="color:green" class="complete-btn" data-order-id="%s">Hoàn thành</button>',
+                                            $order->id,
+                                        ),
+                                        'Giao hàng thất bại' => '<span class="failed" style="color:red;">Giao hàng thất bại</span>',
+                                        'Đã hủy' => '<span class="canceled" style="color:gray;">Đã hủy</span>',
+                                        default => '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>',
+                                    };
+                                 
+                                @endphp
                                 
-                                    <td>
-                                        <div class="uk-button-group">
-                                            <a href="{{ route('order.show', $item->id) }}" class=" view-order-bt"><button style="text-transform: uppercase">Chi tiết</button></a>
-                                            @if ($item->status == 'Chờ xác nhận')
-                                                <form action="{{ route('order.update', $item->id) }}" method="post" class="cancel-button form-cancel" style="text-transform: uppercase;">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" style="text-transform: uppercase;">Hủy đơn hàng</button>
-                                                </form>
-                                            @endif
-                                            <!-- <button class=" review-button" data-uk-toggle="target: #modal-review-1">Đánh giá</button> -->
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                {!! $result !!}
+                            
+                                <div id="order-status-message"></div>
+                            </div>
+                            
+            
+                            <!-- Modal Xem thêm chi tiết sản phẩm -->
+                            <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
+                                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                    <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+                                    
+                                    <h3 class="uk-modal-title font-bold">Thông số sản phẩm</h3>
+                                    <div class="uk-margin modal-details-info">
+                                        @foreach ($order->orderDetails as $orderDetail)
+                                            <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->product->name }}</p>
+                                            <p><img alt="Product Image" src="{{ $orderDetail->product->image ?? 'default-image.jpg' }}"/></p>
+                                            <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
+                                            <p><strong>Size:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
+                                            <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
+                                            <p><strong>Giá:</strong> {{ number_format($orderDetail->price, 0, ',', '.') }}₫</p>
+                                            <p><strong>Thông tin chi tiết:</strong> {{ $orderDetail->product->description ?? 'Không có thông tin' }}</p>
+                                            <hr />
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    @endforeach
+                @endif
             </div>
-
-
+              
+    {{-- voucher --}}
             <div id="discounts-content" class="content-section">
                 <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
             </div>
@@ -275,51 +189,52 @@
     </div>
 
 
-    <div id="modal-review-1" class="uk-flex-top modal-review" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    <!-- Modal Review -->
+    @if ($orders->isEmpty())
+    @else
+        @foreach ($orders as $order)
+            <div id="modal-review-{{ $order->id }}" class="uk-flex-top modal-review" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
 
-            <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+                    <h3 class="uk-modal-title font-bold">Đánh giá đơn hàng</h3>
 
-            <h3 class="uk-modal-title font-bold">Đánh giá sản phẩm</h3>
-            <div class="uk-margin modal-review-name">
-                <p><strong>Tên sản phẩm:</strong> Giày búp bê da</p>
-                <p><strong>Màu sắc:</strong> Đen</p>
-                <p><strong>Size:</strong> S</p>
-            </div>
-
-
-            <form id="review-form">
-                <div class="uk-margin">
-                    <strong for="rating" class="rating-model">Đánh giá:</strong>
-                    <div class="flex gap-2 items-center mt-1">
-                        <a href="#" class="star" data-value="1"><i
-                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                        <a href="#" class="star" data-value="2"><i
-                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                        <a href="#" class="star" data-value="3"><i
-                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                        <a href="#" class="star" data-value="4"><i
-                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                        <a href="#" class="star" data-value="5"><i
-                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                    <!-- Hiển thị thông tin đơn hàng -->
+                    <div class="uk-margin modal-review-name">
+                        <p><strong>Mã đơn hàng:</strong> {{ $order->code }}</p>
+                        <p><strong>Người nhận:</strong> {{ $order->name }}</p>
+                        <p><strong>Địa chỉ:</strong> {{ $order->address }}</p>
+                        <p><strong>Số điện thoại:</strong> {{ $order->phone }}</p>
                     </div>
+
+                    <!-- Form đánh giá cho toàn bộ đơn hàng -->
+                    <form id="review-form-{{ $order->id }}" data-order-id="{{ $order->id }}" enctype="multipart/form-data">
+                        <div class="uk-margin">
+                            <strong for="rating" class="rating-model">Đánh giá:</strong>
+                            <div class="flex gap-2 items-center mt-1">
+                                <a href="#" class="star" data-value="1"><i class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                <a href="#" class="star" data-value="2"><i class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                <a href="#" class="star" data-value="3"><i class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                <a href="#" class="star" data-value="4"><i class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                <a href="#" class="star" data-value="5"><i class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                            </div>
+                            <input type="hidden" name="rating" id="rate-input-{{ $order->id }}">
+                        </div>
+                        <div class="uk-margin">
+                            <strong>Hình ảnh minh họa:</strong>
+                            <input type="file" name="image" class="form-control" accept="image/*" required>
+                        </div>
+                        <div class="uk-margin">
+                            <strong for="review-content">Nội dung đánh giá:</strong>
+                            <textarea name="content" class="mt-2 block w-full h-32 p-2 input-info" rows="5" placeholder="Viết đánh giá của bạn về đơn hàng..." required></textarea>
+                        </div>
+                        <button type="submit" class="bt-review">Gửi đánh giá</button>
+                    </form>
+                    
                 </div>
-
-
-                <div class="uk-margin">
-                    <strong for="review-content" class="text-[#222] ">Nội dung đánh giá:</strong>
-                    <textarea id="review-content" class=" mt-2 block w-full h-32 p-2 input-info" rows="5" placeholder="Viết đánh giá của bạn về sản phẩm..."></textarea>
-                </div>
-
-
-                <button type="submit" class="bt-review">Gửi đánh giá</button>
-            </form>
-        </div>
-    </div>
-
-
-
-
+            </div>
+        @endforeach
+    @endif
 </div>
 
 <script>
@@ -339,27 +254,142 @@
             activeSection.style.display = 'block';
         }
     }
-    $(document).ready(function() {
-        $(document).on('submit', '.form-cancel', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'warning',
-                title: 'Bạn có muốn hủy đơn hàng này không?',
-                showDenyButton: true,
-                confirmButtonText: 'Có',
-                denyButtonText: `Hủy`,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Hủy đơn hàng thành công',
-                        showConfirmButton: false,
-                    });
+
+  
+</script>
+{{-- sử lý send review --}}
+<script>
+$(document).ready(function() {
+    
+        // Bắt sự kiện click để lưu giá trị rate
+        $('.star').on('click', function (event) {
+            event.preventDefault();
+            const value = $(this).data('value');
+            const orderId = $(this).closest('form').data('order-id');
+
+            // Lưu giá trị đánh giá vào input ẩn
+            $('#rate-input-' + orderId).val(value);
+
+            // Đổi màu các sao
+            $(this).closest('.flex').find('i').each(function (index) {
+                if (index < value) {
+                    $(this).removeClass('text-gray-400').addClass('text-yellow-500');
+                } else {
+                    $(this).removeClass('text-yellow-500').addClass('text-gray-400');
                 }
             });
         });
-    });
+
+        // Xử lý gửi đánh giá
+        $('form[id^="review-form-"]').on('submit', function (event) {
+            event.preventDefault();  // Ngăn form gửi theo cách mặc định
+
+            const orderId = $(this).data('order-id');
+            const rating = $('#rate-input-' + orderId).val();  
+            const content = $(this).find('textarea[name="content"]').val(); 
+            const image = $(this).find('input[name="image"]')[0].files[0];  
+
+            // Tạo đối tượng FormData
+            const formData = new FormData();
+            formData.append('order_id', orderId);
+            formData.append('rating', rating);
+            formData.append('content', content);
+            formData.append('image', image); 
+             // Kiểm tra xem file ảnh có được lấy đúng không
+            //  for (var pair of formData.entries()) {
+            //     console.log(pair[0] + ': ' + pair[1]);
+            // }
+
+
+            $.ajax({
+                url: "{{ route('reviews.store') }}", 
+                type: 'POST',
+                data: formData,
+                processData: false, 
+                contentType: false,  
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+                },
+                success: function (data) {
+                    if (data.status == 'success') {
+                        alert("Send thành công: " + (data.message ? data.message : 'Không có thông điệp'));
+                        // location.reload(); 
+                    } else {
+                        alert('Có lỗi xảy ra: ' + data.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText); 
+                    alert('Đã xảy ra lỗi, vui lòng thử lại.' + error);
+                }
+            });
+        });
+
+
+
+        // update order status hoàn thành
+        $('.complete-btn').click(function() {
+        var orderId = $(this).data('order-id');
+        var messageDiv = $('#order-status-message');
+        var button = $(this); 
+            $.ajax({
+                url: "{{ route('thongtinOrder.updateOrder', ':id') }}".replace(':id', orderId),
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}' 
+                },
+                success: function(data) {
+                    if (data.status === 'success') {
+                        messageDiv.html(`<span style="color:green;">${data.message}</span>`);
+                        button.prop('disabled', true);  // Vô hiệu hóa nút sau khi đã cập nhật
+                        button.html('Hoàn thành');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    messageDiv.html(`<span style="color:red;">Có lỗi xảy ra, vui lòng thử lại. ${error}</span>`);
+                }
+            });
+        });
+
+
+});
+</script>
+<script>
+    window.Echo.channel('order-status.' + {{ $order->id }})
+        .listen('OrderStatusUpdated', (event) => {
+            const status = event.status;
+            const messageDiv = document.getElementById('order-status-message');
+
+            let statusHtml = '';
+            switch (status) {
+                case 'Hoàn thành':
+                    statusHtml = '<span class="delivered" style="color:green;">Đã giao hàng</span>';
+                    break;
+                case 'Chờ xác nhận':
+                    statusHtml = '<span class="pending" style="color:orange;">Đang chờ xác nhận</span>';
+                    break;
+                case 'Đã xác nhận':
+                    statusHtml = '<span class="confirmed" style="color:blue;">Đã xác nhận</span>';
+                    break;
+                case 'Đang giao':
+                    statusHtml = '<span class="shipping" style="color:yellow;">Đang giao hàng</span>';
+                    break;
+                case 'Giao hàng thành công':
+                    statusHtml = '<span style="color:green;">Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span>';
+                    break;
+                case 'Giao hàng thất bại':
+                    statusHtml = '<span class="failed" style="color:red;">Giao hàng thất bại</span>';
+                    break;
+                case 'Đã hủy':
+                    statusHtml = '<span class="canceled" style="color:gray;">Đã hủy</span>';
+                    break;
+                default:
+                    statusHtml = '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>';
+                    break;
+            }
+
+            messageDiv.innerHTML = statusHtml;
+        });
 </script>
 
 @endsection

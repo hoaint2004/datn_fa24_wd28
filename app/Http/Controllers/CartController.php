@@ -87,10 +87,14 @@ class CartController extends Controller
                     'quantity' => $quantity,
                     'price' => $product->price * $quantity
                 ]);
-            }
 
+
+            }
+            $cartCount = Cart::all();
+
+            $product = Product::with('variants')->where('id', $request->id)->first();
             DB::commit();
-            return response()->json(['status' => true, 'message' => 'Sản phẩm được thêm vào giỏ hàng thành công', 'data' => $cartItem ?? $cart]);
+            return response()->json(['status' => true, 'message' => 'Sản phẩm được thêm vào giỏ hàng thành công', 'data' => $cartItem ?? $cart, 'product' => $product, 'cartCount' => $cartCount->count()]);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());

@@ -77,8 +77,7 @@
         <span class="sub-span-title">
             List các nhóm sản phẩm nổi bật nhất
         </span>
-        <div class="collection-list uk-grid" uk-grid>
-     
+        <div class="collection-list uk-grid" uk-grid>           
             @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
@@ -89,8 +88,8 @@
                 <span>{{$category3->name}}</span>
             </a>
             @endforeach
-          
-       
+
+
         </div>
     </section>
 
@@ -253,7 +252,7 @@
                             </a>
                         </div>
                     </div>
-                  
+
                 @endforeach
             @endif
         </div>
@@ -601,13 +600,13 @@
 
                     <div class="flex items-center my-4 price">
                         <span class="text-2xl font-bold text-red-500 modal-price">
-                          
+
                         </span>
-                       
+
                         <span class="text-base text-gray-500 line-through ml-2">
-                           
+
                         </span>
-                       
+
                     </div>
                     <!-- <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>
@@ -672,10 +671,10 @@
                 if (isNaN(value) || value < 1) {
                     $(this).val(1);
                 } else if (value > 9999) {
-                    $(this).val(9999);  
+                    $(this).val(9999);
                 }
             });
-                                                                                                                                                                                                                        
+
             // Đảm bảo rằng bạn sử dụng .on('click') để cập nhật khi người dùng chọn màu và size
             $('.quick-view-button').on('click', function(e) {
                 e.preventDefault();
@@ -813,6 +812,8 @@
                         quantity: quantity
                     },
                     success: function(response) {
+                        var cartCount = response.cartCount;
+                        $('.cartCount').text(cartCount)
                         if (response.status) {
                             Swal.fire({
                                 position: 'center',

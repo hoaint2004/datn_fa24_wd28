@@ -65,7 +65,7 @@
                 <div>
                     <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
                         uk-toggle="target: #offcanvas-flip">
-                        <span class="cart-counter">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
+                        <span class="cart-counter cartCount">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
                     </a>
                 </div>
 
@@ -209,9 +209,9 @@
                                                 ->orderByDesc('quan')
                                                 ->with('product')
                                                 ->take(2)
-                                                ->get();                                 
+                                                ->get();
                                         @endphp
-                                
+
                                         @foreach($data['productFeatured'] as $item => $product)
                                             <li class="uk-margin-small-bottom">
                                                 <a href="{{ route('featured_products', $product->product_id) }}">
@@ -221,7 +221,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                
+
 
                                 <!-- Giày nam -->
                                 {{-- <div>

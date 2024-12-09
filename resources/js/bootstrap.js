@@ -8,6 +8,18 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+// Cấu hình Pusher
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'your-pusher-key', // Thay 'your-pusher-key' bằng Pusher key của bạn
+    cluster: 'your-pusher-cluster', // Thay 'your-pusher-cluster' bằng Pusher cluster của bạn
+    forceTLS: true
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

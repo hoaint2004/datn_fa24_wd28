@@ -325,40 +325,40 @@
                             </div>
                         </div>
 
-                        <div class="mt-8 comment-reply">
-                            <h2 class="text-[28px] font-semibold mt-16 comment-reply-title">
-                                Thêm đánh giá
-                            </h2>
-                            <form action="" class="mt-4 space-y-4">
+                    <div class="mt-8 comment-reply">
+                        <h2 class="text-[28px] font-semibold mt-16 comment-reply-title">
+                            Thêm đánh giá
+                        </h2>
+                        <form action="" class="mt-4 space-y-4">
 
-                                <div class="rating">
-                                    <label class="block text-base font-medium text-[#555] ">
-                                        Your rating
-                                        <span class="text-red-500">*</span>
-                                    </label>
-                                    <div class="flex gap-2 items-center mt-1">
-                                        <a href="#" class="star" data-value="1"><i
-                                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                                        <a href="#" class="star" data-value="2"><i
-                                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                                        <a href="#" class="star" data-value="3"><i
-                                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                                        <a href="#" class="star" data-value="4"><i
-                                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                                        <a href="#" class="star" data-value="5"><i
-                                                class="fa-solid fa-star text-gray-400 text-lg"></i></a>
-                                    </div>
+                            <div class="rating">
+                                <label class="block text-base font-medium text-[#555] ">
+                                    Your rating
+                                    <span class="text-red-500">*</span>
+                                </label>
+                                <div class="flex gap-2 items-center mt-1">
+                                    <a href="#" class="star" data-value="1"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="2"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="3"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="4"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
+                                    <a href="#" class="star" data-value="5"><i
+                                            class="fa-solid fa-star text-gray-400 text-lg"></i></a>
                                 </div>
+                            </div>
 
-                                <div class="comment-reply-review pb-10">
-                                    <label class="block text-base font-medium text-[#555] pb-3 pt-3">
-                                        Your review
-                                        <span class="text-red-500">
-                                            *
-                                        </span>
-                                    </label>
-                                    <textarea class="mt-1 block w-full h-32 p-2 input-info"></textarea>
-                                </div>
+                            <div class="comment-reply-review pb-10">
+                                <label class="block text-base font-medium text-[#555] pb-3 pt-3">
+                                    Your review
+                                    <span class="text-red-500">
+                                        *
+                                    </span>
+                                </label>
+                                <textarea class="mt-1 block w-full h-32 p-2 input-info"></textarea>
+                            </div>
 
                                 <div class="uk-grid comment-reply-review-info pb-5" uk-grid>
                                     <div class="comment-reply-name uk-width-1-2">
@@ -389,20 +389,20 @@
                                     </label>
                                 </div>
 
-                                <button class="comment-reply-button " type="submit">
-                                    Submit
-                                </button>
+                            <button class="comment-reply-button " type="submit">
+                                Submit
+                            </button>
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
+                </div>
 
-                    {{-- Tab comment --}}
-                    <div class="tab-comment">
-                        <div class="form-comment">
+                {{-- Tab comment --}}
+                <div class="tab-comment">
+                    <div class="form-comment">
 
-                            <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
-
+                        <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
+    
 
                             @if (auth()->check())
                                 <form action="{{ route('post_comment', $data['product']->id) }}" method="POST"
@@ -437,18 +437,18 @@
                                                 class="avatar" width="60px">
                                         </a>
 
-                                        <div class="media-comment-body" id="media-comment-body-{{ $cmt->id }}">
-                                            <h4 name="fullname"> {{ $cmt->user->fullname }}
-                                                <small class="created_at" style="color: #5555558f">
-                                                    {{ $cmt->created_at->diffForHumans() }}
-                                                </small>
-                                            </h4>
-
-                                            <div class="text-right">
+                                <div class="media-comment-body" id="media-comment-body-{{$cmt->id}}">
+                                    <h4 name="fullname"> {{ $cmt->user->fullname }}
+                                        <small class="created_at" style="color: #5555558f">
+                                            {{ $cmt->created_at->diffForHumans() }}
+                                        </small>
+                                    </h4>
+                                        <div class="text-right">
                                                 @can('my-comment', $cmt)
                                                     <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id }}"
                                                         data-id_comment="{{ $cmt->id }}"
-                                                        data-content="{{ $cmt->content }}">Sửa</a>
+                                                        data-content="{{ $cmt->content }}">Sửa
+                                                    </a>
                                                     <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
                                                         class="delete-comment">
                                                         @csrf
@@ -456,33 +456,18 @@
                                                         <button type="submit" class="btn-delete"
                                                             data-comment_id="{{ $cmt->id }}">Xóa</button>
                                                     </form>
+                                                    <a class="btn-reply" href=""
+                                                            data-id_comment="{{ $cmt->id }}">Trả lời
+                                                    </a>
                                                 @endcan
-
-                                                <a class="btn-reply" href=""
-                                                    data-id_comment="{{ $cmt->id }}">Trả lời
-                                                </a>
-                                            </div>
-                                            <form action="{{ route('update_comment', $cmt->id) }}" method="POST"
-                                                style="display:none" class="form-edit-comment-parent"
-                                                id="form-edit-{{ $cmt->id }}">
-
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn-delete"
-                                                    data-comment_id="{{ $cmt->id }}">Xóa</button>
-                                            </form>
                                         </div>
-                                        <a class="btn-reply" href=""
-                                            data-id_comment="{{ $cmt->id }}">Trả lời
-                                        </a>
-                                    </div>
+                                        {{-- </div> --}}
 
-                                    <form action="{{ route('update_comment', $cmt->id) }}" method="POST"
-                                        style="display:none" class="form-edit-comment-parent"
-                                        id="form-edit-{{ $cmt->id }}">
+                                    <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
+                                        class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
                                         @csrf
                                         @method('PUT')
-                                        <textarea name="content-edit" id="text-edit-{{ $cmt->id }}" cols="70" placeholder="Enter content (*)"
+                                        <textarea name="content-edit" id="text-edit-{{$cmt->id}}" cols="70"  placeholder="Enter content (*)"
                                             required="required">
                                             </textarea>
 
@@ -490,157 +475,151 @@
                                             data-id_comment="{{ $cmt->id }}">Cập nhật</button>
                                     </form>
 
+
                                     <form action="" method="POST" style="display:none"
                                         class="form-post-comment-child" id="form-reply-{{ $cmt->id }}">
                                         @csrf
                                         @method('POST')
-                                        <input type="button" value="{{ $data['product']->id }}" hidden
-                                            name="product_id">
-                                        <textarea name="content-reply" cols="70"placeholder="Enter content (*)" class="text-note-{{ $cmt->id }}"
-                                            required="required" id="content-reply"></textarea>
-                                        <button class="btnsave-reply" type="submit"
-                                            data-id_comment="{{ $cmt->id }}"
-                                            data-comment="{{ $data['product']->id }}"> Gửi</button>
+                                        <input type="button" value="{{ $data['product']->id }}" hidden name="product_id">
+                                        <textarea name="content-reply" cols="70"placeholder="Enter content (*)"
+                                            class="text-note-{{ $cmt->id }}" required="required" id="content-reply"></textarea>
+
+
+                                            <button class="btnsave-reply" type="submit"
+                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
                                     </form>
 
                                     {{-- Các bình luận con --}}
                                     {{-- id="list-comment-child-{{ $cmt->parent_id }}" --}}
-                                    <div class="list-comment-child" id="list-comment-child-{{ $cmt->id }}">
+                                    <div class="list-comment-child" id="list-comment-child-{{$cmt->id}}">
                                         @foreach ($cmt->replies as $child)
-                                            <div class="comment-child comment-child-{{ $child->id }}">
-                                                <a href="" class="pull-left">
-                                                    <img src="{{ url('/storage/images/img_user.jpg') }}"
-                                                        alt="" class="avatar" width="60px">
-                                                </a>
+                                        <div class="comment-child comment-child-{{$child->id}}">
+                                            <a href="" class="pull-left">
+                                                <img src="{{ url('/storage/images/img_user.jpg') }}"
+                                                    alt="" class="avatar" width="60px">
+                                            </a>
 
-                                                <div class="media-comment-body">
-                                                    <h4 name="fullname"> {{ $child->user->fullname }}
-                                                        <small class="created_at" style="color: #5555558f">
-                                                            {{ $child->created_at->diffForHumans() }}
-                                                        </small>
-                                                    </h4>
-                                                    <p name="content" id="content-{{ $child->id }}">
-                                                        {{ $child->content }}
-                                                    </p>
+                                            <div class="media-comment-body">
+                                                <h4 name="fullname"> {{ $child->user->fullname }}
+                                                    <small class="created_at" style="color: #5555558f">
+                                                        {{ $child->created_at->diffForHumans() }}
+                                                    </small>
+                                                </h4>
+                                                <p name="content" id="content-{{ $child->id }}">
+                                                    {{ $child->content }}
+                                                </p>
 
-                                                    <div class="text-right">
-                                                        @can('my-comment', $child)
-                                                            <a href="" class="btn-edit-child"
-                                                                id="btn-edit-child-{{ $child->id }}"
-                                                                data-id_comment="{{ $child->id }}"
-                                                                data-content="{{ $child->content }}">Sửa</a>
-                                                            <form action="{{ route('destroy_comment', $child->id) }}"
-                                                                method="post" class="delete-comment">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn-delete-reply"
-                                                                    data-comment_id="{{ $child->id }}">Xóa
-                                                                </button>
-                                                            </form>
-                                                            <a class="btn-reply-p2" href=""
-                                                                data-id_comment="{{ $child->id }}">Trả lời
-                                                            </a>
+                                                <div class="text-right">
+                                                    @can('my-comment', $child)
+                                                    <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
+                                                        data-content="{{ $child->content }}">Sửa</a>
+                                                    <form action="{{ route('destroy_comment', $child->id) }}"
+                                                        method="post" class="delete-comment">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-delete-reply"
+                                                            data-comment_id="{{ $child->id }}">Xóa
+                                                        </button>
+                                                    </form>
+                                                    <a class="btn-reply-p2" href=""
+                                                        data-id_comment="{{ $child->id }}">Trả lời
+                                                    </a>
 
 
-                                                            <div class="media-comment-body">
-                                                                <h4 name="fullname"> {{ $child->user->fullname }}
-                                                                    <small class="created_at" style="color: #5555558f">
-                                                                        {{ $child->created_at->diffForHumans() }}
-                                                                    </small>
-                                                                </h4>
-                                                                <p name="content" id="content-{{ $child->id }}">
-                                                                    {{ $child->content }}
-                                                                </p>
-
-                                                                <div class="text-right">
-                                                                    @can('my-comment', $child)
-                                                                        <a href="" class="btn-edit-child"
-                                                                            id="btn-edit-child-{{ $child->id }}"
-                                                                            data-id_comment="{{ $child->id }}"
-                                                                            data-content="{{ $child->content }}">Sửa</a>
-                                                                        <form
-                                                                            action="{{ route('destroy_comment', $child->id) }}"
-                                                                            method="post" class="delete-comment">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <button type="submit" class="btn-delete-reply"
-                                                                                data-comment_id="{{ $child->id }}">Xóa
-                                                                            </button>
-                                                                        </form>
-                                                                        <a class="btn-reply-p2" href=""
-                                                                            data-id_comment="{{ $child->id }}">Trả lời
-                                                                        </a>
-                                                                    @endcan
-                                                                </div>
-                                                                {{-- Form edit --}}
-                                                                <form action="" method="POST" style="display:none"
-                                                                    class="form-edit-comment-parent"
-                                                                    id="form-edit-{{ $child->id }}">
+                                                    <div class="media-comment-body">
+                                                        <h4 name="fullname"> {{ $child->user->fullname }} 
+                                                            <small class="created_at" style="color: #5555558f">
+                                                                {{ $child->created_at->diffForHumans() }}
+                                                            </small>
+                                                        </h4>
+                                                        <p name="content" id="content-{{ $child->id }}">
+                                                            {{ $child->content }}
+                                                        </p>
+    
+                                                        <div class="text-right">
+                                                            @can('my-comment', $child)
+                                                            <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
+                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
+                                                                <form action="{{ route('destroy_comment', $child->id) }}"
+                                                                    method="post" class="delete-comment">
                                                                     @csrf
-                                                                    @method('PUT')
-                                                                    <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" rows="6"
-                                                                        placeholder="Enter content (*)" class="content-edit" required="required"></textarea>
-
-                                                                    <button class="btnsave-update" type="submit"
-                                                                        data-id_comment="{{ $child->id }}">Cập
-                                                                        nhật</button>
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn-delete-reply"
+                                                                        data-comment_id="{{ $child->id }}">Xóa
+                                                                    </button>
                                                                 </form>
+                                                                <a class="btn-reply-p2" href=""
+                                                                    data-id_comment="{{ $child->id }}">Trả lời
+                                                                </a>
+                                                            @endcan
+                                                        </div>
+                                                        {{-- Form edit --}}
+                                                        <form action="" method="POST" style="display:none"
+                                                            class="form-edit-comment-parent"
+                                                             id="form-edit-{{ $child->id }}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
+                                                                class="content-edit" required="required"></textarea>
 
-                                                                {{-- Form reply --}}
-                                                                <form action="" method="POST" style="display:none"
-                                                                    class="form-post-comment-grandchildren"
-                                                                    id="form-reply-{{ $child->id }}">
-                                                                    @csrf
-                                                                    @method('POST')
-                                                                    <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" rows="6"
-                                                                        placeholder="Enter content (*)" class="content-reply" required="required"></textarea>
+                                                            <button class="btnsave-update" type="submit"
+                                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
+                                                        </form>
 
-                                                                    <button class="btnsave-reply-p2" type="submit"
-                                                                        data-id_comment="{{ $child->id }}">
-                                                                        Gửi</button>
-                                                                </form>
-                                                            </div>
-                                                        @endcan
+                                                        {{-- Form reply --}}
+                                                        <form action="" method="POST" style="display:none"
+                                                            class="form-post-comment-grandchildren"
+                                                            id="form-reply-{{ $child->id }}">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
+                                                                class="content-reply" required="required"></textarea>
+
+                                                            <button class="btnsave-reply-p2" type="submit"
+                                                                data-id_comment="{{ $child->id }}"> Gửi</button>
+                                                        </form>
                                                     </div>
-                                                    {{-- Form edit --}}
-                                                    <form action="" method="POST" style="display:none"
-                                                        class="form-edit-comment-parent"
-                                                        id="form-edit-{{ $child->id }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
-                                                            class="content-edit" required="required"></textarea>
 
-                                                        <button class="btnsave-update" type="submit"
-                                                            data-id_comment="{{ $child->id }}">Cập nhật</button>
-                                                    </form>
-
-                                                    {{-- Form reply --}}
-                                                    <form action="" method="POST" style="display:none"
-                                                        class="form-post-comment-grandchildren"
-                                                        id="form-reply-{{ $child->id }}">
-                                                        @csrf
-                                                        @method('POST')
-                                                        <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
-                                                            class="content-reply" required="required"></textarea>
-
-                                                        <button class="btnsave-reply-p2" type="submit"
-                                                            data-id_comment="{{ $child->id }}"> Gửi</button>
-                                                    </form>
                                                 </div>
+                                                {{-- Form edit --}}
+                                                <form action="" method="POST" style="display:none"
+                                                    class="form-edit-comment-parent"
+                                                    id="form-edit-{{ $child->id }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70"  placeholder="Enter content (*)"
+                                                        class="content-edit" required="required"></textarea>
+
+                                                    <button class="btnsave-update" type="submit"
+                                                        data-id_comment="{{ $child->id }}">Cập nhật</button>
+                                                </form>
+
+                                                {{-- Form reply --}}
+                                                <form action="" method="POST" style="display:none"
+                                                    class="form-post-comment-grandchildren"
+                                                    id="form-reply-{{ $child->id }}">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
+                                                        class="content-reply" required="required"></textarea>
+
+                                                    <button class="btnsave-reply-p2" type="submit"
+                                                        data-id_comment="{{ $child->id }}"> Gửi</button>
+                                                </form>
                                             </div>
+                                        </div>
                                         @endforeach
                                     </div>
                                 </div>
-                        </div>
-                        @endforeach
+                                @endforeach
+                            </div>
 
+                        </div>
                     </div>
+
                 </div>
 
-        </div>
-
-        </ul>
+            </ul>
         </div>
 
         <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
@@ -650,8 +629,8 @@
                     <h2>Sản phẩm liên quan</h2>
                 </div>
 
-                <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
-                    @if (!empty($data['productRelated']))
+                        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                            @if (!empty($data['productRelated']))
 
                         @foreach ($data['productRelated'] as $key => $item)
                             <div class="product-item uk-width-1-4@m">
@@ -660,8 +639,7 @@
                                         <img src="{{ $item->image }}" alt="{{ $item->name }}" />
                                     </a>
                                     <span>-10%</span>
-                                    <i class="fas fa-heart icon-heart"
-                                        style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                    <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
                                     <div class="product-button">
                                         <button>Thêm vào giỏ </button>
                                         <button uk-toggle="target: #modal-container">Xem nhanh</button>
@@ -691,191 +669,193 @@
                                     @if (!empty($item->images))
                                         @foreach ($item->images as $item)
                                             <div class="product-item-detail-gallery-item">
-                                                <img src="{{ $item->image_url }}" alt="">
+                                                <img src="{{ $item->image_url }}"
+                                                    alt="">
                                             </div>
                                         @endforeach
                                     @endif
                                 </div>
 
                             </div>
-                </div>
-                <div class="product-review">
-                    <a href="{{ route('categories', $item->category->id) }}">
-                        <span>{{ $item->category->name }}</span>
-                    </a>
-                    <div class="icon">
-                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                        <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
-                    </div>
-                </div>
-                <a href="{{ route('productDetail', $item->id) }}" class="product-name">{{ $item->name }}</a>
-                <div class="product-price">
-                    <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
-                    @if (!empty($item->price_old))
-                        <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
-                    @endif
-                </div>
-                <div class="product-item-detail-gallery-items">
-                    @if (!empty($item->images))
-                        @foreach ($collection as $item)
+                        </div>
+                        <div class="product-review">
+                            <a href="{{ route('categories', $item->category->id) }}">
+                                <span>{{ $item->category->name }}</span>
+                            </a>
+                            <div class="icon">
+                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                            </div>
+                        </div>
+                        <a href="{{ route('productDetail', $item->id) }}"
+                            class="product-name">{{ $item->name }}</a>
+                        <div class="product-price">
+                            <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                            @if (!empty($item->price_old))
+                            <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                            @endif
+                        </div>
+                        <div class="product-item-detail-gallery-items">
+                            @if (!empty($item->images))
+                            @foreach ($collection as $item)
                             <div class="product-item-detail-gallery-item">
                                 <img src="{{ $item->image_url }}" alt="">
                             </div>
-                        @endforeach
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
+                <button class="icon-left-product-detail uk-position-center-left uk-position-small uk-hidden-hover" href
+                    uk-slider-item="previous">
+                    <i>‹</i>
+                </button>
+                <button class="icon-right-product-detail uk-position-center-right uk-position-small uk-hidden-hover" href
+                    uk-slider-item="next">
+                    <i>›</i>
+                </button>
             </div>
-            @endforeach
-            @endif
-        </div>
-        <button class="icon-left-product-detail uk-position-center-left uk-position-small uk-hidden-hover" href
-            uk-slider-item="previous">
-            <i>‹</i>
-        </button>
-        <button class="icon-right-product-detail uk-position-center-right uk-position-small uk-hidden-hover" href
-            uk-slider-item="next">
-            <i>›</i>
-        </button>
-        </div>
-        <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
         </div>
 
-    </section>
+            </section>
 
-    <script>
-        $(document).ready(function() {
-            $('input[name="product-choose-color"]').on('change', function() {
-                const selectedColor = $(this).val();
+            <script>
+                $(document).ready(function() {
+                    $('input[name="product-choose-color"]').on('change', function() {
+                        const selectedColor = $(this).val();
 
-                $('.size-group').hide();
-                $('.all-sizes').hide();
+                        $('.size-group').hide();
+                        $('.all-sizes').hide();
 
-                if (selectedColor) {
-                    $(`.size-group[data-color="${selectedColor}"]`).show();
-                } else {
+                        if (selectedColor) {
+                            $(`.size-group[data-color="${selectedColor}"]`).show();
+                        } else {
+                            $('.all-sizes').show();
+                        }
+                    });
+
                     $('.all-sizes').show();
-                }
-            });
+                    $('.size-group').hide();
+                });
 
-            $('.all-sizes').show();
-            $('.size-group').hide();
-        });
+                $('.quantity-selector-button-minus').on('click', function() {
+                    var currentValue = parseInt($('.quantity-selector-input').val());
+                    if (currentValue > 1) {
+                        $('.quantity-selector-input').val(currentValue - 1);
+                    }
+                });
 
-        $('.quantity-selector-button-minus').on('click', function() {
-            var currentValue = parseInt($('.quantity-selector-input').val());
-            if (currentValue > 1) {
-                $('.quantity-selector-input').val(currentValue - 1);
-            }
-        });
+                $('.quantity-selector-button-plus').on('click', function() {
+                    var currentValue = parseInt($('.quantity-selector-input').val());
+                    $('.quantity-selector-input').val(currentValue + 1);
+                });
 
-        $('.quantity-selector-button-plus').on('click', function() {
-            var currentValue = parseInt($('.quantity-selector-input').val());
-            $('.quantity-selector-input').val(currentValue + 1);
-        });
-
-        $('.quantity-selector-input').on('input', function() {
-            var value = parseInt($(this).val());
-            if (isNaN(value) || value < 1) {
-                $(this).val(1);
-            } else if (value > 9999) {
-                $(this).val(9999);
-            }
-        });
+                $('.quantity-selector-input').on('input', function() {
+                    var value = parseInt($(this).val());
+                    if (isNaN(value) || value < 1) {
+                        $(this).val(1);
+                    } else if (value > 9999) {
+                        $(this).val(9999);
+                    }
+                });
 
 
-        $('.form-addToCart').on('submit', function(e) {
-            e.preventDefault();
-            var form = $(this);
-            var url = form.attr('action');
-            var productId = form.find('.productId').val();
-            var color = form.find('input[name="product-choose-color"]:checked').val();
-            var size = form.find('input[name="product-choose-size"]:checked').val();
-            var quantity = form.find('input[name="quantity"]').val();
+                $('.form-addToCart').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var url = form.attr('action');
+                    var productId = form.find('.productId').val();
+                    var color = form.find('input[name="product-choose-color"]:checked').val();
+                    var size = form.find('input[name="product-choose-size"]:checked').val();
+                    var quantity = form.find('input[name="quantity"]').val();
 
-            if (color == null) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Vui lòng chọn màu sắc',
-                    showConfirmButton: true,
-                })
-
-                return false;
-            }
-
-            if (size == null) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'error',
-                    title: 'Vui lòng chọn size',
-                    showConfirmButton: true,
-                })
-
-                return false;
-            }
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    id: productId,
-                    color: color,
-                    size: size,
-                    quantity: quantity
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: response.message,
-                            showConfirmButton: true,
-                        })
-                    } else {
+                    if (color == null) {
                         Swal.fire({
                             position: 'center',
                             icon: 'error',
-                            title: response.message,
+                            title: 'Vui lòng chọn màu sắc',
                             showConfirmButton: true,
                         })
+
+                        return false;
                     }
-                },
-                error: function() {
-                    alert('Lỗi khi thêm vào giỏ hàng');
-                }
-            });
-        });
 
+                    if (size == null) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Vui lòng chọn size',
+                            showConfirmButton: true,
+                        })
 
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', (event) => {
-                event.preventDefault(); // k chuyển trang click vào sao
+                        return false;
+                    }
 
-                //lấy giá trị rating data-value
-                const ratingValue = parseInt(star.dataset.value);
-                //update màu sắc
-                document.querySelectorAll('.star').forEach((s) => {
-                    const currentValue = parseInt(s.dataset.value);
-                    const icon = s.querySelector('i');
-                    // sửa màu
-                    icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
-                    icon.classList.toggle('text-gray-400', currentValue > ratingValue);
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            id: productId,
+                            color: color,
+                            size: size,
+                            quantity: quantity
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                })
+                            } else {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                })
+                            }
+                        },
+                        error: function() {
+                            alert('Lỗi khi thêm vào giỏ hàng');
+                        }
+                    });
                 });
 
-                //lưu vào ứng dụng, gửi lên backend
-                console.log("Rating value:", ratingValue);
 
-            });
-        });
-    </script>
+                document.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', (event) => {
+                        event.preventDefault(); // k chuyển trang click vào sao
 
-    <script src="{{ asset('assets/sneakers/assets/js/product-detail.js') }}"></script>
-@endsection
+                        //lấy giá trị rating data-value
+                        const ratingValue = parseInt(star.dataset.value);
+                        //update màu sắc
+                        document.querySelectorAll('.star').forEach((s) => {
+                            const currentValue = parseInt(s.dataset.value);
+                            const icon = s.querySelector('i');
+                            // sửa màu
+                            icon.classList.toggle('text-yellow-400', currentValue <= ratingValue);
+                            icon.classList.toggle('text-gray-400', currentValue > ratingValue);
+                        });
 
-@section('js')
-@endsection
+                        //lưu vào ứng dụng, gửi lên backend
+                        console.log("Rating value:", ratingValue);
+
+                    });
+                });
+            </script>
+
+    <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>
+    @endsection
+
+    @section('js')
+    @endsection
