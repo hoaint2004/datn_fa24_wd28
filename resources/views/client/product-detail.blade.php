@@ -836,6 +836,8 @@
                         dataType: 'json',
                         success: function(response) {
                             if (response.status) {
+                                var cartCount = response.cartCount;
+                                $('.cartCount').text(cartCount)
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
