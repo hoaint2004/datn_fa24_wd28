@@ -44,6 +44,7 @@ $(document).ready(function () {
         $('.form-post-comment-child').slideUp();
         $(form_reply).slideDown();
     });
+    
     // Xử lý dữ liệu btnsave-reply
     $(document).on('click', '.btnsave-reply', function (ev) {
         ev.preventDefault();

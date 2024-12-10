@@ -10,7 +10,7 @@
         <title>Chi tiết sản phẩm</title>
 
         {{-- css --}}
-        <!-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css') }}"> -->
+        {{-- <!-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css') }}"> --> --}}
         {{-- js --}}
         {{-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/js/product-detail.css')}}"> --}}
 
@@ -842,7 +842,7 @@
                 });
             </script>
 
-    <script src="{{asset('assets/sneakers/assets/js/product-detail.js')}}"></script>
+    <script src="{{asset('product-detail.js')}}"></script>
     @endsection
 
     @section('js')
