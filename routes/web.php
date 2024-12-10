@@ -145,7 +145,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{id}', 'update')->name('update');
             Route::delete('/delete/{id}', 'delete')->name('delete');
         });
-
+    // Route::get('/listUser',[AdminUserController::class,'index'])->name('listUser');
     Route::resource('reviews',ReviewsController::class);    
 
     Route::resource('orders', AdminOrderController::class);

@@ -200,7 +200,7 @@
                 <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
                 <button uk-icon="search" class="icon-search"></button>
             </form>
-        
+
             <!-- Kiểm tra nếu không có đơn hàng -->
             @if ($orders->isEmpty())
                 <span style="color:red; font-size: 1.2em;">Không có đơn nào</span>
@@ -446,7 +446,6 @@ $(document).ready(function() {
         // update order status hoàn thành
         $('.complete-btn').click(function () {
             var orderId = $(this).data('order-id');
-            var messageDiv = $('#order-status-message');
             var button = $(this);
 
             $.ajax({
@@ -457,13 +456,11 @@ $(document).ready(function() {
                 },
                 success: function (data) {
                     if (data.status === 'success') {
-                        messageDiv.html(`<span style="color:green;">${data.message}</span>`);
+                        alert(data.message);
                         button.prop('disabled', true); // Vô hiệu hóa nút sau khi đã cập nhật
                         button.text('Đã hoàn thành'); // Đổi chữ trên nút
                     } else {
-                        messageDiv.html(
-                            `<span style="color:orange;">Cập nhật không thành công: ${data.message}</span>`
-                        );
+                        alert('cập nhật không thành công'+ data.message);
                     }
                 },
                 error: function (xhr, status, error) {

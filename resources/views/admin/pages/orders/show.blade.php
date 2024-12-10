@@ -116,13 +116,13 @@
                                 @method('PATCH')
                                 <div class="mb-3">
                                     <label for="statusInput" class="form-label">Trạng thái đơn hàng:</label>
-                                    <select id="statusInput" name="status" class="form-control">
+                                    <select id="statusInput" name="status" class="form-control" {{$order->status=='Hoàn thành'?'disabled':''}}>
                                         <option value="Chờ xác nhận" {{ $order->status == 'Chờ xác nhận' ? 'selected' : '' }}>Chờ xác nhận</option>
                                         <option value="Đã xác nhận" {{ $order->status == 'Đã xác nhận' ? 'selected' : '' }}>Đã xác nhận</option>
                                         <option value="Đang giao" {{ $order->status == 'Đang giao' ? 'selected' : '' }}>Đang giao</option>
                                         <option value="Giao hàng thành công" {{ $order->status == 'Giao hàng thành công' ? 'selected' : '' }}>Giao hàng thành công</option>
                                         <option value="Giao hàng thất bại" {{ $order->status == 'Giao hàng thất bại' ? 'selected' : '' }}>Giao hàng thất bại</option>
-                                        <option value="Đã hủy" {{ $order->status == 'Đã hủy' ? 'selected' : '' }}>Đã hủy</option>
+                                        <option value="Đã hủy" {{ $order->status == 'Đã hủy' ? 'selected' : '' }} disabled>Đã hủy</option>
                                         <option value="Hoàn thành" {{ $order->status == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành</option>
                                     </select>
                                 </div>
@@ -130,7 +130,7 @@
                                     <label for="payment_status">Trạng thái thanh toán:</label>
                                     <select id="payment_status" name="payment_status" class="form-control"{{$order->payment_status=='Đã thanh toán'?'disabled':''}}>
                                         <option value="Chưa thanh toán" {{ $order->payment_status == 'Chưa thanh toán' ? 'selected' : '' }}>Chưa thanh toán</option>
-                                        <option value="Đã thanh toán" {{ $order->payment_status == 'Đã thanh toán' ? 'selected' : '' }}>Đã thanh toán</option>
+                                        <option value="Đã thanh toán" {{ $order->payment_status == 'Đã thanh toán' ? 'selected' : '' }} {{ $order->status !== 'Giao hàng thành công' ? 'disabled' : '' }}>Đã thanh toán</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cập nhật</button> <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Quay lại</a> 
