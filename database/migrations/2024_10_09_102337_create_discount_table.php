@@ -21,6 +21,8 @@ return new class extends Migration
             $table->decimal('discount_value', 10, 2); // Giá trị giảm giá
             $table->decimal('min_order_value', 10, 2)->nullable(); // Giá trị đơn hàng tối thiểu
             $table->integer('usage_limit')->nullable(); // Giới hạn số lần sử dụng
+            $table->unsignedBigInteger('user_id')->nullable(); //người sử dụng
+
             $table->timestamps();
         });
     }

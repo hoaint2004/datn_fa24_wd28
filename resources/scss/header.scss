@@ -59,6 +59,7 @@ header {
                 background-color: #f45d56;
                 display: inline-block;
                 z-index: 5;
+
             }
         }
         .offcanvas-cart {
@@ -216,6 +217,7 @@ header {
                         }
                     }
                 }
+
             }
         }
     }
@@ -295,6 +297,7 @@ header {
             color: $color-p;
             transition: all 0.8s;
             padding: 20px 0 5px 10px;
+            text-decoration: none !important;
             &:hover {
                 color: $color;
             }
@@ -307,6 +310,7 @@ header {
     flex-direction: column;
 }
 
+
 .uk-dropnav-dropbar {
     left: 30% !important;
     right: 15%;
@@ -316,9 +320,6 @@ header {
     display: flex;
     flex-direction: column;
 }
-//   .navbar-menu
-// .uk-dropdown {  padding: 16px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-//  background-color: white; }
 
 .uk-modal-close-default {
     .close-modal {
@@ -332,4 +333,16 @@ header {
 
 .uk-modal-body {
     padding: 30px;
+
+}
+
+
+
+.logo-page {
+    text-decoration: none !important;
+    h1 {
+        font-family: $font-spectral;
+        color: #222222;
+        font-size: 36px;
+    }
 }

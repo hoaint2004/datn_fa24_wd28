@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReviewsController;
+
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
 use App\Http\Controllers\CommentController as ControllersCommentController;
@@ -46,6 +48,7 @@ use App\Http\Controllers\PaymentController;
 // });
 
 
+
 Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])
     ->name('password.forgotPassword');
 
@@ -57,6 +60,7 @@ Route::get('/forgot_password', [AuthController::class, 'showResetForm'])
 
 Route::post('/password/reset', [AuthController::class, 'reset'])
     ->name('password.update');
+
 
 // route admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -142,6 +146,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/delete/{id}', 'delete')->name('delete');
         });
 
+    Route::resource('reviews',ReviewsController::class);    
+
     Route::resource('orders', AdminOrderController::class);
 });
 
@@ -161,8 +167,10 @@ Route::middleware(['web'])->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/category', [ControllersProductController::class, 'category'])->name('category');
     Route::get('/contact', [ControllersProductController::class, 'contact'])->name('contact');
+
     // lọc client
     Route::post('/filter',[FilterController::class,'filterProducts'])->name('filter');
+
 
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
@@ -178,14 +186,17 @@ Route::middleware(['web'])->group(function () {
     Route::put('/comment/edit/{id}', [ControllersCommentController::class, 'update'])->name('update_comment');
     Route::delete('/comment/delete/{id}', [ControllersCommentController::class, 'destroy'])->name('destroy_comment');
 
-
      //Coongr thanh toán
      Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay_payment');
      Route::get('/vnpay/return', [PaymentController::class, 'vnpayReturn'])->name('vnpay.return');
  
+
+    // review
+    Route::post('/reviews',[ReviewsController::class,'store'])->name('reviews.store');
+
 });
 
-Route::get('/filter', function(){
+Route::get('/filter', function () {
     return view('user.filter-product');
 });
 
@@ -193,3 +204,6 @@ Route::get('/succes', function(){
     return view('client.success-vnpay');
 });
 
+Route::get('/success-vnpay', function () {
+    return view('client.success-vnpay');
+});

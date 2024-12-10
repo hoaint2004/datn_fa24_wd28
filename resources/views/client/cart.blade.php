@@ -84,16 +84,45 @@
                                 </tr>
                             @endforeach
                         @else
-                            <div class="d-flex justify-content-center align-items-center p-5">
-                                Chưa có sản phẩm
+                            <div class="text-[20px] text-[#222] my-10 flex justify-center">
+                               Bạn không có sản phẩm nào trong giỏ hàng
                             </div>
                         @endif
                     </tbody>
                 </table>
             </div>
 
+
+
             <div class="shopping-cart-right uk-width-1-3">
                 <h2 class="">Thông tin đơn hàng</h2>
+                <div class="shopping-cart-right-info">
+                    @if (!empty($data['carts']))
+                        @foreach ($data['carts'] as $item)
+                            <div class="info-item" >
+                                <div style="background-image: url('{{ $item->product->image }}')" class="bg-img-cart">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <div>
+                                        <span>Số lượng: <strong>{{ $item->quantity }}</strong></span>
+                                    </div>
+                                    <div>
+                                        <span>Size: <strong>{{ $item->color }} / {{ $item->size }}</strong></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
+                                        đ</strong>
+                                        @if (!empty($item->product->price_old))
+                                            <del>({{ number_format($item->product->price_old, 0, ',', '.') }}
+                                                đ)</del>
+                                        @endif
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
                 <div class="shipping-fee">
                     <span>Phí vận chuyển</span>
                     <span>30.000</span>
@@ -103,9 +132,9 @@
                     <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
                 </div>
                 <div class="total-action">
-					<a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-					<a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
-				</div>
+                    <a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
+                    <a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
+                </div>
             </div>
         </div>
     </section>
@@ -159,7 +188,6 @@
             updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
         });
 
-        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         function updateQuantity(cartId, quantity) {
             $.ajax({

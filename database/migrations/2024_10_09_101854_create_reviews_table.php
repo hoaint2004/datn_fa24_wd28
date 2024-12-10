@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedTinyInteger('rating')->nullable()->comment('Rating from 1 to 5');
+            $table->string('image')->nullable(); // Không cần default
+
             $table->text('content');
-            $table->integer('rating');
             $table->timestamps();
         });
     }

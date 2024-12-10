@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Events\OrderStatusUpdated;
 
 class OrderController extends Controller
 {
@@ -25,6 +26,11 @@ class OrderController extends Controller
      */
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect()->route('home')->with([
+                'checkLogin' => 'Vui lòng đăng nhập để tiếp tục!'
+            ]);
+        }
         $carts = Cart::where('user_id', Auth::user()->id)->get();
         $total = 0;
         $subTotal = 0;
@@ -47,7 +53,7 @@ class OrderController extends Controller
             'address' => 'required|string|max:255',
             'phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
         ],
-[
+        [
             'name.required' => 'Bắt buộc nhập',
             'address.required' => 'Bắt buộc nhập',
             'phone.required' => 'Bắt buộc nhập',
@@ -242,7 +248,12 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $totalProduct = 0;
+        foreach($order->orderDetails as $item) {
+            $totalProduct += $item->price * $item->quantity;
+        }
+        return view('client.order-detail', compact('order', 'totalProduct'));
     }
 
     /**
@@ -258,7 +269,32 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        // Kiểm tra và cập nhật trạng thái
+        $status = $request->input('status');
+        DB::beginTransaction();
+        
+        try {
+            // Cập nhật trạng thái đơn hàng
+            $order->status = $status;
+            $order->save();
+        
+            // Phát sự kiện khi trạng thái đơn hàng thay đổi
+            event(new OrderStatusUpdated($order));
+        
+            DB::commit();
+        
+            // Trả về phản hồi thành công
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Trạng thái đơn hàng đã được cập nhật thành công.',
+                'order' => $order // Trả về thông tin đơn hàng đã cập nhật
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['status' => 'error', 'message' => 'Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng.'], 500);
+        }
+        
     }
 
     /**

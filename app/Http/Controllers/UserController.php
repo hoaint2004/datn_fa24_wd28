@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\alert;
+use App\Events\OrderStatusUpdated;
+
 class UserController extends Controller
 {
     public function changeInfo(){
@@ -15,12 +17,64 @@ class UserController extends Controller
     }
 
     public function account(){
-        $user = Auth::user();
-        
-        $orders = $user->orders;
-        return view('client.account', compact('user', 'orders'));
+
+        $user = User::find(Auth::user()->id);
+        $orders = $user->orders()
+                ->with('orderDetails.product', 'orderDetails.variant','review')
+                ->get();
+                // dd($orders);
+        return view('client.account', compact('user','orders'));
     }
 
+    public function updateOrderStatus($orderId){
+        $order = Order::findOrFail($orderId);
+        if($order->status === 'Giao hàng thành công' && $order->payment_status === 'Đã thanh toán'){
+            $order->status = 'Hoàn thành';
+            $order->save();
+            // Phát sự kiện khi client nhấn hoàn thành
+            event(new OrderStatusUpdated($order));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Cảm ơn quý khách đã mua hàng.'
+            ]);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Vui lòng thanh toán cho Shipper để hoàn tất đơn hàng. Hoặc chờ trong giây lát!'
+        ]);
+    }
+    // hủy đơn
+    public function cancelOrder($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        if ($order->payment_status === 'Đã thanh toán' && $order->payment_method === 'vnpay') {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hủy đơn thành công, vui lòng liên hệ để được hoàn tiền.'
+            ]);
+        }
+
+        if (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận'])) {
+            $order->status = 'Đã hủy';
+            $order->save();
+            event(new OrderStatusUpdated($order));
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Hủy đơn thành công. Bạn cứ cẩn thận!'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Không thể hủy đơn hàng tại trạng thái hiện tại.'
+        ]);
+    }
+
+
+
+
+   
     public function changePassword($id_user, Request $request){
         // Lấy các giá trị từ request
         $password_old = $request->input('password_old');

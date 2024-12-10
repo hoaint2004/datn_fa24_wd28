@@ -35,8 +35,8 @@ class ProductRequest extends FormRequest
 
             // Validation cho các biến thể sản phẩm
             'variants' => 'nullable|array',
-            'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|between:40,50', // Kích thước chỉ từ 40 đến 50
-            'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string|in:Trắng,Đỏ,Xanh,Hồng,Đen', // Màu chỉ được chọn từ các giá trị cụ thể
+            'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|between:20,50', // Kích thước chỉ từ 40 đến 50
+            'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string|', // Màu chỉ được chọn từ các giá trị cụ thể
             'variants.*.quantity' => 'required_with:variants.*.size,variants.*.color|integer|min:0',
         ];
     }

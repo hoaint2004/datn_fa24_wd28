@@ -8,6 +8,26 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+// Đảm bảo rằng biến môi trường được lấy đúng cách từ Vite
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.VITE_PUSHER_APP_KEY,  // Đảm bảo lấy từ VITE_PUSHER_APP_KEY
+    cluster: process.env.VITE_PUSHER_APP_CLUSTER,  // Đảm bảo lấy từ VITE_PUSHER_APP_CLUSTER
+    forceTLS: true,
+    encrypted: true,
+});
+
+
+
+
+
+
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

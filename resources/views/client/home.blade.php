@@ -77,16 +77,7 @@
         <span class="sub-span-title">
             List các nhóm sản phẩm nổi bật nhất
         </span>
-        <div class="collection-list uk-grid" uk-grid>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-           
+        <div class="collection-list uk-grid" uk-grid>           
             @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
@@ -97,8 +88,8 @@
                 <span>{{$category3->name}}</span>
             </a>
             @endforeach
-          
-       
+
+
         </div>
     </section>
 
@@ -148,7 +139,7 @@
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
-                                                <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                                <img src="" style="background-image: url({{ $item->image }}); padding: 115px 0" />
                                             </a>
                                             <span>-10%</span>
                                             <i class="fas fa-heart icon-heart"
@@ -261,6 +252,7 @@
                             </a>
                         </div>
                     </div>
+
                 @endforeach
             @endif
         </div>
@@ -286,7 +278,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})"  />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -351,60 +343,7 @@
         <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </section>
 
-    <section class="brand uk-container uk-container-large">
-        <div class="uk-grid brand-body" uk-grid>
-            <div class="uk-width-2-5 brand-left">
-                <div class="brand-left-image">
-                    <div class="title">
-                        <a href="#">
-                            <h2>Thương Hiệu</h2>
-                        </a>
-                        <hr />
-                    </div>
-                    <span class="sub-span-title">
-                        Các thương hiệu tin dùng chúng tôi
-                    </span>
-                </div>
-            </div>
-
-            <div class="uk-width-3-5 ">
-                <div class="uk-grid" uk-grid="true">
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/adidas.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/alexsander.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/gucci.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/nike.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
@@ -427,7 +366,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -498,7 +437,9 @@
             <div class="title">
                 <hr />
                 <a href="#">
+
                     <h2>{{ !empty($data['categoryNewOne']->name) ? $data['categoryNewOne']->name : '' }}</h2>
+
                 </a>
                 <hr />
             </div>
@@ -512,7 +453,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -591,7 +532,7 @@
                 </div>
 
                 <div class="uk-width-1-2" style="overflow-y: hidden;">
-                    <h1 class="text-3xl font-bold"></h1>
+                    <h1 class="text-3xl font-bold title-model-detail"></h1>
                     <p class="text-xl text-gray-600"></p>
                     <div class="flex items-center mt-2">
                         <div class="flex items-center">
@@ -603,27 +544,38 @@
                         </div>
                         <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
-                    <div class="mt-4">
+
+                    <div class="flex items-center my-4 price">
+                        <span class="text-2xl font-bold text-red-500 modal-price">
+
+                        </span>
+
+                        <span class="text-base text-gray-500 line-through ml-2">
+
+                        </span>
+
+                    </div>
+                    <!-- <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>
                         <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
-                    </div>
-                    <p class="mt-4 text-gray-600 modal-description">
+                    </div> -->
+                    <p class="mt-4  mb-4 desc text-gray-600 modal-description">
 
                     </p>
                     <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
-                        <div class="mt-4">
-                            <p class="font-bold">Màu sắc</p>
+                        <div class="mb-4 color ">
+                             <p class="text-lg font-bold mb-4">Màu sắc</p>
                             <div class="flex space-x-2 mt-2 box-color">
 
                             </div>
                         </div>
                         <div class="mt-4">
-                            <p class="font-bold">Size</p>
+                            <p class="font-bold text-lg text-[#222] mb-4">Size</p>
                             <div class="flex space-x-2 mt-2 box-size">
 
                             </div>
                         </div>
-                        <div class="mt-4 flex items-center space-x-4">
+                        <div class="mt-10 flex items-center space-x-4">
                             <div class="flex items-center border border-gray-300 rounded-lg">
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
                                 <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
@@ -637,7 +589,7 @@
                             </button>
                         </div>
                     </form>
-                    <div class="mt-4">
+                    <div class="mt-10">
                         <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
                     </div>
                 </div>
@@ -666,10 +618,10 @@
                 if (isNaN(value) || value < 1) {
                     $(this).val(1);
                 } else if (value > 9999) {
-                    $(this).val(9999);  
+                    $(this).val(9999);
                 }
             });
-                                                                                                                                                                                                                        
+
             // Đảm bảo rằng bạn sử dụng .on('click') để cập nhật khi người dùng chọn màu và size
             $('.quick-view-button').on('click', function(e) {
                 e.preventDefault();
@@ -807,6 +759,8 @@
                         quantity: quantity
                     },
                     success: function(response) {
+                        var cartCount = response.cartCount;
+                        $('.cartCount').text(cartCount)
                         if (response.status) {
                             Swal.fire({
                                 position: 'center',

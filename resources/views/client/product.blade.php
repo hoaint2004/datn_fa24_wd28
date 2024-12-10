@@ -42,7 +42,7 @@
                         <li class="uk-open sidebar-size">
                             <a class="uk-accordion-title" href="#">Kích thước</a>
                             <div class="uk-accordion-content ">
-                                <ul class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                                <ul >
                                     @foreach ([40,41,42,43,44,45,46,47,48,49,50] as $size)
                                         <li class="sidebar-content-right">
                                             <input type="checkbox" name="size[]" id="size-{{ $size }}" value="{{ $size }}" />
@@ -94,9 +94,7 @@
                     <div class="show-product">
                         Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
                     </div>
-                    <div class="product-list-filter">
-                        <span class="">sản phẩm chính của danh mục</span>
-                    </div>
+                   
 
                     <form class="uk-form-stacked shop-sort-by">
                         <div class="shop-sort-by">
@@ -124,7 +122,7 @@
                                 <div class="product-item uk-width-1-4">
                                     <div class="product-image">
                                         <a href="{{ route('productDetail', $item->id) }}">
-                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                            <img src="" style="background-image: url({{ $item->image }})" />
                                         </a>
                                         <span>-10%</span>
                                         <i class="fas fa-heart icon-heart"
@@ -254,24 +252,21 @@
     </section>
     
     <!-- Modal xem nhanh-->
-    @if (!empty($data['categoryById']->products))
-    @foreach ($data['categoryById']->products as $key => $item)
-    <div id="modal-container-{{$item->id}}" class="uk-modal-container" uk-modal>
+    <div id="modal-container" class="uk-modal-container" uk-modal>
         <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+            <input type="hidden" value="" class="modal-product-id">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-body uk-grid" uk-grid>
                 <div class="uk-width-1-2">
-                    <img alt="Girls Pink Moana Printed Dress" class="w-full rounded-lg" src="{{$item->image}}" style="width: 100%; max-height: 70vh; object-fit: cover;" />
-                    <div class="flex mt-4 space-x-2">
-                        @foreach($item->images as $img)
-                        <img alt="Thumbnail 1" class="w-20 h-20 rounded-lg" src="{{$img->image_url}}" style="width: 80px; height: 80px; object-fit: cover;" />
-                        @endforeach
+                    <img alt="" class="w-full rounded-lg" src=""
+                        style="width: 100%; max-height: 70vh; object-fit: cover;" />
+                    <div class="flex mt-4 space-x-2 box-image-url">
                     </div>
                 </div>
 
                 <div class="uk-width-1-2" style="overflow-y: hidden;">
-                    <h1 class="text-3xl font-bold">YK Disney</h1>
-                    <p class="text-xl text-gray-600">Giày búp bê da</p>
+                    <h1 class="text-3xl font-bold"></h1>
+                    <p class="text-xl text-gray-600"></p>
                     <div class="flex items-center mt-2">
                         <div class="flex items-center">
                             <i class="fas fa-star text-yellow-500"></i>
@@ -280,80 +275,71 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">(121 Reviews)</p>
+                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
                     <div class="mt-4">
-                        <span class="text-2xl font-bold">$80.00</span>
-                        <span class="text-xl line-through text-gray-500 ml-2">$100.00</span>
+                        <span class="text-2xl font-bold modal-price"></span>
+                        <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
                     </div>
-                    <p class="mt-4 text-gray-600">
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                    <p class="mt-4 text-gray-600 modal-description">
+
                     </p>
-                    <div class="mt-4">
-                        <p class="font-bold">Color</p>
-                        <div class="flex space-x-2 mt-2">
-                            <div class="w-8 h-8 bg-blue-600 rounded-full cursor-pointer"></div>
-                            <div class="w-8 h-8 bg-red-600 rounded-full cursor-pointer"></div>
-                            <div class="w-8 h-8 bg-black rounded-full cursor-pointer"></div>
-                            <div class="w-8 h-8 bg-yellow-600 rounded-full cursor-pointer"></div>
-                            <div class="w-8 h-8 bg-green-600 rounded-full cursor-pointer"></div>
+                    <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
+                        <div class="mt-4">
+                            <p class="font-bold">Màu sắc</p>
+                            <div class="flex space-x-2 mt-2 box-color">
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <p class="font-bold">Size</p>
-                        <div class="flex space-x-2 mt-2">
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">S</button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">M</button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">L</button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">XL</button>
-                            <button class="w-10 h-10 border border-gray-300 rounded-lg">XXL</button>
+                        <div class="mt-4">
+                            <p class="font-bold">Size</p>
+                            <div class="flex space-x-2 mt-2 box-size">
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-4 flex items-center space-x-4">
-                        <div class="flex items-center border border-gray-300 rounded-lg">
-                            <button class="w-10 h-10 text-gray-600">-</button>
-                            <input class="w-12 h-10 text-center border-none" type="text" value="1" />
-                            <button class="w-10 h-10 text-gray-600">+</button>
+                        <div class="mt-4 flex items-center space-x-4">
+                            <div class="flex items-center border border-gray-300 rounded-lg">
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
+                                <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
+                                    type="text" value="1" />
+                                <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
+                            </div>
+                            <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
+                                hàng</button>
+                            <button class="border border-gray-300 rounded-lg p-2">
+                                <i class="far fa-heart text-gray-600"></i>
+                            </button>
                         </div>
-                        <button class="bg-black text-white px-6 py-2 rounded-lg">Add to Cart</button>
-                        <button class="border border-gray-300 rounded-lg p-2">
-                            <i class="far fa-heart text-gray-600"></i>
-                        </button>
-                    </div>
+                    </form>
                     <div class="mt-4">
-                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">In Stock</span>
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @endforeach
-    @endif
     {{-- call api HTML xem nhanh --}}
-    
-    <div id="modal-container-{{$item->id}}" class="uk-modal-container" uk-modal>
-        <div id="xem-nhanh"></div>
-    </div>
 
 @endsection
 
 
 @section('js')
-    {{-- <script>
+    {{-- xem nhanh them gio hang --}}
+    <script>
         $(document).ready(function() {
-            $('.quantity-selector-button-minus').on('click', function() {
-                var currentValue = parseInt($('.quantity-selector-input').val());
+            $('.btn-minus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
                 if (currentValue > 1) {
-                    $('.quantity-selector-input').val(currentValue - 1);
+                    $('.input-quantity-modal').val(currentValue - 1);
                 }
             });
 
-            $('.quantity-selector-button-plus').on('click', function() {
-                var currentValue = parseInt($('.quantity-selector-input').val());
-                $('.quantity-selector-input').val(currentValue + 1);
+            $('.btn-plus').on('click', function() {
+                var currentValue = parseInt($('.input-quantity-modal').val());
+                $('.input-quantity-modal').val(currentValue + 1);
             });
 
-            $('.quantity-selector-input').on('input', function() {
+            $('.input-quantity-modal').on('input', function() {
                 var value = parseInt($(this).val());
                 if (isNaN(value) || value < 1) {
                     $(this).val(1);
@@ -372,7 +358,7 @@
                     url: `/quick-view/${productId}`,
                     type: 'GET',
                     success: function(response) {
-                        
+
                         // Đổ dữ liệu vào modal
                         $('#modal-container .uk-width-1-2 img').attr('src', response.image);
                         $('#modal-container .modal-url').text(response.url);
@@ -430,7 +416,7 @@
 
                         if (response.images.length > 0) {
                             const firstImage = response.images;
-                            
+
                             firstImage.forEach(image => {
                                 $('.box-image-url').append(
                                     `<img alt="Thumbnail 1" class="w-20 h-20 rounded-lg"
@@ -466,7 +452,7 @@
                 var quantity = $('#modal-container input[name="quantity"]').val();
 
                 // Gửi dữ liệu qua AJAX
-                if(color == null) {
+                if (color == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -477,7 +463,7 @@
                     return false;
                 }
 
-                if(size == null) {
+                if (size == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
@@ -492,14 +478,14 @@
                     url: form.attr('action'),
                     method: 'POST',
                     data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'), 
+                        _token: $('meta[name="csrf-token"]').attr('content'),
                         id: productId,
                         color: color,
                         size: size,
                         quantity: quantity
                     },
                     success: function(response) {
-                        if(response.status) {
+                        if (response.status) {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
@@ -521,7 +507,51 @@
                 });
             });
         });
-    </script> --}}
+
+        // Thực hiện khi nhấn nút giảm số lượng
+        $('.btn-minus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            // Giảm số lượng nếu > 1
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.val(quantity); // Cập nhật lại giá trị input
+                updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+            }
+        });
+
+        // Thực hiện khi nhấn nút tăng số lượng
+        $('.btn-plus-header').on('click', function() {
+            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
+            var quantityInput = $(this).siblings('.input-cart-header'); // Tìm input số lượng
+            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+
+            quantity++; // Tăng số lượng
+            quantityInput.val(quantity); // Cập nhật lại giá trị input
+            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+        });
+
+        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateQuantity(cartId, quantity) {
+            $.ajax({
+                url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
+                method: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+                    cart_id: cartId,
+                    quantity: quantity
+                },
+                error: function(xhr, status, error) {
+                    console.error("Lỗi khi cập nhật số lượng:", error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                }
+            });
+        }
+    </script>
+    {{-- end xem nhanh --}}
+
     {{-- filter--}}
     <script>
         $(document).ready(function () {
@@ -764,4 +794,6 @@
     {{-- end filter --}}
     
     
+  
 @endsection
+
