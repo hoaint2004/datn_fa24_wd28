@@ -106,7 +106,7 @@
                             </p>
                             <p class="text-gray-600 mb-4 product-info-vendor">
                                 <strong>Thương hiệu:</strong>
-                                <a href="#" id="vendor">Jordan</a>
+                                <a href="#" id="vendor">{{ $data['product']->category->name }}</a>
                             </p>
 
                         </div>
@@ -193,17 +193,27 @@
 
                         <div class="mb-4 product-extra-content">
                             <p class="mb-1 free-deliver">
-                                Miễn phí vận chuyển trên toàn thế giới cho tất cả các đơn hàng của Hiếu
+                                Chính sách đổi trả & Chính sách giao hàng
                             </p>
                             <p class=" mb-1 date-time-extra">
                                 <i class="fas fa-check-circle fa-sm text-red-500">
                                 </i>
-                                30 ngày trả hàng dễ dàng
+                                Được đổi ý
+                            </p>
+                            <p class=" mb-1 date-time-extra">
+                                <i class="fas fa-check-circle fa-sm text-red-500">
+                                </i>
+                                7 ngày miễn phí trả hàng
                             </p>
                             <p class="date-time-extra">
                                 <i class="fas fa-check-circle fa-sm text-red-500">
                                 </i>
-                                Đặt hàng trước 00:00 khuya để được giao hàng trong ngày
+                                Không áp dụng chính sách bảo hành
+                            </p>
+                            <p class="date-time-extra">
+                                <i class="fas fa-check-circle fa-sm text-red-500">
+                                </i>
+                                Đặt hàng nhanh chóng - Giao hàng tận tay
                             </p>
                         </div>
                     </div>
@@ -215,7 +225,7 @@
                 <ul class="uk-flex-center tab-product-detail-top" uk-tab>
                     <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
                     <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
-                    <li><a class="tab-product-detail-title" href="#">Đánh giá (1)</a></li>
+                    <li><a class="tab-product-detail-title" href="#">Đánh giá</a></li>
                     <li><a class="tab-product-detail-title" href="#">Bình luận</a></li>
                 </ul>
 
@@ -325,7 +335,8 @@
                             </div>
                         </div>
 
-                    <div class="mt-8 comment-reply">
+                  
+                        <div class="mt-8 comment-reply">
                         <h2 class="text-[28px] font-semibold mt-16 comment-reply-title">
                             Thêm đánh giá
                         </h2>
@@ -401,8 +412,7 @@
                 <div class="tab-comment">
                     <div class="form-comment">
 
-                        <h3 style="margin-top: 40px">Hãy để lại bình luận</h3>
-    
+                        <h3 class="title-cmt mt-10">Hãy để lại bình luận</h3>
 
                             @if (auth()->check())
                                 <form action="{{ route('post_comment', $data['product']->id) }}" method="POST"
@@ -443,6 +453,9 @@
                                             {{ $cmt->created_at->diffForHumans() }}
                                         </small>
                                     </h4>
+                                    <p name="content" id="content-{{ $cmt->id }}">
+                                        {{ $cmt->content }}
+                                    </p>
                                         <div class="text-right">
                                                 @can('my-comment', $cmt)
                                                     <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id }}"
@@ -508,33 +521,6 @@
                                                 <p name="content" id="content-{{ $child->id }}">
                                                     {{ $child->content }}
                                                 </p>
-
-                                                <div class="text-right">
-                                                    @can('my-comment', $child)
-                                                    <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
-                                                        data-content="{{ $child->content }}">Sửa</a>
-                                                    <form action="{{ route('destroy_comment', $child->id) }}"
-                                                        method="post" class="delete-comment">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-delete-reply"
-                                                            data-comment_id="{{ $child->id }}">Xóa
-                                                        </button>
-                                                    </form>
-                                                    <a class="btn-reply-p2" href=""
-                                                        data-id_comment="{{ $child->id }}">Trả lời
-                                                    </a>
-
-
-                                                    <div class="media-comment-body">
-                                                        <h4 name="fullname"> {{ $child->user->fullname }} 
-                                                            <small class="created_at" style="color: #5555558f">
-                                                                {{ $child->created_at->diffForHumans() }}
-                                                            </small>
-                                                        </h4>
-                                                        <p name="content" id="content-{{ $child->id }}">
-                                                            {{ $child->content }}
-                                                        </p>
     
                                                         <div class="text-right">
                                                             @can('my-comment', $child)
@@ -679,9 +665,9 @@
                             </div>
                         </div>
                         <div class="product-review">
-                            <a href="{{ route('categories', $item->category->id) }}">
+                            {{-- <a href="{{ route('categories', $item->category->id) }}">
                                 <span>{{ $item->category->name }}</span>
-                            </a>
+                            </a> --}}
                             <div class="icon">
                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -700,7 +686,7 @@
                         </div>
                         <div class="product-item-detail-gallery-items">
                             @if (!empty($item->images))
-                            @foreach ($collection as $item)
+                            @foreach ($item->images as $item)
                             <div class="product-item-detail-gallery-item">
                                 <img src="{{ $item->image_url }}" alt="">
                             </div>

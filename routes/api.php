@@ -22,6 +22,8 @@ Route::prefix('thongtinOrder')
     ->group(function(){
         Route::post('/updateOrder/{orderId}','updateOrderStatus')
             ->name('updateOrder');
+        Route::post('/cancel/{orderId}','cancelOrder')
+            ->name('cancel');
 });
 
 Route::prefix('orders')

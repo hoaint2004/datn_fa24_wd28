@@ -138,6 +138,10 @@
                 position: relative;
                 img {
                     border-radius: 10px;
+                    background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+           padding: 140px 0;
                 } 
                 span {
                     position: absolute;
@@ -218,7 +222,11 @@
                 color: $color-title;
                 font-family: $font-spectral;
                 font-size: 16.5px;
-
+                display: -webkit-box; /* Kích hoạt chế độ khung hộp */
+  -webkit-line-clamp: 2; /* Số dòng hiển thị */
+  -webkit-box-orient: vertical; /* Hướng sắp xếp của các dòng */
+  overflow: hidden; /* Ẩn phần dư */
+  text-overflow: ellipsis; /* Hiển thị dấu "..." */
                 font-weight: $font-weight-medium;
                 transition: all .8s;     
                 display: inline-block;

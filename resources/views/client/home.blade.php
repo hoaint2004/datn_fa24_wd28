@@ -139,7 +139,7 @@
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
-                                                <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                                <img src="" style="background-image: url({{ $item->image }}); padding: 115px 0" />
                                             </a>
                                             <span>-10%</span>
                                             <i class="fas fa-heart icon-heart"
@@ -278,7 +278,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})"  />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -343,60 +343,7 @@
         <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </section>
 
-    <section class="brand uk-container uk-container-large">
-        <div class="uk-grid brand-body" uk-grid>
-            <div class="uk-width-2-5 brand-left">
-                <div class="brand-left-image">
-                    <div class="title">
-                        <a href="#">
-                            <h2>Thương Hiệu</h2>
-                        </a>
-                        <hr />
-                    </div>
-                    <span class="sub-span-title">
-                        Các thương hiệu tin dùng chúng tôi
-                    </span>
-                </div>
-            </div>
-
-            <div class="uk-width-3-5 ">
-                <div class="uk-grid" uk-grid="true">
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/adidas.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/alexsander.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/gucci.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/nike.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
@@ -419,7 +366,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -506,7 +453,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src=""" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>

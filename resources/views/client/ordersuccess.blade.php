@@ -1,5 +1,5 @@
 @extends('client.layouts.master')
-@section('title', 'cảm ơn')
+@section('title', 'Đặt hàng thành công')
 @section('content')
 
 

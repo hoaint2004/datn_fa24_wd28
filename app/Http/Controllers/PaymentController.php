@@ -35,7 +35,7 @@ class PaymentController extends Controller
         session(['cart_data' => $carts]);
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_ReturnUrl = route('order.success');
+        $vnp_ReturnUrl = route('vnpay.return');
         $vnp_TmnCode = "IH2ONX1B";
         $vnp_HashSecret = "8V2791JGIMTNOOI4338HD0RGFBSUWIB2";
         $vnp_TxnRef = time();
@@ -88,7 +88,6 @@ class PaymentController extends Controller
         DB::beginTransaction();
         try {
             if ($request->vnp_ResponseCode == "00") {
-                // Lấy dữ liệu từ session 
                 $paymentData = session('payment_data');
                 if (!$paymentData) {
                     throw new Exception('Không tìm thấy dữ liệu thanh toán trong session');
@@ -115,16 +114,26 @@ class PaymentController extends Controller
                 // Xóa giỏ hàng
                 Cart::where('user_id', Auth::id())->delete();
                 
-                // Lưu tất cả thay đổi vào DB
+                // Flash order data to session
+                session()->flash('order_success', [
+                    'code' => $order->code,
+                    'name' => $order->name,
+                    'phone' => $order->phone, 
+                    'address' => $order->address,
+                    'payment_method' => $order->payment_method,
+                    'subtotal' => $order->total_price - $order->shipping_fee, 
+                    'shipping_fee' => $order->shipping_fee,
+                    'total' => $order->total_price
+                ]);
+                
                 DB::commit();
                 
                 return view('client.success-vnpay');
             }
-            
+                
             throw new Exception('Thanh toán thất bại');
             
-        } catch (Exception $e) { 
-            // Rollback nếu có lỗi
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error('Lỗi thanh toán VNPay: ' . $e->getMessage());
             return redirect()->route('home')->with('error', 'Thanh toán không thành công');

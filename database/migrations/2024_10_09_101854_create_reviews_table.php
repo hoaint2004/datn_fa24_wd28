@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('image')->nullable(); // Không cần default
 
             $table->text('content');
-            $table->integer('rating');
             $table->timestamps();
         });
     }

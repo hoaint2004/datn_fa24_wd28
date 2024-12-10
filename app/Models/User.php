@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function reviews()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Reviews::class, 'user_id', 'id');
     }
 
     // // Quan hệ một-nhiều với order histories
