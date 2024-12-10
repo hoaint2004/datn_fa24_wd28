@@ -732,3 +732,34 @@
         }
     }
 }
+
+
+
+#modal-container {
+    input[type="radio"] {
+        display: none;
+    }
+    
+    
+    .box-color span, 
+    .box-size span {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .box-color span:hover,
+    .box-size span:hover {
+        border-color: #ccc;
+    }
+    
+    
+    input[type="radio"]:checked + span {
+        border-color: $color-red; 
+        background-color: #ffff;
+        font-weight: bold;
+    }
+}

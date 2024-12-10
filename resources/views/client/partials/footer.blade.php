@@ -41,7 +41,7 @@
                 <h1>Wina Shoes</h1>
               </a>
               <p class="m-0 mt-4 mb-1 leading-7 text-[15px]">
-                WIna Shoes luôn cam kết, đảm bảo bàn giao sản phẩm đạt chất lượng
+                Wina Shoes luôn cam kết, đảm bảo bàn giao sản phẩm đạt chất lượng
                 tối ưu nhất đến tay người dùng.
                 <br />
                 Mã số thuế: 01234567891 do Sở Kế hoạch và Đầu tư Tp Hà Nội cấp
@@ -78,7 +78,7 @@
                   <br />
                   Email: <a href="#">hieunm@sieunhan.vn</a>
                   <br />
-                  Từ 7h00 - 22h00 các ngày từ thứ 2 đến Chủ nhật
+                  Từ 7h00 - 22h00 hàng ngày
                 </p>
               </div>
             </div>
@@ -124,10 +124,10 @@
             <p class="m-0 text-[15px] leading-7">
               © 2024 - Bản quyền thuộc về
               <a href="#">
-                <strong> F1GENZ TECHNOLOGY CO., LTD. </strong>
+                <strong> WD-28 - DATN - FALL2024</strong>
               </a>
               <a href="#">
-                Cung cấp bởi <strong>Sapo</strong>
+                Cung cấp bởi <strong>FPT Polytechnic</strong>
               </a>
             </p>
             <ul class="flex leading-7">

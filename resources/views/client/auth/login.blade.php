@@ -46,8 +46,8 @@
 
         <div class="wrapper-login uk-grid" uk-grid>
             <div class="uk-width-1-2 login-left">
-                <img src="https://img.pikbest.com/ai/illus_our/20230418/64e0e89c52dec903ce07bb1821b4bcc8.jpg!w700wp"
-                    alt="">
+                <img src="https://heins.websitesbykarlo.com/wp-content/uploads/2024/04/banner-01-1.jpg"
+                    alt="" width="100%">
             </div>
 
             <div class="uk-width-1-2 login-right">

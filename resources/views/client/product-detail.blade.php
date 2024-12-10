@@ -622,7 +622,7 @@
                             <div class="product-item uk-width-1-4@m">
                                 <div class="product-image">
                                     <a href="{{ route('productDetail', $item->id) }}">
-                                        <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                        <img src=""style="background-image: url({{ $item->image }})" />
                                     </a>
                                     <span>-10%</span>
                                     <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
