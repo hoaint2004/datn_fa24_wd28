@@ -42,8 +42,8 @@
                         <li class="uk-open sidebar-size">
                             <a class="uk-accordion-title" href="#">Kích thước</a>
                             <div class="uk-accordion-content ">
-                                <ul >
-                                    @foreach ([40,41,42,43,44,45,46,47,48,49,50] as $size)
+                                <ul class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                                    @foreach (range(20, 50) as $size)
                                         <li class="sidebar-content-right">
                                             <input type="checkbox" name="size[]" id="size-{{ $size }}" value="{{ $size }}" />
                                             <label for="size-{{ $size }}">{{ $size }}</label>
@@ -58,7 +58,7 @@
                             <a class="uk-accordion-title" href="#">Màu sắc</a>
                             <div class="uk-accordion-content">
                                 <ul>
-                                    @foreach (['Trắng', 'Đỏ', 'Xanh', 'Hồng', 'Đen'] as $color)
+                                    @foreach (['Trắng', 'Đỏ', 'Xanh', 'Hồng', 'Đen','Tím','Vàng','Cam'] as $color)
                                         <li class="sidebar-content-right">
                                             <input type="checkbox" name="color[]" id="color-{{ strtolower($color) }}" value="{{ $color }}" />
                                             <label for="color-{{ strtolower($color) }}">{{ $color }}</label>
@@ -94,7 +94,6 @@
                     <div class="show-product">
                         Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
                     </div>
-                   
 
                     <form class="uk-form-stacked shop-sort-by">
                         <div class="shop-sort-by">
@@ -560,26 +559,21 @@
                 let selectedSizes = [];
                 let selectedColors = [];
                 let priceRange = {};
-    
                 // Lấy các danh mục được chọn
                 $('.sidebar-category input:checked').each(function () {
                     selectedCategories.push($(this).val());
                 });
-    
                 // Lấy các kích thước được chọn
                 $('.sidebar-size input:checked').each(function () {
                     selectedSizes.push($(this).val());
                 });
-    
                 // Lấy các màu sắc được chọn
                 $('.sidebar-color input:checked').each(function () {
                     selectedColors.push($(this).val());
                 });
-    
                 // Lấy khoảng giá
                 priceRange.from = $('.sidebar-price-body input:first').val();
                 priceRange.to = $('.sidebar-price-body input:last').val();
-    
                 // Trả về dữ liệu lọc, chỉ gửi các giá trị đã được chọn
                 let filterData = {};
                 if (selectedCategories.length > 0) filterData.categories = selectedCategories;
@@ -597,8 +591,7 @@
                 // sử dụng 2 cái UIkit này dễ xung đột cần kiểm tra khi lỗi ko filter đc
                     UIkit.grid(productList);
                     // UIkit.modal(productXem);
-                 
-                    
+   
                 if (products.length === 0) {
                  
                     productList.empty(); // Xóa nội dung cũ trước khi thêm thông báo
@@ -606,7 +599,6 @@
                     productList.append('<p>Không tìm thấy sản phẩm nào.</p>');
                     return; // Dừng lại ở đây nếu không có sản phẩm
                 }
-
                 // Xóa nội dung cũ
                 productList.empty();
                 productXem.empty();
@@ -661,11 +653,8 @@
                     `;
                     // Thêm sản phẩm vào danh sách
                     productList.append(productHTML);
-                    
 
-                });
-               
-                
+                }); 
                 // let html = '';
                     products.forEach(product => {
                         // Tạo HTML cho từng sản phẩm
@@ -734,24 +723,16 @@
                             // Khởi tạo và hiển thị modal
                             UIkit.modal(modal).show();
                     });
-                  
-
-
-                 
-               
 
             }
     
             // Bắt sự kiện của các nút và call dữ liệu
-             
               $('input[type="checkbox"], .sidebar-price-body input').on('change', function () {
                 const filterData = getFilterData();
                 // $('#product_main').hide();
                 document.getElementById('product_main').style.display = 'none';
-
                 // kiểm tra khi user nhân mũi tên quay lại trang 
                 localStorage.setItem('filterData', JSON.stringify(filterData));
-
               
                 if (Object.keys(filterData).length !== 0) {
                     $.ajax({
@@ -768,14 +749,11 @@
                     });
                 }
 
-
                 // Kiểm tra nếu không có bộ lọc nào được chọn thì không gửi yêu cầu AJAX
                 if (Object.keys(filterData).length == 0) {
                     window.location.reload();
                     return; 
                 }
-    
-              
                 $.ajax({
                     url: '/filter', 
                     method: 'POST',
@@ -792,8 +770,5 @@
         });
     </script>
     {{-- end filter --}}
-    
-    
-  
 @endsection
 

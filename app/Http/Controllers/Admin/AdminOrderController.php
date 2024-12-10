@@ -36,7 +36,7 @@ class AdminOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $order = Order::findOrFail($id);
         $totalProduct = 0;
@@ -49,17 +49,25 @@ class AdminOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+            $order= Order::findOrFail($id);
+            $order->status =  $request->status;
+            $order->payment_status = $request->payment_status;
+            $order->save(); 
+            return redirect()->back()->with('status_success','Cập nhật thành công');
+        }catch(\Exception $e){  
+            return redirect()->back()->with('status_failed','Cập nhật không thành công');
+        }
     }
 
     /**

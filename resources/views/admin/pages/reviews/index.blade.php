@@ -40,8 +40,7 @@
                                         <tr>
                                             <th scope="col" style="width: 46px;">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="cardtableCheck">
+                                                    <input class="form-check-input" type="checkbox" value="" id="cardtableCheck">
                                                     <label class="form-check-label" for="cardtableCheck"></label>
                                                 </div>
                                             </th>
@@ -58,7 +57,7 @@
                                         <tr>
                                             <td></td>
                                             <td>{{ $loop->iteration }}</td> 
-                                            <td>{{ $review->user->username }}</td> 
+                                            <td>{{ $review->user->username ?? 'N/A' }}</td> 
                                             <td>
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= $review->rating)
@@ -68,8 +67,8 @@
                                                     @endif
                                                 @endfor
                                             </td>
-                                            <td>{{ $review->content }}</td> <!-- Nội dung đánh giá -->
-                                            <td>{{$review->created_at->diffForHumans()}}</td>
+                                            <td>{{ $review->content ?? 'Không có nội dung' }}</td> <!-- Nội dung đánh giá -->
+                                            <td>{{ $review->created_at ? $review->created_at->diffForHumans() : 'N/A' }}</td>
                                             <td>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#reviewModal{{ $review->id }}">Chi tiết</a>
                                             </td>
@@ -84,12 +83,14 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p><strong>Người đánh giá:</strong> {{ $review->user->username }}</p>
-                                                        <p><strong>Email:</strong> {{ $review->user->email }}</p>
-                                                        <p><strong>Thời gian đánh giá:</strong> {{ $review->created_at->format('d/m/Y H:i A') }}</p>
-                                                        <p><strong>Nội dung đánh giá:</strong> {{ $review->content }}</p>
-                                                        <p><strong>Hình ảnh đánh giá:</strong> <img src="{{ $review->image }}" alt="link" width="400px" height="300px"></p>
-
+                                                        <p><strong>Người đánh giá:</strong> {{ $review->user->username ?? 'Ẩn danh' }}</p>
+                                                        <p><strong>Email:</strong> {{ $review->user->email ?? 'Không có email' }}</p>
+                                                        <p><strong>Thời gian đánh giá:</strong> {{ $review->created_at ? $review->created_at->format('d/m/Y H:i A') : 'N/A' }}</p>
+                                                        <p><strong>Nội dung đánh giá:</strong> {{ $review->content ?? 'Không có nội dung' }}</p>
+                                                        @if (!empty($review->image))
+                                                        <p><strong>Hình ảnh đánh giá:</strong> <img src="{{ $review->image }}" alt="Hình ảnh" width="400px" height="300px"></p>
+                                                        @endif
+                    
                                                         <p><strong>Đánh giá:</strong>
                                                             @for ($i = 1; $i <= 5; $i++)
                                                                 @if ($i <= $review->rating)
@@ -99,26 +100,27 @@
                                                                 @endif
                                                             @endfor
                                                         </p>
-                                                        <p><strong>Mã đơn hàng:</strong>{{ $review->order->code }}</p>
-                                                       
-                                                        <p><strong>Sản phẩm trong đơn hàng:</strong></p>
+                                                        @if ($review->order)
+                                                            <p><strong>Mã đơn hàng:</strong> {{ $review->order->code ?? 'Không xác định' }}</p>
+                                                            <p><strong>Sản phẩm trong đơn hàng:</strong></p>
                                                             <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
                                                                 <ul class="list-group">
                                                                     @foreach ($review->order->orderDetails as $orderDetail)
                                                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                                                             <div>
-                                                                                <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->variant->product->name }}</p>
-                                                                                <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color }}</p>
-                                                                                <p><strong>Kích thước:</strong> {{ $orderDetail->variant->size }}</p>
-                                                                                <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
+                                                                                <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->variant->product->name ?? 'N/A' }}</p>
+                                                                                <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
+                                                                                <p><strong>Kích thước:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
+                                                                                <p><strong>Số lượng:</strong> {{ $orderDetail->quantity ?? 0 }}</p>
                                                                             </div>
-                                                                                <img src="{{ $orderDetail->variant->product->image }}" alt="Hình sản phẩm" width="250" height="200">                                                                      
+                                                                            @if (!empty($orderDetail->variant->product->image))
+                                                                                <img src="{{ $orderDetail->variant->product->image }}" alt="Hình sản phẩm" width="250" height="200">   
+                                                                            @endif
                                                                         </li>
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
-                                                        
-                                                        
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -131,6 +133,8 @@
                             </div>
                         </div>
                     </div><!-- end card-body -->
+                    
+                    <!-- end card-body -->
                 </div><!-- end card -->
             </div><!-- end col -->
         </div><!-- end row -->

@@ -84,125 +84,225 @@
 
             </div>
 
-
-            <div id="orders-content" class="content-section my-order">
-                <!-- Form tìm kiếm đơn hàng -->
-                <form action="" class="form-search-my-order">
+        {{-- đơn hàng --}}
+        {{-- <div id="orders-content" class="content-section my-order">
+            <div class="order-header">
+                <div class="order-search">
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
-
-            
                     <button uk-icon="search" class="icon-search"></button>
-
-                </form>
-            
-                <!-- Kiểm tra nếu không có đơn hàng -->
-                @if ($orders->isEmpty())
-                    <span style="color:red">Không có đơn nào</span>
-                @else
-                    <!-- Hiển thị danh sách đơn hàng -->
-                    @foreach ($orders as $order)
-                        <div class="order-item">
-                            <div class="order-content">
-                                <div class="order-content-left"> 
-                                    <div class="order-code">Mã đơn hàng: {{$order->code}}</div>
-                                </div>
-            
-                                <div class="order-content-right">
-                                    <!-- Nút hành động -->
-                                    <div class="order-actions">
-                                        <button class="view-order-bt" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
-                                        
-                                        @if ($order->status === 'Hoàn thành')
-                                            @if (!$order->review || $order->review->user_id !== $order->user_id)
-                                                <!-- Kiểm tra nếu chưa có đánh giá hoặc đánh giá không thuộc user hiện tại -->
-                                                <button class="review-button" data-uk-toggle="target: #modal-review-{{ $order->id }}">
-                                                    Viết đánh giá
-                                                </button>
-                                            @else
-                                                <!-- Nếu đã có đánh giá -->
-                                                <button class="review-button" disabled>
-                                                    Đã đánh giá
-                                                </button>
+                </div>
+                <div class="order-filter">
+                    <select class="uk-select text-[#222] border-none">
+                        <option>Tất cả đơn hàng</option>
+                        <option>Đã giao hàng</option>
+                        <option>Đang xử lý</option>
+                        <option>Đã hủy</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="uk-overflow-auto">
+                <table class="uk-table uk-table-middle uk-table-divider order-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Người nhận</th>
+                            <th>Tổng tiền</th>
+                            <th>Thanh toán</th>
+                            <th>Trạng thái giao hàng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if ($orders->isEmpty())
+                            <tr>
+                                <td colspan="7" style="text-align: center; color: red; font-size: 1.2em;">Không có đơn nào</td>
+                            </tr>
+                        @else
+                            @foreach ($orders as $index => $order)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $order->code }}</td>
+                                    <td>{{ $order->recipient_name }}</td>
+                                    <td>{{ number_format($order->total_price, 0, ',', '.') }}₫</td>
+                                    <td>
+                                        <p class="uk-margin-remove">{{ $order->payment_method }}</p>
+                                        <p class="uk-margin-remove payment-status">
+                                            {{ $order->payment_status === 'Đã thanh toán' ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+                                        </p>
+                                    </td>
+                                    <td>
+                                        @php
+                                        $statusClass = match($order->status) {
+                                            'Hoàn thành' => 'status-delivered',
+                                            'Chờ xác nhận' => 'in-process',
+                                            'Đã xác nhận' => 'in-process',
+                                            'Đang giao' => 'in-process',
+                                            'Giao hàng thất bại' => 'failed',
+                                            'Đã hủy' => 'canceled',
+                                            default => 'unknown',
+                                        };
+                                        $statusText = match($order->status) {
+                                            'Hoàn thành' => 'Đã giao hàng',
+                                            'Chờ xác nhận' => 'Đang chờ xác nhận',
+                                            'Đã xác nhận' => 'Đã xác nhận',
+                                            'Đang giao' => 'Đang giao hàng',
+                                            'Giao hàng thất bại' => 'Giao hàng thất bại',
+                                            'Đã hủy' => 'Đã hủy',
+                                            default => 'Không xác định',
+                                        };
+                                        @endphp
+                                        <span class="{{ $statusClass }}">{{ $statusText }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="uk-button-group">
+                                            <button class="view-order-bt" data-uk-toggle="target: #modal-details-{{ $order->id }}">Chi tiết</button>
+                                            @if ($order->status === 'Chờ xác nhận' || $order->status === 'Đã xác nhận')
+                                                <button class="cancel-btn" data-order-id="{{ $order->id }}">Hủy đơn hàng</button>
                                             @endif
-                                        @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
-                                            <span class="" style="color:red">Bình tĩnh để đánh giá</span>
-                                        @endif
+                                        </div>
+                                    </td>
+                                </tr>
+        
+                                <!-- Modal Xem thêm chi tiết sản phẩm -->
+                                <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
+                                    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                        <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+                                        <h3 class="uk-modal-title font-bold">Thông tin đơn hàng</h3>
+                                        <div class="uk-margin modal-details-info">
+                                            @foreach ($order->orderDetails as $orderDetail)
+                                                <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->product->name }}</p>
+                                                <p><img alt="Product Image" class="uk-width-small uk-border-rounded" src="{{ $orderDetail->product->image ?? 'default-image.jpg' }}"/></p>
+                                                <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
+                                                <p><strong>Size:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
+                                                <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
+                                                <p><strong>Giá:</strong> {{ number_format($orderDetail->price, 0, ',', '.') }}₫</p>
+                                                <p><strong>Thông tin chi tiết:</strong> {{ $orderDetail->product->description ?? 'Không có thông tin' }}</p>
+                                                <hr />
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                                
-                            </div>
-            
-                            <!-- Trạng thái đơn hàng -->
-                            <div class="order-status">
-                              @php
-                                $result = match($order->status) {
-                                    'Hoàn thành' => '<span class="delivered" style="color:green;">Đã giao hàng</span>',
-                                    'Chờ xác nhận' => sprintf(
-                                        '<span class="pending" style="color:orange;">Đang chờ xác nhận</span> 
-                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
-                                        $order->id,
-                                    ),
-                                    'Đã xác nhận' => sprintf(
-                                        '<span class="confirmed" style="color:blue;">Đã xác nhận</span> 
-                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
-                                        $order->id,
-                                    ),
-                                    'Đang giao' => '<span class="shipping" style="color:yellow;">Đang giao hàng</span>',
-                                    'Giao hàng thành công' => sprintf(
-                                        '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span> 
-                                        <button style="color:green" class="complete-btn" data-order-id="%s">Hoàn thành</button>',
-                                        $order->id,
-                                    ),
-                                    'Giao hàng thất bại' => sprintf(
-                                        '<span class="failed" style="color:red;">Giao hàng thất bại vui lòng liên hệ để được xử lý</span> 
-                                        <button style="color:red" class="cancel-btn" data-order-id="%s">Hủy đơn</button>',
-                                        $order->id,
-                                    ),
-                                    'Đã hủy' => '<span class="canceled" style="color:gray;">Đã hủy</span>',
-                                    default => '<span class="unknown" style="color:lightgray;">Trạng thái không xác định</span>',
-                                };
-                                @endphp
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div> --}}
+        
+        
+        {{-- end đơn hàng --}}
 
-                                
-                                {!! $result !!}
-                            
-                                <div id="order-status-message"></div>
+        <div id="orders-content" class="content-section my-order">
+            <!-- Form tìm kiếm đơn hàng -->
+            <form action="" class="order-search">
+                <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
+                <button uk-icon="search" class="icon-search"></button>
+            </form>
+        
+            <!-- Kiểm tra nếu không có đơn hàng -->
+            @if ($orders->isEmpty())
+                <span style="color:red; font-size: 1.2em;">Không có đơn nào</span>
+            @else
+                <!-- Hiển thị danh sách đơn hàng -->
+                @foreach ($orders as $order)
+                    <div class="order-item">
+                        <div class="order-content uk-grid-collapse uk-child-width-expand@s" uk-grid>
+                            <div class="order-content-left">
+                                <div class="order-code uk-text-bold">Mã đơn hàng: {{$order->code}}</div>
                             </div>
-                            
-            
-                            <!-- Modal Xem thêm chi tiết sản phẩm -->
-                            <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
-                                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                    <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+        
+                            <div class="order-content-right">
+                                <!-- Nút hành động -->
+                                <div class="order-actions uk-button-group">
+                                    <button class="view-order-bt uk-button uk-button-primary" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
                                     
-                                    <h3 class="uk-modal-title font-bold">Thông số sản phẩm</h3>
-                                    <div class="uk-margin modal-details-info">
-                                        @foreach ($order->orderDetails as $orderDetail)
-                                            <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->product->name }}</p>
-                                            <p><img alt="Product Image" src="{{ $orderDetail->product->image ?? 'default-image.jpg' }}"/></p>
-                                            <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
-                                            <p><strong>Size:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
-                                            <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
-                                            <p><strong>Giá:</strong> {{ number_format($orderDetail->price, 0, ',', '.') }}₫</p>
-                                            <p><strong>Thông tin chi tiết:</strong> {{ $orderDetail->product->description ?? 'Không có thông tin' }}</p>
-                                            <hr />
-                                        @endforeach
-                                    </div>
+                                    @if ($order->status === 'Hoàn thành')
+                                        @if (!$order->review || $order->review->user_id !== $order->user_id)
+                                            <!-- Kiểm tra nếu chưa có đánh giá hoặc đánh giá không thuộc user hiện tại -->
+                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                Viết đánh giá
+                                            </button>
+                                        @else
+                                            <!-- Nếu đã có đánh giá -->
+                                            <button class="review-button uk-button uk-button-default" disabled>
+                                                Đã đánh giá
+                                            </button>
+                                        @endif
+                                    @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
+                                        <span class="uk-text-danger">Bình tĩnh để đánh giá</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
-                    @endforeach
-                @endif
-            </div>
-              
+        
+                        <!-- Trạng thái đơn hàng -->
+                        <div class="order-status">
+                            @php
+                            $result = match($order->status) {
+                                'Hoàn thành' => '<span class="status-delivered uk-text-success">Đã giao hàng</span>',
+                                'Chờ xác nhận' => sprintf(
+                                    '<span class="pending uk-text-warning">Đang chờ xác nhận</span>
+                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                    $order->id,
+                                ),
+                                'Đã xác nhận' => sprintf(
+                                    '<span class="confirmed uk-text-primary">Đã xác nhận</span>
+                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                    $order->id,
+                                ),
+                                'Đang giao' => '<span class="shipping uk-text-warning">Đang giao hàng</span>',
+                                'Giao hàng thành công' => sprintf(
+                                    '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span>
+                                    <button class="complete-btn uk-button uk-button-success uk-button-small" data-order-id="%s">Hoàn thành</button>',
+                                    $order->id,
+                                ),
+                                'Giao hàng thất bại' => sprintf(
+                                    '<span class="failed uk-text-danger">Giao hàng thất bại, vui lòng liên hệ để được xử lý</span>
+                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                    $order->id,
+                                ),
+                                'Đã hủy' => '<span class="canceled uk-text-muted">Đã hủy</span>',
+                                default => '<span class="unknown uk-text-light">Trạng thái không xác định</span>',
+                            };
+                            @endphp
+        
+                            {!! $result !!}
+                        </div>
+        
+                        <!-- Modal Xem thêm chi tiết sản phẩm -->
+                        <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                                <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
+                                <h3 class="uk-modal-title font-bold">Thông tin đơn hàng</h3>
+                                <div class="uk-margin modal-details-info">
+                                    @foreach ($order->orderDetails as $orderDetail)
+                                        <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->product->name }}</p>
+                                        <p><img alt="Product Image" class="uk-width-small uk-border-rounded" src="{{ $orderDetail->product->image ?? 'default-image.jpg' }}"/></p>
+                                        <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
+                                        <p><strong>Size:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
+                                        <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
+                                        <p><strong>Giá:</strong> {{ number_format($orderDetail->price, 0, ',', '.') }}₫</p>
+                                        <p><strong>Thông tin chi tiết:</strong> {{ $orderDetail->product->description ?? 'Không có thông tin' }}</p>
+                                        <hr />
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+            
         {{-- voucher --}}
             <div id="discounts-content" class="content-section">
                 <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
-            </div>
+            </div> 
         </main>
 
     </div>
+
 
 
     <!-- Modal Review -->

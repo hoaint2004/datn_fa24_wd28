@@ -94,7 +94,7 @@
                                                 <th scope="col">Hình ảnh</th>
                                                 <th scope="col">Tên sản phẩm</th>
                                                 <th scope="col">Danh mục</th>
-                                                <th scope="col">Mô tả</th>
+                                                <th scope="col">Trạng thái</th>
                                                 <th scope="col">Giá</th>
                                                 <th scope="col" class="text-center">Thao tác</th>
                                             </tr>
@@ -103,10 +103,26 @@
                                             @foreach ($products as $key => $pro)
                                                 <tr>
                                                     <td class="text-center">{{ $key + 1 }}</td>
-                                                    <td><img src="{{ $pro->image }}" width="100px" alt="error" class="rounded"></td>
+                                                    <td>
+                                                        <a href="{{ route('productDetail', $pro->id) }}" target="_blank">
+                                                            <img src="{{ $pro->image }}" width="100px" alt="error" class="rounded">
+                                                        </a>
+                                                    </td>
                                                     <td>{{ $pro->name }}</td>
                                                     <td>{{ $pro->category->name ?? 'Không có loại' }}</td>
-                                                    <td>{{ Str::limit($pro->description, 50) }}</td>
+
+                                                    <td>    
+                                                        <p>
+                                                            <span style="color: {{$pro->status === 0 ? '#28a745' : 'red'}}; 
+                                                                        border: 2px solid {{$pro->status === 0 ? 'green' : 'red'}}; 
+                                                                        padding: 5px 10px; 
+                                                                        border-radius: 5px; 
+                                                                        font-weight: bold;">
+                                                                {{ $pro->status === 0 ? 'Hiện' : 'Ẩn' }}
+                                                            </span>
+                                                        </p>
+                                                    </td>
+
                                                     <td>{{ number_format($pro->price, 0, ',', '.') }} đ</td>
                                                     <td class="text-center">
                                                         <a href="{{ route('admin.products.edit', $pro->id) }}" class="btn btn-sm btn-success">

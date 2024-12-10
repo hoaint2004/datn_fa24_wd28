@@ -139,7 +139,7 @@
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
-                                                <img src="" style="background-image: url({{ $item->image }}); padding: 115px 0" />
+                                                <img src="" style="background-image: url({{ $item->image }}); padding: 100px 0" />
                                             </a>
                                             <span>-10%</span>
                                             <i class="fas fa-heart icon-heart"
@@ -235,7 +235,7 @@
         </div>
     </section>
 
-    <section class="name-shoes uk-container uk-container-large">
+    {{-- <section class="name-shoes uk-container uk-container-large">
         <div class="uk-grid" uk-grid="true">
             @if (!empty($data['categoryLimit3']))
                 @foreach ($data['categoryLimit3'] as $item)
@@ -256,7 +256,7 @@
                 @endforeach
             @endif
         </div>
-    </section>
+    </section> --}}
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
         uk-slider="autoplay: true; autoplay-interval: 3000;">

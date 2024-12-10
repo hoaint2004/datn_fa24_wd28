@@ -41,10 +41,7 @@
 
                     <ul class="order-left-body uk-switcher uk-margin">
                         <div class="address">
-                    
-
                             <p class="order-name">Thông tin khách hàng</p>
-
                             <div class="space-y-4">
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 <div class="!mb-7">
@@ -85,43 +82,44 @@
 
                         <!-- Bước 2: Phương thức thanh toán -->
                        
-                    <div class="payments">
-                        <fieldset class="uk-fieldset payments-body">
-                            <p class="order-name">Phương thức thanh toán</p>
+                        <div class="payments">
+                            <fieldset class="uk-fieldset payments-body">
+                                <p class="order-name">Phương thức thanh toán</p>
 
-                            <div class="uk-margin payments-card">
-                                <label class="flex items-center mb-2 payments-card-title">
-                                    <input type="radio" name="payment_method" class="form-radio text-black"
+                                <div class="uk-margin payments-card">
+                                    <label class="flex items-center mb-2 payments-card-title">
+                                        <input type="radio" name="payment_method" class="form-radio text-black"
 
-                                        value="Thanh toán khi nhận hàng" checked>
+                                            value="Thanh toán khi nhận hàng" checked>
 
-                                    <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán khi nhận hàng</span>
-                                </label>
-                                <label class="flex items-center mb-2 payments-card-title">
-                                    <input type="radio" name="payment_method" class="form-radio text-black"
+                                        <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán khi nhận hàng</span>
+                                    </label>
+                                    <label class="flex items-center mb-2 payments-card-title">
+                                        <input type="radio" name="payment_method" class="form-radio text-black"
 
-                                        value="Thanh toán khi nhận hàng" checked>
+                                            value="Thanh toán khi nhận hàng" checked>
 
-                                    <div class="ml-2 text-[14px] font-semibold text-[#222]" uk-toggle="target: #id-vnpay">
-                                        Thanh toán bằng VNPay
-                                    </div>
-                                    <!-- <a href="{{ route('vnpay_payment') }}" class="flex items-center mb-2 payments-card-title">
-                                        <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán bằng VNPay</span>
-                                    </a> -->
-                                </label>
+                                        <div class="ml-2 text-[14px] font-semibold text-[#222]" uk-toggle="target: #id-vnpay">
+                                            Thanh toán bằng VNPay
+                                        </div>
+                                        <!-- <a href="{{ route('vnpay_payment') }}" class="flex items-center mb-2 payments-card-title">
+                                            <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán bằng VNPay</span>
+                                        </a> -->
+                                    </label>
 
-                                <button type="button" id="nextTab2" class="uk-button uk-button-primary mt-5">Tiếp tục</button>
-                            </div>
+                                    <button type="button" id="nextTab2" class="uk-button uk-button-primary mt-5">Tiếp tục</button>
+                                </div>
 
 
-                        </fieldset>
-                    </div>
+                            </fieldset>
+                        </div>
+
 
                         <!-- Bước 3: Xác nhận đơn hàng -->
                         <div class="review">
                             <fieldset class="uk-fieldset review-body">
                                 {{-- <legend class="uk-legend order-title-item">Xác thực thanh toán</legend> --}}
-                                <p class="order-name mt-5 mb-3">Sản phẩm đã đặt.</p>
+                                <p class="order-name">Sản phẩm đã đặt.</p>
                                 <div class="uk-list uk-list-divider review-content">
                                     @foreach ($carts as $item)
                                         <div class="warp">
@@ -187,8 +185,6 @@
             </div>
         </form>
     </section>
-
-  
 
     <div id="id-vnpay" uk-modal>
         <div class="uk-modal-dialog uk-modal-body uk-card uk-card-default">
@@ -262,3 +258,19 @@
         });
     </script>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tabList = UIkit.tab(document.querySelector('.uk-tab'));
+
+        // First tab "Tiếp tục" button
+        document.getElementById('nextTab').addEventListener('click', function() {
+            tabList.show(1);
+        });
+
+        // Second tab "Tiếp tục" button
+        document.getElementById('nextTab2').addEventListener('click', function() {
+            tabList.show(2);
+        });
+    });
+</script>

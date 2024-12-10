@@ -27,8 +27,14 @@ class FilterController extends Controller
     
         // Lọc theo màu sắc
         if (!empty($request->colors)) {
-            $query->whereHas('variants', function ($q) use ($request) {
-                $q->whereIn('color', $request->colors);
+            $colors = $request->colors;
+
+            $query->whereHas('variants', function ($q) use ($colors) {
+                $q->where(function ($subQuery) use ($colors) {
+                    foreach ($colors as $color) {
+                        $subQuery->orWhere('color', 'LIKE', "%$color%");
+                    }
+                });
             });
         }
     

@@ -49,6 +49,8 @@ class UserController extends Controller
         $order = Order::findOrFail($orderId);
 
         if ($order->payment_status === 'Đã thanh toán' && $order->payment_method === 'vnpay') {
+            $order->status = 'Đã hủy';
+            $order->save();
             return response()->json([
                 'status' => 'success',
                 'message' => 'Hủy đơn thành công, vui lòng liên hệ để được hoàn tiền.'
