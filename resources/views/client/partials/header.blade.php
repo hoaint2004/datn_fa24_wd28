@@ -174,7 +174,7 @@
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
                                 <!-- Nổi bật -->
                                 @php
-                                    $categories = \App\Models\Category::orderBy('id', 'DESC')->get();
+                                    $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
                                 @endphp
                                 @if (!empty($categories))
                                     <div>
