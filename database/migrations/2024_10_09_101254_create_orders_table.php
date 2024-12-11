@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -33,18 +34,27 @@ return new class extends Migration
             // Hình thức thanh toán
             $table->enum('payment_method', ['Thanh toán khi nhận hàng', 'vnpay'])
                 ->default('Thanh toán khi nhận hàng');
-            //  cod: Thanh toán khi nhận,
-            //  vnpay: Thanh toan vnpay,
 
             $table->string('shipping_fee', 255); // Phí vận chuyển
 
             // Trạng thái thanh toán
             $table->enum('payment_status', ['Chưa thanh toán', 'Đã thanh toán'])
                 ->default('Chưa thanh toán');
-            //  unpaid: Đơn hàng chưa được thanh toán.
-            //  paid: Đơn hàng đã được thanh toán thành công.
             $table->timestamps();
         });
+
+        // Thêm Trigger để ngăn cập nhật trạng thái khi đã hủy
+        DB::unprepared('
+            CREATE TRIGGER prevent_update_cancelled_order
+            BEFORE UPDATE ON orders
+            FOR EACH ROW
+            BEGIN
+                IF OLD.status = "Đã hủy" THEN
+                    SIGNAL SQLSTATE "45000"
+                    SET MESSAGE_TEXT = "Không thể thay đổi trạng thái của đơn đã bị hủy.";
+                END IF;
+            END;
+        ');
     }
 
     /**
@@ -52,6 +62,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Xóa Trigger trước khi xóa bảng
+        DB::unprepared('DROP TRIGGER IF EXISTS prevent_update_cancelled_order');
+
         Schema::dropIfExists('orders');
     }
 };

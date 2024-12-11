@@ -60,18 +60,18 @@
 
                 {{-- Sidebar Product --}}
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarProduct" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProduct_variants">
+                    <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarProducts">
                         <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí sản phẩm</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarProduct">
+                    <div class="collapse menu-dropdown" id="sidebarProducts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.product_variants.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
+                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
                                     sách sản phẩm </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.product_variants.create') }}" wire:navigate class="nav-link" data-key="t-chat">
+                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
                                     Thêm mới sản phẩm </a>
                             </li>
                         </ul>
@@ -79,7 +79,7 @@
                 </li>
 
                 {{-- Sidebar Product_variants --}}
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                     <a class="nav-link menu-link" href="#sidebarProduct_variants" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarProduct_variants">
                         <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí biến thể sản phẩm</span>
@@ -115,25 +115,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProducts">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí sản phẩm</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarProducts">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.products.index') }}" wire:navigate class="nav-link" data-key="t-chat"> Danh
-                                    sách sản phẩm </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.products.create') }}" wire:navigate class="nav-link" data-key="t-chat">
-                                    Thêm mới sản phẩm </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="banners">
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí banner</span>
@@ -141,20 +122,17 @@
                     <div class="collapse menu-dropdown" id="banners">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                               
+                                <a href="{{ route('admin.banners.index') }}" class="nav-link" data-key="t-chat"> Danh sách banner
+                                </a>
                             </li>
                             <li class="nav-item">
-<<<<<<< HEAD
-                              
-=======
                                 <a href="{{ route('admin.banners.create') }}" class="nav-link" data-key="t-chat"> Thêm mới banner
                                 </a>
->>>>>>> main
                             </li>
                         </ul>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarVoucher" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarVoucher">
@@ -183,6 +161,21 @@
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('admin.comments.index') }}" class="nav-link" data-key="t-chat"> Danh sách bình luận
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#reviews" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="reviews">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đánh giá</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="reviews">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.reviews.index') }}" class="nav-link" data-key="t-chat"> Danh sách đánh giá
                                 </a>
                             </li>
                         </ul>

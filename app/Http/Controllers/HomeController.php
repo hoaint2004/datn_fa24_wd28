@@ -38,9 +38,7 @@ class HomeController extends Controller
     
 
         $data['categoryLimit3'] = Category::with('products')
-            ->whereHas('products', function ($query) {
-                $query->where('status', 0);  
-            })
+            ->where('status', 0)
             ->orderBy('id', 'DESC')
             ->limit(3)
             ->get();
@@ -54,9 +52,10 @@ class HomeController extends Controller
                     ->limit(20);
             }
         ])
-        ->orderBy('id', 'DESC')
-        ->limit(1)
-        ->first();
+            ->where('status', 0)
+            ->orderBy('id', 'DESC')
+            ->limit(1)
+            ->first();
             
        
         return view('client.home', compact('data'));

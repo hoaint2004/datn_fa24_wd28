@@ -14,8 +14,8 @@
             <!-- Phần logo ở giữa -->
             <!-- Phần logo ở giữa -->
             <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
-                <a href="{{ route('home') }}">
-                    <h1 style="font-size: 35px;">Wina Shoes</h1>
+                <a href="{{ route('home') }}" class="logo-page">
+                    <h1>Wina Shoes</h1>
                     {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
                         alt="" /> --}}
                 </a>
@@ -65,7 +65,7 @@
                 <div>
                     <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
                         uk-toggle="target: #offcanvas-flip">
-                        <span class="cart-counter">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
+                        <span class="cart-counter cartCount">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
                     </a>
                 </div>
 
@@ -174,7 +174,7 @@
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
                                 <!-- Nổi bật -->
                                 @php
-                                    $categories = \App\Models\Category::orderBy('id', 'DESC')->get();
+                                    $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
                                 @endphp
                                 @if (!empty($categories))
                                     <div>
@@ -209,9 +209,9 @@
                                                 ->orderByDesc('quan')
                                                 ->with('product')
                                                 ->take(2)
-                                                ->get();                                 
+                                                ->get();
                                         @endphp
-                                
+
                                         @foreach($data['productFeatured'] as $item => $product)
                                             <li class="uk-margin-small-bottom">
                                                 <a href="{{ route('featured_products', $product->product_id) }}">
@@ -221,7 +221,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                
+
 
                                 <!-- Giày nam -->
                                 {{-- <div>

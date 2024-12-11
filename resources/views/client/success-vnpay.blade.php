@@ -92,25 +92,4 @@
 
 </html>
 
-
-
-
-<!-- <div class="main">
-    <div class="container1">
-        <h1 style="font-size: 24px">Cảm ơn bạn đã đặt hàng!</h1>
-        <p>Mã đơn hàng {{ session('code') }}</p>
-        <p><strong>Thông tin giao hàng</strong></p>
-        <p>
-            {{ session('name') }}
-        </p>
-        <p>{{ session('phone') }}</p>
-        <p>{{ session('address') }}</p>
-        <p><strong>Phương thức thanh toán</strong></p>
-
-        <p>({{ session('payment_method') }})</p>
-
-
-        <a href="{{ route('home') }}" class="btn">Tiếp tục mua hàng</a>
-    </div>
-</div> -->
 @endsection

@@ -130,7 +130,7 @@ class PaymentController extends Controller
                 
                 return view('client.success-vnpay');
             }
-            
+                
             throw new Exception('Thanh toán thất bại');
             
         } catch (Exception $e) {

@@ -77,16 +77,7 @@
         <span class="sub-span-title">
             List các nhóm sản phẩm nổi bật nhất
         </span>
-        <div class="collection-list uk-grid" uk-grid>
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="https://bizweb.dktcdn.net/thumb/large/100/520/624/themes/959507/assets/home_collection_list_item_image__1.jpg?1724041824574"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>Flash Sale</span>
-            </a>
-           
+        <div class="collection-list uk-grid" uk-grid>           
             @foreach($data['categoryLimit3'] as $category3)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
@@ -97,8 +88,8 @@
                 <span>{{$category3->name}}</span>
             </a>
             @endforeach
-          
-       
+
+
         </div>
     </section>
 
@@ -148,7 +139,7 @@
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
-                                                <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                                <img src="" style="background-image: url({{ $item->image }}); padding: 100px 0" />
                                             </a>
                                             <span>-10%</span>
                                             <i class="fas fa-heart icon-heart"
@@ -164,7 +155,7 @@
                                             <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
                                                 <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
-                                            <div class="icon">
+                                            <div class="icon text-[10px]">
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
                                                 <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
@@ -244,7 +235,7 @@
         </div>
     </section>
 
-    <section class="name-shoes uk-container uk-container-large">
+    {{-- <section class="name-shoes uk-container uk-container-large">
         <div class="uk-grid" uk-grid="true">
             @if (!empty($data['categoryLimit3']))
                 @foreach ($data['categoryLimit3'] as $item)
@@ -261,11 +252,11 @@
                             </a>
                         </div>
                     </div>
-                  
+
                 @endforeach
             @endif
         </div>
-    </section>
+    </section> --}}
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
         uk-slider="autoplay: true; autoplay-interval: 3000;">
@@ -287,7 +278,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})"  />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -352,60 +343,7 @@
         <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </section>
 
-    <section class="brand uk-container uk-container-large">
-        <div class="uk-grid brand-body" uk-grid>
-            <div class="uk-width-2-5 brand-left">
-                <div class="brand-left-image">
-                    <div class="title">
-                        <a href="#">
-                            <h2>Thương Hiệu</h2>
-                        </a>
-                        <hr />
-                    </div>
-                    <span class="sub-span-title">
-                        Các thương hiệu tin dùng chúng tôi
-                    </span>
-                </div>
-            </div>
-
-            <div class="uk-width-3-5 ">
-                <div class="uk-grid" uk-grid="true">
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/jordan.jpeg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/adidas.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/alexsander.png') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/gucci.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/nike.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                    <a href="#" class="uk-width-1-4 uk-transition-toggle" tabIndex={0}>
-                        <img class="uk-transition-scale-up uk-transition-opaque"
-                            src="{{ url('storage/images/Brand/puma.jpg') }}" alt="" />
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
@@ -428,7 +366,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -515,7 +453,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
@@ -609,13 +547,13 @@
 
                     <div class="flex items-center my-4 price">
                         <span class="text-2xl font-bold text-red-500 modal-price">
-                          
+
                         </span>
-                       
+
                         <span class="text-base text-gray-500 line-through ml-2">
-                           
+
                         </span>
-                       
+
                     </div>
                     <!-- <div class="mt-4">
                         <span class="text-2xl font-bold modal-price"></span>
@@ -821,6 +759,8 @@
                         quantity: quantity
                     },
                     success: function(response) {
+                        var cartCount = response.cartCount;
+                        $('.cartCount').text(cartCount)
                         if (response.status) {
                             Swal.fire({
                                 position: 'center',

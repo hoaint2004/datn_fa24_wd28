@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class AdminOrderController extends Controller
 {
     /**
@@ -36,7 +36,7 @@ class AdminOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $order = Order::findOrFail($id);
         $totalProduct = 0;
@@ -49,17 +49,31 @@ class AdminOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    // public function edit(string $id)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $order= Order::findOrFail($id);
+            if ($order->status === 'Đã hủy') {
+                throw new \Exception('Không thể thay đổi trạng thái của đơn đã bị hủy.');
+            }
+            $order->status =  $request->status;
+            $order->payment_status = $request->payment_status;
+            $order->save(); 
+            DB::commit();
+            return redirect()->back()->with('status_succeed','Cập nhật thành công');
+        }catch(\Exception $e){  
+            DB::rollback();
+            return redirect()->back()->with('status_failed','Cập nhật không thành công.'.$e->getMessage());
+        }
     }
 
     /**

@@ -1,8 +1,7 @@
 @extends('Admin.layouts.master')
 
-@section('title')
-    Danh sách sản phẩm
-@endsection
+@section('title', 'Danh sách sản phẩm')
+
 @section('style')
     <style>
         body {
@@ -14,33 +13,44 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .table {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
+        ul > li {
+            margin-bottom: 15px;
         }
 
-        .table-light {
-            background-color: #f1f1f1;
-        }
-
-        .btn {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        .table tr:hover {
-            background-color: #f9f9f9;
-        }
-        ul>li {
-
-        }
         b {
-
+            font-weight: bold;
         }
+
+        .form-control {
+            width: 300px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            margin-left: 10px;
+        }
+
+        #statusInput {
+    width: 100%;
+    padding: 0.47rem 0.75rem;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--vz-body-color);
+    background-color: 262A2F;
+    background-clip: padding-box;
+    border: 1px solid #2A2F34;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#statusInput:focus {
+    border-color: #86b7fe;
+   
+    outline: 0;
+}
+        
     </style>
 @endsection
 
@@ -48,81 +58,95 @@
     <div class="page-content">
         <div class="container-fluid">
             <div class="row">
+                @if($order->orderDetails->isNotEmpty())
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Thông tin người nhận</h4>
-                        </div><!-- end card header -->
+                        </div>
+                        <div class="card">
 
-                        <div class="card-body">
-                            <ul>
-                                <li>Họ và tên: <b>{{ $order->name }}</b></li>
-                                <li>Số điện thoại: <b>{{ $order->phone }}</b></li>
-                                <li>Địa chỉ: <b>{{ $order->phone }}</b></li>
-                                <li>Trạng thái đơn hàng: <b>{{ $order->status }}</b></li>
-                                <li>Trạng thái thanh toán: <b>{{ $order->payment_status }}</b></li>
-                                <li>Phương thức thanh toán thanh toán: <b>{{ $order->payment_method }}</b></li>
-                                <li>
-                                    Tiền hàng: 
-                                    <b>
-                                        {{ number_format($totalProduct, 0, ',', '.') }} đ
-                                    </b>
-                                </li>
-                                <li>Tiền ship: <b>{{ number_format($order->shipping_fee, 0, ',', '.') }} đ</b></li>
-                                <li style="font-size: 18px">Tổng tiền: <b>
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Thông tin người nhận</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Họ và tên: <b>{{ $order->name }}</b></li>
+                                    <li>Số điện thoại: <b>{{ $order->phone }}</b></li>
+                                    <li>Địa chỉ: <b>{{ $order->address }}</b></li>
+                                    <li>Tiền hàng: <b>{{ number_format($totalProduct, 0, ',', '.') }} đ</b></li>
+                                    <li>Tiền ship: <b>{{ number_format($order->shipping_fee, 0, ',', '.') }} đ</b></li>
+                                    <li style="font-size: 18px">Tổng tiền: <b>{{ number_format($totalProduct + $order->shipping_fee, 0, ',', '.') }} đ</b></li>
+                                </ul>
+                                <h5 class="mt-4">Chi tiết đơn hàng:</h5>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($order->orderDetails as $key => $detail)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $detail->product->name }}</td>
+                                                <td>{{ number_format($detail->price, 0, ',', '.') }} đ</td>
+                                                <td>{{ $detail->quantity }}</td>
+                                                <td>{{ number_format($detail->price * $detail->quantity, 0, ',', '.') }} đ</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                             
+                            </div>
+                        </div>
+                    </div>
 
-                                        {{ number_format($totalProduct + $order->shipping_fee, 0, ',', '.') }} đ</b>
-                                </li>
-                            </ul>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Sản phẩm của đơn hàng</h4>
-                        </div><!-- end card header -->
-
+                            <h4 class="card-title mb-0 flex-grow-1">Trạng thái</h4>
+                        </div>
                         <div class="card-body">
-                            <div class="live-preview">
-                                <div class="table-responsive table-card">
-                                    <table class="table align-middle table-nowrap table-striped-columns mb-0">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th scope="col" class="text-center">STT</th>
-                                                <th scope="col">Mã sản phẩm</th>
-                                                <th scope="col">Hình ảnh</th>
-                                                <th scope="col">Tên sản phẩm</th>
-                                                <th scope="col">Đơn giá</th>
-                                                <th scope="col">Số lượng</th>
-                                                <th scope="col">Thành tiền</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach ($order->orderDetails as $key => $item)
-
-                                                <tr>
-                                                    <td class="text-center">{{ $key + 1 }}</td>
-                                                    <td>{{ $item->product->code }}</td>
-                                                    <td><img src="{{ $item->product->image }}" width="100px"
-                                                            alt="error" class="rounded"></td>
-                                                    <td>{{ $item->product->name }}</td>
-                                                    <td>{{ number_format($item->product->price, 0, ',', '.') ?? number_format($item->product->price_old, 0, ',', '.') }}
-                                                        đ</td>
-                                                    <td>{{ $item->quantity }}</td>
-                                                    <td>{{ number_format($item->total, 0, ',', '.') }} đ</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                            <form method="POST" action="{{ route('admin.orders.update', $order->id) }}">
+                                @csrf
+                                @method('PATCH')
+                                <div class="mb-3">
+                                    <label for="statusInput" class="form-label">Trạng thái đơn hàng:</label>
+                                    <select id="statusInput" name="status" class="form-control" {{$order->status=='Hoàn thành'?'disabled':''}}>
+                                        <option value="Chờ xác nhận" {{ $order->status == 'Chờ xác nhận' ? 'selected' : '' }}>Chờ xác nhận</option>
+                                        <option value="Đã xác nhận" {{ $order->status == 'Đã xác nhận' ? 'selected' : '' }}>Đã xác nhận</option>
+                                        <option value="Đang giao" {{ $order->status == 'Đang giao' ? 'selected' : '' }}>Đang giao</option>
+                                        <option value="Giao hàng thành công" {{ $order->status == 'Giao hàng thành công' ? 'selected' : '' }}>Giao hàng thành công</option>
+                                        <option value="Giao hàng thất bại" {{ $order->status == 'Giao hàng thất bại' ? 'selected' : '' }}>Giao hàng thất bại</option>
+                                        <option value="Đã hủy" {{ $order->status == 'Đã hủy' ? 'selected' : '' }} disabled>Đã hủy</option>
+                                        <option value="Hoàn thành" {{ $order->status == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành</option>
+                                    </select>
                                 </div>
-                            </div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div>
-    </div> <!-- end col -->
-@endsection
+                                <div class="mb-3">
+                                    <label for="payment_status">Trạng thái thanh toán:</label>
+                                    <select id="payment_status" name="payment_status" class="form-control"{{$order->payment_status=='Đã thanh toán'?'disabled':''}}>
+                                        <option value="Chưa thanh toán" {{ $order->payment_status == 'Chưa thanh toán' ? 'selected' : '' }}>Chưa thanh toán</option>
+                                        <option value="Đã thanh toán" {{ $order->payment_status == 'Đã thanh toán' ? 'selected' : '' }} {{ $order->status !== 'Giao hàng thành công' ? 'disabled' : '' }}>Đã thanh toán</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button> <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Quay lại</a> 
+                            </form>
+                           
 
-@section('script')
+                        </div>
+                    </div>
+                </div>
+                @else
+                    <div class="alert alert-warning text-center">
+                        <b>{{ '!Không có đơn hàng nào!' }}</b>
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Quay lại</a>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
 @endsection

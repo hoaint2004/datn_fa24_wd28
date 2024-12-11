@@ -46,8 +46,8 @@
 
         <div class="wrapper-login uk-grid" uk-grid>
             <div class="uk-width-1-2 login-left">
-                <img src="https://s3-alpha-sig.figma.com/img/040c/c45a/2d79166cf646d5a5a0119f93bceae506?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XtJ9U5yNNXTF91j2NBmsgRmXb-ngUrtOmjP95bqX6bHuCO7lILxQexO9yiAE76HW3jRESlXGLWI-yefVNHapkWXblD8jMD7kClf1AvFqSRAYUKsuUfVr0Ce4Yh5LsUrvYSlIIky8PYL-l4KxASyl2iq9XhpaJ5KlFuIvmDNyXFzkpKeOPv2j5wfUCsH4LJAqX~uDwo6Qvq-lV5COpNIbp3Y5p5vqHLDIX28mI2ys6nEIY9hN4YnJbUBbIl-CMhmMK8uojZY~xL5vKOLFGibJwhQoYmNmcuBvAfVra3fs3~UAHoAnsA3YukYwJ0KvIuPvyTAOovAEk~Apch03kxGrRw__"
-                    alt="">
+                <img src="https://heins.websitesbykarlo.com/wp-content/uploads/2024/04/banner-01-1.jpg"
+                    alt="" width="100%">
             </div>
 
             <div class="uk-width-1-2 login-right">
