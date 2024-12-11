@@ -402,7 +402,7 @@
                         if (response.variants.length > 0) {
                             const firstColor = response.variants[0];
                             $(`input[name="product-choose-color"][value="${firstColor.color}"]`)
-                                .prop('checked', true);
+                                .prop('checked', false);
                             firstColor.sizes.forEach(size => {
                                 $('.box-size').append(
                                     `<label>
@@ -484,6 +484,49 @@
                         quantity: quantity
                     },
                     success: function(response) {
+                        var cartCount = response.cartCount;
+                        $('.cartCount').text(cartCount)
+                        $('.countCartHeader').text('(' + cartCount + ')')
+                        let html = `
+                            <div class="warp">
+                                <a href="${response.urlProduct}">
+                                    <img src="${response.product.image}" alt="" width="120px"></a>
+                                <div class="warp-body">
+                                    <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
+                                    <div class="price">
+                                        <span><strong>${response.product.price}đ</strong></span>
+                                    </div>
+                                    <div class="data-size">
+                                        <span>${response.data.color} / ${response.data.size}</span>
+                                    </div>
+                                    <div class="quantity">
+                                        <div class="quantity-selector">
+                                            <button aria-label="Giảm số lượng"
+                                                data-cart-id="${response.data.id}"
+                                                class="quantity-selector-button-minus btn-minus-header">
+                                                -
+                                            </button>
+                                            <input class="quantity-selector-input input-cart-header"
+                                                type="number" step="1" min="1" max="9999"
+                                                aria-label="Số lượng sản phẩm"
+                                                data-cart-id="${response.data.id}"
+                                                value="${response.data.quantity}" readonly="">
+                                            <button aria-label="Tăng số lượng"
+                                                data-cart-id="${response.data.id}"
+                                                class="quantity-selector-button-plus btn-plus-header">+
+                                            </button>
+                                        </div>
+                                        <form data-product-id="${response.data.id}" class="form-deleteCart"
+                                            action="${response.url}" method="post">
+                                            @csrf
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $('.sidebarCart').append(html);
                         if (response.status) {
                             Swal.fire({
                                 position: 'center',

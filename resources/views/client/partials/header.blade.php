@@ -74,7 +74,7 @@
                         <button class="uk-offcanvas-close" type="button" uk-close style="color: red;"></button>
                         <div class="modal-header">
                             <h3 class="modal-title">Giỏ hàng của tôi
-                                <span class="cart-panel-counter"
+                                <span class="cart-panel-counter countCartHeader"
                                     style="opacity: 1;">({{ !empty($cartsAll) ? $cartsAll->count() : '' }})</span>
                             </h3>
                             <a href="#" class="close-account-panel button-close">
@@ -82,7 +82,7 @@
                             </a>
                         </div>
 
-                        <div class="mini-cart-product">
+                        <div class="mini-cart-product sidebarCart">
                             @if (!empty($carts))
                                 @php
                                     $total = 0;
@@ -92,10 +92,10 @@
                                         $total += $item->quantity * $item->product->price;
                                     @endphp
                                     <div class="warp">
-                                        <a href="#">
+                                        <a href="{{ route('productDetail', $item->product->id) }}">
                                             <img src="{{ $item->product->image }}" alt="" width="120px"></a>
                                         <div class="warp-body">
-                                            <a href="#" class="product-name">{{ $item->name }}</a>
+                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
                                             <div class="price">
                                                 <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
                                             </div>

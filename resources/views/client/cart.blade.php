@@ -41,7 +41,7 @@
 
                                     <td class="shopping-cart-left-tbody-product">
                                         <div class="warp">
-                                            <a href="#" class="product-name">{{ $item->product->name }}</a>
+                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
                                             <div class="price">
                                                 <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
                                                         đ</strong>
