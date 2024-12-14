@@ -129,7 +129,7 @@ Sneakers - Thế Giới Giày
 
         </div>
 
-        <div class="uk-width-2-3 sale-product-right">
+        <div class="uk-width-2-3 sale-product-right">   
             <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
                 uk-slider="autoplay: false; autoplay-interval: 3000;">
                 <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
@@ -139,13 +139,12 @@ Sneakers - Thế Giới Giày
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="" style="background-image: url({{ $item->image }}); padding: 100px 0" />
+                                    <img src="" style="background-image: url({{ $item->image }}); padding: 110px 0" />
                                 </a>
                                 <span>-10%</span>
                                 <i class="fas fa-heart icon-heart"
                                     style="color: #c90d0d; font-size: 1.25rem;"></i>
                                 <div class="product-button">
-                                    {{-- <button type="submit" class="addToCart" data-id="{{ $item->id }}">Thêm vào giỏ </button> --}}
                                     <button type="button" uk-toggle="target: #modal-container"
                                         class="quick-view-button" data-id="{{ $item->id }}">Xem
                                         nhanh</button>
@@ -193,11 +192,11 @@ Sneakers - Thế Giới Giày
                         @endforeach
                         @endif
                     </div>
-                    <button class="icon-left-product uk-position-center-left uk-position-small uk-hidden-hover" href
+                    <button class="icon-left-product-date-time uk-position-center-left uk-position-small uk-hidden-hover" href
                         uk-slider-item="previous">
                         <i>‹</i>
                     </button>
-                    <button class="icon-right-product uk-position-center-right uk-position-small uk-hidden-hover" href
+                    <button class="icon-right-product-date-time uk-position-center-right uk-position-small uk-hidden-hover" href
                         uk-slider-item="next">
                         <i>›</i>
                     </button>
@@ -234,7 +233,6 @@ Sneakers - Thế Giới Giày
         </div>
     </div>
 </section>
-
 
 <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
     uk-slider="autoplay: true; autoplay-interval: 3000;">
@@ -538,6 +536,7 @@ Sneakers - Thế Giới Giày
                     </span>
 
                 </div>
+                
                 <div class="flex items-center">
                     <span class="text-[#222] font-semibold">Danh mục:</span>
                     <p class="text-sm text-[#333] ml-2"></p>
@@ -764,7 +763,7 @@ Sneakers - Thế Giới Giày
                     let html = `
                             <div class="warp">
                                 <a href="${response.urlProduct}">
-                                    <img src="${response.product.image}" alt="" width="120px"></a>
+                                    <div style="background-image: url(${response.product.image});" class="img-mini-cart"> </div></a>
                                 <div class="warp-body">
                                     <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
                                     <div class="price">

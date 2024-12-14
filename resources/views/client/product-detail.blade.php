@@ -668,14 +668,14 @@
                         </div>
                         <div class="product-item-detail-gallery-items">
                             @if (!empty($item->images))
-                            @foreach ($item->images as $item)
+                            @foreach (array_slice($item->images->toArray(), 0, 8) as $image) 
                             <div class="product-item-detail-gallery-item">
-                                <img src="{{ $item->image_url }}"
-                                    alt="">
+                                <img src="{{ $image['image_url'] }}" alt="" class="">
                             </div>
                             @endforeach
                             @endif
                         </div>
+
 
                     </div>
 
@@ -706,7 +706,7 @@
                 $('.image-main').attr('src', newImageUrl);
             });
         });
-        
+
         $(document).ready(function() {
             $('input[name="product-choose-color"]').on('change', function() {
                 const selectedColor = $(this).val();
@@ -797,7 +797,7 @@
                         let html = `
                                     <div class="warp">
                                         <a href="${response.urlProduct}">
-                                            <img src="${response.product.image}" alt="" width="120px"></a>
+                                             <div style="background-image: url(${response.product.image});" class="img-mini-cart"></div></a>
                                         <div class="warp-body">
                                             <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
                                             <div class="price">

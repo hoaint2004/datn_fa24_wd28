@@ -178,47 +178,54 @@ Sneakers - Thế Giới Giày
             </div>
 
             <div class="product-list">
-                <div class="home-product-list-wrapper uk-grid"  id="filter-id" uk-grid>
-                    
+                <div class="home-product-list-wrapper uk-grid" id="filter-id" uk-grid>
+
                 </div>
             </div>
             {{-- test --}}
 
-    {{-- end test --}}
-    <nav aria-label="Pagination">
-        <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
-            <li><a href="#"><span uk-pagination-previous></span></a></li>
-            <li class="uk-active"><span aria-current="page">1</span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li class="uk-disabled"><span>…</span></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#"><span uk-pagination-next></span></a></li>
-        </ul>
-    </nav>
-    </div>
+            {{-- end test --}}
+            <nav aria-label="Pagination">
+                <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                    <li><a href="#"><span uk-pagination-previous></span></a></li>
+                    <li class="uk-active"><span aria-current="page">1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li class="uk-disabled"><span>…</span></li>
+                    <li><a href="#">7</a></li>
+                    <li><a href="#">8</a></li>
+                    <li><a href="#"><span uk-pagination-next></span></a></li>
+                </ul>
+            </nav>
+        </div>
 
     </div>
 </section>
 
 <!-- Modal xem nhanh-->
 <div id="modal-container" class="uk-modal-container" uk-modal>
-    <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+    <div class="uk-modal-dialog uk-width-large" style="max-width: 100vw; max-height: 100vh;">
         <input type="hidden" value="" class="modal-product-id">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-body uk-grid" uk-grid>
             <div class="uk-width-1-2">
                 <img alt="" class="w-full rounded-lg" src=""
-                    style="width: 100%; max-height: 70vh; object-fit: cover;" />
-                <div class="flex mt-4 space-x-2 box-image-url">
+                    style="width: 100%; height: 70vh; object-fit: cover;  object-position: center" />
+                <div class="flex mt-4 space-x-2 box-image-url uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                    <div class="uk-slider-container">
+                        <ul class="uk-slider-items uk-child-width-1-5 uk-grid">
+                            <!-- Ảnh thumbnail sẽ được append vào đây -->
+                        </ul>
+                    </div>
+
+                    <a class="uk-position-center-left uk-position-small " href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small " href="#" uk-slidenav-next uk-slider-item="next"></a>
                 </div>
             </div>
 
             <div class="uk-width-1-2" style="overflow-y: hidden;">
-                <h1 class="text-3xl font-bold"></h1>
-                <p class="text-xl text-gray-600"></p>
-                <div class="flex items-center mt-2">
+                <h1 class="text-2xl font-bold text-[#222] title-model-detail"></h1>
+                <div class="flex items-center mt-2 mb-3">
                     <div class="flex items-center">
                         <i class="fas fa-star text-yellow-500"></i>
                         <i class="fas fa-star text-yellow-500"></i>
@@ -228,41 +235,49 @@ Sneakers - Thế Giới Giày
                     </div>
                     <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                 </div>
-                <div class="mt-4">
-                    <span class="text-2xl font-bold modal-price"></span>
+
+                <div class="flex items-center my-3 price">
+                    <span class="text-2xl font-bold text-red-500 modal-price"></span>
                     <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
                 </div>
-                <p class="mt-4 text-gray-600 modal-description">
+
+                <div class="flex items-center">
+                    <span class="text-[#222] font-semibold">Danh mục:</span>
+                    <!-- <p class="text-sm text-[#333] ml-2"></p> -->
+                    <p class="text-sm text-[#333] ml-2"></p>
+                </div>
+
+                <p class="mt-4  mb-4 desc text-gray-600 modal-description">
 
                 </p>
                 <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
-                    <div class="mt-4">
-                        <p class="font-bold">Màu sắc</p>
-                        <div class="flex space-x-2 mt-2 box-color">
+                    <div class="color">
+                        <p class="text-lg font-bold mb-1">Màu sắc</p>
+                        <div class="flex space-x-2 box-color">
 
                         </div>
                     </div>
-                    <div class="mt-4">
-                        <p class="font-bold">Size</p>
-                        <div class="flex space-x-2 mt-2 box-size">
+                    <div class="mt-5">
+                        <p class="font-bold text-lg text-[#222] mb-1">Size</p>
+                        <div class="flex space-x-2 box-size">
 
                         </div>
                     </div>
-                    <div class="mt-4 flex items-center space-x-4">
+                    <div class="mt-7 flex items-center space-x-4">
                         <div class="flex items-center border border-gray-300 rounded-lg">
                             <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
                             <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
                                 type="text" value="1" />
                             <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
                         </div>
-                        <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
+                        <button type="button" class="bt-add-cart-modal rounded-lg btnAddToCart">Thêm giỏ
                             hàng</button>
                         <button class="border border-gray-300 rounded-lg p-2">
                             <i class="far fa-heart text-gray-600"></i>
                         </button>
                     </div>
                 </form>
-                <div class="mt-4">
+                <div class="mt-7">
                     <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
                 </div>
             </div>
@@ -315,7 +330,7 @@ Sneakers - Thế Giới Giày
                     $('#modal-container .modal-url').text(response.url);
                     $('#modal-container .modal-product-id').val(response.id);
                     $('#modal-container h1').text(response.name);
-                    $('#modal-container p.text-xl').text(response.category_name);
+                    $('#modal-container p.text-sm').text(response.category_name);
                     $('#modal-container .product-price strong').text(response.price);
                     $('#modal-container .modal-description').text(response.description);
                     $('#modal-container .modal-price').text(response.price);
@@ -367,13 +382,24 @@ Sneakers - Thế Giới Giày
 
                     if (response.images.length > 0) {
                         const firstImage = response.images;
+                        let html = '<ul class="uk-slider-items uk-child-width-1-5 uk-grid-small uk-grid">';
 
                         firstImage.forEach(image => {
-                            $('.box-image-url').append(
-                                `<img alt="Thumbnail 1" class="w-20 h-20 rounded-lg"
-                                    src="${image.image_url}"
-                                    style="width: 80px; height: 80px; object-fit: cover;" />`
-                            );
+                            html += `
+                                <li>
+                                    <img alt="Thumbnail" class="thumbnail-image w-20 h-20 rounded-lg cursor-pointer" 
+                                        src="${image.image_url}"
+                                        style="width: 100px; height: 100px; object-fit: cover;" 
+                                        onclick="changeMainImage('${image.image_url}')" />
+                                </li>
+                            `;
+                        });
+                        html += '</ul>';
+                        $('.box-image-url .uk-slider-container').html(html);
+
+                        $(document).on('click', '.thumbnail-image', function() {
+                            let imageUrl = $(this).attr('src');
+                            $('.uk-width-1-2 img:first').attr('src', imageUrl);
                         });
                     }
 
