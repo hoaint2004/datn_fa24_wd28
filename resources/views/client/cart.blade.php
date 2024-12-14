@@ -34,14 +34,13 @@
                                 <tr>
                                     <td class="shopping-cart-left-tbody-image">
                                         <a href="{{ route('productDetail', $item->product->id) }}">
-                                            <img src="{{ $item->product->image }}" alt="{{ $item->product->name }}"
-                                                width="120px">
+                                            <div class="imagebg-shopping-cart" style="background-image: url({{ $item->product->image }});" alt="{{ $item->product->image }}"></div>
                                         </a>
                                     </td>
 
                                     <td class="shopping-cart-left-tbody-product">
                                         <div class="warp">
-                                            <a href="#" class="product-name">{{ $item->product->name }}</a>
+                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
                                             <div class="price">
                                                 <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
                                                         đ</strong>
@@ -92,8 +91,6 @@
                 </table>
             </div>
 
-
-
             <div class="shopping-cart-right uk-width-1-3">
                 <h2 class="">Thông tin đơn hàng</h2>
                 <div class="shopping-cart-right-info">
@@ -107,7 +104,10 @@
                                         <span>Số lượng: <strong>{{ $item->quantity }}</strong></span>
                                     </div>
                                     <div>
-                                        <span>Size: <strong>{{ $item->color }} / {{ $item->size }}</strong></span>
+                                        <span>Size: <strong>{{ $item->size }}</strong></span>
+                                    </div>
+                                    <div>
+                                        <span>Color: <strong>{{ $item->color }}</strong></span>
                                     </div>
                                 </div>
                                 <div>

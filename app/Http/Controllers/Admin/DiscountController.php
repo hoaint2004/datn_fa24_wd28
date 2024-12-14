@@ -80,5 +80,46 @@ class DiscountController extends Controller
             'usage_limit' => 'nullable|integer|min:1', // Kiểm tra giới hạn sử dụng
         ]);
     }
+
+    public function validateDiscountCode(Request $request)
+{
+    $code = $request->discount_code;
+    $total = $request->total;
+    
+    $discount = Discount::where('discount_code', $code)
+        ->where('is_active', true)
+        ->where('start_date', '<=', now())
+        ->where('end_date', '>=', now())
+        ->first();
+
+    if (!$discount) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn'
+        ]);
+    }
+
+    if ($discount->min_order_value && $total < $discount->min_order_value) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Giá trị đơn hàng chưa đạt mức tối thiểu'
+        ]);
+    }
+
+    $discountAmount = 0;
+    if ($discount->discount_type === '%') {
+        $discountAmount = $total * ($discount->discount_value / 100);
+    } else {
+        $discountAmount = $discount->discount_value;
+    }
+
+    return response()->json([
+        'status' => 'success',
+        'discount' => $discountAmount,
+        'message' => 'Áp dụng mã giảm giá thành công'
+    ]);
+}
+
     
 }
+

@@ -15,13 +15,33 @@ class PaymentController extends Controller
     public function vnpay_payment(Request $request)
     {
         $data = $request->all();
+    
+        // $carts = Cart::where('user_id', Auth::id())->get();
+        // if($carts->isEmpty()) {
+        //     return redirect()->route('showCart')->with('error', 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng');
+        // }
+        $carts = Cart::where('user_id', Auth::id())->get();
+        if($carts->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
+            ]);
+        }
+
+        // $carts = Cart::where('user_id', Auth::id())->get();
+        // if ($carts->isEmpty()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
+        //     ]);
+        // }
         
-        // Lưu  session
+        // Lưu session
         session([
             'payment_data' => [
                 'user_id' => Auth::id(),
                 'code' => 'ORDER-' . time(),
-                'name' => $request->input('name'),
+                'name' => $request->input('name'), 
                 'address' => $request->input('address'),
                 'phone' => $request->input('phone'),
                 'total_price' => $data['total'],
@@ -30,8 +50,7 @@ class PaymentController extends Controller
                 'payment_status' => 'Đã thanh toán'
             ]
         ]);
-
-        $carts = Cart::where('user_id', Auth::id())->get();
+    
         session(['cart_data' => $carts]);
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";

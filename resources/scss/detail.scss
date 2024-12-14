@@ -31,11 +31,22 @@
     .product-detail-body {
         .product-detail-left {
             padding-right: 50px;
+            .image-main {
+                height: 600px !important; 
+                object-fit: cover;
+                object-position: center center;
+            }
             .product-detail-image-slide {
                 display: flex;
                 justify-content: space-between;
                 .swiper-slide {
-                    width: 145px;
+                    padding: 60px 0;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -430,19 +441,6 @@
     display: flex;
     align-items: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .media-comment-body {
     h4 {

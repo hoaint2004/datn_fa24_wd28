@@ -94,7 +94,24 @@ class CartController extends Controller
 
             $product = Product::with('variants')->where('id', $request->id)->first();
             DB::commit();
-            return response()->json(['status' => true, 'message' => 'Sản phẩm được thêm vào giỏ hàng thành công', 'data' => $cartItem ?? $cart, 'product' => $product, 'cartCount' => $cartCount->count()]);
+            return response()->json([
+                'url' => route('cart.delete', $cart->id),
+                'urlProduct' => route('productDetail', $request->id),
+                'status' => true,
+                'message' => 'Sản phẩm được thêm vào giỏ hàng thành công',
+                'data' => [
+                    'id' => $cart->id,
+                    'color' => $cart->color,
+                    'size' => $cart->size,
+                    'quantity' => $cart->quantity,
+                ],
+                'product' => [
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                ],
+                'cartCount' => $cartCount->count(),
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
