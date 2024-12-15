@@ -169,7 +169,7 @@
 
                     <!-- Danh mục sản phẩm với menu con và dropbar -->
                     <li class="uk-parent">
-                        <a href="{{ route('category') }}" class="">Danh mục sản phẩm <span>›</span></a>
+                        <a href="#" class="">Danh mục sản phẩm <span>›</span></a>
                         <div class="uk-dropdown uk-width-2xlarge">
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
                                 <!-- Nổi bật -->
@@ -250,7 +250,7 @@
                     <a href="{{ route('home') }}">Trang chủ</a>
                 </li>
                 <li>
-                    <a href="{{ route('category') }}">Danh mục sản phẩm</a>
+                    <a href="#">Danh mục sản phẩm</a>
                 </li>
                 <li>
                     <a href="#">Sản phẩm nổi bật</a>
