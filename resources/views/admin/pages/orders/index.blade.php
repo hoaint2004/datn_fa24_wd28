@@ -103,9 +103,9 @@
                                                     <td>{{ $item->payment_status }}</td>
                                                     <td>{{ $item->created_at }}</td>
                                                     <td class="text-center">
-                                                        <a href="{{ route('admin.orders.edit', $item->id) }}" class="btn btn-sm btn-success">
+                                                        {{-- <a href="{{ route('admin.orders.edit', $item->id) }}" class="btn btn-sm btn-success">
                                                             <i class="ri-settings-4-line"></i>
-                                                        </a>
+                                                        </a> --}}
                                                         {{-- <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#topmodal{{ $item->id }}">
                                                             <i class="ri-delete-bin-5-line"></i>
                                                         </a> --}}

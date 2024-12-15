@@ -6,55 +6,65 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Comment;
 
-
+// controller dành cho sản phẩm best seller
 class ProductController extends Controller
 {   
     //sản phẩm nổi bật chi tiết
-    public function featured_products($id)
+    public function featured_products($type)
     {
-       
-        $product = Product::with(['category', 'variants', 'images'])
-                          ->where('id', $id)
-                          ->where('status', 0)
-                          ->first();
-    
-        if (!$product) {
-            abort(404, 'Sản phẩm không tồn tại hoặc không hoạt động');
+        $data = [];
+        
+        // Sản phẩm bán chạy nhất
+        if ($type == 'most-purchased') {
+            $data['products'] = Product::select('products.*')
+                ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                ->groupBy('products.id')
+                ->orderByDesc('total_quantity')
+                ->with(['category', 'variants', 'images'])
+                ->where('status', 0)
+                ->limit(3)->get();
+                // ->paginate(9);
         }
     
-        // Nhóm các biến thể theo màu và kích thước
-        $groupedColors = $product->variants
-            ->groupBy('color')
-            ->map(function ($items, $color) {
-                return [
-                    'color' => $color,
-                    'sizes' => $items->pluck('size')->unique()->toArray(),
-                ];
-            });
+        // Sản phẩm mới
+        elseif ($type == 'latest') {
+            $data['products'] = Product::orderBy('created_at', 'desc')
+                ->with(['category', 'variants', 'images'])
+                ->where('status', 0)
+                ->limit(4)->get();
+                // ->paginate(9);
+        }
     
-        $allSizes = $product->variants->pluck('size')->unique();
+        // Sản phẩm giá rẻ
+        elseif ($type == 'cheapest') {
+            $data['products'] = Product::orderBy('price', 'asc')
+                ->with(['category', 'variants', 'images'])
+                ->where('status', 0)
+                ->limit(3)->get();
+                // ->paginate(9);
+        }
     
-        $data['product'] = $product;
-        $data['groupedColors'] = $groupedColors;
-        $data['allSizes'] = $allSizes;
     
-        // Lấy các sản phẩm liên quan trong cùng danh mục
-        $data['productRelated'] = Product::with('category')
-            ->where('category_id', '=', $product->category_id)
-            ->where('id', '!=', $id)
-            ->where('status', 0)  
-            ->limit(20)
-            ->get();
-    
-        // Lấy các bình luận hoạt động cho sản phẩm
-        $comments = Comment::where('product_id', $id)
-            ->where('parent_id', 0)
-            ->where('status', 1)  
-            ->orderBy('id', 'DESC')
-            ->get();
-                
-        return view("client.product-detail", compact('data', 'comments'));
+        // Lấy tất cả các danh mục sản phẩm
+        $data['categories'] = Category::with(['products' => function ($query) {
+            $query->where('status', 0);
+        }])
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        // $data['paginate']=[
+        //     'total' => $data['products']->total(), // Tổng số sản phẩm
+        //     'per_page' => $data['products']->perPage(), // Số sản phẩm trên mỗi trang
+        //     'current_page' => $data['products']->currentPage(), // Trang hiện tại
+        //     'last_page' => $data['products']->lastPage(), // Tổng số trang
+        //     'from' => $data['products']->firstItem(), // Sản phẩm bắt đầu hiển thị
+        //     'to' => $data['products']->lastItem(), // Sản phẩm kết thúc hiển thị
+        // ];
+        return view('client.ProductBestSeller', compact('data','type'));
     }
+    
+    
     
 
     // public function product_detail(){
