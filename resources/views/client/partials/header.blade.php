@@ -169,23 +169,24 @@
                         <a href="{{ route('category') }}" class="">Danh mục sản phẩm <span>›</span></a>
                         <div class="uk-dropdown uk-width-2xlarge">
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
-                                <!-- Nổi bật -->
                                 @php
                                 $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
+                                $chunks = $categories->chunk(4);
                                 @endphp
-                                @if (!empty($categories))
+
+                                @foreach($chunks as $chunk)
                                 <div>
                                     <ul class="uk-nav uk-dropdown-nav">
-                                        @foreach ($categories as $item)
-                                        <li class="uk-nav-header">
-                                            <a
-                                                href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
+                                        @foreach($chunk as $item)
+                                        <li class="uk-nav-header !mt-0 text-[16px] text-[#222]">
+                                            <a href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
                                         </li>
                                         @endforeach
                                     </ul>
                                 </div>
-                                @endif
+                                @endforeach
                             </div>
+
                         </div>
                     </li>
 

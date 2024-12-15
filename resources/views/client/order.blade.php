@@ -30,7 +30,7 @@
 </span>
 <section class="uk-container uk-container-large order mb-4">
     <h2 class="order-title">Thông tin nhận hàng</h2>
-    <form action="{{ route('order.store') }}" method="POST">
+    <form action="{{ route('order.store') }}" method="POST" nsubmit="return preventResubmit()">
         @csrf
         <div class="uk-grid order-body" uk-grid>
             <article class="uk-margin-top uk-width-2-3 order-left">
@@ -92,7 +92,7 @@
                             </div>
 
                         </div>
-                        <button type="button" id="nextTab" class="uk-button uk-button-primary ">Tiếp tục</button>
+                        <button type="button" id="nextTab" class="uk-button uk-button-primary text-[12px] ">Tiếp tục</button>
 
                     </div>
 
@@ -110,20 +110,16 @@
 
                                     <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán khi nhận hàng</span>
                                 </label>
+
                                 <label class="flex items-center mb-2 payments-card-title">
                                     <input type="radio" name="payment_method" class="form-radio text-black"
 
-                                        value="Thanh toán khi nhận hàng" checked>
+                                        value="Thanh toán khi nhận hàng">
+                                    <button type="button" class="bt-vnpay-order !ml-2 !text-[14px] !font-semibold !text-[#222]" onclick="submitVNPay()">Thanh toán VNPay</button>
 
-                                    <div class="ml-2 text-[14px] font-semibold text-[#222]" uk-toggle="target: #id-vnpay">
-                                        Thanh toán bằng VNPay
-                                    </div>
-                                    <!-- <a href="{{ route('vnpay_payment') }}" class="flex items-center mb-2 payments-card-title">
-                                            <span class="ml-2 text-[14px] font-semibold text-[#222]">Thanh toán bằng VNPay</span>
-                                        </a> -->
                                 </label>
 
-                                <button type="button" id="nextTab2" class="uk-button uk-button-primary mt-5">Tiếp tục</button>
+                                <button type="button" id="nextTab2" class="uk-button uk-button-primary mt-5 text-[12px]">Tiếp tục</button>
                             </div>
 
 
@@ -135,13 +131,14 @@
                     <div class="review">
                         <fieldset class="uk-fieldset review-body">
                             {{-- <legend class="uk-legend order-title-item">Xác thực thanh toán</legend> --}}
-                            <p class="order-name">Sản phẩm đã đặt.</p>
+                            <p class="order-name">Sản phẩm đã đặt</p>
                             <div class="uk-list uk-list-divider review-content">
                                 @foreach ($carts as $item)
                                 <div class="warp">
-                                    <a href="{{ route('productDetail', $item->product_id) }}"><img
+                                    <a href="{{ route('productDetail', $item->product_id) }}">
+                                        <img
                                             src="{{ asset($item->product->image) }}" alt=""
-                                            width="120px"></a>
+                                            class="!h-[110px] !w-[110px] !max-w-[1110px] !max-h-[1110px]" style="object-fit: cover;"></a>
                                     <div class="warp-body">
                                         <a href="{{ route('productDetail', $item->product_id) }}"
                                             class="product-name">{{ $item->product->name }}</a>
@@ -154,8 +151,11 @@
                                         </div>
                                         <div class="data-size">
                                             <label>Size: </label>
-                                            <span>{{ $item->variant->color }} / {{ $item->variant->size }}.</span>
-                                            <span>Số lượng: {{ $item->quantity }}</span>
+                                            <span>{{ $item->variant->color }} / {{ $item->variant->size }}</span>
+                                        </div>
+                                        <div class="data-size">
+                                            <label>Số lượng:</label>
+                                            <span> {{ $item->quantity }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -171,23 +171,24 @@
                 <h2 class="">Đơn hàng</h2>
 
                 <div class="discount-code">
-                    <span class="code">Mã giảm giá</span>
-                    <form action="">
-                        <input class="shopping-cart-right-input" type="text" id="discount_code" autocomplete="off" placeholder="Nhập mã giảm giá">
+                    <span class="code block text-base font-semibold text-[#222] pb-3">Mã giảm giá</span>
+                    <div class="form-voucher">
+                        <input class="shopping-cart-right-input block w-full p-1 input-info" type="text" id="discount_code" autocomplete="off" placeholder="Nhập mã giảm giá">
                         <button type="button" id="apply-discount" class="shopping-cart-right-button" onclick="validateDiscount()">
                             <span class="shopping-cart-right-text">Apply</span>
                         </button>
                         <button type="button" id="change-discount" class="shopping-cart-right-button" onclick="changeDiscount()" style="display: none;">
-                            <span class="shopping-cart-right-text">Đổi mã khác</span>
+                            <span class="shopping-cart-right-text"> Mã khác</span>
                         </button>
 
-                    </form>
+                    </div>
                 </div>
 
 
-                <div class="discount-amount hidden">
-                    <span>Giảm giá</span>
-                    <span id="discount-value">0 đ</span>
+                <div class="discount-amount hidden font-bold mt-4">
+                    <span class="text-[15px] text-[#222]">Giảm</span>
+                    <span id="discount-value" class="text-[15px] text-[red]">0 đ</span>
+                    <span class="text-[15px] text-[#222]">cho sản phẩm</span>
                 </div>
                 <div class="total-right">
                     <span>Tổng sản phẩm</span>
@@ -199,8 +200,8 @@
                     <input type="hidden" name="shipping_fee" value="{{ $shipping }}" id="">
                 </div>
                 <div class="total-right total-voucher">
-                    <span>Tổng tiền</span>
-                    <span>{{ $total }} đ</span>
+                    <span class="!text-[18px] font-semibold text-[#222]">Tổng tiền</span>
+                    <span class="!text-[18px] font-semibold text-[#222]">{{ $total }} đ</span>
                     <input type="hidden" name="total_price" value="{{ $total }}" id="">
                 </div>
                 <div class="total-action">
@@ -212,12 +213,12 @@
     </form>
 </section>
 
-<div id="id-vnpay" uk-modal>
+<!-- <div id="id-vnpay" uk-modal>
     <div class="uk-modal-dialog uk-modal-body uk-card uk-card-default">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <h2 class="uk-card-title font-bold">Thanh toán qua VNPay</h2>
 
-        <!-- Form thanh toán -->
+       
         <form action="{{ route('vnpay_payment') }}" method="POST" id="vnpay-form">
             @csrf
             <div class="uk-margin">
@@ -245,18 +246,21 @@
             </div>
 
             <div class="uk-margin">
-                <span class="block text-[18px] font-semibold  text-[#222] mb-5">Thông tin đơn hàng</span>
+                <label class="block text-[14px] font-semibold text-[#222]">Thông tin đơn hàng</label>
                 <div class="uk-grid !mt-0 pb-3">
-                    <div class="uk-width-expand block text-[14px] font-semibold  text-[#222]">Tổng phụ:</div>
-                    <div class="uk-width-auto">{{ number_format($total - $shipping) }}đ</div>
+                    <div class="uk-width-expand block text-[14px] text-[#333]">Tổng sản phẩm:</div>
+                    <div class="uk-width-auto">{{ number_format($subTotal - $shipping) }}đ</div>
+                    <input type="hidden" name="subtotal" value="{{ $subTotal - $shipping }}">
                 </div>
                 <div class="uk-grid !mt-0 pb-3">
-                    <div class="uk-width-expand block text-[14px] font-semibold  text-[#222]">Phí vận chuyển:</div>
+                    <div class="uk-width-expand block text-[14px] text-[#333]">Phí vận chuyển:</div>
                     <div class="uk-width-auto">{{ number_format($shipping) }}đ</div>
+                    <input type="hidden" name="shipping_fee" value="{{ $shipping }}">
                 </div>
                 <div class="uk-grid !mt-0 pb-3">
-                    <div class="uk-width-expand block text-[14px] font-semibold  text-[#222]"><strong>Tổng thanh toán:</strong></div>
+                    <div class="uk-width-expand block text-[14px] font-semibold text-[#222]">Tổng thanh toán:</div>
                     <div class="uk-width-auto"><strong>{{ number_format($total) }}đ</strong></div>
+                    <input type="hidden" name="total" value="{{ $total }}">
                 </div>
             </div>
 
@@ -267,46 +271,86 @@
             </button>
         </form>
     </div>
-</div>
+</div> -->
 
 @endsection
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var tabList = UIkit.tab(document.querySelector('.uk-tab'));
+        var tabItems = document.querySelectorAll('.uk-tab li');
 
         // First tab "Tiếp tục" button
         document.getElementById('nextTab').addEventListener('click', function() {
+            tabItems[0].classList.add('tab-completed');
             tabList.show(1);
         });
 
         // Second tab "Tiếp tục" button
         document.getElementById('nextTab2').addEventListener('click', function() {
+            tabItems[1].classList.add('tab-completed');
             tabList.show(2);
         });
     });
 
-    $('#vnpay-form').submit(function(e) {
-        e.preventDefault();
+    // $('#vnpay-form').submit(function(e) {
+    //     e.preventDefault();
 
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                if (response.status === 'error') {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'warning',
-                        title: response.message,
-                        showConfirmButton: true
-                    });
-                } else {
-                    window.location.href = response;
-                }
-            }
-        });
-    });
+    //     $.ajax({
+    //         url: $(this).attr('action'),
+    //         method: 'POST',
+    //         data: $(this).serialize(),
+    //         success: function(response) {
+    //             if (response.status === 'error') {
+    //                 Swal.fire({
+    //                     position: 'center',
+    //                     icon: 'warning',
+    //                     title: response.message,
+    //                     showConfirmButton: true
+    //                 });
+    //             } else {
+    //                 window.location.href = response;
+    //             }
+    //         }
+    //     });
+    // });
+
+    function submitVNPay() {
+        // Kiểm tra các trường bắt buộc
+        const name = document.querySelector('input[name="name"]').value;
+        const phone = document.querySelector('input[name="phone"]').value;
+        const address = document.querySelector('input[name="address"]').value;
+
+        if (!name || !phone || !address) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Vui lòng điền đầy đủ thông tin giao hàng',
+                showConfirmButton: true
+            });
+            return;
+        }
+
+        const orderData = {
+            name: name,
+            phone: phone,
+            address: address,
+            total: document.querySelector('input[name="total_price"]').value,
+            shipping_fee: document.querySelector('input[name="shipping_fee"]').value,
+            voucher_use: document.querySelector('input[name="voucher_use"]').value
+        };
+
+        fetch('{{ route("vnpay_payment") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify(orderData)
+            })
+            .then(response => response.text())
+            .then(url => window.location.href = url);
+    }
 
     function validateDiscount() {
         const code = document.getElementById('discount_code').value;
@@ -314,10 +358,10 @@
         const shipping = parseInt('{{ $shipping }}'.replace(/[^0-9]/g, ''));
 
         console.log('Dữ liệu gửi đi:', {
-        code: code,
-        subtotal: subtotal,
-        shipping: shipping
-    });
+            code: code,
+            subtotal: subtotal,
+            shipping: shipping
+        });
 
         fetch('{{ route("validate.discount") }}', {
                 method: 'POST',
@@ -389,8 +433,8 @@
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Áp dụng mã giảm giá thành công',
-                        text: `Giảm: ${data.discount.toLocaleString()}đ - Tổng mới: ${finalTotal.toLocaleString()}đ`,
+                        title: 'Áp mã giảm giá thành công',
+                        // text: `Giảm: ${data.discount.toLocaleString()}đ - Tổng mới: ${finalTotal.toLocaleString()}đ`,
                         showConfirmButton: false,
                         timer: 2000
                     });
@@ -439,5 +483,12 @@
         if (totalInput) {
             totalInput.value = total;
         }
+    }
+
+    function preventResubmit() {
+        setTimeout(function() {
+            window.location.href = "{{ route('home') }}";
+        }, 1000);
+        return true;
     }
 </script>

@@ -18,6 +18,15 @@
     }
 }
 .wrapper-register {
+    .register-left {
+        .img-resgister {
+            background-image: url('https://s3-alpha-sig.figma.com/img/040c/c45a/2d79166cf646d5a5a0119f93bceae506?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q6hPs9hT36ACfh0LKSowN-SPsO83I5laXdhJcS1pq62GlhevlJSj3RrwQSLb1f8h60qQ2osDQZ5Nc362k5Q-u9p2-QA7QUn8evqh8lfJerEhtEtgu7mKNxaGTF1PQhhwqL~XLpW3rE-dzs3aVe9-9v4pRxCTR2blwBS4fbPe9B07mep7GlUXFDclOYwLWDpg11AuB-F0RN5YegM6dFnDfPc5ZfKj-UbOzORG1xcc7RSR-ebaLBgfL7PEJcVrVlLM2kvkmNPlSPFdBGvOzsm6lqszDs9JLCuokuC-Mxwg0w9wVgW37esrfc4yvt5A1DzSUvYz6AlkJUGh3~ji5Kg19g__');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100% !important;
+        }
+    }
     .register-right {
         padding: 0 80px;
         h2 {
@@ -63,6 +72,16 @@
 }
 
 .wrapper-login {
+    .login-left {
+        height: 100vh;
+        .img-login {
+            background-image: url('https://s3-alpha-sig.figma.com/img/040c/c45a/2d79166cf646d5a5a0119f93bceae506?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q6hPs9hT36ACfh0LKSowN-SPsO83I5laXdhJcS1pq62GlhevlJSj3RrwQSLb1f8h60qQ2osDQZ5Nc362k5Q-u9p2-QA7QUn8evqh8lfJerEhtEtgu7mKNxaGTF1PQhhwqL~XLpW3rE-dzs3aVe9-9v4pRxCTR2blwBS4fbPe9B07mep7GlUXFDclOYwLWDpg11AuB-F0RN5YegM6dFnDfPc5ZfKj-UbOzORG1xcc7RSR-ebaLBgfL7PEJcVrVlLM2kvkmNPlSPFdBGvOzsm6lqszDs9JLCuokuC-Mxwg0w9wVgW37esrfc4yvt5A1DzSUvYz6AlkJUGh3~ji5Kg19g__');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+        }
+    }
     .login-right {
         position: absolute;
         top: 50%;
