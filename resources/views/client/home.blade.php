@@ -136,12 +136,23 @@
                         <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
                             @if (!empty($data['productNews']))
                                 @foreach ($data['productNews'] as $key => $item)
+                                    @php
+                                        if ($item->price_old > 0) { 
+                                            $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                                        } else {
+                                            $discountPercentage = 0;
+                                        }
+                                    @endphp
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
                                                 <img src="" style="background-image: url({{ $item->image }}); padding: 100px 0" />
                                             </a>
-                                            <span>-10%</span>
+                                            <span>
+                                                @if ($discountPercentage > 0)
+                                                    {{ $discountPercentage }}%
+                                                @endif
+                                            </span>
                                             <i class="fas fa-heart icon-heart"
                                                 style="color: #c90d0d; font-size: 1.25rem;"></i>
                                             <div class="product-button">
@@ -172,22 +183,14 @@
                                             @endif
                                         </div>
                                         <div class="product-item-detail-gallery-items">
-                                            <div class="product-item-detail-gallery-item">
-                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                                    alt="">
-                                            </div>
-                                            <div class="product-item-detail-gallery-item">
-                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                                    alt="">
-                                            </div>
-                                            <div class="product-item-detail-gallery-item">
-                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                                    alt="">
-                                            </div>
-                                            <div class="product-item-detail-gallery-item">
-                                                <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                                    alt="">
-                                            </div>
+                                            @if (!empty($item->images))
+                                                @foreach ($item->images as $image)
+                                                    <div class="product-item-detail-gallery-item">
+                                                        <img src="{{ $image->image_url }}"
+                                                            alt="">
+                                                    </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -275,12 +278,23 @@
             <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
                 @if (!empty($data['productUpdateNews']))
                     @foreach ($data['productUpdateNews'] as $key => $item)
+                        @php
+                            if ($item->price_old > 0) { 
+                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            } else {
+                                $discountPercentage = 0;
+                            }
+                        @endphp
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
                                     <img src="" style="background-image: url({{ $item->image }})"  />
                                 </a>
-                                <span>-10%</span>
+                                <span>
+                                    @if ($discountPercentage > 0)
+                                        {{ $discountPercentage }}%
+                                    @endif
+                                </span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
                                 <div class="product-button">
                                     {{-- <button>Thêm vào giỏ </button> --}}
@@ -310,22 +324,14 @@
                                 @endif
                             </div>
                             <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
+                                @if (!empty($item->images))
+                                    @foreach ($item->images as $image)
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="{{ $image->image_url }}"
+                                                alt="">
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -363,12 +369,23 @@
             <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
                 @if (!empty($data['productPopulars']))
                     @foreach ($data['productPopulars'] as $key => $item)
+                        @php
+                            if ($item->price_old > 0) { 
+                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            } else {
+                                $discountPercentage = 0;
+                            }
+                        @endphp
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
                                     <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
-                                <span>-10%</span>
+                                <span>
+                                    @if ($discountPercentage > 0)
+                                        {{ $discountPercentage }}%
+                                    @endif
+                                </span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
                                 <div class="product-button">
                                     {{-- <button>Thêm vào giỏ </button> --}}
@@ -398,22 +415,14 @@
                                 @endif
                             </div>
                             <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
+                                @if (!empty($item->images))
+                                    @foreach ($item->images as $image)
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="{{ $image->image_url }}"
+                                                alt="">
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -450,12 +459,23 @@
             <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
                 @if (!empty($data['categoryNewOne']->products))
                     @foreach ($data['categoryNewOne']->products as $key => $item)
+                        @php
+                            if ($item->price_old > 0) { 
+                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            } else {
+                                $discountPercentage = 0;
+                            }
+                        @endphp
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
                                     <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
-                                <span>-10%</span>
+                                <span>
+                                    @if ($discountPercentage > 0)
+                                        {{ $discountPercentage }}%
+                                    @endif
+                                </span>
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
                                 <div class="product-button">
                                     {{-- <button>Thêm vào giỏ </button> --}}
@@ -485,22 +505,14 @@
                                 @endif
                             </div>
                             <div class="product-item-detail-gallery-items">
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
-                                <div class="product-item-detail-gallery-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/large/100/041/044/products/b396909d-5313-452d-9cdf-499890ef67b6-jpeg.jpg?v=1697789268097"
-                                        alt="">
-                                </div>
+                                @if (!empty($item->images))
+                                    @foreach ($item->images as $image)
+                                        <div class="product-item-detail-gallery-item">
+                                            <img src="{{ $image->image_url }}"
+                                                alt="">
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     @endforeach

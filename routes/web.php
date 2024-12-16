@@ -175,7 +175,7 @@ Route::middleware(['web'])->group(function () {
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
     Route::get('/order-history', [UserController::class, 'order_history'])->name('order_history');
-    Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
+    Route::get('/search', [SneakerController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
