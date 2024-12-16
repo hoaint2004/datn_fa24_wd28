@@ -92,10 +92,10 @@
             <div class="uk-width-3-4 collection-right">
                 <div class="product-list-filter">
                     <div class="show-product">
-                        Hiển thị <span class="show-start">1</span> - <span class="show-end">16</span> trong tổng số <span class="shoe-total">642</span> sản phẩm
+                       
                     </div>
 
-                    <form class="uk-form-stacked shop-sort-by">
+                    {{-- <form class="uk-form-stacked shop-sort-by">
                         <div class="shop-sort-by">
                             <label class="uk-form-label" for="sort-by">Sắp xếp theo:</label>
                             <div class="uk-form-controls">
@@ -108,12 +108,20 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
 
                 </div>
 
                 <div class="product-list" id="product_main">
-                   
+                    @if(!empty($data['paginate']))
+                    <div class="show-product">
+                        Hiển thị 
+                        <span class="show-start">{{ $data['paginate']['from'] }}</span> - 
+                        <span class="show-end">{{ $data['paginate']['to'] }}</span> 
+                        trong tổng số 
+                        <span class="shoe-total">{{ $data['paginate']['total'] }}</span> sản phẩm
+                    </div>
+                    @endif
                     <div class="home-product-list-wrapper uk-grid " uk-grid>
 
                         @if (!empty($data['categoryById']->products))
@@ -236,16 +244,22 @@
                 </div> --}}
                 
                 {{-- end test --}}
-                <nav aria-label="Pagination">
+                <nav aria-label="Pagination" id="original-pagination">
                     <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
-                        <li><a href="#"><span uk-pagination-previous></span></a></li>
-                        <li class="uk-active"><span aria-current="page">1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li class="uk-disabled"><span>…</span></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#"><span uk-pagination-next></span></a></li>
+                        <li><a href="{{ $data['products']->previousPageUrl() }}"><span uk-pagination-previous></span></a></li>
+                        @for ($i = 1; $i <= $data['products']->lastPage(); $i++)
+                            <li class="{{ $data['products']->currentPage() == $i ? 'uk-active' : '' }}">
+                                <a href="{{ $data['products']->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+                        <li><a href="{{ $data['products']->nextPageUrl() }}"><span uk-pagination-next></span></a></li>
+                    </ul>
+                </nav>
+
+                
+                <nav aria-label="Pagination" id="filtered-pagination" style="display: none;">
+                    <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                    
                     </ul>
                 </nav>
             </div>
@@ -600,7 +614,7 @@
     {{-- filter--}}
     <script>
         $(document).ready(function () {
-            function getFilterData() {
+            function getFilterData() { 
                 let selectedCategories = [];
                 let selectedSizes = [];
                 let selectedColors = [];
@@ -626,7 +640,7 @@
                 if (selectedSizes.length > 0) filterData.sizes = selectedSizes;
                 if (selectedColors.length > 0) filterData.colors = selectedColors;
                 if (priceRange.from && priceRange.to) filterData.price = priceRange;
-    
+                
                 return filterData;
             }
     

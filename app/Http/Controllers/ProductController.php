@@ -9,7 +9,7 @@ use App\Models\Comment;
 // controller dành cho sản phẩm best seller
 class ProductController extends Controller
 {   
-    //sản phẩm nổi bật chi tiết
+    //Đây là Controller phần sản phẩm nổi bật
     public function featured_products($type)
     {
         $data = [];
@@ -23,7 +23,7 @@ class ProductController extends Controller
                 ->orderByDesc('total_quantity')
                 ->with(['category', 'variants', 'images'])
                 ->where('status', 0)
-                ->limit(3)->get();
+                ->limit(5)->get();
                 // ->paginate(9);
         }
     
@@ -32,7 +32,7 @@ class ProductController extends Controller
             $data['products'] = Product::orderBy('created_at', 'desc')
                 ->with(['category', 'variants', 'images'])
                 ->where('status', 0)
-                ->limit(4)->get();
+                ->limit(5)->get();
                 // ->paginate(9);
         }
     
@@ -41,7 +41,7 @@ class ProductController extends Controller
             $data['products'] = Product::orderBy('price', 'asc')
                 ->with(['category', 'variants', 'images'])
                 ->where('status', 0)
-                ->limit(3)->get();
+                ->limit(5)->get();
                 // ->paginate(9);
         }
     
