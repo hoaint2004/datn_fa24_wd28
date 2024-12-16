@@ -37,10 +37,10 @@ class HomeController extends Controller
             ->get();
     
 
-        $data['categoryLimit3'] = Category::with('products')
+        $data['categoryLimit8'] = Category::with('products')
             ->where('status', 0)
             ->orderBy('id', 'DESC')
-            ->limit(3)
+            ->limit(8)
             ->get();
     
       

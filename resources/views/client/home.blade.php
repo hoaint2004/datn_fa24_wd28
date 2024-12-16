@@ -78,14 +78,14 @@
             List các nhóm sản phẩm nổi bật nhất
         </span>
         <div class="collection-list uk-grid" uk-grid>           
-            @foreach($data['categoryLimit3'] as $category3)
+            @foreach($data['categoryLimit8'] as $category8)
             <a class="collection-list-item " href="#" title="Flash Sale">
                 <div class="home-collection-list-item-image">
-                    <img src="{{$category3->image}}"
+                    <img src="{{$category8->image}}"
                         alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
                         fetchpriority="auto">
                 </div>
-                <span>{{$category3->name}}</span>
+                <span>{{$category8->name}}</span>
             </a>
             @endforeach
 
