@@ -204,7 +204,7 @@
                                 <div class="uk-width-1-1">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
-                                            <a href="{{ route('featured_products', ['type' => 'most-purchased']) }}">Best Seller</a>
+                                            {{-- <a href="{{ route('featured_products', ['type' => 'most-purchased']) }}">Best Seller</a> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -213,7 +213,7 @@
                                 <div class="uk-width-1-1">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
-                                            <a href="{{ route('featured_products', ['type' => 'latest']) }}">Sản phẩm mới</a>
+                                            {{-- <a href="{{ route('featured_products', ['type' => 'latest']) }}">Sản phẩm mới</a> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -222,7 +222,7 @@
                                 <div class="uk-width-1-1">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>
-                                            <a href="{{ route('featured_products', ['type' => 'cheapest']) }}">Sản phẩm giá rẻ</a>
+                                            {{-- <a href="{{ route('featured_products', ['type' => 'cheapest']) }}">Sản phẩm giá rẻ</a> --}}
                                         </li>
                                     </ul>
                                 </div>

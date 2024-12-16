@@ -30,13 +30,15 @@ class Kernel extends HttpKernel
      */
 
      protected $routeMiddleware = [
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
         // ...
-        'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+        // 'isAdmin' => \App\Http\Middleware\IsAdmin::class,
     ];
 
      protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
+            \App\Http\Middleware\AdminMiddleware::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
