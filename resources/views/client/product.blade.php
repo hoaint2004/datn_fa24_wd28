@@ -113,6 +113,7 @@ Sneakers - Thế Giới Giày
 
             </div>
 
+<<<<<<< HEAD
             <div class="product-list" id="product_main">
                 <div class="home-product-list-wrapper uk-grid" uk-grid>
                     @if (!empty($data['categoryById']->products))
@@ -175,6 +176,181 @@ Sneakers - Thế Giới Giày
                     @endif
 
                 </div>
+=======
+            <div class="uk-width-3-4 collection-right">
+                <div class="product-list-filter">
+                    <div class="show-product">
+                       
+                    </div>
+
+                    {{-- <form class="uk-form-stacked shop-sort-by">
+                        <div class="shop-sort-by">
+                            <label class="uk-form-label" for="sort-by">Sắp xếp theo:</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="sort-by" name="sort-by">
+                                    <option class="option-filter" value="popular">Phổ biến nhất</option>
+                                    <option class="option-filter" value="price_asc">Giá (Thấp đến cao)</option>
+                                    <option class="option-filter" value="price_desc">Giá (Cao đến thấp)</option>
+                                    <option class="option-filter" value="newest">Mới nhất</option>
+                                    <option class="option-filter" value="oldest">Cũ nhất</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form> --}}
+
+                </div>
+
+                <div class="product-list" id="product_main">
+                    @if(!empty($data['paginate']))
+                    <div class="show-product">
+                        Hiển thị 
+                        <span class="show-start">{{ $data['paginate']['from'] }}</span> - 
+                        <span class="show-end">{{ $data['paginate']['to'] }}</span> 
+                        trong tổng số 
+                        <span class="shoe-total">{{ $data['paginate']['total'] }}</span> sản phẩm
+                    </div>
+                    @endif
+                    <div class="home-product-list-wrapper uk-grid " uk-grid>
+
+                        @if (!empty($data['categoryById']->products))
+                            @foreach ($data['categoryById']->products as $key => $item)
+                                @php
+                                    if ($item->price_old > 0) { 
+                                        $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                                    } else {
+                                        $discountPercentage = 0;
+                                    }
+                                @endphp
+                                <div class="product-item uk-width-1-4">
+                                    <div class="product-image">
+                                        <a href="{{ route('productDetail', $item->id) }}">
+                                            <img src="" style="background-image: url({{ $item->image }})" />
+                                        </a>
+                                        <span>
+                                          @if ($discountPercentage > 0)
+                                            {{ $discountPercentage }}%
+                                          @endif
+                                        </span>
+                                        <i class="fas fa-heart icon-heart"
+                                            style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                        <div class="product-button">
+                                            <button>Thêm vào giỏ </button>
+                                            <button type="button" uk-toggle="target: #modal-container-{{$item->id}}"
+                                                class="quick-view-button" data-id="{{ $item->id }}">Xem
+                                                nhanh</button>
+                                        </div>
+                                    </div>
+                                    <div class="product-review">
+                                        <a href="{{ route('categories', $item->category->id) }}">
+                                            <span>{{ $item->category->name }}</span>
+                                        </a>
+                                        <div class="icon">
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('productDetail', $item->id) }}"
+                                        class="product-name">{{ $item->name }}</a>
+                                    <div class="product-price">
+                                        <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                        @if (!empty($item->price_old))
+                                            <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                        @endif
+                                    </div>
+                                    <div class="product-item-detail-gallery-items">
+                                        @if (!empty($item->images))
+                                            @foreach ($item->images as $image)
+                                                <div class="product-item-detail-gallery-item">
+                                                    <img src="{{ $image->image_url }}"
+                                                        alt="">
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+
+                    </div>
+                   
+
+                </div>
+                <div class="product-list">
+                    <div class="home-product-list-wrapper uk-grid" uk-grid>
+                        <div id="filter-id"></div>
+                    </div>
+                </div>
+                {{-- test --}}
+               
+                
+
+                {{-- <div class="product-list">
+                    <div class="home-product-list-wrapper uk-grid " uk-grid>
+                        @if (!empty($products))
+                            @foreach ($products as $key => $item)
+                                <div class="product-item uk-width-1-4">
+                                    <div class="product-image">
+                                        <a href="{{ route('productDetail', $item->id) }}">
+                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" />
+                                        </a>
+                                        <span>-10%</span>
+                                        <i class="fas fa-heart icon-heart"
+                                            style="color: #c90d0d; font-size: 1.25rem;"></i>
+                                        <div class="product-button">
+                                            <button type="button" uk-toggle="target: #modal-container"
+                                                class="quick-view-button" data-id="{{ $item->id }}">Xem
+                                                nhanh</button>
+                                        </div>
+                                    </div>
+                                    <div class="product-review">
+                                        <a href="{{ route('categories', $item->category->id) }}">
+                                            <span>{{ $item->category->name }}</span>
+                                        </a>
+                                        <div class="icon">
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                            <i class="fa-regular fa-star icon-review" style="color: #fdb5b9;"></i>
+                                        </div>
+                                    </div>
+                                    <a href="{{ route('productDetail', $item->id) }}"
+                                        class="product-name">{{ $item->name }}</a>
+                                    <div class="product-price">
+                                        <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
+                                        @if (!empty($item->price_old))
+                                            <del>{{ number_format($item->price_old, 0, ',', '.') }} ₫</del>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div> --}}
+                
+                {{-- end test --}}
+                <nav aria-label="Pagination" id="original-pagination">
+                    <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                        <li><a href="{{ $data['products']->previousPageUrl() }}"><span uk-pagination-previous></span></a></li>
+                        @for ($i = 1; $i <= $data['products']->lastPage(); $i++)
+                            <li class="{{ $data['products']->currentPage() == $i ? 'uk-active' : '' }}">
+                                <a href="{{ $data['products']->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+                        <li><a href="{{ $data['products']->nextPageUrl() }}"><span uk-pagination-next></span></a></li>
+                    </ul>
+                </nav>
+
+                
+                <nav aria-label="Pagination" id="filtered-pagination" style="display: none;">
+                    <ul class="uk-pagination uk-flex-right uk-margin-medium-top" uk-margin>
+                    
+                    </ul>
+                </nav>
+>>>>>>> ed2493fe8baf677e9b8e59431b3d78007476bbd6
             </div>
 
             <div class="product-list">
@@ -542,6 +718,7 @@ Sneakers - Thế Giới Giày
         }
     });
 
+<<<<<<< HEAD
     // Thực hiện khi nhấn nút tăng số lượng
     $('.btn-plus-header').on('click', function() {
         var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
@@ -566,6 +743,39 @@ Sneakers - Thế Giới Giày
             error: function(xhr, status, error) {
                 console.error("Lỗi khi cập nhật số lượng:", error);
                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
+=======
+    {{-- filter--}}
+    <script>
+        $(document).ready(function () {
+            function getFilterData() { 
+                let selectedCategories = [];
+                let selectedSizes = [];
+                let selectedColors = [];
+                let priceRange = {};
+                // Lấy các danh mục được chọn
+                $('.sidebar-category input:checked').each(function () {
+                    selectedCategories.push($(this).val());
+                });
+                // Lấy các kích thước được chọn
+                $('.sidebar-size input:checked').each(function () {
+                    selectedSizes.push($(this).val());
+                });
+                // Lấy các màu sắc được chọn
+                $('.sidebar-color input:checked').each(function () {
+                    selectedColors.push($(this).val());
+                });
+                // Lấy khoảng giá
+                priceRange.from = $('.sidebar-price-body input:first').val();
+                priceRange.to = $('.sidebar-price-body input:last').val();
+                // Trả về dữ liệu lọc, chỉ gửi các giá trị đã được chọn
+                let filterData = {};
+                if (selectedCategories.length > 0) filterData.categories = selectedCategories;
+                if (selectedSizes.length > 0) filterData.sizes = selectedSizes;
+                if (selectedColors.length > 0) filterData.colors = selectedColors;
+                if (priceRange.from && priceRange.to) filterData.price = priceRange;
+                
+                return filterData;
+>>>>>>> ed2493fe8baf677e9b8e59431b3d78007476bbd6
             }
         });
     }

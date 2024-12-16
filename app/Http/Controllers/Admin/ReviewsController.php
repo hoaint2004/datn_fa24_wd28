@@ -83,11 +83,4 @@ public function index(Request $request)
             ], 500);
         }
     }
-
-
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> fb13817d6b0caba2ec0e5cd84c09ec5e84b4c929

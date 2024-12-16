@@ -165,7 +165,7 @@ Route::middleware(['web'])->group(function () {
     Route::post('/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
     Route::post('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
-    // trang sp nổi bật
+    // trang sp nổi bật,bestSeller
     Route::get('/featured_products/{type}',[ControllersProductController::class,'featured_products'])->name('featured_products');
     
     Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -179,7 +179,7 @@ Route::middleware(['web'])->group(function () {
     Route::resource('/order', OrderController::class);
     Route::get('/ordersuccess', [OrderController::class, 'orderSuccess'])->name('order.success');
     Route::get('/order-history', [UserController::class, 'order_history'])->name('order_history');
-    Route::get('/search', [ControllersProductController::class, 'search'])->name('search');
+    Route::get('/search', [SneakerController::class, 'search'])->name('search');
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');

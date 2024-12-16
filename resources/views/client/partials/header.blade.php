@@ -3,10 +3,9 @@
         <div class="uk-grid" uk-grid="true">
             <!-- Phần tìm kiếm bên trái -->
             <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
-                <form action="" class="form-search">
+                <form action="{{ route('search') }}" class="form-search">
                     <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
                     <button uk-icon="search" class="icon-search">
-
                     </button>
                 </form>
             </div>

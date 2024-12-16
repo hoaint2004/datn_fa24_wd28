@@ -249,8 +249,19 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        showContent('info');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     showContent('info');
+    // });
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const activeTab = params.get('activeTab') || 'info'; // Mặc định là 'info'
+
+        showContent(activeTab);
+        const activeMenuItem = document.querySelector(`.menu li[onclick="showContent('${activeTab}')"]`);
+        if (activeMenuItem) {
+            document.querySelectorAll('.menu li').forEach(item => item.classList.remove('active'));
+            activeMenuItem.classList.add('active');
+        }
     });
 
     function showContent(section) {
