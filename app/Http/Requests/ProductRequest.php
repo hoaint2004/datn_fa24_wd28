@@ -34,9 +34,15 @@ class ProductRequest extends FormRequest
             'product_galleries.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
     
             // Validation cho các biến thể sản phẩm
+<<<<<<< HEAD
             'variants' => 'nullable|array|distinct',
             'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|between:20,50',
             'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string',
+=======
+            'variants' => 'nullable|array',
+            'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|between:20,50', // Kích thước chỉ từ 40 đến 50
+            'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string|', // Màu chỉ được chọn từ các giá trị cụ thể
+>>>>>>> fb13817d6b0caba2ec0e5cd84c09ec5e84b4c929
             'variants.*.quantity' => 'required_with:variants.*.size,variants.*.color|integer|min:0',
         ];
     }
@@ -73,5 +79,9 @@ class ProductRequest extends FormRequest
             'variants.*.quantity.min' => 'Số lượng không được nhỏ hơn 0.',
         ];
     }
+<<<<<<< HEAD
     
 }
+=======
+}
+>>>>>>> fb13817d6b0caba2ec0e5cd84c09ec5e84b4c929

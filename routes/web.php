@@ -63,11 +63,11 @@ Route::post('/password/reset', [AuthController::class, 'reset'])
 
 
 // route admin
-// Route::prefix('admin')->name('admin.')->group(function () {
-    Route::prefix('admin')
-    ->name('admin.')
-    ->middleware(['auth', 'admin']) // Thêm middleware auth và admin
-    ->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Route::prefix('admin')
+    // ->name('admin.')
+    // ->middleware(['auth', 'admin']) // Thêm middleware auth và admin
+    // ->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::controller(CategoryController::class)->name('categories.')
@@ -198,6 +198,8 @@ Route::middleware(['web'])->group(function () {
     // review
     Route::post('/reviews',[ReviewsController::class,'store'])->name('reviews.store');
 
+    Route::post('/validate-discount', [DiscountController::class, 'validateDiscountCode'])->name('validate.discount');
+
 });
 
 Route::get('/filter', function () {
@@ -210,4 +212,8 @@ Route::get('/succes', function(){
 
 Route::get('/success-vnpay', function () {
     return view('client.success-vnpay');
+});
+
+Route::get('/testbutton', function () {
+    return view('client.testbutton');
 });

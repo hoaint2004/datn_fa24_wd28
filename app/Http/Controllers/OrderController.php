@@ -49,6 +49,10 @@ class OrderController extends Controller
     // Thêm đơn hàng ở client
     public function store(Request $request)
     {
+        Log::info('Dữ liệu đặt hàng:', [
+            'request_all' => $request->all(),
+            'voucher_use' => $request->voucher_use
+        ]);
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -65,9 +69,15 @@ class OrderController extends Controller
         try {
             $params = $request->except('_token');
             $params['code'] = 'SW-' . Auth::user()->id . '-' . now()->timestamp;
+            $params['voucher_use'] = $request->voucher_use;
+            Log::info('Params trước khi tạo order:', $params);
 
             $order = Order::create($params);
             $orderID = $order->id;
+
+            Log::info('Order sau khi tạo:', [
+                'order' => $order
+            ]);
 
             $carts = Cart::where('user_id', Auth::user()->id)->get();
             foreach($carts as $item) {

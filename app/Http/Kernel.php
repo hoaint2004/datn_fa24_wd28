@@ -28,17 +28,18 @@ class Kernel extends HttpKernel
      *
      * @var array<string, array<int, class-string|string>>
      */
-
-     protected $routeMiddleware = [
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        // ...
-        // 'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+    protected $routeMiddleware = [
+        // Các middleware khác
+        'admin' => \App\Http\Middleware\AdminMiddleware::class, // Đường dẫn chính xác đến middleware
     ];
+    //  protected $routeMiddleware = [
+    //     // ...
+    //     'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+    // ];
 
      protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
-            \App\Http\Middleware\AdminMiddleware::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,

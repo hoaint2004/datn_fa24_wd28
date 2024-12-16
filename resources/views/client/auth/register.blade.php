@@ -28,7 +28,7 @@
     </a>
     <div class="wrapper-register uk-grid" uk-grid>
         <div class="uk-width-1-2 register-left">
-            <img src="https://heins.websitesbykarlo.com/wp-content/uploads/2024/04/banner-01-1.jpg" alt="" width="100%">
+            <img src="" alt=""  class="img-resgister">
         </div>
 
         <form class="uk-width-1-2 register-right" action="{{ route('postRegister') }}" method="post">

@@ -59,7 +59,6 @@ header {
                 background-color: #f45d56;
                 display: inline-block;
                 z-index: 5;
-
             }
         }
         .offcanvas-cart {
@@ -89,7 +88,15 @@ header {
                     flex: 1;
                     .warp {
                         display: flex;
-                        padding: 17px 30px 45px 30px;
+                        padding: 15px 30px 23px 30px;
+                        .img-mini-cart {
+                            height: 130px;
+                            width: 120px;
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                            background-position: center center;
+                            overflow: hidden; 
+                        }
                         .warp-body {
                             display: flex;
                             flex-direction: column;
@@ -101,7 +108,11 @@ header {
                                 font-weight: $font-weight-bold;
                                 text-decoration: none;
                                 display: block;
-
+                                display: -webkit-box; 
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical; 
+                                overflow: hidden; 
+                                text-overflow: ellipsis; 
                                 transition: all 0.6s;
                                 &:hover {
                                     color: $color-red;
@@ -217,7 +228,6 @@ header {
                         }
                     }
                 }
-
             }
         }
     }
@@ -310,10 +320,9 @@ header {
     flex-direction: column;
 }
 
-
 .uk-dropnav-dropbar {
     left: 30% !important;
-    right: 15%;
+    right: 22%;
     top: 100% !important;
 }
 .uk-dropdown-nav {
@@ -324,19 +333,16 @@ header {
 .uk-modal-close-default {
     .close-modal {
         transition: transform 0.3s ease;
-      &:hover {
-        transform: scale(1.2);
-        color: red !important; 
-      }
+        &:hover {
+            transform: scale(1.2);
+            color: red !important;
+        }
     }
 }
 
 .uk-modal-body {
     padding: 30px;
-
 }
-
-
 
 .logo-page {
     text-decoration: none !important;
@@ -344,5 +350,11 @@ header {
         font-family: $font-spectral;
         color: #222222;
         font-size: 36px;
+        transition: all 0.8s;
+        &:hover {
+            transform: scale(1.03);
+        }
     }
 }
+
+

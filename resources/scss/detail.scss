@@ -3,19 +3,41 @@
 
 .icon-left-product-detail {
     @include button-style(#333, #fff, $color, red);
-    font-size: 24px;
+ 
+    border: 1px solid #222;
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
+    transition: border-color 0.5s ease;
+    &:hover {
+        border-color: #fff;
+    }
+    i {
+        color: black;
+        font-size: 30px;
+    }
 }
 .icon-right-product-detail {
     @include button-style(#333, #fff, $color, red);
-    font-size: 24px;
+ 
+    border: 1px solid #222;
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
+    transition: border-color 0.5s ease;
+    &:hover {
+        border-color: #fff;
+    }
+    i {
+        color: black;
+        font-size: 30px;
+    }
 }
 
 .input-info {
@@ -31,11 +53,22 @@
     .product-detail-body {
         .product-detail-left {
             padding-right: 50px;
+            .image-main {
+                height: 600px !important; 
+                object-fit: cover;
+                object-position: center center;
+            }
             .product-detail-image-slide {
                 display: flex;
                 justify-content: space-between;
                 .swiper-slide {
-                    width: 145px;
+                    padding: 60px 0;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -408,7 +441,9 @@
                     gap: 10px;
                     img {
                         border-radius: 50%;
-                        width: 30px;
+                        width: 25px;
+                        height: 25px;
+                        object-fit: cover;
                         &:hover {
                             cursor: pointer;
                             border: solid 3px $color;
@@ -430,19 +465,6 @@
     display: flex;
     align-items: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .media-comment-body {
     h4 {
