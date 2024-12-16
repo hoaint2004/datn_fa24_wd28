@@ -164,6 +164,7 @@
             <!-- Menu chính -->
             <div class="navbar-menu alo">
                 <ul class="flex justify-center m-0 p-0 gap-8 uk-subnav">
+                    
                     <li><a href="{{ route('home') }}">Trang chủ</a></li>
 
                     <!-- Danh mục sản phẩm với menu con và dropbar -->
@@ -191,49 +192,48 @@
                         </div>
                     </li>
 
+
+
                     <!-- Sản phẩm nổi bật với menu con và dropbar -->
                     <li class="uk-parent">
                         <a href="#">Sản phẩm nổi bật <span>›</span></a>
-                        <div class="uk-dropdown uk-width-2xlarge">
-                            <div class="uk-child-width-1-3@m" uk-grid>
-                                <!-- Nổi bật -->
-                                <div>
-                                    <ul class="uk-nav uk-navbar-dropdown-nav uk-grid uk-grid-medium uk-child-width-1-1 uk-margin-remove">
-                                        @php
-                                            $data['productFeatured'] = \App\Models\Variants::select('variants.product_id')
-                                                ->selectRaw('SUM(variants.quantity) as quan')
-                                                ->join('products', 'products.id', '=', 'variants.product_id')
-                                                ->where('products.status', 0)
-                                                ->groupBy('variants.product_id')
-                                                ->orderByDesc('quan')
-                                                ->with('product')
-                                                ->take(2)
-                                                ->get();
-                                        @endphp
-
-                                        @foreach($data['productFeatured'] as $item => $product)
-                                            <li class="uk-margin-small-bottom">
-                                                <a href="{{ route('featured_products', $product->product_id) }}">
-                                                    {{ $product->product->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
+                        <div class="uk-dropdown uk-dropdown-left">
+                            <div class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                                <!-- Sản phẩm có lượt mua nhiều -->
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'most-purchased']) }}">Best Seller</a>
+                                        </li>
                                     </ul>
                                 </div>
 
-
-                                <!-- Giày nam -->
-                                {{-- <div>
+                                <!-- Sản phẩm mới -->
+                                <div class="uk-width-1-1">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="#">Nổi bật 3</a></li>
-                                        <li><a href="#">Nổi bật 4</a></li>
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'latest']) }}">Sản phẩm mới</a>
+                                        </li>
                                     </ul>
-                                </div> --}}
-                                <!-- Giày nam -->
+                                </div>
 
+                                <!-- Sản phẩm giá rẻ -->
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'cheapest']) }}">Sản phẩm giá rẻ</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </li>
+
+
+
+
+
+                
                     <li><a href="#">Xu hướng thời trang</a></li>
                     <li><a href="{{ route('contact') }}">Liên hệ</a></li>
                 </ul>

@@ -74,8 +74,8 @@
                                 {{-- Description --}}
                                 <div class="col-md-12 mt-3">
                                     <label for="productDescript" class="form-label">Description</label>
-                                    <textarea name="" class="form-control" name="description"
-                                    id="productDescript" value="{{ old('description') }}" placeholder="Nhập giới thiệu sản phẩm..." cols="30" rows="10"></textarea>
+                                    <textarea class="form-control" name="description"
+                                    id="productDescript" placeholder="Nhập giới thiệu sản phẩm..." cols="30" rows="10">{{ old('description') }}</textarea>
                                     {{-- <input type="text" class="form-control" name="description"
                                         id="productDescript" value="{{ old('description') }}" placeholder="Nhập giới thiệu sản phẩm..."> --}}
                                     @error('description')
@@ -133,21 +133,21 @@
                                         @foreach (old('variants', []) as $index => $variant)
                                         <div class="variant-item row g-3 align-items-center mb-2" id="variant_{{ $index }}">
                                             <div class="col-md-3">
-                                                <label for="variantSize_{{ $index }}" class="form-label">Size</label>
+                                                <label for="variantSize_{{ $index }}" class="form-label">Kích cỡ</label>
                                                 <input type="text" id="variantSize_{{ $index }}" name="variants[{{ $index }}][size]" placeholder="Size" class="form-control" value="{{ old('variants.' . $index . '.size', $variant['size'] ?? '') }}" />
                                                 @error('variants.' . $index . '.size')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="variantColor_{{ $index }}" class="form-label">Color</label>
+                                                <label for="variantColor_{{ $index }}" class="form-label">Màu</label>
                                                 <input type="text" id="variantColor_{{ $index }}" name="variants[{{ $index }}][color]" placeholder="Color" class="form-control" value="{{ old('variants.' . $index . '.color', $variant['color'] ?? '') }}" />
                                                 @error('variants.' . $index . '.color')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="variantQuantity_{{ $index }}" class="form-label">Quantity</label>
+                                                <label for="variantQuantity_{{ $index }}" class="form-label">Số lượng</label>
                                                 <input type="number" id="variantQuantity_{{ $index }}" name="variants[{{ $index }}][quantity]" placeholder="Quantity" class="form-control" value="{{ old('variants.' . $index . '.quantity', $variant['quantity'] ?? '') }}" />
                                                 @error('variants.' . $index . '.quantity')
                                                     <span class="text-danger">{{ $message }}</span>

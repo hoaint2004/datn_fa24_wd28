@@ -57,5 +57,91 @@ class FilterController extends Controller
         });
         return response()->json($products);
     }
+    public function filterBestSeller(Request $request) {
+        try {
+
+            // Lấy giá trị từ query string
+            $sortBy = $request->get('sortBy'); // Nhận giá trị của sortBy
+            $type = $request->get('productType'); // Nhận giá trị của productType
+            
+            // Kiểm tra tham số productType hợp lệ
+            if (!in_array($type, ['most-purchased', 'latest', 'cheapest'])) {
+                return response()->json(['error' => 'Invalid product type'], 400);
+            }
+            
+            $products = Product::query();
+            
+            // Áp dụng bộ lọc theo kiểu sản phẩm
+            switch ($type) {
+                case 'most-purchased':
+                    $products->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->select('products.*')
+                        ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                        ->groupBy('products.id');
+                    break;
+            
+                case 'latest':
+                    $products->orderBy('products.created_at', 'desc'); // Sắp xếp theo ngày tạo mới nhất
+                    break;
+            
+                case 'cheapest':
+                    $products->orderBy('products.price', 'asc'); // Sắp xếp theo giá tăng dần
+                    break;
+                default:
+                    break;
+            }
+            
+            // Áp dụng bộ lọc theo sắp xếp (sortBy)
+            switch ($sortBy) {
+                case 'price_asc':
+                    $products->orderBy('products.price', 'asc');
+                    break;
+                case 'price_desc':
+                    $products->orderBy('products.price', 'desc');
+                    break;
+                case 'newest':
+                    $products->orderBy('products.created_at', 'desc');
+                    break;
+                case 'oldest':
+                    $products->orderBy('products.created_at', 'asc');
+                    break;
+                // case 'most-purchased':
+                //     // Sắp xếp theo tổng số lượng đã mua (từ phần selectRaw)
+                //     $products->orderByRaw('SUM(order_details.quantity) desc');
+                //     break;
+                default:
+                    break;
+            }
+            
+            // Thêm các mối quan hệ và điều kiện chung
+            $products->with(['category', 'variants', 'images'])
+                ->where('status', 0);
+            
+            // Lấy kết quả cuối cùng
+            $products = $products->paginate(3);
+            
+           
+            // Trả về kết quả
+            return response()->json([
+                'products' => $products,
+                'pagination' => [
+                    'total' => $products->total(), // Tổng số sản phẩm
+                    'per_page' => $products->perPage(), // Số sản phẩm trên mỗi trang
+                    'current_page' => $products->currentPage(), // Trang hiện tại
+                    'last_page' => $products->lastPage(), // Tổng số trang
+                    'from' => $products->firstItem(), // Sản phẩm bắt đầu hiển thị
+                    'to' => $products->lastItem(), // Sản phẩm kết thúc hiển thị
+                ] // Lấy dữ liệu mảng của các sản phẩm
+            ]);
+
+        } catch (\Exception $e) {
+            \Log::error('Error filtering products: ' . $e->getMessage());
+            return response()->json(['error' => 'Internal Server Error'], 500);
+        }
+    }
+    
+    
+    
+    
     
 }
