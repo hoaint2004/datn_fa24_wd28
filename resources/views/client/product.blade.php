@@ -95,20 +95,6 @@
                        
                     </div>
 
-                    {{-- <form class="uk-form-stacked shop-sort-by">
-                        <div class="shop-sort-by">
-                            <label class="uk-form-label" for="sort-by">Sắp xếp theo:</label>
-                            <div class="uk-form-controls">
-                                <select class="uk-select" id="sort-by" name="sort-by">
-                                    <option class="option-filter" value="popular">Phổ biến nhất</option>
-                                    <option class="option-filter" value="price_asc">Giá (Thấp đến cao)</option>
-                                    <option class="option-filter" value="price_desc">Giá (Cao đến thấp)</option>
-                                    <option class="option-filter" value="newest">Mới nhất</option>
-                                    <option class="option-filter" value="oldest">Cũ nhất</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form> --}}
 
                 </div>
 
