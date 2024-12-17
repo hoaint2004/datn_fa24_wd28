@@ -784,80 +784,90 @@
                     }
 
                     $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            id: productId,
-                            color: color,
-                            size: size,
-                            quantity: quantity
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status) {
-                                var cartCount = response.cartCount;
-                                $('.cartCount').text(cartCount)
-                                $('.countCartHeader').text('(' + cartCount + ')')
-                                let html = `
-                                    <div class="warp">
-                                        <a href="${response.urlProduct}">
-                                            <img src="${response.product.image}" alt="" width="120px"></a>
-                                        <div class="warp-body">
-                                            <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
-                                            <div class="price">
-                                                <span><strong>${response.product.price}đ</strong></span>
-                                            </div>
-                                            <div class="data-size">
-                                                <span>${response.data.color} / ${response.data.size}</span>
-                                            </div>
-                                            <div class="quantity">
-                                                <div class="quantity-selector">
-                                                    <button aria-label="Giảm số lượng"
-                                                        data-cart-id="${response.data.id}"
-                                                        class="quantity-selector-button-minus btn-minus-header">
-                                                        -
-                                                    </button>
-                                                    <input class="quantity-selector-input input-cart-header"
-                                                        type="number" step="1" min="1" max="9999"
-                                                        aria-label="Số lượng sản phẩm"
-                                                        data-cart-id="${response.data.id}"
-                                                        value="${response.data.quantity}" readonly="">
-                                                    <button aria-label="Tăng số lượng"
-                                                        data-cart-id="${response.data.id}"
-                                                        class="quantity-selector-button-plus btn-plus-header">+
-                                                    </button>
-                                                </div>
-                                                <form data-product-id="${response.data.id}" class="form-deleteCart"
-                                                    action="${response.url}" method="post">
-                                                    @csrf
-                                                    <button class="cart-item-remove"><i
-                                                            class="fa-solid fa-trash-can"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        id: productId,
+                        color: color,
+                        size: size,
+                        quantity: quantity
+                    },
+                    success: function(response) {
+                        var cartCount = response.cartCount;
+                        $('.cartCount').text(cartCount);
+                        $('.countCartHeader').text('(' + cartCount + ')');
+
+                        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                        var existingCartItem = $(
+                            `.sidebarCart .cart-item[data-id="${response.data.id}"]`);
+
+                        if (existingCartItem.length > 0) {
+                            // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+                            existingCartItem.find('.quantity-selector-input').val(response.data
+                                .quantity);
+                        } else {
+                            // Nếu sản phẩm chưa tồn tại, tạo HTML và thêm sản phẩm mới
+                            let html = `
+                            <div class="cart-item warp" data-id="${response.data.id}">
+                                <a href="${response.urlProduct}">
+                                    <img src="${response.product.image}" alt="" width="120px">
+                                </a>
+                                <div class="warp-body">
+                                    <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
+                                    <div class="price">
+                                        <span><strong>${response.product.price}đ</strong></span>
                                     </div>
-                                `;
-                                $('.sidebarCart').append(html);
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: response.message,
-                                    showConfirmButton: true,
-                                })
-                            } else {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'error',
-                                    title: response.message,
-                                    showConfirmButton: true,
-                                })
+                                    <div class="data-size">
+                                        <span>${response.data.color} / ${response.data.size}</span>
+                                    </div>
+                                    <div class="quantity">
+                                        <div class="quantity-selector">
+                                            <button aria-label="Giảm số lượng"
+                                                data-cart-id="${response.data.id}"
+                                                class="quantity-selector-button-minus btn-minus-header">-</button>
+                                            <input class="quantity-selector-input input-cart-header"
+                                                type="number" step="1" min="1" max="9999"
+                                                aria-label="Số lượng sản phẩm"
+                                                data-cart-id="${response.data.id}"
+                                                value="${response.data.quantity}" readonly="">
+                                            <button aria-label="Tăng số lượng"
+                                                data-cart-id="${response.data.id}"
+                                                class="quantity-selector-button-plus btn-plus-header">+</button>
+                                        </div>
+                                        <form data-product-id="${response.data.id}" class="form-deleteCart"
+                                            action="${response.url}" method="post">
+                                            @csrf
+                                            <button class="cart-item-remove"><i
+                                                    class="fa-solid fa-trash-can"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                                    $('.sidebarCart').append(html); // Thêm sản phẩm mới vào giao diện
+                                }
+
+                                if (response.status) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: response.message,
+                                        showConfirmButton: true,
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'error',
+                                        title: response.message,
+                                        showConfirmButton: true,
+                                    });
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Lỗi khi thêm vào giỏ hàng:", error);
                             }
-                        },
-                        error: function() {
-                            alert('Lỗi khi thêm vào giỏ hàng');
-                        }
-                    });
+                        });
                 });
 
 

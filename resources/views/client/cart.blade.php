@@ -41,7 +41,8 @@
 
                                     <td class="shopping-cart-left-tbody-product">
                                         <div class="warp">
-                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
+                                            <a href="{{ route('productDetail', $item->product->id) }}"
+                                                class="product-name">{{ $item->product->name }}</a>
                                             <div class="price">
                                                 <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
                                                         đ</strong>
@@ -85,7 +86,7 @@
                             @endforeach
                         @else
                             <div class="text-[20px] text-[#222] my-10 flex justify-center">
-                               Bạn không có sản phẩm nào trong giỏ hàng
+                                Bạn không có sản phẩm nào trong giỏ hàng
                             </div>
                         @endif
                     </tbody>
@@ -99,7 +100,7 @@
                 <div class="shopping-cart-right-info">
                     @if (!empty($data['carts']))
                         @foreach ($data['carts'] as $item)
-                            <div class="info-item" >
+                            <div class="info-item">
                                 <div style="background-image: url('{{ $item->product->image }}')" class="bg-img-cart">
                                 </div>
                                 <div class="d-flex flex-column">
@@ -112,7 +113,7 @@
                                 </div>
                                 <div>
                                     <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
-                                        đ</strong>
+                                            đ</strong>
                                         @if (!empty($item->product->price_old))
                                             <del>({{ number_format($item->product->price_old, 0, ',', '.') }}
                                                 đ)</del>
@@ -160,38 +161,32 @@
             });
         });
 
-
-
-        // Thực hiện khi nhấn nút giảm số lượng
-        // Cập nhật khi nhấn nút giảm số lượng
         $('.quantity-selector-button-minus').on('click', function() {
-            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-            var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+            var cartId = $(this).data('cart-id');
+            var quantityInput = $(this).siblings('.quantity-selector-input');
+            var quantity = parseInt(quantityInput.val());
 
             // Giảm số lượng nếu > 1
             if (quantity > 1) {
                 quantity--;
-                quantityInput.val(quantity); // Cập nhật lại giá trị input
-                updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+                quantityInput.val(quantity);
+                updateQuantity(cartId, quantity);
             }
         });
 
-        // Cập nhật khi nhấn nút tăng số lượng
         $('.quantity-selector-button-plus').on('click', function() {
-            var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-            var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-            var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
+            var cartId = $(this).data('cart-id');
+            var quantityInput = $(this).siblings('.quantity-selector-input');
+            var quantity = parseInt(quantityInput.val());
 
             quantity++; // Tăng số lượng
-            quantityInput.val(quantity); // Cập nhật lại giá trị input
-            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
+            quantityInput.val(quantity);
+            updateQuantity(cartId, quantity);
         });
 
-        // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
         function updateQuantity(cartId, quantity) {
             $.ajax({
-                url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
+                url: '/cart/update-quantity',
                 method: 'POST',
                 data: {
                     _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
@@ -199,6 +194,8 @@
                     quantity: quantity
                 },
                 success: function(response) {
+                    console.log(response);
+                    
                     if (response.success) {
                         // Cập nhật giá từng sản phẩm
                         const newProductPrice = response.new_product_price; // Giá tiền mới của sản phẩm

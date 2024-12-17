@@ -90,7 +90,7 @@
                                     @php
                                         $total += $item->quantity * $item->product->price;
                                     @endphp
-                                    <div class="warp">
+                                    <div class="warp cart-item" data-id="{{ $item->id }}">
                                         <a href="{{ route('productDetail', $item->product->id) }}">
                                             <img src="{{ $item->product->image }}" alt="" width="120px"></a>
                                         <div class="warp-body">
