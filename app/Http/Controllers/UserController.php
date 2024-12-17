@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Discount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\alert;
+use Carbon\Carbon;
 use App\Events\OrderStatusUpdated;
 
 class UserController extends Controller
@@ -26,8 +28,9 @@ class UserController extends Controller
          $orders = $orders->map(function ($order) {
             $order->review_exists = $order->review && $order->review->user_id === $order->user_id;
             return $order;
-        });        
-        return view('client.account', compact('user','orders'));
+        });     
+        $vouchers = Discount::where('usage_limit','>','0')->where('end_date','>=',Carbon::now())->where('is_active','=',1)->get();   
+        return view('client.account', compact('user','orders','vouchers'));
     }
 
     public function updateOrderStatus($orderId){
