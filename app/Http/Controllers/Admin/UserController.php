@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::all(); // Lấy tất cả user
+        $users = User::where('role','user')->get(); // Lấy tất cả user
         return view('admin.pages.users.index', compact('users'));
     }
 
@@ -20,13 +20,19 @@ class UserController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:Hoạt động,Không hoạt động',
         ]);
-
-        $user = User::findOrFail($id);
-        $user->status = $request->status; // Cập nhật trạng thái
-        $user->save();
-
-        return back()->with('success', 'Trạng thái người dùng đã được cập nhật!');
+        DB::beginTransaction();
+        try{
+            $user = User::findOrFail($id);
+            $user->status = $request->status; // Cập nhật trạng thái
+            $user->save();
+            DB::commit();
+            return redirect()->back()->with('status_succeed', 'Trạng thái người dùng đã được cập nhật!');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect()->back()->with('status_failed','Lỗi rồi'.$e->getMessage());
+        }
+       
     }
 }
