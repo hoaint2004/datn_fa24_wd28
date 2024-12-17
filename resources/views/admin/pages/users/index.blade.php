@@ -19,7 +19,7 @@
                                         <th scope="col">Tên người dùng</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Số điện thoại</th>
-                                        <th scope="col">Quyền hành</th>
+                                        <th scope="col">Vai trò</th>
                                         <th scope="col">Trạng thái</th>
                                         <th scope="col" style="width: 150px;">Thao tác</th>
                                     </tr>
@@ -31,9 +31,9 @@
                                         <td>{{ $user->fullname ?? 'N/A' }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        <td>{{ $user->role }}</td>
+                                        <td>{{ $user->role==='user'?'Khách hàng':'Không xác định' }}</td>
                                         <td>
-                                            @if ($user->status === 'active')
+                                            @if ($user->status === 'Hoạt động')
                                                 <span class="badge bg-success">Hoạt động</span>
                                             @else
                                                 <span class="badge bg-danger">Không hoạt động</span>
@@ -45,8 +45,8 @@
                                                 @csrf
                                                 @method('PATCH')
                                                 <select name="status" class="form-select form-select-sm d-inline-block w-auto">
-                                                    <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Hoạt động</option>
-                                                    <option value="inactive" {{ $user->status == 'inactive' ? 'selected' : '' }}>Không hoạt động</option>
+                                                    <option value="Hoạt động" {{ $user->status == 'Hoạt động' ? 'selected' : '' }}>Hoạt động</option>
+                                                    <option value="Không hoạt động" {{ $user->status == 'Không hoạt động' ? 'selected' : '' }}>Không hoạt động</option>
                                                 </select>
                                                 <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
                                             </form>
