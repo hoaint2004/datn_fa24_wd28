@@ -96,15 +96,16 @@ class DiscountController extends Controller
             'shipping' => $shipping
         ]);
 
-        $discount = Discount::where('discount_code', $code)
+        $discount = Discount::where('discount_code', $request->discount_code)
             ->where('is_active', true)
             ->where('start_date', '<=', now())
             ->where('end_date', '>=', now())
+            ->where('usage_limit', '>', 0)  // Kiểm tra số lượng còn lại
             ->first();
 
-            Log::info('Thông tin mã giảm giá:', [
-                'discount' => $discount
-            ]);
+        Log::info('Thông tin mã giảm giá:', [
+            'discount' => $discount
+        ]);
 
         if (!$discount) {
             return response()->json([
@@ -143,9 +144,9 @@ class DiscountController extends Controller
             'status' => 'success',
             'discount' => $discountAmount,
             'discount_id' => $discount->id,
+            'usage_limit' => $discount->usage_limit,
             'final_total' => $finalTotal,
             'message' => 'Áp dụng mã giảm giá thành công'
         ]);
-        
     }
 }

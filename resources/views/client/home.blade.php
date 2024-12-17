@@ -28,14 +28,14 @@
     <section class="about-us uk-container uk-container-large">
         <div class="about-us-container uk-grid" uk-grid="true">
             <div class="content uk-width-1-2@m uk-width-1-2@s">
-                <div class="title">
+                <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                     <a href="#">
                         <h2>Về chúng tôi</h2>
                     </a>
                     <hr />
                 </div>
-                <span class="sub-span-title">Artisanal Nomad</span>
-                <p>
+                <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">Artisanal Nomad</span>
+                <p uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                     Chủ đề này khám phá các loại vải sáng tạo, thiết kế tương lai và
                     kiểu dáng đẹp mắt lấy cảm hứng từ thời đại kỹ thuật số. Quần áo
                     kết hợp các yếu tố công nghệ có thể mặc, điểm nhấn sáng và tính
@@ -48,17 +48,17 @@
                     thuật, đưa người mặc đến một thế giới hùng vĩ và quyến rũ.
                 </p>
                 <div class="shopping">
-                    <a href="#">
+                    <a href="#" uk-scrollspy="cls: uk-animation-slide-left; delay: 200; duration: 1500; repeat: false">
                         Men shoes
                         <i class="fas fa-shopping-cart"></i>
                     </a>
-                    <a href="#">
+                    <a href="#" uk-scrollspy="cls: uk-animation-slide-right; delay: 200; duration: 1500; repeat: false">
                         Women shoes <i class="fas fa-shopping-cart"></i>
                     </a>
                 </div>
             </div>
             <div class="image-about-us uk-width-1-2@m uk-width-1-2@s">
-                <img class="large-image"
+                <img class="large-image"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false"
                     src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" />
                 <!-- <img class="small-image" src="https://bizweb.dktcdn.net/100/062/136/products/gta49-2.jpg?v=1711008704143" alt="" /> -->
             </div>
@@ -66,17 +66,17 @@
     </section>
 
     <section class="collection uk-container uk-container-large">
-        <div class="title">
+        <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             <hr />
             <a href="#">
                 <h2>Danh mục nổi bật</h2>
             </a>
             <hr />
         </div>
-        <span class="sub-span-title">
+        <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             List các nhóm sản phẩm nổi bật nhất
         </span>
-        <div class="collection-list uk-grid" uk-grid>
+        <div class="collection-list uk-grid" uk-grid  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
             @foreach ($data['categoryLimit8'] as $category8)
                 <a class="collection-list-item " href="#" title="Flash Sale">
                     <div class="home-collection-list-item-image">
@@ -131,7 +131,7 @@
                 <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
                     uk-slider="autoplay: true; autoplay-interval: 3000;">
                     <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-                        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
                             @if (!empty($data['productNews']))
                                 @foreach ($data['productNews'] as $key => $item)
                                     @php
@@ -222,12 +222,12 @@
                         alt="">
                 </a>
                 <div class="home-banner2-item-info">
-                    <div class="title">
+                    <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                         <a href="#">
                             <h2>Bộ sưu tập mùa hè</h2>
                         </a>
                         <hr />
-                        <span class="sub-span-title">
+                        <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                             Vẻ Đẹp Trường Tồn Được Tái Tạo: Nghiên Cứu Sự Đối Lập trong Xu Hướng Thời Trang Mùa Hè 2024
                         </span>
                     </div>
@@ -239,44 +239,22 @@
         </div>
     </section>
 
-    {{-- <section class="name-shoes uk-container uk-container-large">
-        <div class="uk-grid" uk-grid="true">
-            @if (!empty($data['categoryLimit3']))
-                @foreach ($data['categoryLimit3'] as $item)
-                    <div class="name-shoes-item uk-width-1-3">
-                        <div class="name-shoes-image" style="height: 100%">
-                            <a href="{{ route('categories', ['id' => $item->id]) }}" style="height: 100%"
-                                class="a-img uk-inline-clip uk-transition-toggle" tabIndex={0}>
-                                <img style="height: 100%" class="uk-transition-scale-up uk-transition-opaque"
-                                    src="{{ $item->image }}" alt="{{ !empty($item->name) ? $item->name : '' }}" /></a>
-                        </div>
-                        <div class="name-shoes-body">
-                            <a href="{{ route('categories', ['id' => $item->id]) }}" class="a-body">
-                                <p>{{ !empty($item->name) ? $item->name : '' }}</p>
-                            </a>
-                        </div>
-                    </div>
-
-                @endforeach
-            @endif
-        </div>
-    </section> --}}
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
         uk-slider="autoplay: true; autoplay-interval: 3000;">
         <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-            <div class="title">
+            <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 <hr />
                 <a href="#">
                     <h2>SẢN PHẨM MỚI CẬP NHẬT</h2>
                 </a>
                 <hr />
             </div>
-            <span class="sub-span-title">
+            <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 Top sản phẩm mới cập nhật
             </span>
 
-            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
                 @if (!empty($data['productUpdateNews']))
                     @foreach ($data['productUpdateNews'] as $key => $item)
                         @php
@@ -358,18 +336,18 @@
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
         uk-slider="autoplay: true; autoplay-interval: 3000;">
         <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-            <div class="title">
+            <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 <hr />
                 <a href="#">
                     <h2>SẢN PHẨM PHỔ BIẾN</h2>
                 </a>
                 <hr />
             </div>
-            <span class="sub-span-title">
+            <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 Top các sản phẩm phổ biển nhất
             </span>
 
-            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
                 @if (!empty($data['productPopulars']))
                     @foreach ($data['productPopulars'] as $key => $item)
                         @php
@@ -447,7 +425,7 @@
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
         uk-slider="autoplay: true; autoplay-interval: 3000;">
         <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-            <div class="title">
+            <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 <hr />
                 <a href="#">
 
@@ -456,11 +434,11 @@
                 </a>
                 <hr />
             </div>
-            <span class="sub-span-title">
+            <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 Sản phẩm mới nhất của danh mục
             </span>
 
-            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+            <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
                 @if (!empty($data['categoryNewOne']->products))
                     @foreach ($data['categoryNewOne']->products as $key => $item)
                         @php
@@ -537,21 +515,29 @@
 
     <!-- Modal xem nhanh-->
     <div id="modal-container" class="uk-modal-container" uk-modal>
-        <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+        <div class="uk-modal-dialog uk-width-large" style="max-width: 100vw; max-height: 100vh;">
             <input type="hidden" value="" class="modal-product-id">
             <button class="uk-modal-close-default" type="button" uk-close></button>
             <div class="uk-modal-body uk-grid" uk-grid>
                 <div class="uk-width-1-2">
                     <img alt="" class="w-full rounded-lg" src=""
-                        style="width: 100%; max-height: 70vh; object-fit: cover;" />
-                    <div class="flex mt-4 space-x-2 box-image-url">
+                        style="width: 100%; height: 70vh; object-fit: cover;  object-position: center" />
+                    <div class="flex mt-4 space-x-2 box-image-url uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                        <div class="uk-slider-container">
+                            <ul class="uk-slider-items uk-child-width-1-5 uk-grid">
+                                <!-- Ảnh thumbnail sẽ được append vào đây -->
+                            </ul>
+                        </div>
+    
+                        <a class="uk-position-center-left uk-position-small " href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small " href="#" uk-slidenav-next uk-slider-item="next"></a>
                     </div>
                 </div>
-
+    
                 <div class="uk-width-1-2" style="overflow-y: hidden;">
-                    <h1 class="text-3xl font-bold title-model-detail"></h1>
-                    <p class="text-xl text-gray-600"></p>
-                    <div class="flex items-center mt-2">
+                    <h1 class="text-2xl font-bold text-[#222] title-model-detail"></h1>
+    
+                    <div class="flex items-center mt-2 mb-3">
                         <div class="flex items-center">
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
@@ -559,55 +545,59 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">()</p>
+                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
                     </div>
-
-                    <div class="flex items-center my-4 price">
+    
+                    <div class="flex items-center my-3 price">
                         <span class="text-2xl font-bold text-red-500 modal-price">
-
+    
                         </span>
-
+    
                         <span class="text-base text-gray-500 line-through ml-2">
-
+    
                         </span>
-
+    
+                    </div>
+    
+                    <div class="flex items-center">
+                        <span class="text-[#222] font-semibold">Danh mục:</span>
+                        <p class="text-sm text-[#333] ml-2"></p>
                     </div>
                     <!-- <div class="mt-4">
                             <span class="text-2xl font-bold modal-price"></span>
                             <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
                         </div> -->
                     <p class="mt-4  mb-4 desc text-gray-600 modal-description">
-
+    
                     </p>
                     <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
-                        <div class="mb-4 color ">
-                            <p class="text-lg font-bold mb-4">Màu sắc</p>
-                            <div class="flex space-x-2 mt-2 box-color">
-
+                        <div class="color ">
+                            <p class="text-lg font-bold mb-1">Màu sắc</p>
+                            <div class="flex flex-wrap gap-2 box-color">
+    
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <p class="font-bold text-lg text-[#222] mb-4">Size</p>
-                            <div class="flex space-x-2 mt-2 box-size">
-
+                        <div class="mt-5">
+                            <p class="font-bold text-lg text-[#222] mb-1">Size</p>
+                            <div class="flex space-x-2 box-size">
+    
                             </div>
                         </div>
-                        <div class="mt-10 flex items-center space-x-4">
+                        <div class="mt-7 flex items-center space-x-4">
                             <div class="flex items-center border border-gray-300 rounded-lg">
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
-                                <input name="quantity"
-                                    class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
+                                <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
                                     type="text" value="1" />
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
                             </div>
-                            <button type="button" class="bg-black text-white px-6 py-2 rounded-lg btnAddToCart">Thêm giỏ
+                            <button type="button" class="bt-add-cart-modal rounded-lg btnAddToCart">Thêm giỏ
                                 hàng</button>
                             <button class="border border-gray-300 rounded-lg p-2">
                                 <i class="far fa-heart text-gray-600"></i>
                             </button>
                         </div>
                     </form>
-                    <div class="mt-10">
+                    <div class="mt-7">
                         <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">Còn hàng</span>
                     </div>
                 </div>

@@ -155,6 +155,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('orders', AdminOrderController::class);
 
     Route::resource('users',AdminUserController::class);
+    
     Route::patch('/updateStatus/{id}',[AdminUserController::class,'updateStatus'])->name('updateStatus');
 });
 
@@ -187,7 +188,6 @@ Route::middleware(['web'])->group(function () {
     Route::get('/notFound', [ControllersProductController::class, 'notFound'])->name('notFound');
     Route::get('/account', [UserController::class, 'account'])->name('account');
     Route::put('/account/changePassword/{id}', [UserController::class, 'changePassword'])->name('changePassword');
-    // Route::get('/', [UserController::class, 'account'])->name('account');
 
     // Comment
     Route::post('/comment/{id}', [ControllersCommentController::class, 'comment'])->name('post_comment');

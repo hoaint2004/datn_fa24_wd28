@@ -98,7 +98,6 @@
                     </div>
                 </li>
 
-                {{-- Sidebar Đơn hàng --}}
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="orders">
@@ -112,7 +111,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li>      
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"
@@ -183,15 +182,25 @@
                 </li>
 
                 {{-- Sidebar Người dùng --}}
+           
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProduct_variants">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
+                    <a class="nav-link menu-link" href="#users" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="users">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
                     </a>
-                </li>
+                    <div class="collapse menu-dropdown" id="users">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users.index') }}" class="nav-link" data-key="t-chat"> Danh sách người dùng
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>    
+                
             </ul>
         </div>
-        <!-- Sidebar -->
+        <!-- End Sidebar -->
     </div>
 
     <div class="sidebar-background"></div>

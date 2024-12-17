@@ -19,12 +19,12 @@ class PaymentController extends Controller
         Log::info('Dữ liệu nhận được:', $request->all());
 
         $carts = Cart::where('user_id', Auth::id())->get();
-        if ($carts->isEmpty()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
-            ]);
-        }
+        // if ($carts->isEmpty()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
+        //     ]);
+        // }
 
         // Lưu session
         session([
@@ -123,13 +123,24 @@ class PaymentController extends Controller
 
                 // Xóa giỏ hàng
                 Cart::where('user_id', Auth::id())->delete();
-                
-                // Lưu tất cả thay đổi vào DB
+
+                // Flash order data to session
+                session()->flash('order_success', [
+                    'code' => $order->code,
+                    'name' => $order->name,
+                    'phone' => $order->phone,
+                    'address' => $order->address,
+                    'payment_method' => $order->payment_method,
+                    'subtotal' => $order->total_price - $order->shipping_fee,
+                    'shipping_fee' => $order->shipping_fee,
+                    'total' => $order->total_price
+                ]);
+
                 DB::commit();
 
                 return view('client.success-vnpay');
             }
-            
+
             throw new Exception('Thanh toán thất bại');
         } catch (Exception $e) {
             DB::rollBack();
