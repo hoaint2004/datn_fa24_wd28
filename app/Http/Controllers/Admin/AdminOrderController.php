@@ -43,6 +43,7 @@ class AdminOrderController extends Controller
         foreach($order->orderDetails as $item) {
             $totalProduct += $item->price * $item->quantity;
         }
+        
         return view('admin.pages.orders.show', compact('order', 'totalProduct'));
     }
 

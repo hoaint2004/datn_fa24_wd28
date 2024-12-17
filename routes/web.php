@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReviewsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 use App\Http\Controllers\ProductVariantsController;
 use App\Http\Controllers\CategoryController as ClientCategoryController;
@@ -152,6 +153,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('reviews',ReviewsController::class);    
 
     Route::resource('orders', AdminOrderController::class);
+
+    Route::resource('users',AdminUserController::class);
+    Route::patch('/updateStatus/{id}',[AdminUserController::class,'updateStatus'])->name('updateStatus');
 });
 
 // Route user

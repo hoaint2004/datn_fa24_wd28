@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone', 255)->nullable();
             $table->string('password', 255);
             $table->enum('role', ['admin', 'user'])->default(User::TYPE_MEMBER);
+            $table->string('status')->default('Hoạt động');
             $table->rememberToken();
             $table->timestamps();
         });
