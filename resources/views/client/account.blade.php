@@ -219,20 +219,21 @@
                                     <button class="view-order-bt uk-button uk-button-primary" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
                                     
                                     @if ($order->status === 'Hoàn thành')
-                                        @if (!$order->review || $order->review->user_id !== $order->user_id)
-                                            <!-- Kiểm tra nếu chưa có đánh giá hoặc đánh giá không thuộc user hiện tại -->
-                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
-                                                Viết đánh giá
-                                            </button>
-                                        @else
+                                        @if ($order->review_exists)
                                             <!-- Nếu đã có đánh giá -->
                                             <button class="review-button uk-button uk-button-default" disabled>
                                                 Đã đánh giá
+                                            </button>
+                                        @else
+                                            <!-- Nếu chưa có đánh giá -->
+                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                Viết đánh giá
                                             </button>
                                         @endif
                                     @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
                                         <span class="uk-text-danger">Bình tĩnh để đánh giá</span>
                                     @endif
+                                 
                                 </div>
                             </div>
                         </div>
@@ -457,30 +458,52 @@ $(document).ready(function() {
         // update order status hoàn thành
         $('.complete-btn').click(function () {
             var orderId = $(this).data('order-id');
-            var button = $(this);
+            var $button = $(this);
+            var $orderItem = $button.closest('.order-item');
 
             $.ajax({
                 url: "{{ route('thongtinOrder.updateOrder', ':id') }}".replace(':id', orderId),
-                type: 'POST',
+                method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
+                    order_id: orderId
                 },
-                success: function (data) {
-                    if (data.status === 'success') {
-                        alert(data.message);
-                        button.prop('disabled', true); // Vô hiệu hóa nút sau khi đã cập nhật
-                        button.text('Đã hoàn thành'); // Đổi chữ trên nút
-                    } else {
-                        alert('cập nhật không thành công'+ data.message);
+                success: function (response) {
+                    if (response.status === 'success') {
+                        $button.prop('disabled', true).text('Đã hoàn thành');
+                        $orderItem.find('.order-status').html('<span class="uk-text-success">Đã giao hàng</span>');
+
+                        // Cập nhật nút đánh giá dựa trên trạng thái review
+                        var $actionGroup = $orderItem.find('.order-actions');
+                        $actionGroup.find('.review-button').remove(); // Xóa nút cũ nếu có
+
+                        if (!response.review_exists) {
+                            $actionGroup.append(`
+                                <button class="review-button uk-button uk-button-secondary" 
+                                        data-uk-toggle="target: #modal-review-${response.order_id}">
+                                    Viết đánh giá
+                                </button>
+                            `);
+                        } else {
+                            $actionGroup.append(`
+                                <button class="review-button uk-button uk-button-default" disabled>
+                                    Đã đánh giá
+                                </button>
+                            `);
+                        }
+
+                        UIkit.notification({
+                            message: 'Cập nhật đơn hàng thành công',
+                            status: 'success',
+                            pos: 'top-right'
+                        });
                     }
-                },
-                error: function (xhr, status, error) {
-                    messageDiv.html(
-                        `<span style="color:red;">Có lỗi xảy ra, vui lòng thử lại. Lỗi: ${xhr.responseText}</span>`
-                    );
-                },
+                }
             });
         });
+
+
+
 
 
 });

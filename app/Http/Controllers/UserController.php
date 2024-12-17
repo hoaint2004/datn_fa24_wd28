@@ -23,6 +23,10 @@ class UserController extends Controller
                 ->with('orderDetails.product', 'orderDetails.variant','review')
                 ->get();
                 // dd($orders);
+         $orders = $orders->map(function ($order) {
+            $order->review_exists = $order->review && $order->review->user_id === $order->user_id;
+            return $order;
+        });        
         return view('client.account', compact('user','orders'));
     }
 
@@ -31,10 +35,15 @@ class UserController extends Controller
         if($order->status === 'Giao hàng thành công' && $order->payment_status === 'Đã thanh toán'){
             $order->status = 'Hoàn thành';
             $order->save();
+
+            $reviewExists = $order->review && $order->review->user_id === $order->user_id;
             // Phát sự kiện khi client nhấn hoàn thành
             event(new OrderStatusUpdated($order));
             return response()->json([
                 'status' => 'success',
+                'order_status' => $order->status,
+                'review_exists' => $reviewExists,
+                'order_id' => $order->id,
                 'message' => 'Cảm ơn quý khách đã mua hàng.'
             ]);
         }
