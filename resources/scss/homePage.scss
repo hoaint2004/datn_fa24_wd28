@@ -59,9 +59,9 @@
     @include button-style(#333, #fff, $color, red);
     margin-left: -20px;
     border: 1px solid #222;
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    border-radius: 50%; 
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,9 +78,9 @@
     @include button-style(#333, #fff, $color, red);
     margin-right: -20px;
     border: 1px solid #222;
-    width: 50px; 
+    width: 50px;
     height: 50px;
-    border-radius: 50%; 
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -783,4 +783,16 @@
         border-color: $color;
         background-color: $color-button;
     }
+}
+
+
+.title.uk-scrollspy-inview,
+.sub-span-title.uk-scrollspy-inview,
+p.uk-scrollspy-inview,
+.shopping a.uk-scrollspy-inview,
+.image-about-us img.uk-scrollspy-inview
+{
+    transform: translateY(0); 
+    opacity: 1; 
+    transition: all 1.9s ease-out; 
 }

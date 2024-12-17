@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
+    
 </head>
 
 <body>
@@ -126,11 +127,11 @@
                     </p>
 
                     <div class="mb-4 color">
-                        <p class="text-lg font-bold">
+                        <p class="text-lg font-bold ">
                             Màu sắc
                         </p>
-                        <div class="flex space-x-2">
-                            <div class="product-color-options">
+                        <div class="flex space-x-2 ">
+                            <div class="product-color-options flex-wrap gap-2">
                                 @foreach ($data['groupedColors'] as $color => $variants)
                                 <span class="product-sw-select-item">
                                     <input type="radio" name="product-choose-color" value="{{ $color }}"
@@ -147,7 +148,7 @@
                         <p class="text-lg font-semibold mb-2 text-[#222]">
                             Size
                         </p>
-                        <div class="flex space-x-2 product-size-options" id="sizeOptions">
+                        <div class="flex space-x-2 product-size-options" id="sizeOptions flex-wrap gap-2">
                             <!-- Hiển thị tất cả các size mặc định -->
                             @foreach ($data['allSizes'] as $size)
                             <span class="product-sw-select-item all-sizes">
@@ -516,7 +517,7 @@
                                     {{-- id="list-comment-child-{{ $cmt->parent_id }}" --}}
                                     <div class="list-comment-child" id="list-comment-child-{{$cmt->id}}">
                                         @foreach ($cmt->replies as $child)
-                                        <div class="comment-child comment-child-{{$child->id}}">
+                                        <div class="comment-child  comment-child-{{$child->id}}">
                                             <a href="" class="pull-left">
                                                 <img src="{{ url('/storage/images/img_user.jpg') }}"
                                                     alt="" class="avatar" width="60px">
@@ -668,7 +669,7 @@
                         </div>
                         <div class="product-item-detail-gallery-items">
                             @if (!empty($item->images))
-                            @foreach (array_slice($item->images->toArray(), 0, 8) as $image) 
+                            @foreach (array_slice($item->images->toArray(), 0, 8) as $image)
                             <div class="product-item-detail-gallery-item">
                                 <img src="{{ $image['image_url'] }}" alt="" class="">
                             </div>
@@ -703,7 +704,10 @@
         $(document).ready(function() {
             $('.swiper-slide').click(function() {
                 let newImageUrl = $(this).css('background-image').replace('url("', '').replace('")', '');
+                let mainImageUrl = $('.image-main').attr('src');
+
                 $('.image-main').attr('src', newImageUrl);
+                $(this).css('background-image', `url(${mainImageUrl})`);
             });
         });
 

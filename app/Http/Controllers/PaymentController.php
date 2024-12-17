@@ -19,12 +19,12 @@ class PaymentController extends Controller
         Log::info('Dữ liệu nhận được:', $request->all());
 
         $carts = Cart::where('user_id', Auth::id())->get();
-        if ($carts->isEmpty()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
-            ]);
-        }
+        // if ($carts->isEmpty()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
+        //     ]);
+        // }
 
         // Lưu session
         session([

@@ -11,7 +11,7 @@
     </nav>
 </div>
 @if($carts->isEmpty())
-<script>
+<!-- <script>
     window.onload = function() {
         Swal.fire({
             position: 'center',
@@ -24,7 +24,7 @@
             }
         });
     }
-</script>
+</script> -->
 @endif
 <span>
 </span>
@@ -185,11 +185,6 @@
                 </div>
 
 
-                <div class="discount-amount hidden font-bold mt-4">
-                    <span class="text-[15px] text-[#222]">Giảm</span>
-                    <span id="discount-value" class="text-[15px] text-[red]">0 đ</span>
-                    <span class="text-[15px] text-[#222]">cho sản phẩm</span>
-                </div>
                 <div class="total-right">
                     <span>Tổng sản phẩm</span>
                     <span>{{ $subTotal }} đ</span>
@@ -199,6 +194,14 @@
                     <span>{{ $shipping }} đ</span>
                     <input type="hidden" name="shipping_fee" value="{{ $shipping }}" id="">
                 </div>
+
+                <div class="discount-amount hidden mt-4">
+                    <div class="shipping-fee">
+                        <span class="text-[15px] text-[#222]">Phiếu giảm giá</span>
+                        <span id="discount-value" class="text-[15px] text-[red]">- 0 đ</span>
+                    </div>
+                </div>
+
                 <div class="total-right total-voucher">
                     <span class="!text-[18px] font-semibold text-[#222]">Tổng tiền</span>
                     <span class="!text-[18px] font-semibold text-[#222]">{{ $total }} đ</span>
@@ -357,12 +360,6 @@
         const subtotal = parseInt('{{ $subTotal }}'.replace(/[^0-9]/g, ''));
         const shipping = parseInt('{{ $shipping }}'.replace(/[^0-9]/g, ''));
 
-        console.log('Dữ liệu gửi đi:', {
-            code: code,
-            subtotal: subtotal,
-            shipping: shipping
-        });
-
         fetch('{{ route("validate.discount") }}', {
                 method: 'POST',
                 headers: {
@@ -382,50 +379,17 @@
                     document.querySelector('.discount-amount').classList.remove('hidden');
                     document.getElementById('discount-value').textContent = data.discount.toLocaleString() + ' đ';
 
-                    // Tính toán giá trị mới
-                    const discountedSubtotal = subtotal - data.discount;
-                    const finalTotal = discountedSubtotal + shipping;
-
-                    // Log kiểm tra giá trị
-                    console.log('Subtotal ban đầu:', subtotal);
-                    console.log('Shipping:', shipping);
-                    console.log('Discount:', data.discount);
-                    console.log('Subtotal sau giảm:', discountedSubtotal);
-                    console.log('Tổng cuối:', finalTotal);
-
-                    console.log('Response từ server:', data);
-                    console.log('Discount ID:', data.discount_id);
-                    console.log('Giá trị voucher_use trước khi lưu:', document.getElementById('voucher_use').value);
-
-                    document.getElementById('voucher_use').value = data.discount_id;
-
-                    console.log('Giá trị voucher_use sau khi lưu:', document.getElementById('voucher_use').value);
-
-                    // Cập nhật tổng tiền sản phẩm
-                    const totalProductElement = document.querySelector('.total-right:not(.total-voucher) span:last-child');
-                    if (totalProductElement) {
-                        totalProductElement.textContent = discountedSubtotal.toLocaleString() + ' đ';
-                    }
-
-                    // Hiển thị phí vận chuyển
-                    const shippingElement = document.querySelector('.shipping-fee span:last-child');
-                    if (shippingElement) {
-                        shippingElement.textContent = shipping.toLocaleString() + ' đ';
-                    }
-
-                    // Cập nhật tổng tiền cuối cùng
+                    // Cập nhật tổng tiền cuối
                     const totalVoucherSpan = document.querySelector('.total-voucher span:nth-child(2)');
                     if (totalVoucherSpan) {
-                        totalVoucherSpan.textContent = finalTotal.toLocaleString() + ' đ';
+                        totalVoucherSpan.textContent = data.final_total.toLocaleString() + ' đ';
                     }
 
                     // Cập nhật input hidden
-                    const totalInput = document.querySelector('.total-voucher input[name="total_price"]');
-                    if (totalInput) {
-                        totalInput.value = finalTotal;
-                    }
+                    document.getElementById('voucher_use').value = data.discount_id;
+                    document.querySelector('input[name="total_price"]').value = data.final_total;
 
-                    // Hiển thị nút đổi mã và vô hiệu hóa input
+                    // Vô hiệu hóa input và đổi nút
                     document.getElementById('discount_code').disabled = true;
                     document.getElementById('apply-discount').style.display = 'none';
                     document.getElementById('change-discount').style.display = 'inline-block';
@@ -434,7 +398,6 @@
                         position: 'center',
                         icon: 'success',
                         title: 'Áp mã giảm giá thành công',
-                        // text: `Giảm: ${data.discount.toLocaleString()}đ - Tổng mới: ${finalTotal.toLocaleString()}đ`,
                         showConfirmButton: false,
                         timer: 2000
                     });
@@ -446,9 +409,36 @@
                         showConfirmButton: true
                     });
                 }
-                document.getElementById('voucher_use').value = data.discount_id;
             });
     }
+
+    function changeDiscount() {
+        // Reset input mã giảm giá
+        document.getElementById('discount_code').value = '';
+        document.getElementById('discount_code').disabled = false;
+
+        // Đổi trạng thái các nút
+        document.getElementById('apply-discount').style.display = 'inline-block';
+        document.getElementById('change-discount').style.display = 'none';
+
+        // Ẩn phần giảm giá
+        document.querySelector('.discount-amount').classList.add('hidden');
+
+        // Khôi phục tổng tiền ban đầu
+        const subtotal = parseInt('{{ $subTotal }}'.replace(/[^0-9]/g, ''));
+        const shipping = parseInt('{{ $shipping }}'.replace(/[^0-9]/g, ''));
+        const total = subtotal + shipping;
+
+        const totalVoucherSpan = document.querySelector('.total-voucher span:nth-child(2)');
+        if (totalVoucherSpan) {
+            totalVoucherSpan.textContent = total.toLocaleString() + ' đ';
+        }
+
+        // Cập nhật input hidden
+        document.querySelector('input[name="total_price"]').value = total;
+        document.getElementById('voucher_use').value = '';
+    }
+
 
     function changeDiscount() {
         // Reset input mã giảm giá

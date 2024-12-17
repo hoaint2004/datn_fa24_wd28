@@ -29,14 +29,16 @@ Sneakers - Thế Giới Giày
 <section class="about-us uk-container uk-container-large">
     <div class="about-us-container uk-grid" uk-grid="true">
         <div class="content uk-width-1-2@m uk-width-1-2@s">
-            <div class="title">
+            <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 <a href="#">
                     <h2>Về chúng tôi</h2>
                 </a>
                 <hr />
             </div>
-            <span class="sub-span-title">Artisanal Nomad</span>
-            <p>
+            <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
+                Artisanal Nomad
+            </span>
+            <p uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                 Chủ đề này khám phá các loại vải sáng tạo, thiết kế tương lai và
                 kiểu dáng đẹp mắt lấy cảm hứng từ thời đại kỹ thuật số. Quần áo
                 kết hợp các yếu tố công nghệ có thể mặc, điểm nhấn sáng và tính
@@ -49,35 +51,35 @@ Sneakers - Thế Giới Giày
                 thuật, đưa người mặc đến một thế giới hùng vĩ và quyến rũ.
             </p>
             <div class="shopping">
-                <a href="#">
-                    Men shoes
+                <a href="#" uk-scrollspy="cls: uk-animation-slide-left; delay: 200; duration: 1500; repeat: false">
+                    Men shoes 
                     <i class="fas fa-shopping-cart"></i>
                 </a>
-                <a href="#">
+                <a href="#" uk-scrollspy="cls: uk-animation-slide-right; delay: 200; duration: 1500; repeat: false">
                     Women shoes <i class="fas fa-shopping-cart"></i>
                 </a>
             </div>
         </div>
         <div class="image-about-us uk-width-1-2@m uk-width-1-2@s">
-            <img class="large-image"
+            <img class="large-image"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false"
                 src="https://img.lazcdn.com/g/p/e42e02a29380f6e1233c97f64de96aa3.png_720x720q80.png" alt="" />
-            <!-- <img class="small-image" src="https://bizweb.dktcdn.net/100/062/136/products/gta49-2.jpg?v=1711008704143" alt="" /> -->
         </div>
     </div>
 </section>
 
+
 <section class="collection uk-container uk-container-large">
-    <div class="title">
+    <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
         <hr />
         <a href="#">
             <h2>Danh mục nổi bật</h2>
         </a>
         <hr />
     </div>
-    <span class="sub-span-title">
+    <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
         List các nhóm sản phẩm nổi bật nhất
     </span>
-    <div class="collection-list uk-grid" uk-grid>
+    <div class="collection-list uk-grid" uk-grid  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
         @foreach($data['categoryLimit3'] as $category3)
         <a class="collection-list-item " href="#" title="Flash Sale">
             <div class="home-collection-list-item-image">
@@ -95,7 +97,7 @@ Sneakers - Thế Giới Giày
 
 <section class="date-time-sale uk-container uk-container-large ">
     <div class="uk-grid" uk-grid="true">
-        <div class="home-sale-left uk-width-1-3">
+        <div class="home-sale-left uk-width-1-3"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
 
             <div class="date-time-image">
                 <img src="https://bizweb.dktcdn.net/thumb/grande/100/520/624/themes/959507/assets/home_flashsale_d_img__1.jpg?1724041824574"
@@ -129,11 +131,11 @@ Sneakers - Thế Giới Giày
 
         </div>
 
-        <div class="uk-width-2-3 sale-product-right">   
+        <div class="uk-width-2-3 sale-product-right">
             <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
                 uk-slider="autoplay: false; autoplay-interval: 3000;">
                 <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-                    <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+                    <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
                         @if (!empty($data['productNews']))
                         @foreach ($data['productNews'] as $key => $item)
                         <div class="product-item uk-width-1-4@m">
@@ -217,12 +219,12 @@ Sneakers - Thế Giới Giày
                     alt="">
             </a>
             <div class="home-banner2-item-info">
-                <div class="title">
+                <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                     <a href="#">
                         <h2>Bộ sưu tập mùa hè</h2>
                     </a>
                     <hr />
-                    <span class="sub-span-title">
+                   <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
                         Vẻ Đẹp Trường Tồn Được Tái Tạo: Nghiên Cứu Sự Đối Lập trong Xu Hướng Thời Trang Mùa Hè 2024
                     </span>
                 </div>
@@ -237,18 +239,18 @@ Sneakers - Thế Giới Giày
 <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
     uk-slider="autoplay: true; autoplay-interval: 3000;">
     <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-        <div class="title">
+        <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             <hr />
             <a href="#">
                 <h2>SẢN PHẨM MỚI CẬP NHẬT</h2>
             </a>
             <hr />
         </div>
-        <span class="sub-span-title">
+       <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             Top sản phẩm mới cập nhật
         </span>
 
-        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true" uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
             @if (!empty($data['productUpdateNews']))
             @foreach ($data['productUpdateNews'] as $key => $item)
             <div class="product-item uk-width-1-4@m">
@@ -322,18 +324,18 @@ Sneakers - Thế Giới Giày
 <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
     uk-slider="autoplay: true; autoplay-interval: 3000;">
     <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-        <div class="title">
+        <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             <hr />
             <a href="#">
                 <h2>SẢN PHẨM PHỔ BIẾN</h2>
             </a>
             <hr />
         </div>
-        <span class="sub-span-title">
+       <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             Top các sản phẩm phổ biển nhất
         </span>
 
-        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
             @if (!empty($data['productPopulars']))
             @foreach ($data['productPopulars'] as $key => $item)
             <div class="product-item uk-width-1-4@m">
@@ -407,7 +409,7 @@ Sneakers - Thế Giới Giày
 <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
     uk-slider="autoplay: true; autoplay-interval: 3000;">
     <div class=" uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
-        <div class="title">
+        <div class="title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             <hr />
             <a href="#">
 
@@ -416,11 +418,11 @@ Sneakers - Thế Giới Giày
             </a>
             <hr />
         </div>
-        <span class="sub-span-title">
+       <span class="sub-span-title" uk-scrollspy="cls: uk-animation-slide-top; delay: 200; duration: 1500; repeat: false">
             Sản phẩm mới nhất của danh mục
         </span>
 
-        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true">
+        <div class="home-product-list-wrapper uk-grid uk-slider-items" uk-grid="true"  uk-scrollspy="cls: uk-animation-fade; delay: 200; duration: 1500; repeat: false">
             @if (!empty($data['categoryNewOne']->products))
             @foreach ($data['categoryNewOne']->products as $key => $item)
             <div class="product-item uk-width-1-4@m">
@@ -536,7 +538,7 @@ Sneakers - Thế Giới Giày
                     </span>
 
                 </div>
-                
+
                 <div class="flex items-center">
                     <span class="text-[#222] font-semibold">Danh mục:</span>
                     <p class="text-sm text-[#333] ml-2"></p>
@@ -551,7 +553,7 @@ Sneakers - Thế Giới Giày
                 <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
                     <div class="color ">
                         <p class="text-lg font-bold mb-1">Màu sắc</p>
-                        <div class="flex space-x-2 box-color">
+                        <div class="flex flex-wrap gap-2 box-color">
 
                         </div>
                     </div>
@@ -692,8 +694,13 @@ Sneakers - Thế Giới Giày
                         $('.box-image-url .uk-slider-container').html(html);
 
                         $(document).on('click', '.thumbnail-image', function() {
-                            let imageUrl = $(this).attr('src');
-                            $('.uk-width-1-2 img:first').attr('src', imageUrl);
+                            let mainImage = $('.uk-width-1-2 img:first');
+                            let newImageUrl = $(this).attr('src');
+                            let oldImageUrl = mainImage.attr('src');
+
+                            // Swap images
+                            mainImage.attr('src', newImageUrl);
+                            $(this).attr('src', oldImageUrl);
                         });
                     }
 

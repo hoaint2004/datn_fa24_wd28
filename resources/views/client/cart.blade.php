@@ -136,7 +136,7 @@ Sneakers - Thế Giới Giày
             </div>
             <div class="shipping-fee">
                 <span>Phí vận chuyển</span>
-                <span>30.000 đ</span>
+                <span>0 đ</span>
             </div>
             <div class="total-right">
                 <span>Tổng tiền</span>
@@ -144,7 +144,7 @@ Sneakers - Thế Giới Giày
             </div>
             <div class="total-action mt-4">
                 <a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-                <a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
+                <a href="#" onclick="checkCartBeforeCheckout()" class="pay-money" title="Thanh toán">Thanh toán</a>
             </div>
         </div>
     </div>
@@ -154,6 +154,26 @@ Sneakers - Thế Giới Giày
 
 @section('js')
 <script>
+    function checkCartBeforeCheckout() {
+    // Lấy số lượng sản phẩm từ class cartCount
+    const cartCount = parseInt($('.cartCount').text()) || 0;
+    
+    if (cartCount === 0) {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng',
+            showConfirmButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('home') }}";
+            }
+        });
+    } else {
+        window.location.href = "{{ route('order.create') }}";
+    }
+}
+
     $(document).ready(function() {
         $(document).on('submit', '.form-deleteCart', function(e) {
             e.preventDefault();

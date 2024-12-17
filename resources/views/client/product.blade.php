@@ -253,7 +253,7 @@ Sneakers - Thế Giới Giày
                 <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
                     <div class="color">
                         <p class="text-lg font-bold mb-1">Màu sắc</p>
-                        <div class="flex space-x-2 box-color">
+                        <div class="flex flex-wrap gap-2 box-color">
 
                         </div>
                     </div>
@@ -398,8 +398,13 @@ Sneakers - Thế Giới Giày
                         $('.box-image-url .uk-slider-container').html(html);
 
                         $(document).on('click', '.thumbnail-image', function() {
-                            let imageUrl = $(this).attr('src');
-                            $('.uk-width-1-2 img:first').attr('src', imageUrl);
+                            let mainImage = $('.uk-width-1-2 img:first');
+                            let newImageUrl = $(this).attr('src');
+                            let oldImageUrl = mainImage.attr('src');
+
+                            // Swap images
+                            mainImage.attr('src', newImageUrl);
+                            $(this).attr('src', oldImageUrl);
                         });
                     }
 
