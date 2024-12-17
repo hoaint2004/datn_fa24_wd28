@@ -554,7 +554,7 @@
                             <i class="fas fa-star text-yellow-500"></i>
                             <i class="fas fa-star text-yellow-500"></i>
                         </div>
-                        <p class="ml-2 text-gray-600">(121 Đánh giá)</p>
+                        <p class="ml-2 text-gray-600">()</p>
                     </div>
 
                     <div class="flex items-center my-4 price">
