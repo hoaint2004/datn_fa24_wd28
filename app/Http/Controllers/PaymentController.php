@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Order;
@@ -15,23 +16,32 @@ class PaymentController extends Controller
     public function vnpay_payment(Request $request)
     {
         $data = $request->all();
-        
-        // Lưu  session
+        Log::info('Dữ liệu nhận được:', $request->all());
+
+        $carts = Cart::where('user_id', Auth::id())->get();
+        // if ($carts->isEmpty()) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng'
+        //     ]);
+        // }
+
+        // Lưu session
         session([
             'payment_data' => [
                 'user_id' => Auth::id(),
                 'code' => 'ORDER-' . time(),
-                'name' => $request->input('name'),
-                'address' => $request->input('address'),
-                'phone' => $request->input('phone'),
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'phone' => $data['phone'],
                 'total_price' => $data['total'],
+                'shipping_fee' => $data['shipping_fee'],
+                'voucher_use' => $data['voucher_use'],
                 'payment_method' => 'vnpay',
-                'shipping_fee' => 30000,
                 'payment_status' => 'Đã thanh toán'
             ]
         ]);
 
-        $carts = Cart::where('user_id', Auth::id())->get();
         session(['cart_data' => $carts]);
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -80,7 +90,7 @@ class PaymentController extends Controller
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
 
-        return redirect($vnp_Url);
+        return $vnp_Url;
     }
 
     public function vnpayReturn(Request $request)
@@ -92,10 +102,10 @@ class PaymentController extends Controller
                 if (!$paymentData) {
                     throw new Exception('Không tìm thấy dữ liệu thanh toán trong session');
                 }
-                
+
                 // Tạo đơn hàng mới
                 $order = Order::create($paymentData);
-                
+
                 // Lưu chi tiết đơn hàng
                 $carts = session('cart_data');
                 foreach ($carts as $cart) {
@@ -110,29 +120,30 @@ class PaymentController extends Controller
                         'total' => $cart->product->price * $cart->quantity
                     ]);
                 }
-                
+
                 // Xóa giỏ hàng
                 Cart::where('user_id', Auth::id())->delete();
-                
+
+
                 // Flash order data to session
                 session()->flash('order_success', [
                     'code' => $order->code,
                     'name' => $order->name,
-                    'phone' => $order->phone, 
+                    'phone' => $order->phone,
                     'address' => $order->address,
                     'payment_method' => $order->payment_method,
-                    'subtotal' => $order->total_price - $order->shipping_fee, 
+                    'subtotal' => $order->total_price - $order->shipping_fee,
                     'shipping_fee' => $order->shipping_fee,
                     'total' => $order->total_price
                 ]);
-                
+
                 DB::commit();
-                
+
                 return view('client.success-vnpay');
             }
-                
+
+
             throw new Exception('Thanh toán thất bại');
-            
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Lỗi thanh toán VNPay: ' . $e->getMessage());

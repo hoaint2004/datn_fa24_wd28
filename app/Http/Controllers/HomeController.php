@@ -38,6 +38,7 @@ class HomeController extends Controller
     
 
         $data['categoryLimit8'] = Category::with('products')
+
             ->where('status', 0)
             ->orderBy('id', 'DESC')
             ->limit(8)

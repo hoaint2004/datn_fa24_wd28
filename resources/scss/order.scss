@@ -22,7 +22,8 @@ body {
 .order-name {
     color: $color-title;
     font-size: 18px;
-    font-weight: $font-weight-bold;
+
+    font-weight: $font-weight-semibold;
     margin-bottom: 16px;
 }
 
@@ -38,6 +39,20 @@ body {
                     .payments-body {
                         .payments-card {
                             .payments-card-title {
+                                .bt-vnpay-order {
+                                    background-color: white !important;
+                                    border: none !important;
+                                    &:hover {
+                                        color: $color !important;
+                                    }
+                                }
+                                span {
+                                    transition: all 0.8s;
+                                    &:hover {
+                                        color: $color !important;
+                                        cursor: pointer;
+                                    }
+                                }
                             }
                             .payments-card-input:focus {
                                 outline: none;
@@ -58,39 +73,43 @@ body {
                                 .warp-body {
                                     display: flex;
                                     flex-direction: column;
-                                    justify-content: space-between;
-                                    padding-left: 30px;
+                                    justify-content: flex-start;
+                                    padding: 0 30px;
+                                    gap: 2px;
                                     .product-name {
                                         font-size: 18px;
                                         color: $color-title;
                                         font-weight: $font-weight-bold;
                                         text-decoration: none;
                                         display: block;
-                                        margin-bottom: 5px;
                                         transition: all 0.6s;
                                         &:hover {
                                             color: $color-red;
                                         }
                                     }
-                                    .price {
-                                        margin-bottom: 5px;
+                                    .price {  
                                         span {
-                                            font-size: 18px;
+                                            font-size: 15px;
                                             color: $color-title;
+                                            font-weight: 600;
                                             strong {
                                                 color: $color-red;
                                                 font-weight: $font-weight-regular;
+                                                margin-left: 5px;
                                             }
                                             del {
                                                 color: $color-auth;
-                                                font-size: 15px;
+                                                font-size: 13px;
                                             }
                                         }
                                     }
                                     .data-size {
+                                        label {
+                                            font-weight: 600;  
+                                            margin-right: 5px; 
+                                        }
                                         color: $color-title;
-                                        font-size: 18px;
-                                        margin-bottom: 5px;
+                                        font-size: 15px;
                                     }
                                 }
                             }
@@ -118,70 +137,47 @@ body {
     .order-title {
         color: $color-title;
         font-family: $font-spectral;
-        font-size: 32px;
+        font-size: 28px;
+        font-weight: bold;
     }
 }
 
 .shopping-cart-right {
     h2 {
         color: $color-title;
-        font-size: 20px;
+        font-size: 22px;
         font-family: $font-spectral;
         border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
-        padding-bottom: 20px;
-        font-weight: $font-weight-regular;
+        padding-bottom: 10px;
+        font-weight: 700;
     }
     .discount-code {
         padding-top: 30px;
         .code {
-            font-size: 20px;
+            font-size: 16px;
             color: $color-title;
         }
-        form {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
-            padding: 20px 0 25px 0;
-            .shopping-cart-right-input {
-                border: 1px solid hsla(0, 0%, 7%, 0.11);
-                padding: 10px 120px 10px 10px;
-                &:focus {
-                    outline: none;
-                }
-            }
-            .shopping-cart-right-button {
-                border: 1px solid $color;
-                background-color: $color;
-                color: $color-button;
-                padding: 10px 28px;
-                transition: all 0.6s;
-                text-transform: uppercase;
-                &:hover {
-                    color: $color;
-                    background-color: $color-button;
-                }
-            }
-        }
+
     }
+    
     .shipping-fee {
         display: flex;
         justify-content: space-between;
-        padding: 20px 0;
-        border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+       
+        // border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
         span {
             color: $color-title;
-            font-size: 18px;
+            font-size: 16px;
         }
     }
     .total-right {
         display: flex;
         justify-content: space-between;
         padding: 20px 0;
-        border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
+        // border-bottom: 1px solid hsla(0, 0%, 7%, 0.11);
         span {
             color: $color-title;
-            font-size: 22px;
+            font-size: 16px;
         }
     }
     .total-action {
@@ -354,6 +350,7 @@ body {
 //         }
 //     }
 // }
+
 
 
 
@@ -761,3 +758,31 @@ body {
         }
     }
 }
+
+
+.tab-completed i {
+    color: #1E90FF !important;
+}
+
+.form-voucher {
+    display: flex;
+    gap: 30px;
+    .shopping-cart-right-input {
+        background-color: #fff !important;
+        border: 1px solid $color-title;
+        border-radius: 0
+    }
+    .shopping-cart-right-button {
+        @include ctn-pay-shopping;
+        border: 1px solid $color-title;
+        color: $color-title;
+        padding: 0 40px !important;
+        font-size: 14px;
+        &:hover {
+            color: $color;
+            border-color: $color;
+        }
+    }
+}
+
+

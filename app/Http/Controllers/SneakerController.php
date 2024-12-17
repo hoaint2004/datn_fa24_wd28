@@ -114,3 +114,4 @@ class SneakerController extends Controller
         return view('client.search', compact('data'));
     }
 }
+

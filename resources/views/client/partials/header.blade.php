@@ -11,12 +11,10 @@
             </div>
 
             <!-- Phần logo ở giữa -->
-            <!-- Phần logo ở giữa -->
             <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
                 <a href="{{ route('home') }}" class="logo-page">
                     <h1>Wina Shoes</h1>
-                    {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
-                        alt="" /> --}}
+
                 </a>
             </div>
 
@@ -34,14 +32,14 @@
                     class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
                     <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
                         @if (Auth::check())
-                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
-                            @if (Auth::check() && Auth::user()->role === 'admin')
-                                <a href="{{ route('admin.dashboard') }}" class="user-header">Trang quản trị</a>
-                            @endif
-                            <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
+                        <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                        @if (Auth::check() && Auth::user()->role === 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="user-header">Trang quản trị</a>
+                        @endif
+                        <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
                         @else
-                            <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
-                            <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
+                        <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
+                        <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
                         @endif
                     </ul>
                 </div>
@@ -51,13 +49,13 @@
                 </div>
 
                 @php
-                    $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
-                        ->orderBy('id', 'DESC')
-                        ->limit(5)
-                        ->get();
-                    $cartsAll = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
-                        ->orderBy('id', 'DESC')
-                        ->get();
+                $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                ->orderBy('id', 'DESC')
+                ->limit(5)
+                ->get();
+                $cartsAll = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                ->orderBy('id', 'DESC')
+                ->get();
                 @endphp
 
                 <!-- cart -->
@@ -124,10 +122,18 @@
                                                     <button class="cart-item-remove"><i
                                                             class="fa-solid fa-trash-can"></i></button>
                                                 </form>
+
                                             </div>
+                                            <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                @csrf
+                                                <button class="cart-item-remove"><i
+                                                        class="fa-solid fa-trash-can"></i></button>
+                                            </form>
                                         </div>
                                     </div>
-                                @endforeach
+                            </div>
+                            @endforeach
                             @endif
                         </div>
 
@@ -142,8 +148,7 @@
                             <p class="mini-cart-button">
                                 <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
                                     Hàng</a>
-                                <a href="{{ route('order.create') }}" class="continue-shopping"
-                                    title="Thanh toán">Thanh toán</a>
+                                <a href="#" onclick="checkCartBeforeCheckout()" class="continue-shopping" title="Thanh toán">Thanh toán</a>
                             </p>
                         </div>
                     </div>
@@ -172,23 +177,25 @@
                         <a href="#" class="">Danh mục sản phẩm <span>›</span></a>
                         <div class="uk-dropdown uk-width-2xlarge">
                             <div class="uk-child-width-1-3@m aloo11" uk-grid>
-                                <!-- Nổi bật -->
                                 @php
-                                    $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
+
+                                $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
+                                $chunks = $categories->chunk(4);
                                 @endphp
-                                @if (!empty($categories))
-                                    <div>
-                                        <ul class="uk-nav uk-dropdown-nav">
-                                            @foreach ($categories as $item)
-                                                <li class="uk-nav-header">
-                                                    <a
-                                                        href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
+
+                                @foreach($chunks as $chunk)
+                                <div>
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        @foreach($chunk as $item)
+                                        <li class="uk-nav-header !mt-0 text-[16px] text-[#222]">
+                                            <a href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                @endforeach
                             </div>
+
                         </div>
                     </li>
 
@@ -207,6 +214,7 @@
                                         </li>
                                     </ul>
                                 </div>
+
 
                                 <!-- Sản phẩm mới -->
                                 <div class="uk-width-1-1">
@@ -269,6 +277,26 @@
 
 </html>
 <script>
+    function checkCartBeforeCheckout() {
+        // Lấy số lượng sản phẩm từ class cartCount
+        const cartCount = parseInt($('.cartCount').text()) || 0;
+
+        if (cartCount === 0) {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục mua hàng',
+                showConfirmButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('home') }}";
+                }
+            });
+        } else {
+            window.location.href = "{{ route('order.create') }}";
+        }
+    }
+
     $(document).ready(function() {
         $(document).on('submit', '.form-deleteCart', function(e) {
             e.preventDefault();

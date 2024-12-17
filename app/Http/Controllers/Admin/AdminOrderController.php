@@ -74,6 +74,7 @@ class AdminOrderController extends Controller
             }
             $order->status =  $request->status;
             // $order->payment_status = $request->payment_status;
+
             $order->save(); 
             DB::commit();
             return redirect()->back()->with('status_succeed','Cập nhật thành công');

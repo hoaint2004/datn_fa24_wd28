@@ -15,6 +15,7 @@ class Order extends Model
         'address',
         'phone',
         'total_price',
+        'voucher_use',
         'status',
         'payment_method',
         'shipping_fee',
@@ -33,4 +34,5 @@ class Order extends Model
     {
         return $this->hasOne(Reviews::class, 'order_id', 'id');
     }
+
 }

@@ -11,15 +11,14 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Events\OrderStatusUpdated;
 
+use App\Models\Discount; 
+
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +34,7 @@ class OrderController extends Controller
         $total = 0;
         $subTotal = 0;
         $shipping = 30000;
-        foreach($carts as $item) {
+        foreach ($carts as $item) {
             $subTotal += ($item->product->price ? $item->product->price : $item->product->price_old) * $item->quantity;
         }
 
@@ -61,16 +60,48 @@ class OrderController extends Controller
             'phone.regex' => 'Số điện thoại không hợp lệ',
             'phone.min' => 'Số điện thoại phải ít nhất 10 kí tự',
         ]);
+        Log::info('Dữ liệu đặt hàng:', [
+            'request_all' => $request->all(),
+            'voucher_use' => $request->voucher_use
+        ]);
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
+                'phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
+            ],
+            [
+                'name.required' => 'Bắt buộc nhập',
+                'address.required' => 'Bắt buộc nhập',
+                'phone.required' => 'Bắt buộc nhập',
+                'phone.regex' => 'Số điện thoại không hợp lệ',
+                'phone.min' => 'Số điện thoại phải ít nhất 10 kí tự',
+            ]
+        );
         DB::beginTransaction();
         try {
+            if ($request->voucher_use) {
+                $discount = Discount::find($request->voucher_use);
+                if ($discount && $discount->usage_limit > 0) {
+                    $discount->decrement('usage_limit');
+                    Log::info('Đã giảm số lượng voucher: ' . $discount->discount_code);
+                }
+            }
+
             $params = $request->except('_token');
             $params['code'] = 'SW-' . Auth::user()->id . '-' . now()->timestamp;
+            $params['voucher_use'] = $request->voucher_use;
+            Log::info('Params trước khi tạo order:', $params);
 
             $order = Order::create($params);
             $orderID = $order->id;
 
+            Log::info('Order sau khi tạo:', [
+                'order' => $order
+            ]);
+
             $carts = Cart::where('user_id', Auth::user()->id)->get();
-            foreach($carts as $item) {
+            foreach ($carts as $item) {
                 $order->orderDetails()->create([
                     'order_id' => $orderID,
                     'product_id' => $item->product_id,
@@ -85,8 +116,8 @@ class OrderController extends Controller
 
             DB::commit();
 
-            foreach($carts as $item) {
-                foreach($item->product->variants as $variant) {
+            foreach ($carts as $item) {
+                foreach ($item->product->variants as $variant) {
                     $variant->update([
                         'quantity' => $variant->quantity - $item->quantity
                     ]);
@@ -95,15 +126,15 @@ class OrderController extends Controller
             }
 
             return redirect()->route('order.success')
-            ->with(
-                [
-                    'name' => $order->name,
-                    'phone' => $order->phone,
-                    'address' => $order->address,
-                    'payment_method' => $order->payment_method,
-                    'code' => $order->code,
-                ]
-            );
+                ->with(
+                    [
+                        'name' => $order->name,
+                        'phone' => $order->phone,
+                        'address' => $order->address,
+                        'payment_method' => $order->payment_method,
+                        'code' => $order->code,
+                    ]
+                );
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -111,7 +142,8 @@ class OrderController extends Controller
         }
     }
 
-    public function orderSuccess() {
+    public function orderSuccess()
+    {
         return view('client.ordersuccess');
     }
 
@@ -252,6 +284,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $totalProduct = 0;
         foreach($order->orderDetails as $item) {
+
             $totalProduct += $item->price * $item->quantity;
         }
         return view('client.order-detail', compact('order', 'totalProduct'));
@@ -265,12 +298,13 @@ class OrderController extends Controller
         
     }
 
+
     /**
      * Update the specified resource in storage.
      */
 
 
-                        // UPDATE ORDER CLIENT
+
     public function update(Request $request, string $id)
     {
         $order = Order::findOrFail($id);
@@ -289,11 +323,13 @@ class OrderController extends Controller
                 'status' => 'success',
                 'message' => 'Trạng thái đơn hàng đã được cập nhật thành công.',
                 'order' => $order 
+
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['status' => 'error', 'message' => 'Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng.'], 500);
         }    
+
     }
 
     /**

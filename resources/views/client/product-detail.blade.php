@@ -9,22 +9,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chi tiết sản phẩm</title>
 
-        {{-- css --}}
-        {{-- <!-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css') }}"> --> --}}
-        {{-- js --}}
-        {{-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/js/product-detail.css')}}"> --}}
+    {{-- css --}}
+    {{-- <!-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/css/product_detail.css') }}"> --> --}}
+    {{-- js --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/sneakers/assets/js/product-detail.css')}}"> --}}
 
-        <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-            rel="stylesheet">
-        <!-- <link rel="stylesheet" href="../src/styles/css/uikit-rtl.css"> -->
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../src/styles/css/uikit-rtl.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.11/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
+    
+</head>
 
     <body>
         <div class="uk-container uk-container-large breadcrumb mt-10 mb-10">
@@ -37,31 +38,139 @@
             </nav>
         </div>
 
-        <section class="product-detail uk-container uk-container-large">
-            <form class="form-addToCart" action="{{ route('addToCart', ['id' => $data['product']->id]) }}" method="post">
-                @csrf
-                <input type="hidden" class="productId" value="{{ $data['product']->id }}">
-                <div class="product-detail-body uk-grid" uk-grid>
-                    <div class="product-detail-left uk-width-1-2">
-                        <img alt="{{ $data['product']->name }}" class="w-full mb-4" height="500"
-                            src="{{ $data['product']->image }}" width="500" />
-                        <div class="product-detail-image-slide">
+    <section class="product-detail uk-container uk-container-large">
+        <form class="form-addToCart" action="{{ route('addToCart', ['id' => $data['product']->id]) }}" method="post">
+            @csrf
+            <input type="hidden" class="productId" value="{{ $data['product']->id }}">
+            <div class="product-detail-body uk-grid" uk-grid>
+
+                <div class="product-detail-left uk-width-1-2">
+                    <img alt="{{ $data['product']->name }}" class="w-full mb-4 image-main"
+                        src="{{ $data['product']->image }}" />
+                    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
+                        <ul class="uk-slider-items uk-child-width-1-5 uk-grid uk-grid-small product-detail-image-slide">
                             @if (!empty($data['product']->images))
-                                @foreach ($data['product']->images as $image)
-                                    <img class="swiper-slide" alt="" src="{{ $image->image_url }}" />
+                            @foreach ($data['product']->images as $image)
+                            <li>
+                                <img class="swiper-slide" alt="" src=""
+                                    style="background-image: url({{ $image->image_url }})" />
+                            </li>
+                            @endforeach
+                            @endif
+                        </ul>
+
+                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                    </div>
+                </div>
+
+
+                <div class="product-detail-right uk-width-1-2">
+                    <div class="product-detail-right-top">
+                        <h3 class="text-3xl">
+                            {{ $data['product']->name }}
+                        </h3>
+                        <div class="stock">
+                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded ">
+                                Còn hàng
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center my-2 review">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                            <i class="fas fa-star text-yellow-400">
+                            </i>
+                        </div>
+                        <p class="text-sm ml-2">
+                            5.0 (121 Đánh giá)
+                        </p>
+                    </div>
+
+                    <div class="flex items-center my-4 price">
+                        <span class="text-2xl font-bold text-red-500">
+                            {{ number_format($data['product']->price, 0, ',', '.') }} ₫
+                        </span>
+                        @if (!empty($data['product']->price_old))
+                        <span class="text-base text-gray-500 line-through ml-2">
+                            {{ number_format($data['product']->price_old, 0, ',', '.') }} ₫
+                        </span>
+                        @endif
+                    </div>
+
+                    <div class="product-info">
+                        <p class="text-gray-600 mb-2 product-info-sku">
+                            <strong>Mã sản phẩm:</strong>
+                            <a href="#" id="sku">SP01</a>
+                        </p>
+                        <p class="text-gray-600 mb-2 product-info-category">
+                            <strong>Danh mục:</strong>
+                            <a href="#" id="category">{{ $data['product']->category->name }}</a>
+                        </p>
+                        <p class="text-gray-600 mb-4 product-info-vendor">
+                            <strong>Thương hiệu:</strong>
+                            <a href="#" id="vendor">{{ $data['product']->category->name }}</a>
+                        </p>
+
+                    </div>
+
+                    <p class=" mb-4 desc">
+                        {{ $data['product']->description }}
+                    </p>
+
+                    <div class="mb-4 color">
+                        <p class="text-lg font-bold ">
+                            Màu sắc
+                        </p>
+                        <div class="flex space-x-2 ">
+                            <div class="product-color-options flex-wrap gap-2">
+                                @foreach ($data['groupedColors'] as $color => $variants)
+                                <span class="product-sw-select-item">
+                                    <input type="radio" name="product-choose-color" value="{{ $color }}"
+                                        id="color-{{ $loop->index }}" class="trigger-option-sw">
+                                    <label for="color-{{ $loop->index }}" style="background-color: #fff"
+                                        class="sw-color-label">{{ $color }}</label>
+                                </span>
                                 @endforeach
                             @endif
                         </div>
                     </div>
 
-                    <div class="product-detail-right uk-width-1-2">
-                        <div class="product-detail-right-top">
-                            <h3 class="text-3xl">
-                                {{ $data['product']->name }}
-                            </h3>
-                            <div class="stock">
-                                <span class="bg-green-100 text-green-700 px-2 py-1 rounded ">
-                                    Còn hàng
+                    <div class="mb-6 size">
+                        <p class="text-lg font-semibold mb-2 text-[#222]">
+                            Size
+                        </p>
+                        <div class="flex space-x-2 product-size-options" id="sizeOptions flex-wrap gap-2">
+                            <!-- Hiển thị tất cả các size mặc định -->
+                            @foreach ($data['allSizes'] as $size)
+                            <span class="product-sw-select-item all-sizes">
+                                <input type="radio" name="product-choose-size" value="{{ $size }}"
+                                    id="product-choose-size-{{ $loop->index }}" class="trigger-option-sw">
+                                <label for="product-choose-size-{{ $loop->index }}"
+                                    class="sw-size-label">{{ $size }}</label>
+                            </span>
+                            @endforeach
+
+                            <!-- Hiển thị các size theo từng màu (ẩn mặc định) -->
+                            @foreach ($data['groupedColors'] as $color => $variants)
+                            <div class="size-group flex space-x-2 product-size-options"
+                                data-color="{{ $color }}" style="display: none;">
+                                @foreach ($variants['sizes'] as $size)
+                                <span class="product-sw-select-item">
+                                    <input type="radio" name="product-choose-size"
+                                        value="{{ $size }}"
+                                        id="product-choose-size-{{ $color }}-{{ $loop->index }}"
+                                        class="trigger-option-sw">
+                                    <label for="product-choose-size-{{ $color }}-{{ $loop->index }}"
+                                        class="sw-size-label">{{ $size }}</label>
                                 </span>
                             </div>
                         </div>
@@ -95,40 +204,105 @@
                             @endif
                         </div>
 
-                        <div class="product-info">
-                            <p class="text-gray-600 mb-2 product-info-sku">
-                                <strong>Mã sản phẩm:</strong>
-                                <a href="#" id="sku">SP01</a>
-                            </p>
-                            <p class="text-gray-600 mb-2 product-info-category">
-                                <strong>Danh mục:</strong>
-                                <a href="#" id="category">{{ $data['product']->category->name }}</a>
-                            </p>
-                            <p class="text-gray-600 mb-4 product-info-vendor">
-                                <strong>Thương hiệu:</strong>
-                                <a href="#" id="vendor">{{ $data['product']->category->name }}</a>
-                            </p>
-
-                        </div>
-
-                        <p class=" mb-4 desc">
-                            {{ $data['product']->description }}
+                    <div class="mb-4 product-extra-content">
+                        <p class="mb-1 free-deliver">
+                            Chính sách đổi trả & Chính sách giao hàng
                         </p>
+                        <p class=" mb-1 date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            Được đổi ý
+                        </p>
+                        <p class=" mb-1 date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            7 ngày miễn phí trả hàng
+                        </p>
+                        <p class="date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            Không áp dụng chính sách bảo hành
+                        </p>
+                        <p class="date-time-extra">
+                            <i class="fas fa-check-circle fa-sm text-red-500">
+                            </i>
+                            Đặt hàng nhanh chóng - Giao hàng tận tay
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
 
-                        <div class="mb-4 color">
-                            <p class="text-lg font-bold">
-                                Màu sắc
-                            </p>
-                            <div class="flex space-x-2">
-                                <div class="product-color-options">
-                                    @foreach ($data['groupedColors'] as $color => $variants)
-                                        <span class="product-sw-select-item">
-                                            <input type="radio" name="product-choose-color" value="{{ $color }}"
-                                                id="color-{{ $loop->index }}" class="trigger-option-sw">
-                                            <label for="color-{{ $loop->index }}" style="background-color: #fff"
-                                                class="sw-color-label">{{ $color }}</label>
-                                        </span>
-                                    @endforeach
+        {{-- --}}
+        <div class="tab-product-detail">
+            <ul class="uk-flex-center tab-product-detail-top" uk-tab>
+                <li class="uk-active"><a class="tab-product-detail-title" href="#">Mô tả</a></li>
+                <li><a class="tab-product-detail-title" href="#">Thông tin bổ sung</a></li>
+                <li><a class="tab-product-detail-title" href="#">Đánh giá</a></li>
+                <li><a class="tab-product-detail-title" href="#">Bình luận</a></li>
+            </ul>
+
+            <!-- Nội dung của tab -->
+            <ul class="uk-switcher uk-margin tab-product-detail-bt">
+                <!-- Tab des -->
+                <div class="tab-des mt-10">
+                    <p class="text-[#222]">{{ $data['product']->description }}</p>
+                </div>
+
+                <!-- Tab Info -->
+                <div class="tab-info mt-10">
+                    <div class="flex gap-10 pb-4">
+                        <span class="text-[#222] font-bold text-lg">Màu sắc</span>
+                        <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam
+                            ad!
+                            Molestias enim dolorem ipsa neque sunt repellat!</p>
+                    </div>
+                    <div class="flex gap-10 pb-4">
+                        <span class="text-[#222] font-bold text-lg">Size</span>
+                        <p class="text-[#555]"> voluptatum ullam fugit, atque vitae assumenda maxime voluptatem ipsam
+                            ad!
+                            Molestias enim dolorem ipsa neque sunt repellat!</p>
+                    </div>
+                </div>
+
+                <!-- Tab review -->
+                <div class="tab-review">
+
+                    <div class="flex items-start gap-x-8 pb-8 pt-8 tab-review-warp">
+                        <img alt="" class="w-16 h-16 rounded-full" height="60"
+                            src="https://storage.googleapis.com/a1aa/image/O7wLlOJVDnb5LBKc40Mw6jm10eUtoOpXp3VAMcG01y7e8ZwTA.jpg"
+                            width="60" />
+                        <div class="tab-review-body">
+                            <div class="tab-review-meta">
+                                <div>
+                                    <div class="text-sm text-gray-500">
+                                        02/07/2004
+                                    </div>
+                                    <div class="text-lg font-semibold pt-1 mb-1 text-[#222]">
+                                        Nguyễn Minh Hiếu
+                                    </div>
+                                </div>
+
+                                <div class="ml-auto flex items-center">
+                                    <div class="text-yellow-400">
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                        <i class="fas fa-star ">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-review-desc">
+                                <div class="mt-2 text-[#555]">
+                                    Hayflower blends with fresh moss on this wine’s gentle nose. The palate adds a ripe
+                                    lemon freshness that is mouth-filling, smooth, and textured with the yeasty richness
+                                    that is aligned to chalky depth.
                                 </div>
                             </div>
                         </div>
@@ -252,91 +426,8 @@
                         </div>
                     </div>
 
-                    <!-- Tab review -->
-                    <div class="tab-review">
 
-                        <div class="flex items-start gap-x-8 pb-8 pt-8 tab-review-warp">
-                            <img alt="" class="w-16 h-16 rounded-full" height="60"
-                                src="https://storage.googleapis.com/a1aa/image/O7wLlOJVDnb5LBKc40Mw6jm10eUtoOpXp3VAMcG01y7e8ZwTA.jpg"
-                                width="60" />
-                            <div class="tab-review-body">
-                                <div class="tab-review-meta">
-                                    <div>
-                                        <div class="text-sm text-gray-500">
-                                            02/07/2004
-                                        </div>
-                                        <div class="text-lg font-semibold pt-1 mb-1 text-[#222]">
-                                            Nguyễn Minh Hiếu
-                                        </div>
-                                    </div>
-
-                                    <div class="ml-auto flex items-center">
-                                        <div class="text-yellow-400">
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-review-desc">
-                                    <div class="mt-2 text-[#555]">
-                                        Hayflower blends with fresh moss on this wine’s gentle nose. The palate adds a ripe
-                                        lemon freshness that is mouth-filling, smooth, and textured with the yeasty richness
-                                        that is aligned to chalky depth.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-x-8 pb-8 pt-8 tab-review-warp">
-                            <img alt="" class="w-16 h-16 rounded-full" height="60"
-                                src="https://storage.googleapis.com/a1aa/image/O7wLlOJVDnb5LBKc40Mw6jm10eUtoOpXp3VAMcG01y7e8ZwTA.jpg"
-                                width="60" />
-                            <div class="tab-review-body">
-                                <div class="tab-review-meta">
-                                    <div>
-                                        <div class="text-sm text-gray-500">
-                                            02/07/2004
-                                        </div>
-                                        <div class="text-lg font-semibold pt-1 mb-1 text-[#222]">
-                                            Nguyễn Minh Hiếu
-                                        </div>
-                                    </div>
-
-                                    <div class="ml-auto flex items-center adfadf">
-                                        <div class="text-yellow-400">
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                            <i class="fas fa-star ">
-                                            </i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-review-desc">
-                                    <div class="mt-2 text-[#555]">
-                                        Hayflower blends with fresh moss on this wine’s gentle nose. The palate adds a ripe
-                                        lemon freshness that is mouth-filling, smooth, and textured with the yeasty richness
-                                        that is aligned to chalky depth.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                  
-                        <div class="mt-8 comment-reply">
+                    <div class="mt-8 comment-reply">
                         <h2 class="text-[28px] font-semibold mt-16 comment-reply-title">
                             Thêm đánh giá
                         </h2>
@@ -414,38 +505,38 @@
 
                         <h3 class="title-cmt mt-10">Hãy để lại bình luận</h3>
 
-                            @if (auth()->check())
-                                <form action="{{ route('post_comment', $data['product']->id) }}" method="POST"
-                                    id="form-post-comment">
-                                    @csrf
-                                    @method('POST')
-                                    <textarea name="content" cols="30" rows="5" id="content"
-                                        class="text-note mt-5 block w-full h-32 p-2 input-info area-cmt" placeholder=" Enter content (*)"></textarea>
-                                    @error('content')
-                                        <span style="color:red">{{ $message }}</span>
-                                    @enderror
-                                    <br>
-                                    <button class="btnsave" id="btnsave" data-comment="{{ $data['product']->id }}"
-                                        type="submit">Gửi bình luận</button>
-                                </form>
-                            @else
-                                <a href="{{ route('login.form') }}" class="error-comment">Vui lòng đăng nhập để có thể
-                                    bình luận</a>
-                            @endif
-                        </div>
+                        @if (auth()->check())
+                        <form action="{{ route('post_comment', $data['product']->id) }}" method="POST"
+                            id="form-post-comment">
+                            @csrf
+                            @method('POST')
+                            <textarea name="content" cols="30" rows="5" id="content"
+                                class="text-note mt-5 block w-full h-32 p-2 input-info area-cmt" placeholder=" Enter content (*)"></textarea>
+                            @error('content')
+                            <span style="color:red">{{ $message }}</span>
+                            @enderror
+                            <br>
+                            <button class="btnsave" id="btnsave" data-comment="{{ $data['product']->id }}"
+                                type="submit">Gửi bình luận</button>
+                        </form>
+                        @else
+                        <a href="{{ route('login.form') }}" class="error-comment">Vui lòng đăng nhập để có thể
+                            bình luận</a>
+                        @endif
+                    </div>
 
-                        {{-- List comment --}}
-                        <h3 class="list-cmt-title">Danh sách bình luận</h3>
+                    {{-- List comment --}}
+                    <h3 class="list-cmt-title">Danh sách bình luận</h3>
 
-                        <div class="list-comment">
-                            <div class="media-comment">
-                                @foreach ($comments as $cmt)
-                                    <div class="comment-parent " id="comment-parent-{{ $cmt->id }}">
-                                        <a href="" class="pull-left" class="pull-left w-16 h-16 rounded-full"
-                                            height="60">
-                                            <img src="{{ url('/storage/images/img_user.jpg') }}" alt=""
-                                                class="avatar" width="60px">
-                                        </a>
+                    <div class="list-comment">
+                        <div class="media-comment">
+                            @foreach ($comments as $cmt)
+                            <div class="comment-parent " id="comment-parent-{{ $cmt->id }}">
+                                <a href="" class="pull-left" class="pull-left w-16 h-16 rounded-full"
+                                    height="60">
+                                    <img src="{{ url('/storage/images/img_user.jpg') }}" alt=""
+                                        class="avatar" width="60px">
+                                </a>
 
                                 <div class="media-comment-body" id="media-comment-body-{{$cmt->id}}">
                                     <h4 name="fullname"> {{ $cmt->user->fullname }}
@@ -456,31 +547,31 @@
                                     <p name="content" id="content-{{ $cmt->id }}">
                                         {{ $cmt->content }}
                                     </p>
-                                        <div class="text-right">
-                                                @can('my-comment', $cmt)
-                                                    <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id }}"
-                                                        data-id_comment="{{ $cmt->id }}"
-                                                        data-content="{{ $cmt->content }}">Sửa
-                                                    </a>
-                                                    <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
-                                                        class="delete-comment">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn-delete"
-                                                            data-comment_id="{{ $cmt->id }}">Xóa</button>
-                                                    </form>
-                                                    <a class="btn-reply" href=""
-                                                            data-id_comment="{{ $cmt->id }}">Trả lời
-                                                    </a>
-                                                @endcan
-                                        </div>
-                                        {{-- </div> --}}
+                                    <div class="text-right">
+                                        @can('my-comment', $cmt)
+                                        <a href="" class="btn-edit" id="btn-edit-{{ $cmt->id }}"
+                                            data-id_comment="{{ $cmt->id }}"
+                                            data-content="{{ $cmt->content }}">Sửa
+                                        </a>
+                                        <form action="{{ route('destroy_comment', $cmt->id) }}" method="post"
+                                            class="delete-comment">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-delete"
+                                                data-comment_id="{{ $cmt->id }}">Xóa</button>
+                                        </form>
+                                        <a class="btn-reply" href=""
+                                            data-id_comment="{{ $cmt->id }}">Trả lời
+                                        </a>
+                                        @endcan
+                                    </div>
+                                    {{-- </div> --}}
 
                                     <form action="{{route('update_comment', $cmt->id)}}" method="POST" style="display:none"
                                         class="form-edit-comment-parent" id="form-edit-{{ $cmt->id }}">
                                         @csrf
                                         @method('PUT')
-                                        <textarea name="content-edit" id="text-edit-{{$cmt->id}}" cols="70"  placeholder="Enter content (*)"
+                                        <textarea name="content-edit" id="text-edit-{{$cmt->id}}" cols="70" placeholder="Enter content (*)"
                                             required="required">
                                             </textarea>
 
@@ -494,19 +585,19 @@
                                         @csrf
                                         @method('POST')
                                         <input type="button" value="{{ $data['product']->id }}" hidden name="product_id">
-                                        <textarea name="content-reply" cols="70"placeholder="Enter content (*)"
+                                        <textarea name="content-reply" cols="70" placeholder="Enter content (*)"
                                             class="text-note-{{ $cmt->id }}" required="required" id="content-reply"></textarea>
 
 
-                                            <button class="btnsave-reply" type="submit"
-                                                data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
+                                        <button class="btnsave-reply" type="submit"
+                                            data-id_comment="{{ $cmt->id }}" data-comment="{{ $data['product']->id}}"> Gửi</button>
                                     </form>
 
                                     {{-- Các bình luận con --}}
                                     {{-- id="list-comment-child-{{ $cmt->parent_id }}" --}}
                                     <div class="list-comment-child" id="list-comment-child-{{$cmt->id}}">
                                         @foreach ($cmt->replies as $child)
-                                        <div class="comment-child comment-child-{{$child->id}}">
+                                        <div class="comment-child  comment-child-{{$child->id}}">
                                             <a href="" class="pull-left">
                                                 <img src="{{ url('/storage/images/img_user.jpg') }}"
                                                     alt="" class="avatar" width="60px">
@@ -521,51 +612,23 @@
                                                 <p name="content" id="content-{{ $child->id }}">
                                                     {{ $child->content }}
                                                 </p>
-    
-                                                        <div class="text-right">
-                                                            @can('my-comment', $child)
-                                                            <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
-                                                                data-content="{{ $child->content }}">Sửa</a>                                                                
-                                                                <form action="{{ route('destroy_comment', $child->id) }}"
-                                                                    method="post" class="delete-comment">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn-delete-reply"
-                                                                        data-comment_id="{{ $child->id }}">Xóa
-                                                                    </button>
-                                                                </form>
-                                                                <a class="btn-reply-p2" href=""
-                                                                    data-id_comment="{{ $child->id }}">Trả lời
-                                                                </a>
-                                                            @endcan
-                                                        </div>
-                                                        {{-- Form edit --}}
-                                                        <form action="" method="POST" style="display:none"
-                                                            class="form-edit-comment-parent"
-                                                             id="form-edit-{{ $child->id }}">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
-                                                                class="content-edit" required="required"></textarea>
 
-                                                            <button class="btnsave-update" type="submit"
-                                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
-                                                        </form>
-
-                                                        {{-- Form reply --}}
-                                                        <form action="" method="POST" style="display:none"
-                                                            class="form-post-comment-grandchildren"
-                                                            id="form-reply-{{ $child->id }}">
-                                                            @csrf
-                                                            @method('POST')
-                                                            <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
-                                                                class="content-reply" required="required"></textarea>
-
-                                                            <button class="btnsave-reply-p2" type="submit"
-                                                                data-id_comment="{{ $child->id }}"> Gửi</button>
-                                                        </form>
-                                                    </div>
-
+                                                <div class="text-right">
+                                                    @can('my-comment', $child)
+                                                    <a href="" class="btn-edit-child" id="btn-edit-child-{{ $child->id}}" data-id_comment="{{ $child->id }}"
+                                                        data-content="{{ $child->content }}">Sửa</a>
+                                                    <form action="{{ route('destroy_comment', $child->id) }}"
+                                                        method="post" class="delete-comment">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn-delete-reply"
+                                                            data-comment_id="{{ $child->id }}">Xóa
+                                                        </button>
+                                                    </form>
+                                                    <a class="btn-reply-p2" href=""
+                                                        data-id_comment="{{ $child->id }}">Trả lời
+                                                    </a>
+                                                    @endcan
                                                 </div>
                                                 {{-- Form edit --}}
                                                 <form action="" method="POST" style="display:none"
@@ -573,7 +636,7 @@
                                                     id="form-edit-{{ $child->id }}">
                                                     @csrf
                                                     @method('PUT')
-                                                    <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70"  placeholder="Enter content (*)"
+                                                    <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
                                                         class="content-edit" required="required"></textarea>
 
                                                     <button class="btnsave-update" type="submit"
@@ -586,27 +649,61 @@
                                                     id="form-reply-{{ $child->id }}">
                                                     @csrf
                                                     @method('POST')
-                                                    <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
+                                                    <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" rows="6" placeholder="Enter content (*)"
                                                         class="content-reply" required="required"></textarea>
 
                                                     <button class="btnsave-reply-p2" type="submit"
                                                         data-id_comment="{{ $child->id }}"> Gửi</button>
                                                 </form>
                                             </div>
+
                                         </div>
-                                        @endforeach
+                                        {{-- Form edit --}}
+                                        <form action="" method="POST" style="display:none"
+                                            class="form-edit-comment-parent"
+                                            id="form-edit-{{ $child->id }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <textarea name="content-edit" id="text-edit-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
+                                                class="content-edit" required="required"></textarea>
+
+                                            <button class="btnsave-update" type="submit"
+                                                data-id_comment="{{ $child->id }}">Cập nhật</button>
+                                        </form>
+
+                                        {{-- Form reply --}}
+                                        <form action="" method="POST" style="display:none"
+                                            class="form-post-comment-grandchildren"
+                                            id="form-reply-{{ $child->id }}">
+                                            @csrf
+                                            @method('POST')
+                                            <textarea name="content-reply" id="text-note-{{ $child->id }}" cols="70" placeholder="Enter content (*)"
+                                                class="content-reply" required="required"></textarea>
+
+                                            <button class="btnsave-reply-p2" type="submit"
+                                                data-id_comment="{{ $child->id }}"> Gửi</button>
+                                        </form>
                                     </div>
                                 </div>
                                 @endforeach
                             </div>
-
                         </div>
+                        @endforeach
                     </div>
 
                 </div>
-
-            </ul>
         </div>
+
+        </div>
+
+        </ul>
+        </div>
+
+
+        <div>
+
+        </div>
+
 
         <div class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
             uk-slider="autoplay: true; autoplay-interval: 3000;">
@@ -693,7 +790,10 @@
                             @endforeach
                             @endif
                         </div>
+
+
                     </div>
+
                     @endforeach
                     @endif
                 </div>

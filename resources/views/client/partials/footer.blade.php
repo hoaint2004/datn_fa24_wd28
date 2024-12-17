@@ -69,7 +69,7 @@
             <div class="ft-top-item-two uk-width-1-5 uk-width-1-5@l uk-width-1-2@s uk-width-1-4@m">
               <h4>Liên hệ</h4>
               <div class="ft-top-item-content">
-                <p class="text text-[15px] leading-7">
+                <p class="p-0 text-[15px] leading-[34px]">
                   Tư vấn dịch vụ: <a href="#">0988697904</a>
                   <br />
                   Hỗ trợ dịch vụ: <a href="#">0988697904</a>

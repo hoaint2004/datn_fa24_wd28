@@ -37,6 +37,7 @@ class ProductRequest extends FormRequest
             'variants' => 'nullable|array|distinct',
             'variants.*.size' => 'required_with:variants.*.color,variants.*.quantity|integer|between:20,50',
             'variants.*.color' => 'required_with:variants.*.size,variants.*.quantity|string',
+
             'variants.*.quantity' => 'required_with:variants.*.size,variants.*.color|integer|min:0',
         ];
     }
@@ -75,3 +76,4 @@ class ProductRequest extends FormRequest
     }
     
 }
+

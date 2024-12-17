@@ -87,7 +87,6 @@ class CartController extends Controller
                     'quantity' => $quantity,
                     'price' => $product->price * $quantity
                 ]);
-            }
 
             $cartCount = Cart::where('user_id', Auth::user()->id)->count();
             $product = Product::with('variants')->where('id', $request->id)->first();
@@ -97,6 +96,7 @@ class CartController extends Controller
             // Trả về response
             return response()->json([
                 'url' => route('cart.delete', $cartItem->id),
+
                 'urlProduct' => route('productDetail', $request->id),
                 'status' => true,
                 'message' => 'Sản phẩm được thêm vào giỏ hàng thành công',
@@ -105,14 +105,17 @@ class CartController extends Controller
                     'color' => $cartItem->color,
                     'size' => $cartItem->size,
                     'quantity' => $cartItem->quantity,
+
                 ],
                 'product' => [
                     'name' => $product->name,
                     'price' => $product->price,
-                    'image' => $product->image, // Lấy hình ảnh từ sản phẩm
+
+                    'image' => $product->image,
                 ],
-                'cartCount' => $cartCount,
+                'cartCount' => $cartCount->count(),
             ]);
+        }
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());

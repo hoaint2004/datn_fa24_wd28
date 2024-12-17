@@ -76,6 +76,7 @@
                                     <label for="productDescript" class="form-label">Description</label>
                                     <textarea class="form-control" name="description"
                                     id="productDescript" placeholder="Nhập giới thiệu sản phẩm..." cols="30" rows="10">{{ old('description') }}</textarea>
+
                                     {{-- <input type="text" class="form-control" name="description"
                                         id="productDescript" value="{{ old('description') }}" placeholder="Nhập giới thiệu sản phẩm..."> --}}
                                     @error('description')

@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Discount;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Laravel\Prompts\alert;
 use Carbon\Carbon;
+
 use App\Events\OrderStatusUpdated;
 
 class UserController extends Controller
@@ -31,6 +33,7 @@ class UserController extends Controller
         });     
         $vouchers = Discount::where('usage_limit','>','0')->where('end_date','>=',Carbon::now())->where('is_active','=',1)->get();   
         return view('client.account', compact('user','orders','vouchers'));
+
     }
 
     public function updateOrderStatus($orderId){
@@ -40,6 +43,7 @@ class UserController extends Controller
             $order->save();
 
             $reviewExists = $order->review && $order->review->user_id === $order->user_id;
+
             // Phát sự kiện khi client nhấn hoàn thành
             event(new OrderStatusUpdated($order));
             return response()->json([
@@ -47,6 +51,7 @@ class UserController extends Controller
                 'order_status' => $order->status,
                 'review_exists' => $reviewExists,
                 'order_id' => $order->id,
+
                 'message' => 'Cảm ơn quý khách đã mua hàng.'
             ]);
         }

@@ -86,10 +86,20 @@
 
         {{-- đơn hàng --}}
         <div id="orders-content" class="content-section my-order">
+
             <div class="order-header">
                 <div class="order-search">
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
                     <button uk-icon="search" class="icon-search"></button>
+
+                </div>
+                <div class="order-filter">
+                    <select class="uk-select text-[#222] border-none">
+                        <option>Tất cả đơn hàng</option>
+                        <option>Đã giao hàng</option>
+                        <option>Đang xử lý</option>
+                        <option>Đã hủy</option>
+                    </select>
                 </div>
                 {{-- <div class="order-filter">
                     <select class="uk-select text-[#222] border-none">
@@ -125,6 +135,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $order->code }}</td>
                                     <td>{{ $order->name }}</td>
+                                    <td>{{ $order->recipient_name }}</td>
                                     <td>{{ number_format($order->total_price, 0, ',', '.') }}₫</td>
                                     <td>
                                         <p class="uk-margin-remove">{{ $order->payment_method }}</p>
@@ -189,12 +200,14 @@
                                                 @endif
                                              
                                             </div>
+
                                         </div>
                                     </td>
                                 </tr>
         
                                 <!-- Modal Xem thêm chi tiết sản phẩm -->
                                 {{-- <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
+
                                     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                         <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
                                         <h3 class="uk-modal-title font-bold">Thông tin đơn hàng</h3>
@@ -211,6 +224,24 @@
                                             @endforeach
                                         </div>
 
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div> --}}
+        
+        {{-- end đơn hàng --}}
+
+
+        <div id="orders-content" class="content-section my-order">
+            <!-- Form tìm kiếm đơn hàng -->
+            <form action="" class="order-search">
+                <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
+                <button uk-icon="search" class="icon-search"></button>
+            </form>
 
                                     </div>
                                 </div> --}}
@@ -340,6 +371,7 @@
                                         </div>
                             
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -380,6 +412,7 @@
             </div>
         </div>
         
+
         </main>
 
     </div>
@@ -594,12 +627,9 @@ $(document).ready(function() {
                         pos: 'top-right'
                     });
                 }
+
             });
         });
-
-
-
-
 
 
 });

@@ -48,6 +48,7 @@
             <div class="uk-width-1-2 login-left">
                 <img src="https://heins.websitesbykarlo.com/wp-content/uploads/2024/04/banner-01-1.jpg"
                     alt="" width="100%">
+
             </div>
 
             <div class="uk-width-1-2 login-right">
