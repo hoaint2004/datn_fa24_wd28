@@ -63,10 +63,10 @@
                                                             href="{{ route('admin.categories.edit', $cate->id) }}"
                                                             class="link-primary"><i class="ri-settings-4-line"
                                                                 style="font-size:18px;"></i></a>
-                                                        <a style="margin: 0 5px; cursor: pointer;" class="link-danger"><i
+                                                        {{-- <a style="margin: 0 5px; cursor: pointer;" class="link-danger"><i
                                                                 class="ri-delete-bin-5-line" style="font-size:18px;"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#topmodal{{ $cate->id }}"></i></a>
+                                                                data-bs-target="#topmodal{{ $cate->id }}"></i></a> --}}
                                                     </td>
                                                 </tr>
                                                 <div id="topmodal{{ $cate->id }}" class="modal fade" tabindex="-1"
