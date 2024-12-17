@@ -836,10 +836,7 @@
                                 icon: 'success',
                                 title: response.message,
                                 showConfirmButton: true,
-                            }).then(() => {
-                                window.location.reload();
                             });
-
                         } else {
                             Swal.fire({
                                 position: 'center',
