@@ -99,20 +99,26 @@
                 </li>
 
                 {{-- Sidebar Người dùng --}}
+           
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProduct_variants">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
+                    <a class="nav-link menu-link" href="#users" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="users">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
                     </a>
+                    <div class="collapse menu-dropdown" id="users">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.users.index') }}" class="nav-link" data-key="t-chat"> Danh sách người dùng
+                                </a>
+                            </li>
+                            {{-- <li class="nav-item">
+                                <a href="{{ route('admin.banners.create') }}" class="nav-link" data-key="t-chat"> Thêm mới banner
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </div>
                 </li>
-
-                {{-- Sidebar Đơn hàng --}}
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarOrders" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarProduct_variants">
-                        <i class="ri-stack-line"></i> <span data-key="t-apps">Quản lí đơn hàng</span>
-                    </a>
-                </li>
+              
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"

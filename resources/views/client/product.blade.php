@@ -133,7 +133,7 @@
                                             style="color: #c90d0d; font-size: 1.25rem;"></i>
                                         <div class="product-button">
                                             <button>Thêm vào giỏ </button>
-                                            <button type="button" uk-toggle="target: #modal-container-{{$item->id}}"
+                                            <button type="button" uk-toggle="target: #modal-container"
                                                 class="quick-view-button" data-id="{{ $item->id }}">Xem
                                                 nhanh</button>
                                         </div>
@@ -321,6 +321,7 @@
         </div>
     </div>
     {{-- call api HTML xem nhanh --}}
+    <div class="" id="xem-nhanh"></div>
 
 @endsection
 
@@ -355,7 +356,7 @@
                 e.preventDefault();
 
                 let productId = $(this).data('id');
-
+                console.log(productId)
                 $.ajax({
                     url: `/quick-view/${productId}`,
                     type: 'GET',
@@ -551,6 +552,50 @@
                     }
                 });
             });
+
+            // test
+    
+            // Bắt sự kiện của các nút và call dữ liệu
+              $('input[type="checkbox"], .sidebar-price-body input').on('change', function () {
+                const filterData = getFilterData();
+                // $('#product_main').hide();
+                document.getElementById('product_main').style.display = 'none';
+                // kiểm tra khi user nhân mũi tên quay lại trang 
+                localStorage.setItem('filterData', JSON.stringify(filterData));
+              
+                if (Object.keys(filterData).length !== 0) {
+                    $.ajax({
+                        url: '/filter',
+                        method: 'POST',
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: filterData,
+                        success: function (products) {
+                            renderProducts(products); 
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+
+                // Kiểm tra nếu không có bộ lọc nào được chọn thì không gửi yêu cầu AJAX
+                if (Object.keys(filterData).length == 0) {
+                    window.location.reload();
+                    return; 
+                }
+                $.ajax({
+                    url: '/filter', 
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    data: filterData,
+                    success: function (products) {
+                        renderProducts(products); 
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    },
+                });
+            });
         });
 
         // Thực hiện khi nhấn nút giảm số lượng
@@ -599,7 +644,6 @@
 
     {{-- filter--}}
     <script>
-        $(document).ready(function () {
             function getFilterData() { 
                 let selectedCategories = [];
                 let selectedSizes = [];
@@ -661,7 +705,7 @@
                                 <i class="fas fa-heart icon-heart" style="color: #c90d0d; font-size: 1.25rem;"></i>
                                 <div class="product-button">
                                     <button>Thêm vào giỏ </button>
-                                    <button type="button" uk-toggle="target: #modal-container-${product.id}" class="quick-view-button" data-id="${product.id}">Xem nhanh</button>
+                                    <button type="button" uk-toggle="target: #modal-container" class="quick-view-button" data-id="${product.id}">Xem nhanh</button>
                                 </div>
                             </div>
                             <div class="product-review">
@@ -701,7 +745,7 @@
                     productList.append(productHTML);
 
                 }); 
-                // let html = '';
+                    let html = '';
                     products.forEach(product => {
                         // Tạo HTML cho từng sản phẩm
                         let thumbnailsHTML = '';
@@ -719,49 +763,49 @@
                             sizesHTML += `<button class="w-10 h-10 border border-gray-300 rounded-lg">${variant.size}</button>`;
                         });
 
-                        html += `
-                            <div id="modal-container-${product.id}" class="uk-modal-container" uk-modal>
-                                <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
-                                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                                    <div class="uk-modal-body uk-grid" uk-grid>
-                                        <div class="uk-width-1-2">
-                                            <img alt="${product.name}" class="w-full rounded-lg" src="${product.images}" style="width: 100%; max-height: 70vh; object-fit: cover;" />
-                                            <div class="flex mt-4 space-x-2">${thumbnailsHTML}</div>
-                                        </div>
-                                        <div class="uk-width-1-2" style="overflow-y: hidden;">
-                                            <h1 class="text-3xl font-bold">${product.description}</h1>
-                                            <p class="text-xl text-gray-600">${product.name}</p>
-                                            <div class="mt-4">
-                                                <span class="text-2xl font-bold">$${product.price.toFixed(2)}</span>
-                                                <span class="text-xl line-through text-gray-500 ml-2">$${product.old_price.toFixed(2)}</span>
-                                            </div>
-                                            <div class="mt-4">
-                                                <p class="font-bold">Color</p>
-                                                <div class="flex space-x-2 mt-2">${colorsHTML}</div>
-                                            </div>
-                                            <div class="mt-4">
-                                                <p class="font-bold">Size</p>
-                                                <div class="flex space-x-2 mt-2">${sizesHTML}</div>
-                                            </div>
-                                            <div class="mt-4 flex items-center space-x-4">
-                                                <div class="flex items-center border border-gray-300 rounded-lg">
-                                                    <button class="w-10 h-10 text-gray-600">-</button>
-                                                    <input class="w-12 h-10 text-center border-none" type="text" value="1" />
-                                                    <button class="w-10 h-10 text-gray-600">+</button>
-                                                </div>
-                                                <button class="bg-black text-white px-6 py-2 rounded-lg">Add to Cart</button>
-                                                <button class="border border-gray-300 rounded-lg p-2">
-                                                    <i class="far fa-heart text-gray-600"></i>
-                                                </button>
-                                            </div>
-                                            <div class="mt-4">
-                                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">${product.code ? "In Stock" : "Out of Stock"}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        // html += `
+                        //     <div id="modal-container-${product.id}" class="uk-modal-container" uk-modal>
+                        //         <div class="uk-modal-dialog uk-width-large" style="max-width: 90vw; max-height: 95vh;">
+                        //             <button class="uk-modal-close-default" type="button" uk-close></button>
+                        //             <div class="uk-modal-body uk-grid" uk-grid>
+                        //                 <div class="uk-width-1-2">
+                        //                     <img alt="${product.name}" class="w-full rounded-lg" src="${product.images}" style="width: 100%; max-height: 70vh; object-fit: cover;" />
+                        //                     <div class="flex mt-4 space-x-2">${thumbnailsHTML}</div>
+                        //                 </div>
+                        //                 <div class="uk-width-1-2" style="overflow-y: hidden;">
+                        //                     <h1 class="text-3xl font-bold">${product.description}</h1>
+                        //                     <p class="text-xl text-gray-600">${product.name}</p>
+                        //                     <div class="mt-4">
+                        //                         <span class="text-2xl font-bold">$${product.price.toFixed(2)}</span>
+                        //                         <span class="text-xl line-through text-gray-500 ml-2">$${product.old_price.toFixed(2)}</span>
+                        //                     </div>
+                        //                     <div class="mt-4">
+                        //                         <p class="font-bold">Color</p>
+                        //                         <div class="flex space-x-2 mt-2">${colorsHTML}</div>
+                        //                     </div>
+                        //                     <div class="mt-4">
+                        //                         <p class="font-bold">Size</p>
+                        //                         <div class="flex space-x-2 mt-2">${sizesHTML}</div>
+                        //                     </div>
+                        //                     <div class="mt-4 flex items-center space-x-4">
+                        //                         <div class="flex items-center border border-gray-300 rounded-lg">
+                        //                             <button class="w-10 h-10 text-gray-600">-</button>
+                        //                             <input class="w-12 h-10 text-center border-none" type="text" value="1" />
+                        //                             <button class="w-10 h-10 text-gray-600">+</button>
+                        //                         </div>
+                        //                         <button class="bg-black text-white px-6 py-2 rounded-lg">Add to Cart</button>
+                        //                         <button class="border border-gray-300 rounded-lg p-2">
+                        //                             <i class="far fa-heart text-gray-600"></i>
+                        //                         </button>
+                        //                     </div>
+                        //                     <div class="mt-4">
+                        //                         <span class="bg-green-100 text-green-600 px-2 py-1 rounded-lg">${product.code ? "In Stock" : "Out of Stock"}</span>
+                        //                     </div>
+                        //                 </div>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                        // `;
                        // Gán toàn bộ HTML vào productXem
                         productXem.append(html);
                         const modal = document.getElementById(`modal-container-${product.id}`);
@@ -771,6 +815,8 @@
                     });
 
             }
+        $(document).ready(function () {
+  
     
             // Bắt sự kiện của các nút và call dữ liệu
               $('input[type="checkbox"], .sidebar-price-body input').on('change', function () {
@@ -800,18 +846,7 @@
                     window.location.reload();
                     return; 
                 }
-                $.ajax({
-                    url: '/filter', 
-                    method: 'POST',
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    data: filterData,
-                    success: function (products) {
-                        renderProducts(products); 
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
-                    },
-                });
+            
             });
         });
     </script>
