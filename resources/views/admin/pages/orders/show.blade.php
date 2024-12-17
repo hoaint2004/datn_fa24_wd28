@@ -116,44 +116,87 @@
                                 @method('PATCH')
                                 <div class="mb-3">
                                     <label for="statusInput" class="form-label">Trạng thái đơn hàng:</label>
-                                @php
-                                    $statusOrder = [
-                                        'Chờ xác nhận' => ['Đã xác nhận', 'Đang giao', 'Giao hàng thất bại', 'Đã hủy'],
-                                        'Đã xác nhận' => ['Đang giao', 'Đã hủy'],
-                                        'Đang giao' => ['Giao hàng thành công', 'Giao hàng thất bại', 'Đã hủy'],
-                                        'Giao hàng thành công' => ['Hoàn thành'],
-                                        'Giao hàng thất bại' => ['Chờ xác nhận', 'Đã hủy'],
-                                        'Đã hủy' => [],
-                                        'Hoàn thành' => []
-                                    ];
-                                
-                                    $currentStatus = $order->status;
-                                @endphp
-                                
-                                <select id="statusInput" name="status" class="form-control" {{ $order->status == 'Hoàn thành' ? 'disabled' : '' }}>
-                                    @foreach ($statusOrder as $status => $nextStatuses)
-                                        <option value="{{ $status }}"
-                                            {{ $currentStatus == $status ? 'selected' : '' }}
-                                            {{ 
-                                                $currentStatus == $status || 
-                                                in_array($status, $nextStatuses) ? '' : 'disabled' 
-                                            }}>
-                                            {{ $status }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="payment_status">Trạng thái thanh toán:</label>
-                                    <select id="payment_status" name="payment_status" class="form-control" {{ $order->payment_status == 'Đã thanh toán' ? 'disabled' : '' }}>
-                                        <option value="Chưa thanh toán" {{ $order->payment_status == 'Chưa thanh toán' ? 'selected' : '' }}>Chưa thanh toán</option>
-                                        <option value="Đã thanh toán" {{ $order->payment_status == 'Đã thanh toán' ? 'selected' : '' }} 
-                                            {{ $order->status !== 'Giao hàng thành công' ? 'disabled' : '' }}>Đã thanh toán</option>
+                                    <select id="statusInput" name="status" class="form-control">
+                                        @if($order->status == 'Chờ xác nhận')
+                                            <option value="Chờ xác nhận" selected>Chờ xác nhận</option>
+                                            <option value="Đã xác nhận">Đã xác nhận</option>
+                                            <option value="Đang giao"disabled>Đang giao</option>
+                                            <option value="Giao hàng thất bại"disabled>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"disabled>Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Đã xác nhận')
+                                            <option value="Chờ xác nhận" disabled>Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"selected>Đã xác nhận</option>
+                                            <option value="Đang giao">Đang giao</option>
+                                            <option value="Giao hàng thất bại"disabled>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"disabled>Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Đang giao')
+                                            <option value="Chờ xác nhận" disabled>Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"disabled>Đã xác nhận</option>
+                                            <option value="Đang giao"selected>Đang giao</option>
+                                            <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công">Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Giao hàng thành công')
+                                            <option value="Chờ xác nhận" disabled>Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"disabled>Đã xác nhận</option>
+                                            <option value="Đang giao"disabled>Đang giao</option>
+                                            <option value="Giao hàng thất bại"disabled>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"selected>Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Giao hàng thất bại')
+                                            <option value="Chờ xác nhận"disabled >Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"disabled>Đã xác nhận</option>
+                                            <option value="Đang giao">Đang giao</option>
+                                            <option value="Giao hàng thất bại"selected>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"disabled>Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Đã hủy')
+                                            <option value="Chờ xác nhận" disabled>Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"disabled>Đã xác nhận</option>
+                                            <option value="Đang giao"disabled>Đang giao</option>
+                                            <option value="Giao hàng thất bại"disabled>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"disabled>Giao hàng thành công</option>
+                                            <option value="Đã hủy"selected>Đã hủy</option>
+                                            <option value="Hoàn thành"disabled>Hoàn thành</option>
+                                        @elseif($order->status == 'Hoàn thành')
+                                            <option value="Chờ xác nhận"disabled >Chờ xác nhận</option>
+                                            <option value="Đã xác nhận"disabled>Đã xác nhận</option>
+                                            <option value="Đang giao"disabled>Đang giao</option>
+                                            <option value="Giao hàng thất bại"disabled>Giao hàng thất bại</option>
+                                            <option value="Giao hàng thành công"disabled>Giao hàng thành công</option>
+                                            <option value="Đã hủy"disabled>Đã hủy</option>
+                                            <option value="Hoàn thành"selected>Hoàn thành</option>
+                                        @endif
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Cập nhật</button> 
-                                <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Quay lại</a> 
+                            
+                                <div class="mb-3">
+                                    <label for="payment_status">Trạng thái thanh toán:</label>
+                                    <select id="payment_status" name="payment_status" class="form-control">
+                                        <option value="Chưa thanh toán" 
+                                            {{ $order->payment_status == 'Chưa thanh toán' ? 'selected' : '' }}>
+                                            Chưa thanh toán
+                                        </option>
+                                        <option value="Đã thanh toán" 
+                                            {{ $order->payment_status == 'Đã thanh toán' ? 'selected' : '' }}
+                                            {{ $order->status !== 'Giao hàng thành công' ? 'disabled' : '' }}>
+                                            Đã thanh toán
+                                        </option>
+                                    </select>
+                                </div>
+                            
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Quay lại</a>
                             </form>
+                            
+                            
                             
                            
 
