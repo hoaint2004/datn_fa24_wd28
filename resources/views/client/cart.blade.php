@@ -97,33 +97,6 @@
 
             <div class="shopping-cart-right uk-width-1-3">
                 <h2 class="">Thông tin đơn hàng</h2>
-                <div class="shopping-cart-right-info">
-                    @if (!empty($data['carts']))
-                        @foreach ($data['carts'] as $item)
-                            <div class="info-item">
-                                <div style="background-image: url('{{ $item->product->image }}')" class="bg-img-cart">
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <div>
-                                        <span>Số lượng: <strong>{{ $item->quantity }}</strong></span>
-                                    </div>
-                                    <div>
-                                        <span>Size: <strong>{{ $item->color }} / {{ $item->size }}</strong></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
-                                            đ</strong>
-                                        @if (!empty($item->product->price_old))
-                                            <del>({{ number_format($item->product->price_old, 0, ',', '.') }}
-                                                đ)</del>
-                                        @endif
-                                    </span>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
                 <div class="shipping-fee">
                     <span>Phí vận chuyển</span>
                     <span>30.000</span>
