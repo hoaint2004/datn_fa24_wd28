@@ -11,8 +11,7 @@
             @if (!empty($data['banners']))
                 @foreach ($data['banners'] as $item)
                     <div>
-                        <img src="{{ $item->image }}"
-                            alt="{{ $item->name }}" uk-cover="true" />
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" uk-cover="true" />
                     </div>
                 @endforeach
             @endif
@@ -77,16 +76,15 @@
         <span class="sub-span-title">
             List các nhóm sản phẩm nổi bật nhất
         </span>
-        <div class="collection-list uk-grid" uk-grid>           
-            @foreach($data['categoryLimit8'] as $category8)
-            <a class="collection-list-item " href="#" title="Flash Sale">
-                <div class="home-collection-list-item-image">
-                    <img src="{{$category8->image}}"
-                        alt="Flash Sale" title="Flash Sale" width="480" height="480" decoding="async"
-                        fetchpriority="auto">
-                </div>
-                <span>{{$category8->name}}</span>
-            </a>
+        <div class="collection-list uk-grid" uk-grid>
+            @foreach ($data['categoryLimit8'] as $category8)
+                <a class="collection-list-item " href="#" title="Flash Sale">
+                    <div class="home-collection-list-item-image">
+                        <img src="{{ $category8->image }}" alt="Flash Sale" title="Flash Sale" width="480" height="480"
+                            decoding="async" fetchpriority="auto">
+                    </div>
+                    <span>{{ $category8->name }}</span>
+                </a>
             @endforeach
 
 
@@ -137,8 +135,10 @@
                             @if (!empty($data['productNews']))
                                 @foreach ($data['productNews'] as $key => $item)
                                     @php
-                                        if ($item->price_old > 0) { 
-                                            $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                                        if ($item->price_old > 0) {
+                                            $discountPercentage = floor(
+                                                (($item->price_old - $item->price) / $item->price_old) * 100,
+                                            );
                                         } else {
                                             $discountPercentage = 0;
                                         }
@@ -146,7 +146,8 @@
                                     <div class="product-item uk-width-1-4@m">
                                         <div class="product-image">
                                             <a href="{{ route('productDetail', $item->id) }}">
-                                                <img src="" style="background-image: url({{ $item->image }}); padding: 100px 0" />
+                                                <img src=""
+                                                    style="background-image: url({{ $item->image }}); padding: 100px 0" />
                                             </a>
                                             <span>
                                                 @if ($discountPercentage > 0)
@@ -163,7 +164,8 @@
                                             </div>
                                         </div>
                                         <div class="product-review">
-                                            <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                            <a
+                                                href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
                                                 <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                             </a>
                                             <div class="icon text-[10px]">
@@ -175,7 +177,7 @@
                                             </div>
                                         </div>
                                         <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
-                                            class="product-name">{{ !empty($item->name) ? $item->name :'' }}</a>
+                                            class="product-name">{{ !empty($item->name) ? $item->name : '' }}</a>
                                         <div class="product-price">
                                             <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                             @if (!empty($item->price_old))
@@ -186,8 +188,7 @@
                                             @if (!empty($item->images))
                                                 @foreach ($item->images as $image)
                                                     <div class="product-item-detail-gallery-item">
-                                                        <img src="{{ $image->image_url }}"
-                                                            alt="">
+                                                        <img src="{{ $image->image_url }}" alt="">
                                                     </div>
                                                 @endforeach
                                             @endif
@@ -279,8 +280,10 @@
                 @if (!empty($data['productUpdateNews']))
                     @foreach ($data['productUpdateNews'] as $key => $item)
                         @php
-                            if ($item->price_old > 0) { 
-                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            if ($item->price_old > 0) {
+                                $discountPercentage = floor(
+                                    (($item->price_old - $item->price) / $item->price_old) * 100,
+                                );
                             } else {
                                 $discountPercentage = 0;
                             }
@@ -288,7 +291,7 @@
                         <div class="product-item uk-width-1-4@m">
                             <div class="product-image">
                                 <a href="{{ route('productDetail', $item->id) }}">
-                                    <img src="" style="background-image: url({{ $item->image }})"  />
+                                    <img src="" style="background-image: url({{ $item->image }})" />
                                 </a>
                                 <span>
                                     @if ($discountPercentage > 0)
@@ -304,7 +307,8 @@
                                 </div>
                             </div>
                             <div class="product-review">
-                                <a href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
+                                <a
+                                    href="{{ route('categories', !empty($item->category->id) ? $item->category->id : '') }}">
                                     <span>{{ !empty($item->category->name) ? $item->category->name : '' }}</span>
                                 </a>
                                 <div class="icon">
@@ -316,7 +320,7 @@
                                 </div>
                             </div>
                             <a href="{{ route('productDetail', !empty($item->id) ? $item->id : '') }}"
-                                class="product-name">{{ !empty($item->name) ?$item->name : '' }}</a>
+                                class="product-name">{{ !empty($item->name) ? $item->name : '' }}</a>
                             <div class="product-price">
                                 <strong>{{ number_format($item->price, 0, ',', '.') }} ₫</strong>
                                 @if (!empty($item->price_old))
@@ -327,8 +331,7 @@
                                 @if (!empty($item->images))
                                     @foreach ($item->images as $image)
                                         <div class="product-item-detail-gallery-item">
-                                            <img src="{{ $image->image_url }}"
-                                                alt="">
+                                            <img src="{{ $image->image_url }}" alt="">
                                         </div>
                                     @endforeach
                                 @endif
@@ -349,7 +352,7 @@
         <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </section>
 
-   
+
 
 
     <section class="product-list uk-container uk-container-large uk-position-relative uk-visible-toggle uk-light"
@@ -370,8 +373,10 @@
                 @if (!empty($data['productPopulars']))
                     @foreach ($data['productPopulars'] as $key => $item)
                         @php
-                            if ($item->price_old > 0) { 
-                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            if ($item->price_old > 0) {
+                                $discountPercentage = floor(
+                                    (($item->price_old - $item->price) / $item->price_old) * 100,
+                                );
                             } else {
                                 $discountPercentage = 0;
                             }
@@ -418,8 +423,7 @@
                                 @if (!empty($item->images))
                                     @foreach ($item->images as $image)
                                         <div class="product-item-detail-gallery-item">
-                                            <img src="{{ $image->image_url }}"
-                                                alt="">
+                                            <img src="{{ $image->image_url }}" alt="">
                                         </div>
                                     @endforeach
                                 @endif
@@ -460,8 +464,10 @@
                 @if (!empty($data['categoryNewOne']->products))
                     @foreach ($data['categoryNewOne']->products as $key => $item)
                         @php
-                            if ($item->price_old > 0) { 
-                                $discountPercentage = floor((($item->price_old - $item->price) / $item->price_old) * 100);
+                            if ($item->price_old > 0) {
+                                $discountPercentage = floor(
+                                    (($item->price_old - $item->price) / $item->price_old) * 100,
+                                );
                             } else {
                                 $discountPercentage = 0;
                             }
@@ -508,8 +514,7 @@
                                 @if (!empty($item->images))
                                     @foreach ($item->images as $image)
                                         <div class="product-item-detail-gallery-item">
-                                            <img src="{{ $image->image_url }}"
-                                                alt="">
+                                            <img src="{{ $image->image_url }}" alt="">
                                         </div>
                                     @endforeach
                                 @endif
@@ -568,15 +573,15 @@
 
                     </div>
                     <!-- <div class="mt-4">
-                        <span class="text-2xl font-bold modal-price"></span>
-                        <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
-                    </div> -->
+                            <span class="text-2xl font-bold modal-price"></span>
+                            <span class="text-xl line-through text-gray-500 ml-2 modal-price-old"></span>
+                        </div> -->
                     <p class="mt-4  mb-4 desc text-gray-600 modal-description">
 
                     </p>
                     <form action="{{ route('addToCart') }}" class="form-modal-addToCart" method="post">
                         <div class="mb-4 color ">
-                             <p class="text-lg font-bold mb-4">Màu sắc</p>
+                            <p class="text-lg font-bold mb-4">Màu sắc</p>
                             <div class="flex space-x-2 mt-2 box-color">
 
                             </div>
@@ -590,7 +595,8 @@
                         <div class="mt-10 flex items-center space-x-4">
                             <div class="flex items-center border border-gray-300 rounded-lg">
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-minus btn-minus">-</button>
-                                <input name="quantity" class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
+                                <input name="quantity"
+                                    class="w-12 input-quantity-modal h-10 text-center border-none quantity-selector-input"
                                     type="text" value="1" />
                                 <button class="w-10 h-10 text-gray-600 quantity-selector-button-plus btn-plus">+</button>
                             </div>
@@ -737,15 +743,14 @@
                 var size = $('#modal-container input[name="product-choose-size"]:checked').val();
                 var quantity = $('#modal-container input[name="quantity"]').val();
 
-                // Gửi dữ liệu qua AJAX
+                // Kiểm tra điều kiện bắt buộc
                 if (color == null) {
                     Swal.fire({
                         position: 'center',
                         icon: 'error',
                         title: 'Vui lòng chọn màu sắc',
                         showConfirmButton: true,
-                    })
-
+                    });
                     return false;
                 }
 
@@ -755,11 +760,11 @@
                         icon: 'error',
                         title: 'Vui lòng chọn size',
                         showConfirmButton: true,
-                    })
-
+                    });
                     return false;
                 }
 
+                // Gửi dữ liệu qua AJAX
                 $.ajax({
                     url: form.attr('action'),
                     method: 'POST',
@@ -772,62 +777,73 @@
                     },
                     success: function(response) {
                         var cartCount = response.cartCount;
-                        $('.cartCount').text(cartCount)
-                        $('.countCartHeader').text('(' + cartCount + ')')
-                        let html = `
-                            <div class="warp">
-                                <a href="${response.urlProduct}">
-                                    <img src="${response.product.image}" alt="" width="120px"></a>
-                                <div class="warp-body">
-                                    <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
-                                    <div class="price">
-                                        <span><strong>${response.product.price}đ</strong></span>
-                                    </div>
-                                    <div class="data-size">
-                                        <span>${response.data.color} / ${response.data.size}</span>
-                                    </div>
-                                    <div class="quantity">
-                                        <div class="quantity-selector">
-                                            <button aria-label="Giảm số lượng"
-                                                data-cart-id="${response.data.id}"
-                                                class="quantity-selector-button-minus btn-minus-header">
-                                                -
-                                            </button>
-                                            <input class="quantity-selector-input input-cart-header"
-                                                type="number" step="1" min="1" max="9999"
-                                                aria-label="Số lượng sản phẩm"
-                                                data-cart-id="${response.data.id}"
-                                                value="${response.data.quantity}" readonly="">
-                                            <button aria-label="Tăng số lượng"
-                                                data-cart-id="${response.data.id}"
-                                                class="quantity-selector-button-plus btn-plus-header">+
-                                            </button>
-                                        </div>
-                                        <form data-product-id="${response.data.id}" class="form-deleteCart"
-                                            action="${response.url}" method="post">
-                                            @csrf
-                                            <button class="cart-item-remove"><i
-                                                    class="fa-solid fa-trash-can"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
+                        $('.cartCount').text(cartCount);
+                        $('.countCartHeader').text('(' + cartCount + ')');
+
+                        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                        var existingCartItem = $(
+                            `.sidebarCart .cart-item[data-id="${response.data.id}"]`);
+
+                        if (existingCartItem.length > 0) {
+                            // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+                            existingCartItem.find('.quantity-selector-input').val(response.data
+                                .quantity);
+                        } else {
+                            // Nếu sản phẩm chưa tồn tại, tạo HTML và thêm sản phẩm mới
+                            let html = `
+                    <div class="cart-item warp" data-id="${response.data.id}">
+                        <a href="${response.urlProduct}">
+                            <img src="${response.product.image}" alt="" width="120px">
+                        </a>
+                        <div class="warp-body">
+                            <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
+                            <div class="price">
+                                <span><strong>${response.product.price}đ</strong></span>
                             </div>
-                        `;
-                        $('.sidebarCart').append(html);
+                            <div class="data-size">
+                                <span>${response.data.color} / ${response.data.size}</span>
+                            </div>
+                            <div class="quantity">
+                                <div class="quantity-selector">
+                                    <button aria-label="Giảm số lượng"
+                                        data-cart-id="${response.data.id}"
+                                        class="quantity-selector-button-minus btn-minus-header">-</button>
+                                    <input class="quantity-selector-input input-cart-header"
+                                        type="number" step="1" min="1" max="9999"
+                                        aria-label="Số lượng sản phẩm"
+                                        data-cart-id="${response.data.id}"
+                                        value="${response.data.quantity}" readonly="">
+                                    <button aria-label="Tăng số lượng"
+                                        data-cart-id="${response.data.id}"
+                                        class="quantity-selector-button-plus btn-plus-header">+</button>
+                                </div>
+                                <form data-product-id="${response.data.id}" class="form-deleteCart"
+                                    action="${response.url}" method="post">
+                                    @csrf
+                                    <button class="cart-item-remove"><i
+                                            class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                            $('.sidebarCart').append(html); // Thêm sản phẩm mới vào giao diện
+                        }
+
                         if (response.status) {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'success',
                                 title: response.message,
                                 showConfirmButton: true,
-                            })
+                            });
                         } else {
                             Swal.fire({
                                 position: 'center',
                                 icon: 'error',
                                 title: response.message,
                                 showConfirmButton: true,
-                            })
+                            });
                         }
                     },
                     error: function(xhr, status, error) {

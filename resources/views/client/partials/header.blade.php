@@ -80,51 +80,51 @@
 
                         <div class="mini-cart-product sidebarCart">
                             @if (!empty($carts))
-                            @php
-                            $total = 0;
-                            @endphp
-                            @foreach ($carts as $item)
-                            @php
-                            $total += $item->quantity * $item->product->price;
-                            @endphp
-                            <div class="warp">
-                                <a href="{{ route('productDetail', $item->product->id) }}">
-                                    <div style="background-image: url({{ $item->product->image }});" class="img-mini-cart"></div>
-                                    <div class="warp-body">
-                                        <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
-                                        <div class="price">
-                                            <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
-                                        </div>
-                                        <div class="data-size">
-                                            <span>{{ $item->color }} / {{ $item->size }}</span>
-                                        </div>
-                                        <div class="quantity">
-                                            <div class="quantity-selector">
-                                                <button aria-label="Giảm số lượng"
-                                                    data-cart-id="{{ $item->id }}"
-                                                    class="quantity-selector-button-minus btn-minus-header">
-                                                    -
-                                                </button>
-                                                <input class="quantity-selector-input input-cart-header"
-                                                    type="number" step="1" min="1" max="9999"
-                                                    aria-label="Số lượng sản phẩm"
-                                                    data-cart-id="{{ $item->id }}"
-                                                    value="{{ $item->quantity }}" readonly="">
-                                                <button aria-label="Tăng số lượng"
-                                                    data-cart-id="{{ $item->id }}"
-                                                    class="quantity-selector-button-plus btn-plus-header">+
-                                                </button>
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach ($carts as $item)
+                                    @php
+                                        $total += $item->quantity * $item->product->price;
+                                    @endphp
+                                    <div class="warp">
+                                        <a href="{{ route('productDetail', $item->product->id) }}">
+                                            <img src="{{ $item->product->image }}" alt="" width="120px"></a>
+                                        <div class="warp-body">
+                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
+                                            <div class="price">
+                                                <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
                                             </div>
-                                            <form data-product-id="{{ $item->id }}" class="form-deleteCart"
-                                                action="{{ route('cart.delete', $item->id) }}" method="post">
-                                                @csrf
-                                                <button class="cart-item-remove"><i
-                                                        class="fa-solid fa-trash-can"></i></button>
-                                            </form>
+                                            <div class="data-size">
+                                                <span>{{ $item->color }} / {{ $item->size }}</span>
+                                            </div>
+                                            <div class="quantity">
+                                                <div class="quantity-selector">
+                                                    <button aria-label="Giảm số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-minus btn-minus-header">
+                                                        -
+                                                    </button>
+                                                    <input class="quantity-selector-input input-cart-header"
+                                                        type="number" step="1" min="1" max="9999"
+                                                        aria-label="Số lượng sản phẩm"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        value="{{ $item->quantity }}" readonly="">
+                                                    <button aria-label="Tăng số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-plus btn-plus-header">+
+                                                    </button>
+                                                </div>
+                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="cart-item-remove"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                            </div>
-                            @endforeach
+                                @endforeach
                             @endif
                         </div>
 

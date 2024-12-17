@@ -85,7 +85,7 @@
             </div>
 
         {{-- đơn hàng --}}
-        {{-- <div id="orders-content" class="content-section my-order">
+        <div id="orders-content" class="content-section my-order">
             <div class="order-header">
                 <div class="order-search">
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
@@ -124,7 +124,7 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $order->code }}</td>
-                                    <td>{{ $order->recipient_name }}</td>
+                                    <td>{{ $order->name }}</td>
                                     <td>{{ number_format($order->total_price, 0, ',', '.') }}₫</td>
                                     <td>
                                         <p class="uk-margin-remove">{{ $order->payment_method }}</p>
@@ -132,35 +132,63 @@
                                             {{ $order->payment_status === 'Đã thanh toán' ? 'Đã thanh toán' : 'Chưa thanh toán' }}
                                         </p>
                                     </td>
-                                    <td>
-                                        @php
-                                        $statusClass = match($order->status) {
-                                            'Hoàn thành' => 'status-delivered',
-                                            'Chờ xác nhận' => 'in-process',
-                                            'Đã xác nhận' => 'in-process',
-                                            'Đang giao' => 'in-process',
-                                            'Giao hàng thất bại' => 'failed',
-                                            'Đã hủy' => 'canceled',
-                                            default => 'unknown',
-                                        };
-                                        $statusText = match($order->status) {
-                                            'Hoàn thành' => 'Đã giao hàng',
-                                            'Chờ xác nhận' => 'Đang chờ xác nhận',
-                                            'Đã xác nhận' => 'Đã xác nhận',
-                                            'Đang giao' => 'Đang giao hàng',
-                                            'Giao hàng thất bại' => 'Giao hàng thất bại',
-                                            'Đã hủy' => 'Đã hủy',
-                                            default => 'Không xác định',
-                                        };
-                                        @endphp
-                                        <span class="{{ $statusClass }}">{{ $statusText }}</span>
+                                    <td> 
+                                        <!-- Trạng thái đơn hàng -->
+                                        <div class="order-status">
+                                            @php
+                                            $result = match($order->status) {
+                                                'Hoàn thành' => '<span class="status-delivered uk-text-success">Đã giao hàng</span>',
+                                                'Chờ xác nhận' => sprintf(
+                                                    '<span class="pending uk-text-warning">Đang chờ xác nhận</span>
+                                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                                    $order->id,
+                                                ),
+                                                'Đã xác nhận' => sprintf(
+                                                    '<span class="confirmed uk-text-primary">Đã xác nhận</span>
+                                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                                    $order->id,
+                                                ),
+                                                'Đang giao' => '<span class="shipping uk-text-warning">Đang giao hàng</span>',
+                                                'Giao hàng thành công' => sprintf(
+                                                    '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span>
+                                                    <button class="complete-btn uk-button uk-button-success uk-button-small" data-order-id="%s">Hoàn thành</button>',
+                                                    $order->id,
+                                                ),
+                                                'Giao hàng thất bại' => sprintf(
+                                                    '<span class="failed uk-text-danger">Giao hàng thất bại, vui lòng liên hệ để được xử lý</span>
+                                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
+                                                    $order->id,
+                                                ),
+                                                'Đã hủy' => '<span class="canceled uk-text-muted">Đã hủy</span>',
+                                                default => '<span class="unknown uk-text-light">Trạng thái không xác định</span>',
+                                            };
+                                            @endphp
+                        
+                                            {!! $result !!}
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="uk-button-group">
-                                            <button class="view-order-bt" data-uk-toggle="target: #modal-details-{{ $order->id }}">Chi tiết</button>
-                                            @if ($order->status === 'Chờ xác nhận' || $order->status === 'Đã xác nhận')
-                                                <button class="cancel-btn" data-order-id="{{ $order->id }}">Hủy đơn hàng</button>
-                                            @endif
+                                            <div class="order-actions uk-button-group">
+                                                <button class="view-order-bt uk-button uk-button-primary" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
+                                                
+                                                @if ($order->status === 'Hoàn thành')
+                                                    @if ($order->review_exists)
+                                                        <!-- Nếu đã có đánh giá -->
+                                                        <button class="review-button uk-button uk-button-default" disabled>
+                                                            Đã đánh giá
+                                                        </button>
+                                                    @else
+                                                        <!-- Nếu chưa có đánh giá -->
+                                                        <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                            Viết đánh giá
+                                                        </button>
+                                                    @endif
+                                                @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
+                                                    <span class="uk-text-danger">Bình tĩnh để đánh giá</span>
+                                                @endif
+                                             
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -189,12 +217,12 @@
                     </tbody>
                 </table>
             </div>
-        </div> --}}
+        </div>
         
         
         {{-- end đơn hàng --}}
 
-        <div id="orders-content" class="content-section my-order">
+        {{-- <div id="orders-content" class="content-section my-order">
             <!-- Form tìm kiếm đơn hàng -->
             <form action="" class="order-search">
                 <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
@@ -219,20 +247,21 @@
                                     <button class="view-order-bt uk-button uk-button-primary" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
                                     
                                     @if ($order->status === 'Hoàn thành')
-                                        @if (!$order->review || $order->review->user_id !== $order->user_id)
-                                            <!-- Kiểm tra nếu chưa có đánh giá hoặc đánh giá không thuộc user hiện tại -->
-                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
-                                                Viết đánh giá
-                                            </button>
-                                        @else
+                                        @if ($order->review_exists)
                                             <!-- Nếu đã có đánh giá -->
                                             <button class="review-button uk-button uk-button-default" disabled>
                                                 Đã đánh giá
+                                            </button>
+                                        @else
+                                            <!-- Nếu chưa có đánh giá -->
+                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
+                                                Viết đánh giá
                                             </button>
                                         @endif
                                     @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
                                         <span class="uk-text-danger">Bình tĩnh để đánh giá</span>
                                     @endif
+                                 
                                 </div>
                             </div>
                         </div>
@@ -293,12 +322,42 @@
                     </div>
                 @endforeach
             @endif
-        </div>
+        </div> --}}
             
         {{-- voucher --}}
-            <div id="discounts-content" class="content-section">
-                <div class="">Phiếu giảm 100% cho khách hàng đặc biệt</div>
-            </div> 
+        <div id="discounts-content" class="content-section container mt-4">
+            <h3 class="mb-4 text-center text-primary">Danh sách Phiếu Giảm Giá</h3>
+            <div class="row justify-content-center">
+                @forelse($vouchers as $voucher)
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-lg h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-uppercase text-success fw-bold">
+                                    {{ $voucher->discount_code }}
+                                </h5>
+                                <p class="card-text text-muted">
+                                    Giảm {{ $voucher->discount_type === 'VND' ? number_format($voucher->discount_value, 0, ',', '.') . ' VND' : number_format($voucher->discount_value, 0, ',', '.') . '%' }}
+                                </p>
+                                <p class="small text-secondary">
+                                    Cho đơn từ {{number_format($voucher->min_order_value,0,',','.').'VND'}}
+                                </p>
+                                <p class="small text-secondary">
+                                    Sử dụng trước: {{ \Carbon\Carbon::parse($voucher->end_date)->format('d/m/Y') }}
+                                </p>
+                                <button class="btn btn-primary btn-sm">
+                                    Áp dụng ngay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12 text-center">
+                        <p class="text-danger">Không có phiếu giảm giá nào khả dụng</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+        
         </main>
 
     </div>
@@ -455,32 +514,70 @@ $(document).ready(function() {
 
 
         // update order status hoàn thành
-        $('.complete-btn').click(function () {
+        $(document).on('click', '.complete-btn', function () {
             var orderId = $(this).data('order-id');
-            var button = $(this);
+            var $button = $(this);
+            var $orderItem = $button.closest('tr'); // Sửa lại selector để tìm đúng hàng
 
             $.ajax({
                 url: "{{ route('thongtinOrder.updateOrder', ':id') }}".replace(':id', orderId),
-                type: 'POST',
+                method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
+                    order_id: orderId
                 },
-                success: function (data) {
-                    if (data.status === 'success') {
-                        alert(data.message);
-                        button.prop('disabled', true); // Vô hiệu hóa nút sau khi đã cập nhật
-                        button.text('Đã hoàn thành'); // Đổi chữ trên nút
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Vô hiệu hóa nút và cập nhật trạng thái
+                        $button.prop('disabled', true).text('Đã hoàn thành');
+                        $orderItem.find('.order-status').html('<span class="uk-text-success">Đã giao hàng</span>');
+
+                        // Cập nhật nút đánh giá
+                        var $actionGroup = $orderItem.find('.order-actions');
+                        $actionGroup.find('.review-button').remove();
+
+                        if (!response.review_exists) {
+                            $actionGroup.append(`
+                                <button class="review-button uk-button uk-button-secondary" 
+                                        data-uk-toggle="target: #modal-review-${response.order_id}">
+                                    Viết đánh giá
+                                </button>
+                            `);
+                        } else {
+                            $actionGroup.append(`
+                                <button class="review-button uk-button uk-button-default" disabled>
+                                    Đã đánh giá
+                                </button>
+                            `);
+                        }
+
+                        // Hiển thị thông báo
+                        UIkit.notification({
+                            message: 'Cập nhật đơn hàng thành công',
+                            status: 'success',
+                            pos: 'top-right'
+                        });
                     } else {
-                        alert('cập nhật không thành công'+ data.message);
+                        UIkit.notification({
+                            message: 'Cập nhật thất bại',
+                            status: 'danger',
+                            pos: 'top-right'
+                        });
                     }
                 },
-                error: function (xhr, status, error) {
-                    messageDiv.html(
-                        `<span style="color:red;">Có lỗi xảy ra, vui lòng thử lại. Lỗi: ${xhr.responseText}</span>`
-                    );
-                },
+                error: function () {
+                    UIkit.notification({
+                        message: 'Lỗi hệ thống! Vui lòng thử lại sau.',
+                        status: 'danger',
+                        pos: 'top-right'
+                    });
+                }
             });
         });
+
+
+
+
 
 
 });

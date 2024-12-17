@@ -778,26 +778,26 @@
                 return false;
             }
 
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    id: productId,
-                    color: color,
-                    size: size,
-                    quantity: quantity
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status) {
-                        var cartCount = response.cartCount;
-                        $('.cartCount').text(cartCount)
-                        $('.countCartHeader').text('(' + cartCount + ')')
-                        let html = `
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            id: productId,
+                            color: color,
+                            size: size,
+                            quantity: quantity
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                var cartCount = response.cartCount;
+                                $('.cartCount').text(cartCount)
+                                $('.countCartHeader').text('(' + cartCount + ')')
+                                let html = `
                                     <div class="warp">
                                         <a href="${response.urlProduct}">
-                                             <div style="background-image: url(${response.product.image});" class="img-mini-cart"></div></a>
+                                            <img src="${response.product.image}" alt="" width="120px"></a>
                                         <div class="warp-body">
                                             <a href="${response.urlProduct}" class="product-name">${response.product.name}</a>
                                             <div class="price">
@@ -833,27 +833,27 @@
                                         </div>
                                     </div>
                                 `;
-                        $('.sidebarCart').append(html);
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: response.message,
-                            showConfirmButton: true,
-                        })
-                    } else {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'error',
-                            title: response.message,
-                            showConfirmButton: true,
-                        })
-                    }
-                },
-                error: function() {
-                    alert('Lỗi khi thêm vào giỏ hàng');
-                }
-            });
-        });
+                                $('.sidebarCart').append(html);
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                })
+                            } else {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'error',
+                                    title: response.message,
+                                    showConfirmButton: true,
+                                })
+                            }
+                        },
+                        error: function() {
+                            alert('Lỗi khi thêm vào giỏ hàng');
+                        }
+                    });
+                });
 
 
         document.querySelectorAll('.star').forEach(star => {

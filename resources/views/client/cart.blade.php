@@ -1,158 +1,273 @@
-@extends('Client.layouts.master')
+<header uk-sticky="top: 100; animation: uk-animation-slide-top">
+    <div class="header-warp uk-container uk-container-large">
+        <div class="uk-grid" uk-grid="true">
+            <!-- Phần tìm kiếm bên trái -->
+            <div class="form header-left uk-width-1-3 uk-flex uk-flex-middle">
+                <form action="{{ route('search') }}" class="form-search">
+                    <input type="text" name="keyword" placeholder="Bạn cần tìm gì..." />
+                    <button uk-icon="search" class="icon-search">
+                    </button>
+                </form>
+            </div>
 
-@section('title')
-Sneakers - Thế Giới Giày
-@endsection
+            <!-- Phần logo ở giữa -->
+            <!-- Phần logo ở giữa -->
+            <div class="header-center uk-width-1-3 uk-flex uk-flex-center uk-flex-middle">
+                <a href="{{ route('home') }}" class="logo-page">
+                    <h1>Wina Shoes</h1>
+                    {{-- <img src="https://bizweb.dktcdn.net/thumb/medium/100/520/624/themes/959507/assets/shop_logo_image.png?1724041824574"
+                        alt="" /> --}}
+                </a>
+            </div>
 
-@section('content')
-@include('client.components.breadcrumb', [
-'title' => 'Giỏ Hàng',
-])
+            <!-- Phần icon bên phải -->
+            <div class="header-right uk-width-1-3 uk-flex uk-flex-right uk-flex-middle">
+                <!-- Dropnav cho biểu tượng user -->
+                <div>
+                    <a href="#" class="uk-icon-link header-icon" uk-icon="icon: user"
+                        uk-toggle="target: #dropnav-user"></a>
+                </div>
 
-<section class="shopping-cart uk-container uk-container-large">
-    <h1 class="cart-title">Giỏ Hàng Của Bạn</h1>
-    <div class="cart-body uk-grid" uk-grid>
-        <div class="shopping-cart-left uk-width-2-3">
-            <table>
-                <thead>
-                    <tr>
-                        <th><span class="pr-10 text-[#222] text-[16px] font-semibol">Sản phẩm</span></th>
-                        <th class="invisible">Details</th>
-                        <th class="text-[#222] text-[16px] font-semibol">Số lượng</th>
-                        <th class="text-[#222] text-[16px] font-semibol">Tổng tiền</th>
-                        <th class="text-[#222] text-[16px] font-semibol">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if ($data['carts']->isNotEmpty())
-                    @php
-                    $total = 0;
-                    @endphp
-                    @foreach ($data['carts'] as $item)
-                    @php
-                    $total_price = $item->product->price * $item->quantity;
-                    $total += $total_price;
-                    @endphp
-                    <tr>
-                        <td class="shopping-cart-left-tbody-image">
-                            <a href="{{ route('productDetail', $item->product->id) }}">
-                                <div class="imgbg-shopping-cart" style="background-image: url({{ $item->product->image }});" alt="{{ $item->product->image }}"></div>
-                            </a>
-                        </td>
-
-                        <td class="shopping-cart-left-tbody-product">
-                            <div class="warp">
-                                <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
-                                <div class="price">
-                                    <span>Giá: <strong>{{ number_format($item->product->price, 0, ',', '.') }}
-                                            đ</strong>
-                                        @if (!empty($item->product->price_old))
-                                        <del>({{ number_format($item->product->price_old, 0, ',', '.') }}
-                                            đ)</del>
-                                        @endif
-                                    </span>
-                                </div>
-                                <div class="data-size">
-                                    <label>Color: </label>
-                                    <span>{{ $item->color }}</span>
-                                </div>
-                                <div class="data-size">
-                                    <label>Size: </label>
-                                    <span>{{ $item->size }}</span>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="shopping-cart-quantity">
-                            <div class="quantity">
-                                <div class="quantity-selector">
-                                    <button class="quantity-selector-button-minus"
-                                        data-cart-id="{{ $item->id }}">-</button>
-                                    <input class="quantity-selector-input" type="text" readonly step="1"
-                                        min="1" max="9999" value="{{ $item->quantity }}"
-                                        data-cart-id="{{ $item->id }}">
-                                    <button class="quantity-selector-button-plus"
-                                        data-cart-id="{{ $item->id }}">+</button>
-                                </div>
-                            </div>
-                        </td>
-
-                        <td class="shopping-cart-left-tbody-total">
-                            <div class="total-price-wrapper">
-                                <span class="product-price">{{ number_format($total_price, 0, ',', '.') }}
-                                    đ</span>
-                            </div>
-                        </td>
-                        <td class="shopping-cart-left-action">
-                            <form data-product-id="{{ $item->id }}" class="form-deleteCart"
-                                action="{{ route('cart.delete', $item->id) }}" method="post">
-                                @csrf
-                                <button class="cart-item-remove btn-removeCart"><i
-                                        class="fa-solid fa-trash-can"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @else
-                    <div class="text-[20px] text-[#222] my-10 flex justify-center font-semibold">
-                        Bạn không có sản phẩm nào trong giỏ hàng
-                    </div>
-                    @endif
-                </tbody>
-            </table>
-        </div>
-
-        <div class="shopping-cart-right uk-width-1-3">
-            <h2 class="!font-semibold">Thông tin đơn hàng</h2>
-            <div class="shopping-cart-right-info">
-                @if (!empty($data['carts']))
-                @foreach ($data['carts'] as $item)
-                <div class="info-item">
-                    <div style="background-image: url('{{ $item->product->image }}')" class="bg-img-cart">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <div>
-                            <span>Số lượng: <strong>{{ $item->quantity }}</strong></span>
-                        </div>
-                        <div>
-                            <span>Size: <strong>{{ $item->size }}</strong></span>
-                        </div>
-                        <div>
-                            <span>Color: <strong>{{ $item->color }}</strong></span>
-                        </div>
-                    </div>
-                    <div>
-                        <span>Giá: <strong class="text-red-500">{{ number_format($item->product->price, 0, ',', '.') }}
-                                đ</strong>
-                            @if (!empty($item->product->price_old))
-                            <del class="text-[12px] text-gray-500">({{ number_format($item->product->price_old, 0, ',', '.') }}
-                                đ)</del>
+                <!-- Dropnav hiện ra khi nhấn vào icon user -->
+                <div id="dropnav-user"
+                    uk-drop="mode: click; pos: bottom-center; offset: 10; animation: reveal-top; animate-out: true; duration: 700"
+                    class="uk-card uk-card-body uk-card-default uk-background-default uk-box-shadow-small uk-padding-small">
+                    <ul class="uk-nav uk-dropdown-nav dropnav-user-header">
+                        @if (Auth::check())
+                            <li><a class="user-header" href="{{ route('account') }}">Thông tin tài khoản</a></li>
+                            @if (Auth::check() && Auth::user()->role === 'admin')
+                                <a href="{{ route('admin.dashboard') }}" class="user-header">Trang quản trị</a>
                             @endif
-                        </span>
+                            <a class="user-header" href="{{ route('logout') }}">Đăng xuất</a>
+                        @else
+                            <li><a class="user-header" href="{{ route('register.form') }}">Đăng ký</a></li>
+                            <li><a class="user-header" href="{{ route('login.form') }}">Đăng nhập</a></li>
+                        @endif
+                    </ul>
+                </div>
+
+                <div>
+                    <a href="#" class="uk-icon-link header-icon" uk-icon="icon: heart"></a>
+                </div>
+
+                @php
+                    $carts = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                        ->orderBy('id', 'DESC')
+                        ->limit(5)
+                        ->get();
+                    $cartsAll = \App\Models\Cart::where('user_id', Auth::user()->id ?? 0)
+                        ->orderBy('id', 'DESC')
+                        ->get();
+                @endphp
+
+                <!-- cart -->
+                <div>
+                    <a href="#" class="uk-icon-link header-icon" uk-icon="icon: bag"
+                        uk-toggle="target: #offcanvas-flip">
+                        <span class="cart-counter cartCount">{{ !empty($cartsAll) ? $cartsAll->count() : '' }}</span>
+                    </a>
+                </div>
+
+                <div class="offcanvas-cart" id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+                    <div class="uk-offcanvas-bar offcanvas-cart-body">
+                        <button class="uk-offcanvas-close" type="button" uk-close style="color: red;"></button>
+                        <div class="modal-header">
+                            <h3 class="modal-title">Giỏ hàng của tôi
+                                <span class="cart-panel-counter countCartHeader"
+                                    style="opacity: 1;">({{ !empty($cartsAll) ? $cartsAll->count() : '' }})</span>
+                            </h3>
+                            <a href="#" class="close-account-panel button-close">
+                                <i class="fas fa-close"></i>
+                            </a>
+                        </div>
+
+                        <div class="mini-cart-product sidebarCart">
+                            @if (!empty($carts))
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @foreach ($carts as $item)
+                                    @php
+                                        $total += $item->quantity * $item->product->price;
+                                    @endphp
+                                    <div class="warp cart-item" data-id="{{ $item->id }}">
+                                        <a href="{{ route('productDetail', $item->product->id) }}">
+                                            <img src="{{ $item->product->image }}" alt="" width="120px"></a>
+                                        <div class="warp-body">
+                                            <a href="{{ route('productDetail', $item->product->id) }}" class="product-name">{{ $item->product->name }}</a>
+                                            <div class="price">
+                                                <span><strong>{{ number_format($item->product->price, 0, ',', '.') }}đ</strong></span>
+                                            </div>
+                                            <div class="data-size">
+                                                <span>{{ $item->color }} / {{ $item->size }}</span>
+                                            </div>
+                                            <div class="quantity">
+                                                <div class="quantity-selector">
+                                                    <button aria-label="Giảm số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-minus btn-minus-header">
+                                                        -
+                                                    </button>
+                                                    <input class="quantity-selector-input input-cart-header"
+                                                        type="number" step="1" min="1" max="9999"
+                                                        aria-label="Số lượng sản phẩm"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        value="{{ $item->quantity }}" readonly="">
+                                                    <button aria-label="Tăng số lượng"
+                                                        data-cart-id="{{ $item->id }}"
+                                                        class="quantity-selector-button-plus btn-plus-header">+
+                                                    </button>
+                                                </div>
+                                                <form data-product-id="{{ $item->id }}" class="form-deleteCart"
+                                                    action="{{ route('cart.delete', $item->id) }}" method="post">
+                                                    @csrf
+                                                    <button class="cart-item-remove"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+
+                        <div class="total-action">
+                            <p class="mini-cart-total ">
+                                <span class="subtotal">Tổng tiền:</span>
+                                <bdi class="currencysymbol">
+                                    <span class="currencysymbol">{{ number_format($total, 0, ',', '.') }}đ</span>
+
+                                </bdi>
+                            </p>
+                            <p class="mini-cart-button">
+                                <a href="{{ route('showCart') }}" class="pay-money" title="Tiếp tục mua hàng">Giỏ
+                                    Hàng</a>
+                                <a href="{{ route('order.create') }}" class="continue-shopping"
+                                    title="Thanh toán">Thanh toán</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                @endforeach
-                @endif
-            </div>
-            <div class="shipping-fee">
-                <span>Phí vận chuyển</span>
-                <span>30.000 đ</span>
-            </div>
-            <div class="total-right">
-                <span>Tổng tiền</span>
-                <span id="total-price">{{ number_format($total ?? 0, 0, ',', '.') }} đ</span>
-            </div>
-            <div class="total-action mt-4">
-                <a href="{{ route('home') }}" class="continue-shopping" title="Tiếp tục mua hàng">Tiếp tục mua hàng</a>
-                <a href="{{ route('order.create') }}" class="pay-money" title="Thanh toán">Thanh toán</a>
             </div>
         </div>
     </div>
-</section>
 
-@endsection
+    <div class="header-bot border-b border-gray-300 shadow-md uk-container uk-container-expand">
+        <nav class="menu-header" uk-navbar uk-dropnav="dropbar: true">
+            <!-- Nút toggle cho menu trên thiết bị di động -->
+            <div class="navbar-toggle">
+                <button class="toggle-navbar" type="button" uk-toggle="target: #offcanvas-menu">
+                    <span class="icon-toggle" uk-navbar-toggle-icon></span>
+                </button>
+            </div>
 
-@section('js')
+            <!-- Menu chính -->
+            <div class="navbar-menu alo">
+                <ul class="flex justify-center m-0 p-0 gap-8 uk-subnav">
+                    
+                    <li><a href="{{ route('home') }}">Trang chủ</a></li>
+
+                    <!-- Danh mục sản phẩm với menu con và dropbar -->
+                    <li class="uk-parent">
+                        <a href="#" class="">Danh mục sản phẩm <span>›</span></a>
+                        <div class="uk-dropdown uk-width-2xlarge">
+                            <div class="uk-child-width-1-3@m aloo11" uk-grid>
+                                <!-- Nổi bật -->
+                                @php
+                                    $categories = \App\Models\Category::where('status', 0)->orderBy('id', 'DESC')->get();
+                                @endphp
+                                @if (!empty($categories))
+                                    <div>
+                                        <ul class="uk-nav uk-dropdown-nav">
+                                            @foreach ($categories as $item)
+                                                <li class="uk-nav-header">
+                                                    <a
+                                                        href="{{ route('categories', $item->id) }}">{{ $item->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                    <!-- Sản phẩm nổi bật với menu con và dropbar -->
+                    <li class="uk-parent">
+                        <a href="#">Sản phẩm nổi bật <span>›</span></a>
+                        <div class="uk-dropdown uk-dropdown-left">
+                            <div class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+                                <!-- Sản phẩm có lượt mua nhiều -->
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'most-purchased']) }}">Best Seller</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Sản phẩm mới -->
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'latest']) }}">Sản phẩm mới</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Sản phẩm giá rẻ -->
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li>
+                                            <a href="{{ route('featured_products', ['type' => 'cheapest']) }}">Sản phẩm giá rẻ</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+
+
+                
+                    <li><a href="#">Xu hướng thời trang</a></li>
+                    <li><a href="{{ route('contact') }}">Liên hệ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="offcanvas-menu" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+            <ul class="uk-nav uk-nav-default">
+                <li>
+                    <a href="{{ route('home') }}">Trang chủ</a>
+                </li>
+                <li>
+                    <a href="#">Danh mục sản phẩm</a>
+                </li>
+                <li>
+                    <a href="#">Sản phẩm nổi bật</a>
+                </li>
+                <li>
+                    <a href="#">Xu hướng thời trang</a>
+                </li>
+                <li>
+                    <a href="{{ route('contact') }}">Liên hệ</a>
+                </li>
+            </ul>
+        </div>
+        </nav>
+    </div>
+</header>
+</body>
+
+</html>
 <script>
     $(document).ready(function() {
         $(document).on('submit', '.form-deleteCart', function(e) {
@@ -166,72 +281,9 @@ Sneakers - Thế Giới Giày
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.submit();
+                    v
                 }
             });
         });
     });
-
-
-
-    // Thực hiện khi nhấn nút giảm số lượng
-    // Cập nhật khi nhấn nút giảm số lượng
-    $('.quantity-selector-button-minus').on('click', function() {
-        var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-        var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-        var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
-
-        // Giảm số lượng nếu > 1
-        if (quantity > 1) {
-            quantity--;
-            quantityInput.val(quantity); // Cập nhật lại giá trị input
-            updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
-        }
-    });
-
-    // Cập nhật khi nhấn nút tăng số lượng
-    $('.quantity-selector-button-plus').on('click', function() {
-        var cartId = $(this).data('cart-id'); // Lấy ID sản phẩm trong giỏ hàng
-        var quantityInput = $(this).siblings('.quantity-selector-input'); // Tìm input số lượng
-        var quantity = parseInt(quantityInput.val()); // Lấy giá trị số lượng hiện tại
-
-        quantity++; // Tăng số lượng
-        quantityInput.val(quantity); // Cập nhật lại giá trị input
-        updateQuantity(cartId, quantity); // Gửi yêu cầu AJAX để cập nhật số lượng
-    });
-
-    // Hàm gửi AJAX để cập nhật số lượng sản phẩm trong giỏ hàng
-    function updateQuantity(cartId, quantity) {
-        $.ajax({
-            url: '/cart/update-quantity', // Địa chỉ route API hoặc controller update số lượng
-            method: 'POST',
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
-                cart_id: cartId,
-                quantity: quantity
-            },
-            success: function(response) {
-                if (response.success) {
-                    // Cập nhật giá từng sản phẩm
-                    const newProductPrice = response.new_product_price; // Giá tiền mới của sản phẩm
-                    const totalCartPrice = response.total_cart_price; // Tổng tiền giỏ hàng mới
-
-                    // Cập nhật giá trị hiển thị của sản phẩm
-                    const productPriceElement = $(`[data-cart-id="${cartId}"]`)
-                        .closest('tr')
-                        .find('.product-price');
-                    productPriceElement.text(newProductPrice.toLocaleString('vi-VN') + ' đ');
-
-                    // Cập nhật tổng tiền giỏ hàng
-                    $('#total-price').text(totalCartPrice.toLocaleString('vi-VN') + ' đ');
-                } else {
-                    alert(response.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Lỗi khi cập nhật số lượng:", error);
-                alert('Có lỗi xảy ra. Vui lòng thử lại.');
-            }
-        });
-    }
 </script>
-@endsection

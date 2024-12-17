@@ -65,8 +65,14 @@ class AdminOrderController extends Controller
             if ($order->status === 'Đã hủy') {
                 throw new \Exception('Không thể thay đổi trạng thái của đơn đã bị hủy.');
             }
+            if($request->payment_status==='Chưa thanh toán' && $request->status==='Hoàn thành'){
+                throw new \Exception('Không thể hoàn thành khi trạng thái là chưa thanh toán');
+            }
+            if($request->status==='Giao hàng thành công' && $order->payment_status==='Chưa thanh toán'){
+                $order->payment_status='Đã thanh toán';
+            }
             $order->status =  $request->status;
-            $order->payment_status = $request->payment_status;
+            // $order->payment_status = $request->payment_status;
             $order->save(); 
             DB::commit();
             return redirect()->back()->with('status_succeed','Cập nhật thành công');
