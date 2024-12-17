@@ -91,14 +91,14 @@
                     <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
                     <button uk-icon="search" class="icon-search"></button>
                 </div>
-                <div class="order-filter">
+                {{-- <div class="order-filter">
                     <select class="uk-select text-[#222] border-none">
                         <option>Tất cả đơn hàng</option>
                         <option>Đã giao hàng</option>
                         <option>Đang xử lý</option>
                         <option>Đã hủy</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
         
             <div class="uk-overflow-auto">
@@ -194,7 +194,7 @@
                                 </tr>
         
                                 <!-- Modal Xem thêm chi tiết sản phẩm -->
-                                <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
+                                {{-- <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
                                     <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                                         <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
                                         <h3 class="uk-modal-title font-bold">Thông tin đơn hàng</h3>
@@ -210,8 +210,10 @@
                                                 <hr />
                                             @endforeach
                                         </div>
+
+
                                     </div>
-                                </div>
+                                </div> --}}
                             @endforeach
                         @endif
                     </tbody>
@@ -221,108 +223,128 @@
         
         
         {{-- end đơn hàng --}}
-
-        {{-- <div id="orders-content" class="content-section my-order">
-            <!-- Form tìm kiếm đơn hàng -->
-            <form action="" class="order-search">
-                <input type="text" name="keyword" placeholder="Tìm kiếm đơn hàng..." class="input-my-order" />
-                <button uk-icon="search" class="icon-search"></button>
-            </form>
-
             <!-- Kiểm tra nếu không có đơn hàng -->
-            @if ($orders->isEmpty())
-                <span style="color:red; font-size: 1.2em;">Không có đơn nào</span>
-            @else
                 <!-- Hiển thị danh sách đơn hàng -->
                 @foreach ($orders as $order)
                     <div class="order-item">
-                        <div class="order-content uk-grid-collapse uk-child-width-expand@s" uk-grid>
-                            <div class="order-content-left">
-                                <div class="order-code uk-text-bold">Mã đơn hàng: {{$order->code}}</div>
-                            </div>
-        
-                            <div class="order-content-right">
-                                <!-- Nút hành động -->
-                                <div class="order-actions uk-button-group">
-                                    <button class="view-order-bt uk-button uk-button-primary" data-uk-toggle="target: #modal-details-{{ $order->id }}">Xem đơn hàng</button>
-                                    
-                                    @if ($order->status === 'Hoàn thành')
-                                        @if ($order->review_exists)
-                                            <!-- Nếu đã có đánh giá -->
-                                            <button class="review-button uk-button uk-button-default" disabled>
-                                                Đã đánh giá
-                                            </button>
-                                        @else
-                                            <!-- Nếu chưa có đánh giá -->
-                                            <button class="review-button uk-button uk-button-secondary" data-uk-toggle="target: #modal-review-{{ $order->id }}">
-                                                Viết đánh giá
-                                            </button>
-                                        @endif
-                                    @elseif (in_array($order->status, ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Giao hàng thất bại']))
-                                        <span class="uk-text-danger">Bình tĩnh để đánh giá</span>
-                                    @endif
-                                 
-                                </div>
-                            </div>
-                        </div>
-        
-                        <!-- Trạng thái đơn hàng -->
-                        <div class="order-status">
-                            @php
-                            $result = match($order->status) {
-                                'Hoàn thành' => '<span class="status-delivered uk-text-success">Đã giao hàng</span>',
-                                'Chờ xác nhận' => sprintf(
-                                    '<span class="pending uk-text-warning">Đang chờ xác nhận</span>
-                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
-                                    $order->id,
-                                ),
-                                'Đã xác nhận' => sprintf(
-                                    '<span class="confirmed uk-text-primary">Đã xác nhận</span>
-                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
-                                    $order->id,
-                                ),
-                                'Đang giao' => '<span class="shipping uk-text-warning">Đang giao hàng</span>',
-                                'Giao hàng thành công' => sprintf(
-                                    '<span>Vui lòng nhấn hoàn thành để hoàn tất đơn hàng: </span>
-                                    <button class="complete-btn uk-button uk-button-success uk-button-small" data-order-id="%s">Hoàn thành</button>',
-                                    $order->id,
-                                ),
-                                'Giao hàng thất bại' => sprintf(
-                                    '<span class="failed uk-text-danger">Giao hàng thất bại, vui lòng liên hệ để được xử lý</span>
-                                    <button class="cancel-btn uk-button uk-button-danger uk-button-small" data-order-id="%s">Hủy đơn</button>',
-                                    $order->id,
-                                ),
-                                'Đã hủy' => '<span class="canceled uk-text-muted">Đã hủy</span>',
-                                default => '<span class="unknown uk-text-light">Trạng thái không xác định</span>',
-                            };
-                            @endphp
-        
-                            {!! $result !!}
-                        </div>
-        
                         <!-- Modal Xem thêm chi tiết sản phẩm -->
                         <div id="modal-details-{{ $order->id }}" class="uk-flex-top modal-details" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="width: 70%">
                                 <button class="uk-modal-close-default modal-bt" type="button" uk-close></button>
                                 <h3 class="uk-modal-title font-bold">Thông tin đơn hàng</h3>
                                 <div class="uk-margin modal-details-info">
-                                    @foreach ($order->orderDetails as $orderDetail)
-                                        <p><strong>Tên sản phẩm:</strong> {{ $orderDetail->product->name }}</p>
-                                        <p><img alt="Product Image" class="uk-width-small uk-border-rounded" src="{{ $orderDetail->product->image ?? 'default-image.jpg' }}"/></p>
-                                        <p><strong>Màu sắc:</strong> {{ $orderDetail->variant->color ?? 'Không xác định' }}</p>
-                                        <p><strong>Size:</strong> {{ $orderDetail->variant->size ?? 'Không xác định' }}</p>
-                                        <p><strong>Số lượng:</strong> {{ $orderDetail->quantity }}</p>
-                                        <p><strong>Giá:</strong> {{ number_format($orderDetail->price, 0, ',', '.') }}₫</p>
-                                        <p><strong>Thông tin chi tiết:</strong> {{ $orderDetail->product->description ?? 'Không có thông tin' }}</p>
-                                        <hr />
-                                    @endforeach
+                                    <div class="uk-grid" uk-grid>
+
+                                        <div class="order-detail-left uk-width-2-3 pr-20">
+                                            <table class="tb-order-detail">
+                                                <thead class="th-order-detail">
+                                                    <tr>
+                                                        <th class="text-[17px]">
+                                                            Sản phẩm
+                                                        </th>
+                                                        <th class="text-[17px]">
+                                                            Giá
+                                                        </th>
+                                                        <th class="text-[17px]">
+                                                            Số lượng
+                                                        </th>
+                                                        <th class="text-[17px]">
+                                                            Tổng cộng
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                            
+                                                <tbody class="tbody-order-detail">
+                                                    <?php $totalProduct = 0?>
+                                                    @foreach ($order->orderDetails as $item)
+                                                    <?php $totalProduct += $item->price * $item->quantity;?>
+                                                        <tr class="tr-order-detail">
+                                                            <td class="tbody-td-order-detail">
+                                                                <div class="product-row">
+                                                                    <a href="{{ route('productDetail', $item->product_id) }}"><img alt="" class="product-image"
+                                                                        src="{{ $item->product->image }}" /></a>
+                                                                    <div class="product-row-body ml-2">
+                                                                        <a href="{{ route('productDetail', $item->product_id) }}" class="text-[#222] font-semibold text-[16px">{{ $item->product->name }}</a>
+                            
+                                                                        <span class="text-[#222] font-semibold">
+                                                                            Màu:
+                                                                            <span class="pl-1 font-light">
+                                                                                {{ $item->color }}
+                                                                            </span>
+                            
+                                                                        </span>
+                                                                        <span class="text-[#222] font-semibold">
+                                                                            Size:
+                                                                            <span class=" pl-1 font-light">
+                                                                                {{ $item->size }}
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                {{ number_format($item->price, 0, ',', '.') ?? number_format($item->product->price_old, 0, ',', '.') }} đ
+                                                            </td>
+                                                            <td>
+                                                                {{ $item->quantity }}
+                                                            </td>
+                                                            <td>
+                                                                {{ number_format($item->total, 0, ',', '.') }} đ
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            
+                                        <div class="uk-width-1-3 order-detail-right">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5>Thông tin người nhận</h5>
+                                                    <hr>
+                                                    <h5 class="card-title-order">{{ $order->name }}</h5>
+                                                    <p class="card-text">{{ $order->address }}</p>
+                                                    <p class="card-text">{{ $order->phone }}</p>
+                            
+                                                </div>
+                                            </div>
+                            
+                                            <!-- Thông tin thanh toán -->
+                                            <div class="payment-summary">
+                                                <div class="summary-item ">
+                                                    <span class="label text-[#222] font-semibold">Mã đơn hàng:</span>
+                                                    <span class="value text-[#222] font-semibold" id="grand-total">{{ $order->code }}</span>
+                                                </div>
+                                                <div class="summary-item ">
+                                                    <span class="label text-[#222] font-semibold">Tổng cộng:</span>
+                                                    <span class="value text-[#222] font-semibold" id="grand-total">{{number_format($totalProduct, 0, ',', '.') }} đ</span>
+                                                </div>
+                                                <div class="summary-item" id="promo-section">
+                                                    <span class="label text-[#222] font-semibold">Tên khuyến mại:</span>
+                                                    <span class="value text-[#222] font-semibold">Khuyến mãi </span>
+                                                </div>
+                                                <div class="summary-item" id="discount-section">
+                                                    <span class="label text-[#222] font-semibold">Mức giảm:</span>
+                                                    <span class="value text-[#222] font-semibold">20.000</span>
+                                                </div>
+                                                <div class="summary-item">
+                                                    <span class="label text-[#222]">Phí giao hàng:</span>
+                                                    <span class="value text-[#222] font-semibold" id="shipping-fee">{{number_format($order->shipping_fee, 0, ',', '.') }} đ</span>
+                                                </div>
+                                                <hr class="divider">
+                                                <div class="summary-item total">
+                                                    <span class="label text-[#222] font-bold text-[18px]">Tổng thanh toán:</span>
+                                                    <span class="value text-[#222] font-semibold" id="final-total">{{number_format($order->total_price, 0, ',', '.') }} đ</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            @endif
-        </div> --}}
             
         {{-- voucher --}}
         <div id="discounts-content" class="content-section container mt-4">
