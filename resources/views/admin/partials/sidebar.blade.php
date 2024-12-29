@@ -98,27 +98,20 @@
                     </div>
                 </li>
 
-                {{-- Sidebar Người dùng --}}
-           
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#users" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="users">
-                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
+                    <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="orders">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đơn hàng</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="users">
+                    <div class="collapse menu-dropdown" id="orders">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.users.index') }}" class="nav-link" data-key="t-chat"> Danh sách người dùng
+                                <a href="{{ route('admin.orders.index') }}" class="nav-link" data-key="t-chat"> Danh sách đơn hàng
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a href="{{ route('admin.banners.create') }}" class="nav-link" data-key="t-chat"> Thêm mới banner
-                                </a>
-                            </li> --}}
                         </ul>
                     </div>
-                </li>
-              
+                </li>      
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#banners" data-bs-toggle="collapse" role="button"
@@ -187,23 +180,27 @@
                         </ul>
                     </div>
                 </li>
+
+                {{-- Sidebar Người dùng --}}
+           
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#orders" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="orders">
-                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí đơn hàng</span>
+                    <a class="nav-link menu-link" href="#users" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="users">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Quản lí người dùng</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="orders">
+                    <div class="collapse menu-dropdown" id="users">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('admin.orders.index') }}" class="nav-link" data-key="t-chat"> Danh sách đơn hàng
+                                <a href="{{ route('admin.users.index') }}" class="nav-link" data-key="t-chat"> Danh sách người dùng
                                 </a>
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li>    
+                
             </ul>
         </div>
-        <!-- Sidebar -->
+        <!-- End Sidebar -->
     </div>
 
     <div class="sidebar-background"></div>

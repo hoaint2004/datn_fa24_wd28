@@ -31,7 +31,7 @@
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Ảnh</th>
                                                 <th scope="col">Tên banner</th>
-                                                <th scope="col">Nội dung</th>
+                                                {{-- <th scope="col">Nội dung</th> --}}
                                                 <th scope="col">Trạng thái</th>
                                                 <th scope="col" style="width: 150px;">Thao tác</th>
                                             </tr>
@@ -49,7 +49,7 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td><img src="{{ $banner->image }}" width="100px" alt=""></td>
                                                     <td>{{ $banner->name }}</td>
-                                                    <td>{{ $banner->description }}</td>
+                                                    {{-- <td>{{ $banner->description }}</td> --}}
                                                     <td><span
                                                             class="badge bg-{{ $banner->status === 1 ? 'success' : 'danger' }}">{{ $banner->status === 1 ? 'Hiện' : 'Ẩn' }}</span>
                                                     </td>
@@ -58,10 +58,10 @@
                                                             href="{{ route('admin.banners.edit', $banner->id) }}"
                                                             class="link-primary"><i class="ri-settings-4-line"
                                                                 style="font-size:18px;"></i></a>
-                                                        <a style="margin: 0 5px; cursor: pointer;" class="link-danger"><i
+                                                        {{-- <a style="margin: 0 5px; cursor: pointer;" class="link-danger"><i
                                                                 class="ri-delete-bin-5-line" style="font-size:18px;"
                                                                 data-bs-toggle="modal"
-                                                                data-bs-target="#topmodal{{ $banner->id }}"></i></a>
+                                                                data-bs-target="#topmodal{{ $banner->id }}"></i></a> --}}
                                                     </td>
                                                 </tr>
                                                 <div id="topmodal{{ $banner->id }}" class="modal fade" tabindex="-1"

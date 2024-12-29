@@ -1,7 +1,7 @@
 @extends('Client.layouts.master')
 
 @section('title')
-    Sneakers - Thế Giới Giày
+    Wina Shoes - Thế Giới Giày
 @endsection
 
 @section('content')
@@ -852,4 +852,3 @@
     </script>
     {{-- end filter --}}
 @endsection
-

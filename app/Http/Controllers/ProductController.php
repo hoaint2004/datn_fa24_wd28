@@ -64,12 +64,10 @@ class ProductController extends Controller
         return view('client.ProductBestSeller', compact('data','type'));
     }
     
-    
-    
 
-    // public function product_detail(){
-    //     return view('client.product-detail');
-    // }
+    public function product_detail(){
+        return view('client.product-detail');
+    }
 
     // public function contact(){
 
@@ -95,4 +93,3 @@ class ProductController extends Controller
 
 
 }
-

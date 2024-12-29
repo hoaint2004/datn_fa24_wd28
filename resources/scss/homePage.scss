@@ -1,5 +1,5 @@
-@import './_mixin.scss';
-@import './font.scss';
+@import "./_mixin.scss";
+@import "./font.scss";
 
 .title {
     display: flex;
@@ -28,49 +28,89 @@
 .sub-span-title {
     @include span;
 }
-.icon-left,
-    .icon-right {
-      @include button-style(#333, #fff,  $color, red);
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }  
+.icon-left {
+    @include button-style(#333, #fff, $color, red);
+    margin-left: 5px;
+    padding: 3px 10px !important;
+    clip-path: polygon(0 0, 50% 0, 100% 100%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+        color: black;
+        font-size: 30px;
+    }
+}
+.icon-right {
+    @include button-style(#333, #fff, $color, red);
+    margin-right: 5px;
+    padding: 3px 10px !important;
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+        color: black;
+        font-size: 30px;
+    }
+}
 
 .icon-left-product {
-    @include button-style(#333, #fff,  $color, red);
-    font-size: 24px;
+    @include button-style(#333, #fff, $color, red);
+    margin-left: -20px;
+    border: 1px solid #222;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: -20px
+    transition: border-color 0.5s ease;
+    &:hover {
+        border-color: #fff;
+    }
+    i {
+        color: black;
+        font-size: 30px;
+    }
 }
 .icon-right-product {
-    @include button-style(#333, #fff,  $color, red);
-    font-size: 24px;
+    @include button-style(#333, #fff, $color, red);
+    margin-right: -20px;
+    border: 1px solid #222;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: -20px;
-}    
+    transition: border-color 0.5s ease;
+    &:hover {
+        border-color: #fff;
+    }
+    i {
+        color: black;
+        font-size: 30px;
+    }
+}
 
 .banner {
     .uk-slideshow-items {
-       img {
-           width: 100%;
-           height: 100%;
-           object-fit: cover; 
-           object-position: center center;
-       }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
     }
     .icon-left,
     .icon-right {
-      @include button-style(#333, #fff,  $color, red);
-      font-size: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }  
+        @include button-style(#333, #fff, $color, red);
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .about-us {
@@ -125,7 +165,6 @@
 }
 
 .product-list {
-    
     .title {
         display: flex;
         justify-content: center;
@@ -138,12 +177,11 @@
                 position: relative;
                 img {
                     border-radius: 10px;
-                    padding: 150px 0;
+                    padding: 170px 0;
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
-
-                } 
+                }
                 span {
                     position: absolute;
                     top: 10px;
@@ -171,12 +209,12 @@
                     flex-direction: column;
                     gap: 3px;
                     opacity: 0;
-                    transition: opacity 0.6s ease; 
+                    transition: opacity 0.6s ease;
                     button {
                         background-color: $color-button;
                         border: 2px solid $color-button;
                         color: $color-title;
-                        transition: all .8s;
+                        transition: all 0.8s;
                         font-family: $font-spectral;
                         border-radius: 5px;
                         font-size: 13px;
@@ -187,13 +225,14 @@
                             border: 2px solid $color;
                         }
                     }
-                } 
-            } &:hover {
-                .icon-heart, 
-                .product-button {
-                  opacity: 1;
                 }
-              }
+            }
+            &:hover {
+                .icon-heart,
+                .product-button {
+                    opacity: 1;
+                }
+            }
             .product-review {
                 display: flex;
                 align-items: center;
@@ -204,9 +243,9 @@
                     span {
                         color: $color-auth;
                         font-size: 14px;
-                        
-                        font-family: $font-spectral; 
-                        transition: all .8s; 
+
+                        font-family: $font-spectral;
+                        transition: all 0.8s;
                         &:hover {
                             color: $color;
                         }
@@ -224,14 +263,14 @@
                 font-family: $font-spectral;
                 font-size: 16.5px;
                 display: -webkit-box; /* Kích hoạt chế độ khung hộp */
-  -webkit-line-clamp: 2; /* Số dòng hiển thị */
-  -webkit-box-orient: vertical; /* Hướng sắp xếp của các dòng */
-  overflow: hidden; /* Ẩn phần dư */
-  text-overflow: ellipsis; /* Hiển thị dấu "..." */
+                -webkit-line-clamp: 2; /* Số dòng hiển thị */
+                -webkit-box-orient: vertical; /* Hướng sắp xếp của các dòng */
+                overflow: hidden; /* Ẩn phần dư */
+                text-overflow: ellipsis; /* Hiển thị dấu "..." */
                 font-weight: $font-weight-medium;
-                transition: all .8s;     
+                transition: all 0.8s;
                 display: inline-block;
-                height: calc(1em* 1.4* 2);   
+                height: calc(1em * 1.4 * 2);
                 &:hover {
                     color: $color;
                     text-decoration: none;
@@ -263,9 +302,9 @@
                         cursor: pointer;
                         border: solid 3px $color;
                     }
-                } 
-            } 
-        }  
+                }
+            }
+        }
     }
     // .home-product-list-wrapper {
     //     .product-item {
@@ -395,68 +434,6 @@
     // }
 }
 
-.brand {
-    margin-top: 45px;
-}
-
-.name-shoes {
-    margin-top: 45px;
-    
-    .name-shoes-item {
-
-    
-        margin-left: 40px;
-        
-        position: relative;
-        margin-left: 40px;
-        
-        .name-shoes-image {
-            width: 100%;
-            height: 100%;
-            
-            .a-img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                border-radius: 10px;
-                
-                
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 10px;
-                }
-            }
-        }
-        
-        .name-shoes-body {
-            .a-body {
-                width: 200px; // Độ rộng cố định cho nút
-                text-align: center;
-                position: absolute;
-                bottom: 10%;
-                left: 50%;
-                transform: translate(-50%);
-                z-index: 2;
-                border-radius: 5px;
-                text-decoration: none;
-                @include button;
-                padding: 10px 20px;
-                
-                p {
-                    margin: 0;
-                    font-size: 16px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
-        }
-    }
-}
-
-
 .date-time-sale {
     margin-top: 45px;
     margin-bottom: 45px;
@@ -469,8 +446,8 @@
             img {
                 object-fit: cover;
                 width: 100%;
-                height: 100%;    
-                border-radius: 10px;       
+                height: 100%;
+                border-radius: 10px;
             }
         }
         .date-time-info {
@@ -482,7 +459,7 @@
             bottom: 20%;
             left: 54.1%;
             transform: translateX(-50%);
-            width: 100%;    
+            width: 100%;
             .countdown {
                 display: flex;
                 flex-wrap: wrap;
@@ -508,8 +485,8 @@
                         width: 50px;
                         height: 50px;
                         display: flex;
-                        justify-content: center; 
-                        align-items: center;   
+                        justify-content: center;
+                        align-items: center;
                     }
                     .days-content,
                     .hours-content,
@@ -521,29 +498,58 @@
                         font-weight: $font-weight-semibold;
                     }
                 }
-            }    
+            }
+        }
+    }
+    .sale-product-right {
+        .icon-left-product-date-time {
+            @include button-style(#333, #fff, $color, red);
+            font-size: 24px;
+            top: 35%;
+            margin-left: 5px;
+            padding: 0 7px !important;
+            clip-path: polygon(0 0, 50% 0, 100% 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+                font-size: 22px;
+                color: black;
+            }
+        }
+        .icon-right-product-date-time {
+            @include button-style(#333, #fff, $color, red);
+            font-size: 24px;
+            top: 35%;
+            margin-right: 5px;
+            padding: 0 7px !important;
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i {
+                font-size: 22px;
+                color: black;
+            }
         }
     }
 }
 
-.uk-light .uk-dotnav>*>* {
+.uk-light .uk-dotnav > * > * {
     margin-top: 20px;
     border: 2px solid $color;
     width: 13px;
     height: 13px;
-   &:hover {
-    background-color: $color;
-   }
+    &:hover {
+        background-color: $color;
+    }
 }
 
-.uk-light .uk-dotnav>.uk-active>* {
+.uk-light .uk-dotnav > .uk-active > * {
     background-color: $color;
 }
-
-
 
 .collection {
-   
     .collection-list {
         .collection-list-item {
             width: 12.5%;
@@ -554,16 +560,16 @@
             .home-collection-list-item-image {
                 width: 100%;
                 height: 0;
-                padding-bottom: 100%; 
+                padding-bottom: 100%;
                 position: relative;
-                
+
                 img {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    object-fit: cover; 
+                    object-fit: cover;
                     border-radius: 50%;
                     margin-bottom: 15px;
                     transition: transform 0.3s ease;
@@ -611,7 +617,9 @@
                     height: 100%;
                     object-fit: cover;
                     object-position: center center;
-                    transition: transform 0.8s, filter 0.8s;
+                    transition:
+                        transform 0.8s,
+                        filter 0.8s;
                     filter: brightness(0.9);
 
                     &:hover {
@@ -694,19 +702,21 @@
     width: 384px;
 }
 
-
-.title-model-detail{
+.title-model-detail {
     font-family: $font-spectral;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Giới hạn số dòng */
 }
 
 .desc {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* Giới hạn số dòng */
+    -webkit-line-clamp: 2; /* Giới hạn số dòng */
     color: #555;
 }
-
 
 .color {
     color: $color-p;
@@ -734,15 +744,12 @@
     }
 }
 
-
-
 #modal-container {
     input[type="radio"] {
         display: none;
     }
-    
-    
-    .box-color span, 
+
+    .box-color span,
     .box-size span {
         display: inline-block;
         padding: 8px 16px;
@@ -750,17 +757,42 @@
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
+        background-color: #ffff;
+        border: 1px solid hsla(0, 0%, 7%, 0.11);
     }
-    
-    .box-color span:hover,
-    .box-size span:hover {
-        border-color: #ccc;
-    }
-    
-    
+
     input[type="radio"]:checked + span {
-        border-color: $color-red; 
+        border-color: $color-red;
         background-color: #ffff;
         font-weight: bold;
     }
+}
+
+.bt-add-cart-modal {
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.6s;
+    border: 1px solid $color;
+    color: $color-button;
+    background-color: $color;
+    border-radius: 10px;
+    padding: 10px 20px;
+    &:hover {
+        color: $color;
+        border-color: $color;
+        background-color: $color-button;
+    }
+}
+
+
+.title.uk-scrollspy-inview,
+.sub-span-title.uk-scrollspy-inview,
+p.uk-scrollspy-inview,
+.shopping a.uk-scrollspy-inview,
+.image-about-us img.uk-scrollspy-inview
+{
+    transform: translateY(0); 
+    opacity: 1; 
+    transition: all 1.9s ease-out; 
 }

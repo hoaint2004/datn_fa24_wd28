@@ -28,12 +28,11 @@ class Kernel extends HttpKernel
      *
      * @var array<string, array<int, class-string|string>>
      */
-
-     protected $routeMiddleware = [
-        // ...
-        'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+    protected $routeMiddleware = [
+        // Các middleware khác
+        'admin' => \App\Http\Middleware\AdminMiddleware::class, // Đường dẫn chính xác đến middleware
     ];
-
+    
      protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,

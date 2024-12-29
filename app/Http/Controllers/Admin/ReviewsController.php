@@ -83,7 +83,4 @@ public function index(Request $request)
             ], 500);
         }
     }
-
-
-
 }

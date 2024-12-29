@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->decimal('total_price', 30, 2);
-
+            $table->string('voucher_use')->nullable();
+ 
             $table->enum('status', [
                 'Chờ xác nhận',         // Chờ xác nhận
                 'Đã xác nhận',       // Đã xác nhận

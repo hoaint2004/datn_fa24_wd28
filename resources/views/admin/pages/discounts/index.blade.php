@@ -69,9 +69,9 @@
                                                         <a href="{{ route('admin.discounts.edit', $discount->id) }}" class="link-primary" style="margin: 0 5px;">
                                                             <i class="ri-settings-4-line" style="font-size:18px;"></i>
                                                         </a>
-                                                        <a href="javascript:void(0);" class="link-danger" style="margin: 0 5px;" data-bs-toggle="modal" data-bs-target="#topmodal{{ $discount->id }}">
+                                                        {{-- <a href="javascript:void(0);" class="link-danger" style="margin: 0 5px;" data-bs-toggle="modal" data-bs-target="#topmodal{{ $discount->id }}">
                                                             <i class="ri-delete-bin-5-line" style="font-size:18px;"></i>
-                                                        </a>
+                                                        </a> --}}
                                                     </td>
                                                 </tr>
                                                 
